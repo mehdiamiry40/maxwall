@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { QuoteForm } from "@/components/QuoteForm";
-import { Footer, Header, PhoneIcon } from "@/components/ui";
-import { images } from "@/lib/images";
+import { Check, container, Eyebrow, Footer, Header, PhoneIcon } from "@/components/ui";
 import { phoneHref, serviceBySlug, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -10,6 +8,8 @@ export const metadata: Metadata = {
   description: "Request a free, fixed-price render or cladding quote anywhere in Adelaide.",
   alternates: { canonical: "/contact" },
 };
+
+const reassurances = ["Free on-site measure and quote", "Fixed written price, no hidden extras", "No obligation"];
 
 export default async function Contact(props: PageProps<"/contact">) {
   const { service } = await props.searchParams;
@@ -19,37 +19,35 @@ export default async function Contact(props: PageProps<"/contact">) {
     <>
       <Header />
       <main className="flex-1 bg-sandstone">
-        <div className="mx-auto grid w-full max-w-5xl gap-14 px-5 py-20 sm:px-8 md:grid-cols-[1fr_1.6fr] md:py-28">
+        <div className={`${container} grid gap-12 py-14 md:grid-cols-[1fr_1.5fr] md:gap-16 md:py-20`}>
           <div>
-            <p className="mb-4 text-xs font-semibold tracking-[0.3em] text-ink-soft uppercase">Contact</p>
-            <h1 className="font-display text-5xl leading-tight">Let&apos;s talk walls</h1>
-            <p className="mt-6 leading-relaxed text-ink-soft">
-              Tell us a little about the job and we&apos;ll get back to you with a price. We
-              usually reply within the hour.
+            <Eyebrow>Free quote</Eyebrow>
+            <h1 className="mt-3 text-4xl font-bold leading-[1.05] sm:text-5xl">Let&apos;s talk walls</h1>
+            <p className="mt-5 text-lg leading-relaxed text-ink-soft">
+              Tell us a little about the job and we&apos;ll get back to you with a price. We usually
+              reply within the hour.
             </p>
-            <div className="my-8 h-px bg-ochre" />
-            <div className="space-y-3">
-              <a href={phoneHref} className="flex items-center gap-3 font-display text-2xl">
+            <ul className="mt-8 space-y-3">
+              {reassurances.map((r) => (
+                <li key={r} className="flex gap-3 font-medium">
+                  <Check /> {r}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 border-t border-line pt-8">
+              <p className="text-sm font-semibold text-ink-soft">Prefer to talk?</p>
+              <a href={phoneHref} className="mt-2 flex items-center gap-3 text-2xl font-bold">
                 <PhoneIcon className="h-5 w-5 text-ochre" /> {site.phone}
               </a>
-              <a href={`mailto:${site.email}`} className="block text-ink-soft hover:text-ink">
-                {site.email}
-              </a>
-              <p className="text-ink-soft">{site.hours}</p>
-              <p className="text-ink-soft">Servicing all of {site.city}</p>
-            </div>
-            <div className="relative mt-10 hidden aspect-[4/3] overflow-hidden md:block">
-              <Image
-                src={images.hero.src}
-                alt={images.hero.alt}
-                fill
-                sizes="340px"
-                className="object-cover object-[50%_35%]"
-              />
+              <p className="mt-3 text-ink-soft">
+                <a href={`mailto:${site.email}`} className="hover:text-ink">{site.email}</a>
+                <br />
+                {site.hours}
+              </p>
             </div>
           </div>
-          <div className="self-start bg-render p-7 sm:p-12">
-            <h2 className="mb-8 font-display text-3xl">Request a free quote</h2>
+          <div className="self-start border border-line bg-white p-6 sm:p-10">
+            <h2 className="mb-7 text-2xl font-bold">Request a free quote</h2>
             <QuoteForm defaultService={preselected} />
           </div>
         </div>

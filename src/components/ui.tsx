@@ -1,225 +1,197 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MobileMenu, NavLinks } from "@/components/nav";
+import { Arrow, Logo, Mark, PhoneIcon } from "@/components/brand";
+import { MobileActionBar, SiteHeader } from "@/components/nav";
 import { images, type Photo } from "@/lib/images";
 import { nav, phoneHref, services, site, type Service } from "@/lib/site";
 
-export const container = "mx-auto w-full max-w-5xl px-5 sm:px-8";
+export { Arrow, Logo, PhoneIcon };
 
-export function PhoneIcon({ className = "h-4 w-4" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
-      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z" />
-    </svg>
-  );
-}
+export const container = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 
-export function Arrow({ className = "h-4 w-4" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className} aria-hidden="true">
-      <path d="M4 12h15m-6-6 6 6-6 6" />
-    </svg>
-  );
-}
+type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
-/** Wordmark: MAX WALL over a letter-spaced descriptor, split by a single rendered "course" line. */
-export function Logo({ className = "" }: { className?: string }) {
-  return (
-    <Link href="/" aria-label={`${site.name} home`} className={`inline-flex flex-col items-center leading-none ${className}`}>
-      <span className="font-display text-[1.7rem] tracking-[0.14em] sm:text-[2.3rem]">MAX WALL</span>
-      <span className="mt-1.5 h-px w-full bg-current opacity-60" />
-      <span className="mt-1.5 text-[0.56rem] font-semibold tracking-[0.42em] sm:text-[0.68rem]">
-        RENDER · CLADDING
-      </span>
-    </Link>
-  );
-}
+const buttonStyles: Record<ButtonVariant, string> = {
+  primary: "bg-ochre text-white hover:bg-ochre-dark",
+  dark: "bg-bluestone text-white hover:bg-bluestone-soft",
+  light: "bg-white text-ink hover:bg-sandstone",
+  outline: "border border-ink/80 text-ink hover:bg-ink hover:text-white",
+  "outline-light": "border border-white/70 text-white hover:bg-white hover:text-ink",
+};
 
-export function Pill({
+export function Button({
   href,
   children,
-  variant = "ochre",
+  variant = "primary",
   className = "",
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: "ochre" | "white" | "outline";
+  variant?: ButtonVariant;
   className?: string;
 }) {
-  const styles = {
-    ochre: "bg-ochre text-white hover:bg-ochre-dark",
-    white: "bg-white text-ochre hover:bg-sandstone",
-    outline: "border border-current hover:bg-white/10",
-  }[variant];
-  return (
-    <a
-      href={href}
-      className={`inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-[0.95rem] transition ${styles} ${className}`}
-    >
+  const cls = `inline-flex items-center justify-center gap-2 rounded-[3px] px-6 py-3.5 text-[0.95rem] font-semibold transition-colors ${buttonStyles[variant]} ${className}`;
+  return href.startsWith("/") ? (
+    <Link href={href} className={cls}>
+      {children}
+    </Link>
+  ) : (
+    <a href={href} className={cls}>
       {children}
     </a>
   );
 }
 
+export function CallButton({ variant = "outline" }: { variant?: ButtonVariant }) {
+  return (
+    <Button href={phoneHref} variant={variant}>
+      <PhoneIcon /> {site.phone}
+    </Button>
+  );
+}
+
 export function TextLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="group inline-flex items-center gap-2 text-ochre-dark">
-      <span className="underline decoration-ochre/40 underline-offset-4 transition group-hover:decoration-ochre">
-        {children}
-      </span>
-      <Arrow className="h-4 w-4 transition group-hover:translate-x-1" />
+    <Link href={href} className="group inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ochre-dark">
+      {children}
+      <Arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
     </Link>
   );
 }
 
-/** Stacked weatherboard courses of varying length, one picked out in ochre. */
-export function CoursesMotif({ className = "" }: { className?: string }) {
-  const rows = [
-    [0, 100], [8, 92], [0, 84], [16, 100], [0, 70], [10, 100],
-    [0, 90], [24, 100], [0, 78], [6, 100], [0, 88], [18, 96],
-  ];
+export function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
-    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
-      {rows.map(([x1, x2], i) => (
-        <rect
-          key={i}
-          x={x1}
-          y={i * 8.4}
-          width={x2 - x1}
-          height="4.6"
-          rx="0.6"
-          fill={i === 4 ? "var(--ochre)" : "currentColor"}
-          opacity={i === 4 ? 1 : 0.85 - i * 0.04}
-        />
-      ))}
+    <p className={`text-xs font-bold tracking-[0.2em] uppercase ${light ? "text-white/70" : "text-ochre-dark"}`}>
+      {children}
+    </p>
+  );
+}
+
+/** Eyebrow + heading, with an optional link aligned to the right on wide screens. */
+export function SectionHead({
+  eyebrow,
+  title,
+  intro,
+  action,
+}: {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  action?: { href: string; label: string };
+}) {
+  return (
+    <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div className="max-w-2xl">
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+        <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">{title}</h2>
+        {intro && <p className="mt-4 text-lg leading-relaxed text-ink-soft">{intro}</p>}
+      </div>
+      {action && (
+        <div className="shrink-0">
+          <TextLink href={action.href}>{action.label}</TextLink>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function Check({ className = "text-ochre" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" className={`mt-[0.2em] h-4 w-4 shrink-0 ${className}`} aria-hidden="true">
+      <path d="M20 6 9 17l-5-5" />
     </svg>
   );
 }
 
 export function Header({ overlay = false }: { overlay?: boolean }) {
-  const tone = overlay ? "text-white" : "text-ink";
   return (
-    <header className={`${overlay ? "absolute inset-x-0 top-0" : "relative border-b border-black/10 bg-render"} z-30 ${tone}`}>
-      <div className="mx-auto max-w-7xl px-4 pb-5 pt-6 sm:px-8 sm:pt-8">
-        <div className="grid grid-cols-[1fr_auto] items-start md:grid-cols-[1fr_auto_1fr]">
-          <a href={phoneHref} className="hidden items-center gap-2 pt-4 text-sm opacity-90 hover:opacity-100 md:flex">
-            <PhoneIcon /> {site.phone}
-          </a>
-          <div className="justify-self-start md:justify-self-center">
-            <Logo />
-          </div>
-          <div className="flex items-start justify-end gap-3 pt-1">
-            <Pill href="/contact" className="hidden !px-6 !py-2.5 sm:inline-flex">
-              Free Quote
-            </Pill>
-            <MobileMenu />
-          </div>
-        </div>
-        <NavLinks />
-      </div>
-    </header>
+    <>
+      <SiteHeader overlay={overlay} />
+      <MobileActionBar />
+    </>
   );
 }
 
-/** Full-bleed photo hero used at the top of inner pages. */
+/** Photo header used at the top of inner pages. */
 export function PageHero({
-  eyebrow,
+  crumb,
   title,
   intro,
   image,
   children,
 }: {
-  eyebrow?: string;
+  crumb?: { label: string; href?: string }[];
   title: string;
   intro?: string;
   image: Photo;
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative isolate flex min-h-[64svh] items-end overflow-hidden bg-bluestone pb-16 pt-52 text-white sm:pb-20">
+    <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden bg-bluestone pb-14 pt-36 text-white sm:pb-16">
       <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="-z-20 object-cover" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(31_43_51/0.6)_0%,rgb(31_43_51/0.25)_35%,rgb(31_43_51/0.85)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(28_38_45/0.55)_0%,rgb(28_38_45/0.3)_40%,rgb(28_38_45/0.88)_100%)]" />
       <div className={container}>
-        {eyebrow && (
-          <p className="mb-4 text-xs font-semibold tracking-[0.3em] uppercase opacity-80">{eyebrow}</p>
+        {crumb && (
+          <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-2 text-sm text-white/75">
+            <Link href="/" className="hover:text-white">Home</Link>
+            {crumb.map((c) => (
+              <span key={c.label} className="flex items-center gap-2">
+                <span aria-hidden="true">/</span>
+                {c.href ? (
+                  <Link href={c.href} className="hover:text-white">{c.label}</Link>
+                ) : (
+                  <span className="text-white">{c.label}</span>
+                )}
+              </span>
+            ))}
+          </nav>
         )}
-        <h1 className="max-w-3xl font-display text-[2.6rem] leading-[1.08] sm:text-6xl">{title}</h1>
-        {intro && <p className="mt-6 max-w-xl text-lg opacity-90">{intro}</p>}
+        <h1 className="max-w-3xl text-4xl font-bold leading-[1.05] sm:text-6xl">{title}</h1>
+        {intro && <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/85">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
       </div>
     </section>
   );
 }
 
-/** Full-bleed photo strip that heads a section, SOL-style. */
-export function Banner({
-  id,
-  title,
-  image,
-  href,
-}: {
-  id?: string;
-  title: string;
-  image: Photo;
-  href?: string;
-}) {
-  const inner = (
-    <>
-      <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-20 object-cover transition duration-700 group-hover:scale-[1.03]" />
-      <div className="absolute inset-0 -z-10 bg-bluestone/45 transition group-hover:bg-bluestone/35" />
-      <div className={`${container} flex items-center justify-between gap-6`}>
-        <h2 className="font-display text-4xl drop-shadow-sm sm:text-5xl">{title}</h2>
-        {href && <Arrow className="hidden h-9 w-9 transition group-hover:translate-x-2 sm:block" />}
-      </div>
-    </>
-  );
-  const cls = "group relative isolate flex h-56 scroll-mt-4 items-center overflow-hidden text-white sm:h-80";
-  return href ? (
-    <Link id={id} href={href} className={cls}>
-      {inner}
-    </Link>
-  ) : (
-    <div id={id} className={cls}>
-      {inner}
-    </div>
-  );
-}
-
 export function ServiceCard({ service }: { service: Service }) {
   const img = images.services[service.slug];
   return (
-    <Link href={`/services/${service.slug}`} className="group block">
+    <Link href={`/services/${service.slug}`} className="group flex flex-col">
       {img && (
-        <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-sandstone">
+        <div className="relative aspect-[4/3] overflow-hidden bg-sandstone">
           <Image
             src={img.src}
             alt={img.alt}
             fill
-            sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
-            className="object-cover transition duration-700 group-hover:scale-105"
+            sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           />
         </div>
       )}
-      <h3 className="font-display text-2xl">{service.title}</h3>
-      <div className="my-4 h-px bg-ochre transition-all duration-500 group-hover:bg-ochre-dark" />
-      <p className="leading-relaxed text-ink-soft">{service.body}</p>
-      <span className="mt-4 inline-flex items-center gap-2 text-sm text-ochre-dark">
-        Learn more <Arrow className="h-4 w-4 transition group-hover:translate-x-1" />
-      </span>
+      <div className="flex flex-1 flex-col border-b border-line pb-6 pt-5">
+        <h3 className="flex items-center justify-between gap-4 text-xl font-bold">
+          {service.title}
+          <Arrow className="h-5 w-5 shrink-0 text-ochre transition-transform group-hover:translate-x-1" />
+        </h3>
+        <p className="mt-2 leading-relaxed text-ink-soft">{service.body}</p>
+      </div>
     </Link>
   );
 }
 
 export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <div className="divide-y divide-ink/15 border-y border-ink/15">
+    <div className="divide-y divide-line border-y border-line">
       {items.map((f) => (
-        <details key={f.q} className="group py-6">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-xl sm:text-2xl">
+        <details key={f.q} className="group">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-semibold">
             {f.q}
-            <span className="text-3xl leading-none text-ochre transition group-open:rotate-45">+</span>
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-ochre transition-transform group-open:rotate-45">
+              +
+            </span>
           </summary>
-          <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">{f.a}</p>
+          <p className="max-w-2xl pb-6 leading-relaxed text-ink-soft">{f.a}</p>
         </details>
       ))}
     </div>
@@ -229,24 +201,23 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
 /** Closing call to action shared by every page. */
 export function CtaSection({
   title = "Ready for walls you'll love?",
-  body = "Tell us about your project and we'll come out, measure up and give you a fixed written quote. Free, with no obligation.",
+  body = "We'll come out, measure up and give you a fixed written quote. Free, with no obligation.",
 }: {
   title?: string;
   body?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-sandstone py-24">
-      <div className={`${container} relative z-10`}>
-        <h2 className="max-w-xl font-display text-4xl leading-tight sm:text-5xl">{title}</h2>
-        <p className="mt-5 max-w-lg text-[1.05rem] leading-relaxed text-ink-soft">{body}</p>
-        <div className="mt-9 flex flex-wrap gap-3">
-          <Pill href="/contact">Get a Free Quote</Pill>
-          <Pill href={phoneHref} variant="outline" className="text-ink">
-            <PhoneIcon /> {site.phone}
-          </Pill>
+    <section className="bg-bluestone text-white">
+      <div className={`${container} grid gap-8 py-16 sm:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}>
+        <div>
+          <h2 className="text-3xl font-bold leading-tight sm:text-[2.6rem]">{title}</h2>
+          <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/75">{body}</p>
+        </div>
+        <div className="flex flex-wrap gap-3 md:justify-end">
+          <Button href="/contact">Get a free quote</Button>
+          <CallButton variant="outline-light" />
         </div>
       </div>
-      <CoursesMotif className="pointer-events-none absolute -right-10 bottom-0 w-64 text-bluestone/15 md:right-10 md:top-1/2 md:w-80 md:-translate-y-1/2" />
     </section>
   );
 }
@@ -254,71 +225,58 @@ export function CtaSection({
 export function Footer() {
   const company = nav.filter((n) => n.href !== "/services");
   return (
-    <footer className="relative isolate overflow-hidden bg-bluestone text-white">
-      <Image src={images.dusk.src} alt="" fill sizes="100vw" className="-z-20 object-cover opacity-40" />
-      <div className="absolute inset-0 -z-10 bg-bluestone/80" />
-      <div className="mx-auto max-w-6xl px-5 pb-10 pt-20 sm:px-8">
-        <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+    <footer className="border-t border-white/10 bg-bluestone pb-24 text-white md:pb-0">
+      <div className={`${container} pb-10 pt-16`}>
+        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Logo />
-            <p className="mt-6 max-w-xs text-[0.95rem] leading-relaxed opacity-80">
-              Render and cladding specialists servicing homeowners and builders across {site.city}.
+            <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
+              Render and cladding for homeowners and builders across {site.city}.
             </p>
           </div>
+          <FooterList title="Services" links={services.map((s) => ({ label: s.title, href: `/services/${s.slug}` }))} />
+          <FooterList title="Company" links={company} />
           <div>
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase opacity-60">Services</p>
-            <ul className="mt-5 space-y-2.5 text-[0.95rem]">
-              {services.map((s) => (
-                <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="opacity-85 hover:opacity-100 hover:underline">
-                    {s.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase opacity-60">Company</p>
-            <ul className="mt-5 space-y-2.5 text-[0.95rem]">
-              {company.map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className="opacity-85 hover:opacity-100 hover:underline">
-                    {n.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase opacity-60">Get in touch</p>
-            <div className="mt-5 space-y-2.5 text-[0.95rem]">
-              <a href={phoneHref} className="flex items-center gap-2 font-display text-2xl">
-                <PhoneIcon className="h-5 w-5 text-ochre" /> {site.phone}
+            <p className="text-xs font-bold tracking-[0.2em] text-white/50 uppercase">Contact</p>
+            <div className="mt-5 space-y-2.5 text-[0.95rem] text-white/80">
+              <a href={phoneHref} className="flex items-center gap-2 text-lg font-bold text-white">
+                <PhoneIcon className="h-4 w-4 text-ochre" /> {site.phone}
               </a>
               <p>
-                <a href={`mailto:${site.email}`} className="opacity-85 hover:opacity-100 hover:underline">
-                  {site.email}
-                </a>
+                <a href={`mailto:${site.email}`} className="hover:text-white">{site.email}</a>
               </p>
-              <p className="opacity-85">{site.hours}</p>
-              <p className="opacity-85">{site.city}, {site.region}</p>
+              <p>{site.hours}</p>
+              <p>{site.city}, {site.region}</p>
             </div>
           </div>
         </div>
-        <div className="mt-16 flex flex-col gap-3 border-t border-white/25 pt-6 text-sm opacity-75 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.legalName}
-            <span className="mx-2">|</span>
-            ABN {site.abn}
-            <span className="mx-2">|</span>
-            <Link href="/privacy" className="hover:underline">Privacy Policy</Link>
+            © {new Date().getFullYear()} {site.legalName} · ABN {site.abn} ·{" "}
+            <Link href="/privacy" className="hover:text-white">Privacy</Link>
           </p>
-          <p className="text-xs">
+          <p className="flex items-center gap-3">
+            <Mark className="h-4 w-4 text-white/40" />
             Photography via{" "}
-            <a href="https://unsplash.com" className="underline" rel="noopener">Unsplash</a>
+            <a href="https://unsplash.com" className="underline hover:text-white" rel="noopener">Unsplash</a>
           </p>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterList({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+  return (
+    <div>
+      <p className="text-xs font-bold tracking-[0.2em] text-white/50 uppercase">{title}</p>
+      <ul className="mt-5 space-y-2.5 text-[0.95rem]">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className="text-white/80 hover:text-white">{l.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

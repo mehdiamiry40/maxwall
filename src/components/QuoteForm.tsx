@@ -8,8 +8,8 @@ import { services } from "@/lib/site";
 const initialState: QuoteState = { ok: false, message: "" };
 
 const input =
-  "w-full border-0 border-b border-ink/30 bg-transparent px-0 py-2.5 text-base outline-none transition placeholder:text-ink-soft/60 focus:border-ochre";
-const label = "block text-sm text-ink-soft";
+  "mt-2 w-full rounded-[3px] border border-line bg-render px-4 py-3 text-base outline-none transition placeholder:text-ink-soft/50 focus:border-ink focus:bg-white";
+const label = "block text-sm font-semibold";
 
 export function QuoteForm({ defaultService = "" }: { defaultService?: string }) {
   const [state, formAction, pending] = useActionState(requestQuote, initialState);
@@ -17,14 +17,14 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
   if (state.ok) {
     return (
       <div className="py-10 text-center" role="status">
-        <p className="font-display text-3xl">Thanks, we&apos;ve got it.</p>
+        <p className="text-2xl font-bold">Thanks, we&apos;ve got it.</p>
         <p className="mt-3 text-ink-soft">{state.message}</p>
       </div>
     );
   }
 
   return (
-    <form action={formAction} className="grid gap-x-8 gap-y-7 sm:grid-cols-2">
+    <form action={formAction} className="grid gap-x-5 gap-y-5 sm:grid-cols-2">
       <div className="sm:col-span-2">
         <label htmlFor="service" className={label}>
           What do you need?
@@ -49,7 +49,7 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
 
       <div>
         <label htmlFor="size" className={label}>
-          Approx. wall area <span className="opacity-60">(optional)</span>
+          Approx. wall area <span className="font-normal text-ink-soft">(optional)</span>
         </label>
         <input id="size" name="size" placeholder="e.g. 80 m²" className={input} />
       </div>
@@ -78,7 +78,7 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
 
       <div className="sm:col-span-2">
         <label htmlFor="details" className={label}>
-          Anything else? <span className="opacity-60">(optional)</span>
+          Anything else? <span className="font-normal text-ink-soft">(optional)</span>
         </label>
         <textarea
           id="details"
@@ -107,11 +107,11 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
         <button
           type="submit"
           disabled={pending}
-          className="rounded-full bg-ochre px-9 py-3.5 text-base text-white transition hover:bg-ochre-dark disabled:opacity-60"
+          className="w-full rounded-[3px] bg-ochre px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-ochre-dark disabled:opacity-60"
         >
           {pending ? "Sending…" : "Get my free quote"}
         </button>
-        <p className="mt-4 text-xs text-ink-soft">
+        <p className="mt-4 text-center text-xs text-ink-soft">
           No obligation. We only use your details to quote your job (
           <Link href="/privacy" className="underline">
             privacy policy

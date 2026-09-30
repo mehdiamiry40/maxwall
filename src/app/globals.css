@@ -2,14 +2,15 @@
 
 /* Max Wall identity: Adelaide bluestone, sandstone and an ochre accent */
 :root {
-  --bluestone: #1f2b33;
-  --bluestone-soft: #2e3d47;
-  --sandstone: #ebe5dc;
-  --render: #f8f6f2;
-  --ochre: #a8652f;
-  --ochre-dark: #8c5226;
-  --ink: #1f2b33;
-  --ink-soft: #55616a;
+  --bluestone: #1c262d;
+  --bluestone-soft: #2b3943;
+  --sandstone: #ece6dd;
+  --render: #f7f5f1;
+  --ochre: #a35f2c;
+  --ochre-dark: #874c21;
+  --ink: #161e23;
+  --ink-soft: #4d5860;
+  --line: #d9d3c9;
 }
 
 @theme inline {
@@ -21,43 +22,37 @@
   --color-ochre-dark: var(--ochre-dark);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
   --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  --font-display: var(--font-body);
+  --font-brand: var(--font-brand);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background: var(--render);
   color: var(--ink);
+  font-feature-settings: "ss01", "cv11";
 }
 
-/* Fine grain that reads like a sponge-finished render coat */
-.texture {
-  position: relative;
-  isolation: isolate;
-}
-.texture::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.28;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  letter-spacing: -0.025em;
 }
 
-/* Horizontal weatherboard lines for the cladding banner */
-.boards {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0 46px,
-    rgb(0 0 0 / 0.22) 46px 48px,
-    rgb(255 255 255 / 0.06) 48px 50px
-  );
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ochre);
+  outline-offset: 3px;
 }
 
 details summary::-webkit-details-marker {

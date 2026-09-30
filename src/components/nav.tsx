@@ -3,37 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Logo, PhoneIcon } from "@/components/brand";
 import { nav, phoneHref, site } from "@/lib/site";
 
 const isActive = (pathname: string, href: string) =>
   href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
-export function NavLinks() {
+/**
+ * One-row header fixed to the top. Over a photo hero it starts transparent
+ * and turns solid once the page scrolls; everywhere else it's solid.
+ */
+export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const pathname = usePathname();
-  return (
-    <nav className="mt-6 hidden justify-center gap-9 text-[0.95rem] md:flex">
-      {nav.map((n) => {
-        const active = isActive(pathname, n.href);
-        return (
-          <Link
-            key={n.href}
-            href={n.href}
-            aria-current={active ? "page" : undefined}
-            className={`underline-offset-8 transition hover:opacity-100 hover:underline ${
-              active ? "underline decoration-ochre decoration-2 opacity-100" : "opacity-90"
-            }`}
-          >
-            {n.label}
-          </Link>
-        );
-      })}
-    </nav>
-  );
-}
-
-export function MobileMenu() {
-  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -42,54 +32,109 @@ export function MobileMenu() {
     };
   }, [open]);
 
-  return (
-    <div className="md:hidden">
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        aria-label={open ? "Close menu" : "Open menu"}
-        className={`relative z-50 grid h-11 w-11 place-items-center rounded-full border border-current ${open ? "text-white" : ""}`}
-      >
-        {open ? (
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-            <path d="M5 5l14 14M19 5 5 19" />
-          </svg>
-        ) : (
-          <span className="block h-px w-5 bg-current shadow-[0_6px_0_currentColor,0_-6px_0_currentColor]" />
-        )}
-      </button>
+  const clear = overlay && !scrolled && !open;
 
+  return (
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
+          clear
+            ? "bg-gradient-to-b from-black/35 to-transparent text-white"
+            : "border-b border-line bg-render/95 text-ink backdrop-blur"
+        }`}
+      >
+        <div className="mx-auto flex h-18 max-w-6xl items-center justify-between gap-6 px-5 sm:px-8">
+          <Logo />
+
+          <nav className="hidden items-center gap-7 text-[0.92rem] font-medium lg:flex">
+            {nav.map((n) => {
+              const active = isActive(pathname, n.href);
+              return (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative py-2 transition-opacity hover:opacity-100 ${active ? "opacity-100" : "opacity-75"}`}
+                >
+                  {n.label}
+                  {active && <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-ochre" />}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <a
+              href={phoneHref}
+              className="hidden items-center gap-2 px-3 py-2 text-[0.92rem] font-semibold xl:flex"
+            >
+              <PhoneIcon /> {site.phone}
+            </a>
+            <Link
+              href="/contact"
+              className="hidden rounded-[3px] bg-ochre px-4 py-2.5 text-[0.92rem] font-semibold text-white transition hover:bg-ochre-dark sm:inline-flex"
+            >
+              Free quote
+            </Link>
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              aria-expanded={open}
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="grid h-11 w-11 place-items-center lg:hidden"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                {open ? <path d="M5 5l14 14M19 5 5 19" /> : <path d="M3 7h18M3 12h18M3 17h18" />}
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Rendered outside the header: its backdrop-blur would otherwise trap this fixed panel */}
       {open && (
-        <div className="fixed inset-0 z-40 flex flex-col bg-bluestone px-6 pb-10 pt-8 text-white">
-          <p className="mb-14 font-display text-[1.7rem] leading-none tracking-[0.14em]">MAX WALL</p>
-          <ul className="space-y-5">
+        <div className="fixed inset-x-0 bottom-0 top-18 z-30 flex flex-col overflow-y-auto border-t border-line bg-render px-5 pb-28 pt-6 text-ink lg:hidden">
+          <ul className="divide-y divide-line">
             {[{ label: "Home", href: "/" }, ...nav].map((n) => (
               <li key={n.href}>
                 <Link
                   href={n.href}
                   onClick={() => setOpen(false)}
-                  className={`font-display text-3xl ${isActive(pathname, n.href) ? "text-ochre" : ""}`}
+                  className={`flex items-center justify-between py-4 text-xl font-semibold tracking-tight ${
+                    isActive(pathname, n.href) ? "text-ochre" : ""
+                  }`}
                 >
                   {n.label}
+                  <span aria-hidden="true" className="text-ink-soft">→</span>
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-auto grid gap-3">
-            <Link
-              href="/contact"
-              onClick={() => setOpen(false)}
-              className="rounded-full bg-ochre py-3.5 text-center"
-            >
-              Get a Free Quote
-            </Link>
-            <a href={phoneHref} className="rounded-full border border-white/70 py-3.5 text-center">
-              Call {site.phone}
-            </a>
-          </div>
         </div>
       )}
+      {!overlay && <div aria-hidden="true" className="h-18" />}
+    </>
+  );
+}
+
+/** Always-visible call / quote bar on phones. */
+export function MobileActionBar() {
+  const pathname = usePathname();
+  if (pathname === "/contact") return null;
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-render/95 p-3 backdrop-blur md:hidden">
+      <a
+        href={phoneHref}
+        className="flex items-center justify-center gap-2 rounded-[3px] border border-ink py-3 text-[0.95rem] font-semibold"
+      >
+        <PhoneIcon /> Call
+      </a>
+      <Link
+        href="/contact"
+        className="flex items-center justify-center rounded-[3px] bg-ochre py-3 text-[0.95rem] font-semibold text-white"
+      >
+        Free quote
+      </Link>
     </div>
   );
 }

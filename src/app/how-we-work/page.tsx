@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { container, CtaSection, Footer, Header, PageHero, Pill } from "@/components/ui";
+import { Button, Check, container, CtaSection, Eyebrow, Footer, Header, PageHero } from "@/components/ui";
 import { images } from "@/lib/images";
 import { steps } from "@/lib/site";
 
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 };
 
 const promises = [
-  { title: "Written quote", body: "Scope, price and timing in writing before we start." },
-  { title: "Site protection", body: "Windows, paths and gardens covered and protected." },
-  { title: "Clean site", body: "Tidy work areas every day and a full clean-up at the end." },
-  { title: "Final walk-through", body: "We check the finish together before we call it done." },
+  "Scope, price and timing in writing before we start",
+  "Windows, paths and gardens covered and protected",
+  "Tidy work areas every day and a full clean-up at the end",
+  "A final walk-through together before we call it done",
 ];
 
 export default function HowWeWorkPage() {
@@ -23,26 +23,23 @@ export default function HowWeWorkPage() {
       <Header overlay />
       <main className="flex-1">
         <PageHero
-          eyebrow="How we work"
+          crumb={[{ label: "How we work" }]}
           title="Simple from first call to final coat"
           intro="Three clear steps, a fixed price and no surprises along the way."
           image={images.scaffold}
         >
-          <Pill href="/contact">Start with a free quote</Pill>
+          <Button href="/contact">Start with a free quote</Button>
         </PageHero>
 
-        <section className="py-24">
+        <section className="py-20 sm:py-28">
           <div className={container}>
-            <ol className="space-y-20">
+            <ol className="divide-y divide-line border-y border-line">
               {steps.map((s, i) => (
-                <li key={s.title} className="grid gap-6 md:grid-cols-[0.8fr_2fr] md:gap-12">
+                <li key={s.title} className="grid gap-4 py-10 md:grid-cols-[10rem_1fr] md:gap-12">
+                  <p className="text-5xl font-bold tracking-tight text-ochre">0{i + 1}</p>
                   <div>
-                    <p className="font-display text-7xl leading-none text-ochre/80">{i + 1}</p>
-                  </div>
-                  <div>
-                    <div className="mb-6 h-px bg-ink/30" />
-                    <h2 className="font-display text-3xl sm:text-4xl">{s.title}</h2>
-                    <p className="mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">{s.detail}</p>
+                    <h2 className="text-2xl font-bold sm:text-3xl">{s.title}</h2>
+                    <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-soft">{s.detail}</p>
                   </div>
                 </li>
               ))}
@@ -50,18 +47,19 @@ export default function HowWeWorkPage() {
           </div>
         </section>
 
-        <section className="bg-sandstone pb-24 pt-4">
-          <div className="texture mx-auto max-w-6xl bg-bluestone px-5 py-16 text-white sm:px-16 sm:py-20">
-            <h2 className="font-display text-3xl sm:text-4xl">On every job</h2>
-            <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-              {promises.map((p) => (
-                <div key={p.title}>
-                  <h3 className="font-display text-2xl">{p.title}</h3>
-                  <div className="my-5 h-px bg-ochre" />
-                  <p className="leading-relaxed opacity-90">{p.body}</p>
-                </div>
-              ))}
+        <section className="bg-sandstone py-20">
+          <div className={`${container} grid gap-10 md:grid-cols-[1fr_1.4fr]`}>
+            <div>
+              <Eyebrow>Our promise</Eyebrow>
+              <h2 className="mt-3 text-3xl font-bold leading-[1.1]">On every job</h2>
             </div>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {promises.map((p) => (
+                <li key={p} className="flex gap-3 border border-line bg-white p-5 leading-relaxed">
+                  <Check /> {p}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

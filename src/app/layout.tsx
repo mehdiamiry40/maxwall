@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Belleza, Mulish } from "next/font/google";
+import { Belleza, Manrope } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Belleza({
-  variable: "--font-display",
-  weight: "400",
+// Manrope carries the whole UI; Belleza is kept only for the MAX WALL wordmark
+const body = Manrope({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
-const body = Mulish({
-  variable: "--font-body",
+const brand = Belleza({
+  variable: "--font-brand",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-AU" className={`${display.variable} ${body.variable} h-full antialiased`}>
+    <html lang="en-AU" className={`${body.variable} ${brand.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

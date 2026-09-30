@@ -8,9 +8,9 @@ export default function Privacy() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl">Privacy policy</h1>
-        <div className="mt-8 space-y-5 text-ink-soft">
+      <main className="mx-auto w-full max-w-2xl flex-1 px-5 py-16 sm:px-8 sm:py-24">
+        <h1 className="text-4xl font-bold sm:text-5xl">Privacy policy</h1>
+        <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink-soft">
           <p>
             {site.legalName} (ABN {site.abn}) respects your privacy and handles personal
             information in line with the Australian Privacy Principles.

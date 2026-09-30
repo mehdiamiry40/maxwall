@@ -22,6 +22,8 @@ const jsonLd = {
   })),
 };
 
+const groups = [{ id: "general", title: "General", items: faqs }, ...services.map((s) => ({ id: s.slug, title: s.title, items: s.faqs }))];
+
 export default function FaqPage() {
   return (
     <>
@@ -29,27 +31,35 @@ export default function FaqPage() {
       <Header overlay />
       <main className="flex-1">
         <PageHero
-          eyebrow="FAQ"
+          crumb={[{ label: "FAQ" }]}
           title="Questions, answered"
           intro="Can't find what you're after? Give us a call and we'll talk it through."
           image={images.faqBanner}
         />
 
-        <section className="py-24">
-          <div className={`${container} grid gap-12 md:grid-cols-[0.8fr_2fr]`}>
-            <h2 className="font-display text-4xl leading-tight">General</h2>
-            <FaqList items={faqs} />
+        <section className="py-20 sm:py-24">
+          <div className={`${container} grid gap-12 lg:grid-cols-[14rem_1fr]`}>
+            <nav aria-label="FAQ topics" className="hidden self-start lg:sticky lg:top-28 lg:block">
+              <ul className="space-y-2 border-l border-line text-[0.95rem]">
+                {groups.map((g) => (
+                  <li key={g.id}>
+                    <a href={`#${g.id}`} className="-ml-px block border-l-2 border-transparent py-1 pl-4 text-ink-soft hover:border-ochre hover:text-ink">
+                      {g.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="space-y-16">
+              {groups.map((g) => (
+                <div key={g.id} id={g.id}>
+                  <h2 className="mb-4 text-2xl font-bold">{g.title}</h2>
+                  <FaqList items={g.items} />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
-
-        {services.map((s) => (
-          <section key={s.slug} className="border-t border-ink/10 py-20">
-            <div className={`${container} grid gap-12 md:grid-cols-[0.8fr_2fr]`}>
-              <h2 className="font-display text-3xl leading-tight">{s.title}</h2>
-              <FaqList items={s.faqs} />
-            </div>
-          </section>
-        ))}
 
         <CtaSection title="Still have questions?" body="Call us or send a message. We're happy to talk through your walls, with no obligation." />
       </main>

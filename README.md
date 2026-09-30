@@ -11,11 +11,13 @@ Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel.
 
 ## Quote form email
 
-The quote form sends email via [Resend](https://resend.com). Set these environment variables in Vercel:
+Quote requests are emailed via [Resend](https://resend.com), connected through the Vercel Marketplace
+(resource `resend-email-cerulean-magnet`, which provides `RESEND_API_KEY` and `RESEND_EMAIL_DOMAIN`).
 
-- `RESEND_API_KEY`
 - `QUOTE_TO_EMAIL` — where quote requests go (comma-separated for several)
-- `QUOTE_FROM_EMAIL` — optional sender, on a domain verified in Resend
+- `QUOTE_FROM_EMAIL` — optional sender override; defaults to `quotes@$RESEND_EMAIL_DOMAIN`
+
+Run `vercel env pull .env.local` to get these locally.
 
 ## Development
 

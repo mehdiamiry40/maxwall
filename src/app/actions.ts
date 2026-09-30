@@ -57,6 +57,11 @@ export async function requestQuote(
     lead.details || "(no details)",
   ].join("\n");
 
+  // Send from whichever domain is verified in Resend (set by the Vercel Resend integration)
+  const from =
+    process.env.QUOTE_FROM_EMAIL ??
+    `Max Wall Website <quotes@${process.env.RESEND_EMAIL_DOMAIN ?? "maxwall.com.au"}>`;
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -64,9 +69,9 @@ export async function requestQuote(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.QUOTE_FROM_EMAIL ?? `Max Wall Website <quotes@maxwall.com.au>`,
+      from,
       to: to.split(",").map((s) => s.trim()),
-      subject: `Quote request: ${lead.service || "Render/cladding"} in ${lead.suburb}`,
+      subject: `New quote request: ${lead.service || "Render/cladding"} in ${lead.suburb}`,
       text,
     }),
   });

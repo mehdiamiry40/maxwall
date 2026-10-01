@@ -8,7 +8,7 @@ export default function Privacy() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-2xl flex-1 px-5 py-16 sm:px-8 sm:py-24">
+      <main id="main" className="mx-auto w-full max-w-2xl flex-1 px-5 py-16 sm:px-8 sm:py-24">
         <h1 className="text-4xl font-bold sm:text-5xl">Privacy policy</h1>
         <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink-soft">
           <p>
@@ -16,7 +16,7 @@ export default function Privacy() {
             information in line with the Australian Privacy Principles.
           </p>
           <p>
-            When you request a quote we collect your name, mobile number, suburb and the
+            When you request a quote we collect your name, mobile number, email (if provided), suburb and the
             details you give us about your job. We use this only to contact you about your
             quote and the work you ask us to do.
           </p>

@@ -14,7 +14,7 @@ export default function AreasPage() {
   return (
     <>
       <Header overlay />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Areas" }]}
           title="Rendering and cladding right across Adelaide"
@@ -25,7 +25,7 @@ export default function AreasPage() {
         <section className="py-20 sm:py-24">
           <div className={`${container} grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2`}>
             {areas.map((a) => (
-              <div key={a.name} className="bg-render p-8 sm:p-10">
+              <div key={a.name} id={a.id} className="scroll-mt-24 bg-render p-8 sm:p-10">
                 <h2 className="text-2xl font-bold">{a.name}</h2>
                 <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 text-ink-soft">
                   {a.suburbs.map((s) => (

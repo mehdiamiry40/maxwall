@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   Button,
   CallButton,
@@ -9,10 +10,12 @@ import {
   Footer,
   Header,
   SectionHead,
+  Reveal,
   ServiceCard,
+  SplitSection,
   TextLink,
 } from "@/components/ui";
-import { images } from "@/lib/images";
+import { blurProps, images } from "@/lib/images";
 import { areas, pillars, services, site, steps } from "@/lib/site";
 
 const jsonLd = {
@@ -41,11 +44,11 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header overlay />
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         {/* Hero */}
         <section className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-bluestone pb-16 pt-40 text-white sm:pb-24">
           <Image
-            src={images.hero.src}
+            src={images.hero.src} {...blurProps(images.hero)}
             alt={images.hero.alt}
             fill
             priority
@@ -79,14 +82,15 @@ export default function Home() {
         <section className="border-b border-line bg-white">
           <div className={`${container} grid md:grid-cols-3`}>
             {pillars.map((p, i) => (
-              <div
+              <Reveal
                 key={p.title}
+                delay={i * 90}
                 className={`py-10 md:px-8 ${i > 0 ? "border-t border-line md:border-l md:border-t-0" : "md:pl-0"} ${i === 2 ? "md:pr-0" : ""}`}
               >
                 <p className="text-sm font-bold text-ochre">0{i + 1}</p>
                 <h2 className="mt-3 text-xl font-bold">{p.title}</h2>
                 <p className="mt-2 leading-relaxed text-ink-soft">{p.body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -100,41 +104,28 @@ export default function Home() {
               action={{ href: "/services", label: "All services" }}
             />
             <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((s) => (
-                <ServiceCard key={s.slug} service={s} />
+              {services.map((s, i) => (
+                <ServiceCard key={s.slug} service={s} index={i} />
               ))}
             </div>
           </div>
         </section>
 
         {/* About */}
-        <section className="bg-sandstone">
-          <div className="mx-auto grid max-w-6xl md:grid-cols-2">
-            <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[520px]">
-              <Image
-                src={images.about.src}
-                alt={images.about.alt}
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover object-[28%_50%]"
-              />
-            </div>
-            <div className="flex flex-col justify-center px-5 py-16 sm:px-12 md:py-20">
-              <Eyebrow>About Max Wall</Eyebrow>
-              <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">
-                Local, careful and easy to deal with
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-ink-soft">
-                We render and clad homes, extensions and new builds across Adelaide, and handle the
-                whole wall from panel install to final coat. Honest pricing, tidy sites and a finish
-                we&apos;re proud to put our name to.
-              </p>
-              <div className="mt-8">
-                <TextLink href="/about">More about us</TextLink>
-              </div>
-            </div>
+        <SplitSection image={images.about} imagePosition="object-[28%_50%]">
+          <Eyebrow>About Max Wall</Eyebrow>
+          <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">
+            Local, careful and easy to deal with
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-ink-soft">
+            We render and clad homes, extensions and new builds across Adelaide, and handle the whole
+            wall from panel install to final coat. Honest pricing, tidy sites and a finish we&apos;re
+            proud to put our name to.
+          </p>
+          <div className="mt-8">
+            <TextLink href="/about">More about us</TextLink>
           </div>
-        </section>
+        </SplitSection>
 
         {/* Process */}
         <section className="py-20 sm:py-28">
@@ -146,10 +137,12 @@ export default function Home() {
             />
             <ol className="grid gap-10 md:grid-cols-3 md:gap-8">
               {steps.map((s, i) => (
-                <li key={s.title} className="border-t-2 border-ink pt-6">
-                  <p className="text-sm font-bold text-ochre">Step {i + 1}</p>
-                  <h3 className="mt-2 text-xl font-bold">{s.title}</h3>
-                  <p className="mt-2 leading-relaxed text-ink-soft">{s.body}</p>
+                <li key={s.title}>
+                  <Reveal delay={i * 90} className="border-t-2 border-ink pt-6">
+                    <p className="text-sm font-bold text-ochre">Step {i + 1}</p>
+                    <h3 className="mt-2 text-xl font-bold">{s.title}</h3>
+                    <p className="mt-2 leading-relaxed text-ink-soft">{s.body}</p>
+                  </Reveal>
                 </li>
               ))}
             </ol>
@@ -159,11 +152,19 @@ export default function Home() {
         {/* Areas */}
         <section className="border-t border-line bg-white py-14">
           <div className={`${container} flex flex-col gap-6 md:flex-row md:items-center md:justify-between`}>
-            <div>
-              <h2 className="text-2xl font-bold">Working right across Adelaide</h2>
-              <p className="mt-2 text-ink-soft">{areas.map((a) => a.name).join(" · ")}</p>
-            </div>
-            <TextLink href="/areas">See all suburbs</TextLink>
+            <h2 className="text-2xl font-bold">Working right across Adelaide</h2>
+            <ul className="flex flex-wrap gap-2">
+              {areas.map((a) => (
+                <li key={a.name}>
+                  <Link
+                    href={`/areas#${a.id}`}
+                    className="inline-flex rounded-full border border-line px-4 py-2 text-[0.92rem] font-medium transition-colors hover:border-ochre hover:text-ochre-dark"
+                  >
+                    {a.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

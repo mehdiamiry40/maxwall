@@ -21,7 +21,7 @@ export default function HowWeWorkPage() {
   return (
     <>
       <Header overlay />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "How we work" }]}
           title="Simple from first call to final coat"

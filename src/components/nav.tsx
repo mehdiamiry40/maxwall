@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo, PhoneIcon } from "@/components/brand";
-import { nav, phoneHref, site } from "@/lib/site";
+import { nav, phoneHref, services, site } from "@/lib/site";
 
 const isActive = (pathname: string, href: string) =>
   href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -49,16 +49,49 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
           <nav className="hidden items-center gap-7 text-[0.92rem] font-medium lg:flex">
             {nav.map((n) => {
               const active = isActive(pathname, n.href);
-              return (
+              const link = (
                 <Link
-                  key={n.href}
                   href={n.href}
                   aria-current={active ? "page" : undefined}
-                  className={`relative py-2 transition-opacity hover:opacity-100 ${active ? "opacity-100" : "opacity-75"}`}
+                  className={`relative flex items-center gap-1 py-2 transition-opacity hover:opacity-100 ${active ? "opacity-100" : "opacity-75"}`}
                 >
                   {n.label}
+                  {n.href === "/services" && (
+                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  )}
                   {active && <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-ochre" />}
                 </Link>
+              );
+              if (n.href !== "/services") return <div key={n.href}>{link}</div>;
+              // Services opens a panel listing every service on hover or keyboard focus
+              return (
+                <div key={n.href} className="group relative">
+                  {link}
+                  <div className="invisible absolute left-1/2 top-full z-50 w-[34rem] -translate-x-1/2 pt-4 opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                    <div className="grid grid-cols-2 gap-1 rounded-[3px] border border-line bg-white p-3 text-ink shadow-xl shadow-black/10">
+                      {services.map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/services/${s.slug}`}
+                          className={`rounded-[3px] p-3 transition-colors hover:bg-render ${
+                            pathname === `/services/${s.slug}` ? "bg-render" : ""
+                          }`}
+                        >
+                          <span className="block text-[0.92rem] font-semibold">{s.title}</span>
+                          <span className="mt-0.5 block text-[0.8rem] leading-snug font-normal text-ink-soft">{s.body}</span>
+                        </Link>
+                      ))}
+                      <Link
+                        href="/services"
+                        className="col-span-2 mt-1 flex items-center justify-between rounded-[3px] bg-sandstone px-3 py-2.5 text-[0.85rem] font-semibold text-ochre-dark hover:bg-line/60"
+                      >
+                        Compare all services <span aria-hidden="true">→</span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </nav>
@@ -107,6 +140,21 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
                   {n.label}
                   <span aria-hidden="true" className="text-ink-soft">→</span>
                 </Link>
+                {n.href === "/services" && (
+                  <ul className="-mt-1 grid grid-cols-2 gap-x-4 gap-y-2 pb-4 pl-1">
+                    {services.map((s) => (
+                      <li key={s.slug}>
+                        <Link
+                          href={`/services/${s.slug}`}
+                          onClick={() => setOpen(false)}
+                          className={`text-[0.95rem] ${pathname === `/services/${s.slug}` ? "text-ochre" : "text-ink-soft"}`}
+                        >
+                          {s.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

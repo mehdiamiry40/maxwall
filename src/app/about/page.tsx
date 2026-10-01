@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { container, CtaSection, Eyebrow, Footer, Header, PageHero, SectionHead } from "@/components/ui";
+import { container, CtaSection, Eyebrow, Footer, Header, PageHero, SectionHead, SplitSection } from "@/components/ui";
 import { images } from "@/lib/images";
 import { pillars, site } from "@/lib/site";
 
@@ -28,7 +27,7 @@ export default function AboutPage() {
   return (
     <>
       <Header overlay />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "About" }]}
           title="Local tradespeople who care how your walls turn out"
@@ -36,39 +35,26 @@ export default function AboutPage() {
           image={images.about}
         />
 
-        <section className="bg-sandstone">
-          <div className="mx-auto grid max-w-6xl md:grid-cols-2">
-            <div className="px-5 py-16 sm:px-12 md:py-24 md:pl-8">
-              <Eyebrow>Our story</Eyebrow>
-              <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">
-                Rendering and cladding done properly
-              </h2>
-              <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">
-                <p>
-                  Max Wall started with a simple idea: walls finished properly, by people who
-                  actually pick up the phone.
-                </p>
-                <p>
-                  Based in Adelaide&apos;s northern suburbs, we work with homeowners, builders and
-                  investors from Gawler to Seaford and up into the Hills.
-                </p>
-                <p>
-                  We handle the whole wall, from Hebel, foam and fibre cement installs through to
-                  render, texture and paint, so you&apos;re not juggling trades.
-                </p>
-              </div>
-            </div>
-            <div className="relative aspect-[4/3] md:aspect-auto">
-              <Image
-                src={images.services["hebel-aac-panels"].src}
-                alt={images.services["hebel-aac-panels"].alt}
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
+        <SplitSection image={images.services["hebel-aac-panels"]} side="right">
+          <Eyebrow>Our story</Eyebrow>
+          <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">
+            Rendering and cladding done properly
+          </h2>
+          <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">
+            <p>
+              Max Wall started with a simple idea: walls finished properly, by people who actually pick
+              up the phone.
+            </p>
+            <p>
+              Based in Adelaide&apos;s northern suburbs, we work with homeowners, builders and investors
+              from Gawler to Seaford and up into the Hills.
+            </p>
+            <p>
+              We handle the whole wall, from Hebel, foam and fibre cement installs through to render,
+              texture and paint, so you&apos;re not juggling trades.
+            </p>
           </div>
-        </section>
+        </SplitSection>
 
         <section className="border-b border-line bg-white">
           <div className={`${container} grid md:grid-cols-3`}>

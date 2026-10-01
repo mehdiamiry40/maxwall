@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Arrow, Logo, Mark, PhoneIcon } from "@/components/brand";
 import { MobileActionBar, SiteHeader } from "@/components/nav";
-import { images, type Photo } from "@/lib/images";
+import { Reveal } from "@/components/Reveal";
+import { blurProps, images, type Photo } from "@/lib/images";
 import { nav, phoneHref, services, site, type Service } from "@/lib/site";
 
-export { Arrow, Logo, PhoneIcon };
+export { Arrow, Logo, PhoneIcon, Reveal };
 
 export const container = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 
@@ -80,7 +81,7 @@ export function SectionHead({
   action?: { href: string; label: string };
 }) {
   return (
-    <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <Reveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">{title}</h2>
@@ -91,7 +92,7 @@ export function SectionHead({
           <TextLink href={action.href}>{action.label}</TextLink>
         </div>
       )}
-    </div>
+    </Reveal>
   );
 }
 
@@ -128,7 +129,7 @@ export function PageHero({
 }) {
   return (
     <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden bg-bluestone pb-14 pt-36 text-white sm:pb-16">
-      <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="-z-20 object-cover" />
+      <Image src={image.src} {...blurProps(image)} alt={image.alt} fill priority sizes="100vw" className="-z-20 object-cover" />
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(28_38_45/0.55)_0%,rgb(28_38_45/0.3)_40%,rgb(28_38_45/0.88)_100%)]" />
       <div className={container}>
         {crumb && (
@@ -154,29 +155,75 @@ export function PageHero({
   );
 }
 
-export function ServiceCard({ service }: { service: Service }) {
+export function ServiceCard({ service, index = 0 }: { service: Service; index?: number }) {
   const img = images.services[service.slug];
   return (
-    <Link href={`/services/${service.slug}`} className="group flex flex-col">
-      {img && (
-        <div className="relative aspect-[4/3] overflow-hidden bg-sandstone">
-          <Image
-            src={img.src}
-            alt={img.alt}
-            fill
-            sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-          />
+    <Reveal delay={(index % 3) * 90} className="flex">
+      <Link href={`/services/${service.slug}`} className="group flex w-full flex-col">
+        {img && (
+          <div className="relative aspect-[4/3] overflow-hidden bg-sandstone">
+            <Image
+              src={img.src} {...blurProps(img)}
+              alt={img.alt}
+              fill
+              sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+          </div>
+        )}
+        <div className="relative flex flex-1 flex-col border-b border-line pb-6 pt-5">
+          <h3 className="flex items-center justify-between gap-4 text-xl font-bold transition-colors group-hover:text-ochre-dark">
+            {service.title}
+            <Arrow className="h-5 w-5 shrink-0 text-ochre transition-transform group-hover:translate-x-1" />
+          </h3>
+          <p className="mt-2 leading-relaxed text-ink-soft">{service.body}</p>
+          <span className="absolute inset-x-0 -bottom-px h-0.5 origin-left scale-x-0 bg-ochre transition-transform duration-300 group-hover:scale-x-100" />
         </div>
-      )}
-      <div className="flex flex-1 flex-col border-b border-line pb-6 pt-5">
-        <h3 className="flex items-center justify-between gap-4 text-xl font-bold">
-          {service.title}
-          <Arrow className="h-5 w-5 shrink-0 text-ochre transition-transform group-hover:translate-x-1" />
-        </h3>
-        <p className="mt-2 leading-relaxed text-ink-soft">{service.body}</p>
+      </Link>
+    </Reveal>
+  );
+}
+
+/**
+ * Photo on one half running to the edge of the screen, content on the other half.
+ * On phones the photo stacks above the content.
+ */
+export function SplitSection({
+  image,
+  imagePosition = "object-center",
+  side = "left",
+  className = "bg-sandstone",
+  children,
+}: {
+  image: Photo;
+  imagePosition?: string;
+  side?: "left" | "right";
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const right = side === "right";
+  return (
+    <section className={`relative ${className}`}>
+      <div className={`relative aspect-[4/3] md:absolute md:inset-y-0 md:aspect-auto md:w-1/2 ${right ? "md:right-0" : "md:left-0"}`}>
+        <Image
+          src={image.src}
+          {...blurProps(image)}
+          alt={image.alt}
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className={`object-cover ${imagePosition}`}
+        />
       </div>
-    </Link>
+      <div className={`${container} md:grid md:grid-cols-2`}>
+        <Reveal
+          className={`flex flex-col justify-center py-16 md:min-h-[540px] md:py-24 ${
+            right ? "md:col-start-1 md:pr-14" : "md:col-start-2 md:pl-14"
+          }`}
+        >
+          {children}
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -208,7 +255,7 @@ export function CtaSection({
 }) {
   return (
     <section className="bg-bluestone text-white">
-      <div className={`${container} grid gap-8 py-16 sm:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}>
+      <Reveal className={`${container} grid gap-8 py-16 sm:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}>
         <div>
           <h2 className="text-3xl font-bold leading-tight sm:text-[2.6rem]">{title}</h2>
           <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/75">{body}</p>
@@ -217,7 +264,7 @@ export function CtaSection({
           <Button href="/contact">Get a free quote</Button>
           <CallButton variant="outline-light" />
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

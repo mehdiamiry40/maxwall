@@ -14,7 +14,7 @@ export default function ServicesPage() {
   return (
     <>
       <Header overlay />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Services" }]}
           title="Render, cladding and everything in between"
@@ -24,8 +24,8 @@ export default function ServicesPage() {
 
         <section className="py-20 sm:py-24">
           <div className={`${container} grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3`}>
-            {services.map((s) => (
-              <ServiceCard key={s.slug} service={s} />
+            {services.map((s, i) => (
+              <ServiceCard key={s.slug} service={s} index={i} />
             ))}
           </div>
         </section>

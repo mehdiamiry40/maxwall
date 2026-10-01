@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   Button,
@@ -14,6 +13,7 @@ import {
   PageHero,
   SectionHead,
   ServiceCard,
+  SplitSection,
 } from "@/components/ui";
 import { images } from "@/lib/images";
 import { serviceBySlug, services, site, steps } from "@/lib/site";
@@ -55,7 +55,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header overlay />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Services", href: "/services" }, { label: service.title }]}
           title={`${service.title} in Adelaide`}
@@ -102,27 +102,20 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
         </section>
 
         {/* Process */}
-        <section className="bg-sandstone">
-          <div className="mx-auto grid max-w-6xl md:grid-cols-2">
-            <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[460px]">
-              <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
-            </div>
-            <div className="px-5 py-16 sm:px-12">
-              <Eyebrow>How it works</Eyebrow>
-              <ol className="mt-6 space-y-7">
-                {steps.map((s, i) => (
-                  <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-2">
-                    <span className="text-lg font-bold text-ochre">{i + 1}</span>
-                    <div>
-                      <h3 className="text-lg font-bold">{s.title}</h3>
-                      <p className="mt-1 leading-relaxed text-ink-soft">{s.body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </section>
+        <SplitSection image={photo}>
+          <Eyebrow>How it works</Eyebrow>
+          <ol className="mt-6 space-y-7">
+            {steps.map((s, i) => (
+              <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-2">
+                <span className="text-lg font-bold text-ochre">{i + 1}</span>
+                <div>
+                  <h3 className="text-lg font-bold">{s.title}</h3>
+                  <p className="mt-1 leading-relaxed text-ink-soft">{s.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </SplitSection>
 
         {/* FAQs */}
         <section className="py-20 sm:py-24">
@@ -140,8 +133,8 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           <div className={container}>
             <SectionHead title="Other services" action={{ href: "/services", label: "All services" }} />
             <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {others.map((s) => (
-                <ServiceCard key={s.slug} service={s} />
+              {others.map((s, i) => (
+                <ServiceCard key={s.slug} service={s} index={i} />
               ))}
             </div>
           </div>

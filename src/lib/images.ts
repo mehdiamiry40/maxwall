@@ -2,7 +2,15 @@
 // Swap these for photos of Max Wall's own jobs as they become available:
 // drop files in /public/images and change `src` to e.g. "/images/hero.jpg".
 
+import { blurs } from "@/lib/blurs";
+
 export type Photo = { src: string; alt: string; credit: string };
+
+/** next/image props that show a tiny blurred preview while the photo loads (if we have one). */
+export function blurProps(photo: Photo) {
+  const blurDataURL = blurs[photo.src.match(/photo-[0-9]+-[0-9a-f]+/)?.[0] ?? ""];
+  return blurDataURL ? { placeholder: "blur" as const, blurDataURL } : {};
+}
 
 // Ask Unsplash for a web-sized original so the image optimiser has less to fetch
 const unsplash = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=max&w=2400&q=80`;

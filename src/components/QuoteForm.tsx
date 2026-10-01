@@ -77,6 +77,13 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
       </div>
 
       <div className="sm:col-span-2">
+        <label htmlFor="email" className={label}>
+          Email <span className="font-normal text-ink-soft">(optional)</span>
+        </label>
+        <input id="email" name="email" type="email" autoComplete="email" className={input} />
+      </div>
+
+      <div className="sm:col-span-2">
         <label htmlFor="details" className={label}>
           Anything else? <span className="font-normal text-ink-soft">(optional)</span>
         </label>

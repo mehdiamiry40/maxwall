@@ -18,7 +18,7 @@ export default async function Contact(props: PageProps<"/contact">) {
   return (
     <>
       <Header />
-      <main className="flex-1 bg-sandstone">
+      <main id="main" className="flex-1 bg-sandstone">
         <div className={`${container} grid gap-12 py-14 md:grid-cols-[1fr_1.5fr] md:gap-16 md:py-20`}>
           <div>
             <Eyebrow>Free quote</Eyebrow>

@@ -257,6 +257,7 @@ export const steps = [
 
 export const areas = [
   {
+    id: "north",
     name: "Northern suburbs",
     suburbs: [
       "Parafield Gardens", "Salisbury", "Mawson Lakes", "Paralowie", "Elizabeth",
@@ -264,6 +265,7 @@ export const areas = [
     ],
   },
   {
+    id: "west",
     name: "Western suburbs",
     suburbs: [
       "Woodville", "West Lakes", "Henley Beach", "Grange", "Findon",
@@ -271,6 +273,7 @@ export const areas = [
     ],
   },
   {
+    id: "east",
     name: "Eastern suburbs & Hills",
     suburbs: [
       "Norwood", "Burnside", "Campbelltown", "Magill", "Paradise",
@@ -278,6 +281,7 @@ export const areas = [
     ],
   },
   {
+    id: "south",
     name: "Southern suburbs",
     suburbs: [
       "Marion", "Glenelg", "Brighton", "Hallett Cove", "Aberfoyle Park",

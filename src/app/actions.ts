@@ -20,6 +20,7 @@ export async function requestQuote(
   const lead = {
     name: field(formData, "name"),
     mobile: field(formData, "mobile"),
+    email: field(formData, "email"),
     suburb: field(formData, "suburb"),
     service: field(formData, "service"),
     size: field(formData, "size"),
@@ -50,6 +51,7 @@ export async function requestQuote(
   const text = [
     `Name: ${lead.name}`,
     `Mobile: ${lead.mobile}`,
+    `Email: ${lead.email || "-"}`,
     `Suburb: ${lead.suburb}`,
     `Service: ${lead.service || "-"}`,
     `Approx. size: ${lead.size || "-"}`,
@@ -71,6 +73,8 @@ export async function requestQuote(
     body: JSON.stringify({
       from,
       to: to.split(",").map((s) => s.trim()),
+      // Lets you hit "reply" to answer the customer directly
+      ...(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) ? { reply_to: lead.email } : {}),
       subject: `New quote request: ${lead.service || "Render/cladding"} in ${lead.suburb}`,
       text,
     }),

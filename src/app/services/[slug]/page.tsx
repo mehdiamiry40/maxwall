@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check } from "lucide-react";
-import { Contact } from "@/components/Contact";
-import { Faq } from "@/components/Faq";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import {
+  Button,
+  CallButton,
+  Check,
+  container,
+  CtaSection,
+  Eyebrow,
+  FaqList,
+  Footer,
+  Header,
+  PageHero,
+  SectionHead,
+  ServiceCard,
+} from "@/components/ui";
 import { images } from "@/lib/images";
-import { phoneHref, serviceBySlug, services, site, steps } from "@/lib/site";
+import { serviceBySlug, services, site, steps } from "@/lib/site";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -18,14 +26,10 @@ export async function generateMetadata(props: PageProps<"/services/[slug]">): Pr
   const { slug } = await props.params;
   const service = serviceBySlug(slug);
   if (!service) return {};
-  const path = `/services/${service.slug}`;
-  const title = `${service.title} Adelaide`;
-  const description = `${service.body} Free fixed-price quotes across Adelaide from Max Wall.`;
   return {
-    title,
-    description,
-    alternates: { canonical: path },
-    openGraph: { type: "website", url: `${site.url}${path}`, title, description, siteName: site.name, locale: "en_AU" },
+    title: `${service.title} Adelaide`,
+    description: `${service.body} Free fixed-price quotes across Adelaide from Max Wall.`,
+    alternates: { canonical: `/services/${service.slug}` },
   };
 }
 
@@ -35,152 +39,117 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
   if (!service) notFound();
 
   const photo = images.services[service.slug];
-  const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
-  const quoteHref = `/?service=${service.slug}#contact`;
+  const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const quoteHref = `/contact?service=${service.slug}`;
 
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: service.title,
-      description: service.intro,
-      serviceType: service.title,
-      url: `${site.url}/services/${service.slug}`,
-      areaServed: { "@type": "City", name: "Adelaide" },
-      provider: { "@type": "HomeAndConstructionBusiness", name: site.name, url: site.url, email: site.email },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: service.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-        { "@type": "ListItem", position: 2, name: service.title, item: `${site.url}/services/${service.slug}` },
-      ],
-    },
-  ];
-
-  const sections: { heading: string; body?: string; list?: string[]; ordered?: boolean }[] = [
-    { heading: "What to expect", body: service.intro },
-    { heading: "Ideal for", list: service.idealFor },
-    { heading: "How it works", list: steps.map((s) => `${s.title}. ${s.body}`), ordered: true },
-  ];
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.intro,
+    areaServed: { "@type": "City", name: "Adelaide" },
+    provider: { "@type": "HomeAndConstructionBusiness", name: site.legalName, telephone: site.phone, url: site.url },
+  };
 
   return (
     <>
-      <Header />
-      <main id="main">
-        <section className="bg-porcelain">
-          <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <Header overlay />
+      <main className="flex-1">
+        <PageHero
+          crumb={[{ label: "Services", href: "/services" }, { label: service.title }]}
+          title={`${service.title} in Adelaide`}
+          intro={service.body}
+          image={photo}
+        >
+          <Button href={quoteHref}>Get a free quote</Button>
+          <CallButton variant="outline-light" />
+        </PageHero>
+
+        {/* Overview */}
+        <section className="py-20 sm:py-24">
+          <div className={`${container} grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16`}>
             <div>
-              <nav aria-label="Breadcrumb" className="text-sm text-zinc-600">
-                <Link href="/" className="transition hover:text-ochre">
-                  Home
-                </Link>
-                <span className="mx-2">/</span>
-                <span>{service.title}</span>
-              </nav>
+              <Eyebrow>Overview</Eyebrow>
+              <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">What to expect</h2>
+              <p className="mt-5 text-lg leading-relaxed text-ink-soft">{service.intro}</p>
 
-              <h1 className="mt-8 font-display text-4xl font-semibold leading-tight text-bluestone sm:text-6xl sm:leading-[0.98]">
-                {service.title} in Adelaide
-              </h1>
-              <p className="mt-7 text-lg leading-relaxed text-ink sm:text-xl">{service.body}</p>
-
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={quoteHref}
-                  className="inline-flex items-center justify-center gap-2 bg-ochre px-7 py-4 text-base font-semibold text-white transition hover:bg-ochre-dark"
-                >
-                  Request a free quote
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-                <a
-                  href={phoneHref}
-                  className="inline-flex items-center justify-center border border-ochre px-7 py-4 text-base font-semibold text-ochre transition hover:bg-white"
-                >
-                  {site.phone}
-                </a>
-              </div>
-            </div>
-
-            <div className="relative aspect-[1.2] overflow-hidden bg-linen shadow-sm">
-              <Image src={photo.src} alt={photo.alt} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-white py-18 sm:py-20">
-          <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.75fr_1.25fr]">
-            <aside>
-              <h2 className="font-display text-3xl font-semibold text-bluestone">What is included</h2>
-              <ul className="mt-7 space-y-4">
+              <h3 className="mt-12 text-xl font-bold">What&apos;s included</h3>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {service.includes.map((item) => (
-                  <li key={item} className="flex gap-3 text-base text-ink">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center bg-ochre text-white">
-                      <Check className="h-4 w-4" aria-hidden />
-                    </span>
-                    {item}
+                  <li key={item} className="flex gap-3 leading-relaxed">
+                    <Check /> {item}
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <aside className="self-start border border-line bg-white p-7 sm:p-8 lg:sticky lg:top-28">
+              <h3 className="text-lg font-bold">Ideal for</h3>
+              <ul className="mt-4 space-y-3 text-ink-soft">
+                {service.idealFor.map((item) => (
+                  <li key={item} className="flex gap-3 leading-relaxed">
+                    <Check /> {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-7 grid gap-3">
+                <Button href={quoteHref}>Get a free quote</Button>
+                <CallButton />
+              </div>
             </aside>
+          </div>
+        </section>
 
-            <div className="grid gap-8">
-              {sections.map((section) => (
-                <article key={section.heading} className="border-t border-zinc-200 pt-7">
-                  <h2 className="font-display text-3xl font-semibold leading-tight text-bluestone">{section.heading}</h2>
-                  {section.body && <p className="mt-4 text-lg leading-relaxed text-zinc-700">{section.body}</p>}
-                  {section.list && (
-                    <ul className="mt-4 space-y-2 text-lg leading-relaxed text-zinc-700">
-                      {section.list.map((item, i) => (
-                        <li key={item} className="flex gap-3">
-                          <span className="w-5 shrink-0 font-semibold text-ochre">{section.ordered ? `${i + 1}.` : "›"}</span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </article>
+        {/* Process */}
+        <section className="bg-sandstone">
+          <div className="mx-auto grid max-w-6xl md:grid-cols-2">
+            <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[460px]">
+              <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+            </div>
+            <div className="px-5 py-16 sm:px-12">
+              <Eyebrow>How it works</Eyebrow>
+              <ol className="mt-6 space-y-7">
+                {steps.map((s, i) => (
+                  <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-2">
+                    <span className="text-lg font-bold text-ochre">{i + 1}</span>
+                    <div>
+                      <h3 className="text-lg font-bold">{s.title}</h3>
+                      <p className="mt-1 leading-relaxed text-ink-soft">{s.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQs */}
+        <section className="py-20 sm:py-24">
+          <div className={`${container} grid gap-10 lg:grid-cols-[1fr_2fr]`}>
+            <div>
+              <Eyebrow>FAQ</Eyebrow>
+              <h2 className="mt-3 text-3xl font-bold leading-[1.1]">Common questions</h2>
+            </div>
+            <FaqList items={service.faqs} />
+          </div>
+        </section>
+
+        {/* Related */}
+        <section className="border-t border-line bg-white py-20 sm:py-24">
+          <div className={container}>
+            <SectionHead title="Other services" action={{ href: "/services", label: "All services" }} />
+            <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {others.map((s) => (
+                <ServiceCard key={s.slug} service={s} />
               ))}
             </div>
           </div>
         </section>
 
-        <Faq
-          className="bg-porcelain"
-          description={`A quick guide before requesting a quote for ${service.title.toLowerCase()} in Adelaide.`}
-          items={service.faqs}
-        />
-
-        <section className="bg-white py-18 sm:py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <h2 className="font-display text-4xl font-semibold text-bluestone">Related services</h2>
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {related.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={`/services/${item.slug}`}
-                  className="group border border-zinc-200 bg-white p-6 transition hover:border-ochre"
-                >
-                  <h3 className="font-display text-2xl font-semibold text-bluestone">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-zinc-600">{item.body}</p>
-                  <span className="mt-5 inline-flex text-sm font-semibold text-ochre underline underline-offset-2">
-                    Learn more
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <Contact />
+        <CtaSection />
       </main>
       <Footer />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );
 }

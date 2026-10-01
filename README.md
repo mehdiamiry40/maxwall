@@ -2,13 +2,11 @@
 
 Website for Max Wall Building Solutions Pty Ltd, render and cladding specialists in Adelaide, SA.
 
-Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel. Layout follows the RM Tiling
-site: a one-page home (hero, about, services, FAQ, projects, contact) plus a page per service.
+Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel.
 
 ## Editing content
 
-- Business details, nav, services, areas, FAQs: `src/lib/site.ts`
-- Homepage sections: `src/components/` (Hero, About, Services, Gallery, Faq, CtaBanner, Contact)
+- Business details, services, areas, FAQs: `src/lib/site.ts`
 - Photos: `src/lib/images.ts` (Unsplash for now — swap in real job photos under `public/images/`)
 
 ## Quote form email

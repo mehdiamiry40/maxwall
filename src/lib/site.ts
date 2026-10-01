@@ -11,29 +11,32 @@ export const site = {
   city: "Adelaide",
   region: "South Australia",
   hours: "Mon–Sat, 7am–6pm",
-  tagline: "Render & Cladding Adelaide",
-  description:
-    "Max Wall provides cement and acrylic render, Hebel and AAC panels, foam and fibre cement cladding across Adelaide. Free fixed-price quotes.",
-  serviceArea: "All of Adelaide & the Hills",
 };
 
 export const phoneHref = `tel:${site.phone.replace(/\s+/g, "")}`;
 
 export const nav = [
-  { label: "Render", href: "/services/cement-render" },
-  { label: "Cladding", href: "/services/fibre-cement-cladding" },
-  { label: "Hebel", href: "/services/hebel-aac-panels" },
-  { label: "Projects", href: "/#projects" },
-  { label: "About", href: "/#about" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "How we work", href: "/how-we-work" },
+  { label: "Areas", href: "/areas" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
-export const trustPoints = [
-  "Free on-site quotes",
-  "Fixed written prices",
-  "Local Adelaide business",
-  "Tidy sites, clean finishes",
+export const pillars = [
+  {
+    title: "Fixed, written quotes",
+    body: "We measure on site and put the price in writing. No surprises on the invoice, no extras halfway through.",
+  },
+  {
+    title: "Adelaide based, locally trusted",
+    body: "Based in Adelaide's north, working for homeowners and builders from Gawler to Seaford and up into the Hills.",
+  },
+  {
+    title: "A finish built to last",
+    body: "Proper prep, quality render systems and clean lines. We finish every wall as if it were on our own home.",
+  },
 ];
 
 export type Service = {

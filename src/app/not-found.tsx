@@ -1,28 +1,19 @@
-import Link from "next/link";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Button, container, Footer, Header, TextLink } from "@/components/ui";
 
 export default function NotFound() {
   return (
     <>
       <Header />
-      <main id="main" className="bg-porcelain">
-        <div className="mx-auto max-w-3xl px-4 py-28 text-center sm:px-6 sm:py-36">
-          <p className="text-sm font-semibold uppercase tracking-[0.08em] text-ochre">404</p>
-          <h1 className="mt-4 font-display text-4xl font-semibold text-bluestone sm:text-6xl">This wall&apos;s not here</h1>
-          <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-zinc-600">
+      <main className="flex-1 bg-sandstone">
+        <div className={`${container} py-28 sm:py-36`}>
+          <p className="text-sm font-bold tracking-[0.2em] text-ochre-dark uppercase">404</p>
+          <h1 className="mt-3 text-4xl font-bold sm:text-6xl">This wall&apos;s not here</h1>
+          <p className="mt-5 max-w-md text-lg leading-relaxed text-ink-soft">
             The page you&apos;re looking for has moved or doesn&apos;t exist.
           </p>
-          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="/" className="bg-ochre px-7 py-4 text-base font-semibold text-white transition hover:bg-ochre-dark">
-              Back to home
-            </Link>
-            <Link
-              href="/#services"
-              className="border border-ochre px-7 py-4 text-base font-semibold text-ochre transition hover:bg-white"
-            >
-              Browse services
-            </Link>
+          <div className="mt-9 flex flex-wrap items-center gap-6">
+            <Button href="/">Back to home</Button>
+            <TextLink href="/services">Browse services</TextLink>
           </div>
         </div>
       </main>

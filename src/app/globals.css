@@ -1,58 +1,92 @@
 @import "tailwindcss";
 
-/* Max Wall identity: Adelaide bluestone, sandstone and an ochre accent */
+/* ------------------------------------------------------------------ */
+/*  Max Wall — service-business design tokens                          */
+/*  Warm render backgrounds, deep bluestone headings, ochre accents.   */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-ink: #17232a;
+  --color-charcoal: #141d23;
+  --color-porcelain: #f6f4f0;
+  --color-linen: #ece6dd;
+  --color-bluestone: #1b2a33;
+  --color-navy: #141d23;
+  --color-ochre: #a35f2c;
+  --color-ochre-dark: #7a4420;
+  --color-success: #15803d;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+}
+
 :root {
-  --bluestone: #1c262d;
-  --bluestone-soft: #2b3943;
-  --sandstone: #ece6dd;
-  --render: #f7f5f1;
-  --ochre: #a35f2c;
-  --ochre-dark: #874c21;
-  --ink: #161e23;
-  --ink-soft: #4d5860;
-  --line: #d9d3c9;
-}
-
-@theme inline {
-  --color-bluestone: var(--bluestone);
-  --color-bluestone-soft: var(--bluestone-soft);
-  --color-sandstone: var(--sandstone);
-  --color-render: var(--render);
-  --color-ochre: var(--ochre);
-  --color-ochre-dark: var(--ochre-dark);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-line: var(--line);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-body);
-  --font-brand: var(--font-brand);
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  --background: #ffffff;
+  --foreground: #17232a;
 }
 
 body {
-  background: var(--render);
-  color: var(--ink);
-  font-feature-settings: "ss01", "cv11";
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-h1,
-h2,
-h3 {
-  text-wrap: balance;
-  letter-spacing: -0.025em;
+/* Smooth in-page anchor scrolling, offset for the sticky header. */
+html {
+  scroll-behavior: smooth;
 }
 
-p {
-  text-wrap: pretty;
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
-:focus-visible {
-  outline: 2px solid var(--ochre);
-  outline-offset: 3px;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Horizontal weatherboard courses — a quiet nod to cladding. */
+@utility courses {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 38px,
+    color-mix(in srgb, currentColor 14%, transparent) 38px 40px
+  );
+}
+
+/* Subtle reveal-on-scroll. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: reveal-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+::selection {
+  background: #a35f2c;
+  color: #ffffff;
 }
 
 details summary::-webkit-details-marker {

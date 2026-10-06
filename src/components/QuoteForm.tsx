@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { requestQuote, type QuoteState } from "@/app/actions";
-import { services } from "@/lib/site";
+import { jobTypes, phoneHref, services, site, storeys } from "@/lib/site";
 
 const initialState: QuoteState = { ok: false, message: "" };
 
@@ -19,6 +19,13 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
       <div className="py-10 text-center" role="status">
         <p className="text-2xl font-bold">Thanks, we&apos;ve got it.</p>
         <p className="mt-3 text-ink-soft">{state.message}</p>
+        <p className="mt-6 text-ink-soft">
+          Need it sooner? Call{" "}
+          <a href={phoneHref} className="font-semibold text-ink">
+            {site.phone}
+          </a>
+          .
+        </p>
       </div>
     );
   }
@@ -29,7 +36,7 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
         <label htmlFor="service" className={label}>
           What do you need?
         </label>
-        <select id="service" name="service" className={`${input} cursor-pointer`} defaultValue={defaultService}>
+        <select id="service" name="service" required className={`${input} cursor-pointer`} defaultValue={defaultService || ""}>
           <option value="" disabled>
             Choose a service
           </option>
@@ -37,6 +44,34 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
             <option key={s.title}>{s.title}</option>
           ))}
           <option>Not sure yet</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="job" className={label}>
+          Type of job
+        </label>
+        <select id="job" name="job" required defaultValue="" className={`${input} cursor-pointer`}>
+          <option value="" disabled>
+            Choose one
+          </option>
+          {jobTypes.map((job) => (
+            <option key={job}>{job}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="storeys" className={label}>
+          Storeys
+        </label>
+        <select id="storeys" name="storeys" required defaultValue="" className={`${input} cursor-pointer`}>
+          <option value="" disabled>
+            Choose one
+          </option>
+          {storeys.map((option) => (
+            <option key={option}>{option}</option>
+          ))}
         </select>
       </div>
 
@@ -91,7 +126,7 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
           id="details"
           name="details"
           rows={3}
-          placeholder="New build, re-render, single or double storey…"
+          placeholder="Colour, timing, access, anything we should know…"
           className={input}
         />
       </div>

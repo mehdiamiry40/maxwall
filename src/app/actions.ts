@@ -23,12 +23,17 @@ export async function requestQuote(
     email: field(formData, "email"),
     suburb: field(formData, "suburb"),
     service: field(formData, "service"),
+    job: field(formData, "job"),
+    storeys: field(formData, "storeys"),
     size: field(formData, "size"),
     details: field(formData, "details"),
   };
 
   if (!lead.name || !lead.mobile || !lead.suburb) {
     return { ok: false, message: "Please add your name, mobile and suburb." };
+  }
+  if (!lead.service || !lead.job || !lead.storeys) {
+    return { ok: false, message: "Please choose a service, the type of job and how many storeys." };
   }
   if (lead.mobile.replace(/\D/g, "").length < 8) {
     return { ok: false, message: "Please check your mobile number." };
@@ -54,6 +59,8 @@ export async function requestQuote(
     `Email: ${lead.email || "-"}`,
     `Suburb: ${lead.suburb}`,
     `Service: ${lead.service || "-"}`,
+    `Job: ${lead.job || "-"}`,
+    `Storeys: ${lead.storeys || "-"}`,
     `Approx. size: ${lead.size || "-"}`,
     "",
     lead.details || "(no details)",

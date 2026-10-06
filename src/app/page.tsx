@@ -15,6 +15,7 @@ import {
   SplitSection,
   TextLink,
 } from "@/components/ui";
+import { SuburbSearch } from "@/components/SuburbSearch";
 import { blurProps, images } from "@/lib/images";
 import { areas, pillars, services, site, steps } from "@/lib/site";
 
@@ -46,7 +47,7 @@ export default function Home() {
 
       <main id="main" className="flex-1">
         {/* Hero */}
-        <section className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-bluestone pb-16 pt-40 text-white sm:pb-24">
+        <section className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-bluestone pb-28 pt-40 text-white md:pb-24">
           <Image
             src={images.hero.src} {...blurProps(images.hero)}
             alt={images.hero.alt}
@@ -149,10 +150,44 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Pricing */}
+        <section className="border-t border-line bg-sandstone py-16 sm:py-20">
+          <div className={`${container} grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-center`}>
+            <div>
+              <Eyebrow>Pricing</Eyebrow>
+              <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">
+                A fixed price, before we start
+              </h2>
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">
+                Most jobs are priced per square metre. Send a photo and a rough size for a same-day
+                ballpark, then a written quote after we measure on site.
+              </p>
+              <div className="mt-6">
+                <TextLink href="/faq">Questions about cost and timing</TextLink>
+              </div>
+            </div>
+            <ul className="grid gap-3">
+              {[
+                "Free on-site measure",
+                "Scope, price and timing in writing",
+                "Painting quoted up front if you want the job finished",
+                "No extras added halfway through",
+              ].map((item) => (
+                <li key={item} className="flex gap-3 border border-line bg-white p-4 font-medium">
+                  <Check /> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         {/* Areas */}
         <section className="border-t border-line bg-white py-14">
-          <div className={`${container} flex flex-col gap-6 md:flex-row md:items-center md:justify-between`}>
-            <h2 className="text-2xl font-bold">Working right across Adelaide</h2>
+          <div className={`${container} flex flex-col gap-6`}>
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <h2 className="text-2xl font-bold">Working right across Adelaide</h2>
+              <SuburbSearch compact />
+            </div>
             <ul className="flex flex-wrap gap-2">
               {areas.map((a) => (
                 <li key={a.name}>

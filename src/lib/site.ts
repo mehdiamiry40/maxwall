@@ -298,7 +298,6 @@ export type SuburbMatch = {
   name: string;
   areaId: string;
   areaName: string;
-  kind: "area" | "suburb";
 };
 
 const wordsMatch = (label: string, query: string) => {
@@ -308,26 +307,24 @@ const wordsMatch = (label: string, query: string) => {
   return query.length >= 4 && value.includes(query);
 };
 
-/** Matching regions and suburbs. A region match stays one row, so "Hills" does not list Norwood. */
+/** Suburbs (and every suburb in a matching region) for a typed query. */
 export function searchSuburbs(query: string): SuburbMatch[] {
   const q = query.trim().toLowerCase();
   if (q.length < 2) return [];
 
   const matches: SuburbMatch[] = [];
   for (const area of areas) {
-    if (wordsMatch(area.name, q)) {
-      matches.push({ name: area.name, areaId: area.id, areaName: area.name, kind: "area" });
-    }
+    const region = wordsMatch(area.name, q);
     for (const name of area.suburbs) {
-      if (wordsMatch(name, q)) {
-        matches.push({ name, areaId: area.id, areaName: area.name, kind: "suburb" });
+      if (region || wordsMatch(name, q)) {
+        matches.push({ name, areaId: area.id, areaName: area.name });
       }
     }
   }
 
   return matches.sort((a, b) => {
-    const rank = (match: SuburbMatch) => (match.kind === "area" ? 0 : match.name.toLowerCase().startsWith(q) ? 1 : 2);
-    return rank(a) - rank(b) || a.name.localeCompare(b.name);
+    const rank = (name: string) => (name.toLowerCase().startsWith(q) ? 0 : 1);
+    return rank(a.name) - rank(b.name) || a.name.localeCompare(b.name);
   });
 }
 

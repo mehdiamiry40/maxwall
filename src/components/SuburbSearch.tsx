@@ -42,7 +42,9 @@ export function SuburbSearch({ compact = false }: { compact?: boolean }) {
                 className="flex items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-render"
               >
                 <span className="font-semibold">{match.name}</span>
-                <span className="text-right text-sm text-ink-soft">{match.areaName}</span>
+                <span className="text-right text-sm text-ink-soft">
+                  {match.kind === "area" ? "Whole area" : match.areaName}
+                </span>
               </Link>
             </li>
           ))}

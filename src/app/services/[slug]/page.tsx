@@ -102,7 +102,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
         </section>
 
         {/* Process */}
-        <SplitSection image={images.about}>
+        <SplitSection image={photo}>
           <Eyebrow>How it works</Eyebrow>
           <ol className="mt-6 space-y-7">
             {steps.map((s, i) => (

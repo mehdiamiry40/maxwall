@@ -234,10 +234,6 @@ export const services: Service[] = [
 
 export const serviceBySlug = (slug: string) => services.find((s) => s.slug === slug);
 
-export const jobTypes = ["New build", "Extension or addition", "Re-render or repair", "Not sure yet"] as const;
-
-export const storeys = ["Single storey", "Double storey", "Not sure yet"] as const;
-
 export const steps = [
   {
     title: "Tell us about the job",
@@ -289,44 +285,10 @@ export const areas = [
     name: "Southern suburbs",
     suburbs: [
       "Marion", "Glenelg", "Brighton", "Hallett Cove", "Aberfoyle Park",
-      "Happy Valley", "Morphett Vale", "Noarlunga",     "Seaford",
+      "Happy Valley", "Morphett Vale", "Noarlunga", "Seaford",
     ],
   },
 ];
-
-export type SuburbMatch = {
-  name: string;
-  areaId: string;
-  areaName: string;
-};
-
-const wordsMatch = (label: string, query: string) => {
-  const value = label.toLowerCase();
-  if (value.startsWith(query)) return true;
-  if (value.split(/\s+/).some((word) => word.startsWith(query))) return true;
-  return query.length >= 4 && value.includes(query);
-};
-
-/** Suburbs (and every suburb in a matching region) for a typed query. */
-export function searchSuburbs(query: string): SuburbMatch[] {
-  const q = query.trim().toLowerCase();
-  if (q.length < 2) return [];
-
-  const matches: SuburbMatch[] = [];
-  for (const area of areas) {
-    const region = wordsMatch(area.name, q);
-    for (const name of area.suburbs) {
-      if (region || wordsMatch(name, q)) {
-        matches.push({ name, areaId: area.id, areaName: area.name });
-      }
-    }
-  }
-
-  return matches.sort((a, b) => {
-    const rank = (name: string) => (name.toLowerCase().startsWith(q) ? 0 : 1);
-    return rank(a.name) - rank(b.name) || a.name.localeCompare(b.name);
-  });
-}
 
 export const faqs = [
   {

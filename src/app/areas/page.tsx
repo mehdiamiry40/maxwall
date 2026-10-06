@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SuburbSearch } from "@/components/SuburbSearch";
 import { Button, container, CtaSection, Footer, Header, PageHero } from "@/components/ui";
 import { images } from "@/lib/images";
 import { areas } from "@/lib/site";
@@ -24,9 +23,6 @@ export default function AreasPage() {
         />
 
         <section className="py-20 sm:py-24">
-          <div className={`${container} mb-10 max-w-xl`}>
-            <SuburbSearch />
-          </div>
           <div className={`${container} grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2`}>
             {areas.map((a) => (
               <div key={a.name} id={a.id} className="scroll-mt-24 bg-render p-8 sm:p-10">

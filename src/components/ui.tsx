@@ -128,7 +128,7 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden bg-bluestone pb-28 pt-36 text-white md:pb-16">
+    <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden bg-bluestone pb-14 pt-36 text-white sm:pb-16">
       <Image src={image.src} {...blurProps(image)} alt={image.alt} fill priority sizes="100vw" className="-z-20 object-cover" />
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(28_38_45/0.55)_0%,rgb(28_38_45/0.3)_40%,rgb(28_38_45/0.88)_100%)]" />
       <div className={container}>

@@ -39,14 +39,11 @@ export default function FaqPage() {
 
         <section className="py-20 sm:py-24">
           <div className={`${container} grid gap-12 lg:grid-cols-[14rem_1fr]`}>
-            <nav aria-label="FAQ topics" className="self-start lg:sticky lg:top-28">
-              <ul className="flex gap-2 overflow-x-auto pb-1 lg:block lg:space-y-2 lg:overflow-visible lg:border-l lg:border-line lg:pb-0">
+            <nav aria-label="FAQ topics" className="hidden self-start lg:sticky lg:top-28 lg:block">
+              <ul className="space-y-2 border-l border-line text-[0.95rem]">
                 {groups.map((g) => (
-                  <li key={g.id} className="shrink-0">
-                    <a
-                      href={`#${g.id}`}
-                      className="inline-flex whitespace-nowrap rounded-full border border-line px-3 py-1.5 text-sm font-medium text-ink-soft hover:border-ochre hover:text-ink lg:-ml-px lg:block lg:rounded-none lg:border-0 lg:border-l-2 lg:border-transparent lg:px-0 lg:py-1 lg:pl-4 lg:text-[0.95rem] lg:font-normal"
-                    >
+                  <li key={g.id}>
+                    <a href={`#${g.id}`} className="-ml-px block border-l-2 border-transparent py-1 pl-4 text-ink-soft hover:border-ochre hover:text-ink">
                       {g.title}
                     </a>
                   </li>
@@ -55,7 +52,7 @@ export default function FaqPage() {
             </nav>
             <div className="space-y-16">
               {groups.map((g) => (
-                <div key={g.id} id={g.id} className="scroll-mt-28">
+                <div key={g.id} id={g.id}>
                   <h2 className="mb-4 text-2xl font-bold">{g.title}</h2>
                   <FaqList items={g.items} />
                 </div>

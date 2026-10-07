@@ -17,8 +17,8 @@ export function Logo({ className = "" }: { className?: string }) {
     <Link href="/" aria-label={`${site.name} home`} className={`inline-flex items-center gap-3 ${className}`}>
       <Mark />
       <span className="flex flex-col leading-none">
-        <span className="font-brand text-[1.45rem] tracking-[0.12em]">MAX WALL</span>
-        <span className="mt-1 text-[0.56rem] font-semibold tracking-[0.34em] opacity-75">
+        <span className="font-brand text-[1.65rem] font-bold tracking-[0.08em]">MAX WALL</span>
+        <span className="mt-0.5 text-[0.62rem] font-semibold tracking-[0.3em] opacity-75">
           RENDER · CLADDING
         </span>
       </span>

@@ -94,7 +94,7 @@ export default function Home() {
                   <span className="text-[#bfe0ff] drop-shadow-sm">Better homes.</span>
                 </span>
               </h1>
-              <ul className="mt-8 space-y-3 text-[1.2rem] font-bold">
+              <ul className="mt-8 space-y-3 text-[1.2rem] font-bold leading-snug">
                 {heroPoints.map((point) => (
                   <li key={point} className="flex items-start gap-3 drop-shadow-sm">
                     <Check className="mt-1 h-5 w-5 text-white" />

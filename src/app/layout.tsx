@@ -1,25 +1,22 @@
 import type { Metadata } from "next";
-import { Belleza, Manrope, Oswald } from "next/font/google";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// Manrope carries the whole UI; Belleza is kept only for the MAX WALL wordmark
-const body = Manrope({
+// One family throughout: Barlow for text, Barlow Condensed for headings,
+// buttons and the MAX WALL wordmark. Both were drawn for signage, so they
+// read well big and small.
+const body = Barlow({
   variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
-// Oswald for big uppercase headings and call-to-action buttons
-const display = Oswald({
+const display = Barlow_Condensed({
   variable: "--font-display",
-  subsets: ["latin"],
-});
-
-const brand = Belleza({
-  variable: "--font-brand",
-  weight: "400",
+  weight: ["500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -44,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-AU" className={`${body.variable} ${display.variable} ${brand.variable} h-full antialiased`}>
+    <html lang="en-AU" className={`${body.variable} ${display.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         <a
           href="#main"

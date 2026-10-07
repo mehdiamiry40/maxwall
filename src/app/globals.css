@@ -45,7 +45,7 @@
   --color-line: var(--line);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
-  --font-brand: var(--font-brand);
+  --font-brand: var(--font-display);
 }
 
 html {
@@ -56,14 +56,15 @@ html {
 body {
   background: #ffffff;
   color: var(--ink);
-  font-feature-settings: "ss01", "cv11";
+  line-height: 1.65;
+  font-kerning: normal;
 }
 
 h1,
 h2,
 h3 {
   text-wrap: balance;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.01em;
 }
 
 p {
@@ -93,24 +94,25 @@ summary {
   cursor: pointer;
 }
 
-/* Condensed uppercase display type (Oswald) for big headings */
+/* Condensed uppercase display type (Barlow Condensed) for headings and buttons */
 .hero-title,
 .section-title,
 .font-display {
   font-family: var(--font-display), sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.01em;
 }
 
+/* Barlow Condensed is narrower than Oswald, so headings run a touch larger */
 .hero-title {
-  font-size: clamp(2.7rem, 5.6vw, 4.6rem);
-  line-height: 1.02;
+  font-size: clamp(3rem, 6.2vw, 5.1rem);
+  line-height: 0.98;
   font-weight: 700;
 }
 
 .section-title {
-  font-size: clamp(2rem, 3.4vw, 3rem);
-  line-height: 1.08;
+  font-size: clamp(2.2rem, 3.7vw, 3.3rem);
+  line-height: 1.02;
   font-weight: 700;
 }
 

@@ -26,7 +26,7 @@ const clients = [
 export default function AboutPage() {
   return (
     <>
-      <Header overlay />
+      <Header />
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "About" }]}
@@ -37,7 +37,7 @@ export default function AboutPage() {
 
         <SplitSection image={images.services["hebel-aac-panels"]} side="right">
           <Eyebrow>Our story</Eyebrow>
-          <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">
+          <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem] text-bluestone">
             Rendering and cladding done properly
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">

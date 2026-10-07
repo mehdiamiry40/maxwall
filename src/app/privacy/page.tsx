@@ -9,7 +9,7 @@ export default function Privacy() {
     <>
       <Header />
       <main id="main" className="mx-auto w-full max-w-2xl flex-1 px-5 py-16 sm:px-8 sm:py-24">
-        <h1 className="text-4xl font-bold sm:text-5xl">Privacy policy</h1>
+        <h1 className="font-display text-4xl font-bold sm:text-5xl text-bluestone">Privacy policy</h1>
         <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink-soft">
           <p>
             {site.legalName} (ABN {site.abn}) respects your privacy and handles personal

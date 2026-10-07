@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Arrow,
-  Button,
   Check,
   container,
   CtaSection,
@@ -10,15 +9,18 @@ import {
   FaqList,
   Footer,
   Header,
+  PhoneIcon,
   Reveal,
   SectionHead,
+  SkyBackdrop,
   TextLink,
 } from "@/components/ui";
+import { QuoteForm } from "@/components/QuoteForm";
 import { FinishGuide } from "@/components/FinishGuide";
 import { ServiceCatalogue } from "@/components/ServiceCatalogue";
 import { blurProps, images } from "@/lib/images";
 import { projectIdeas, projectTypes } from "@/lib/home";
-import { areas, faqs, pillars, site, steps } from "@/lib/site";
+import { areas, faqs, phoneHref, pillars, site, steps } from "@/lib/site";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -39,6 +41,15 @@ const jsonLd = {
 };
 
 const hero = images.services["foam-cladding"];
+
+const heroPoints = [
+  "Cement & acrylic render, Hebel and cladding",
+  "Free on-site measure and fixed written quote",
+  "Fresh facades, extensions and new builds",
+  "Servicing all of Adelaide & the Hills",
+];
+
+const heroBand = ["Free on-site quotes", "Fixed written prices", "Thoughtful finishes. Skilled hands."];
 const icons = [
   <path key="quote" d="M8 3h8l4 4v14H4V3h4Zm8 0v5h4M8 12h8m-8 4h5" />,
   <path
@@ -60,63 +71,71 @@ export default function Home() {
       />
       <Header />
       <main id="main" className="flex-1">
-        <section className="relative isolate mx-3 mt-3 overflow-hidden rounded-sm bg-bluestone text-white sm:mx-5 sm:mt-5">
-          <Image
-            src={hero.src}
-            {...blurProps(hero)}
-            alt={hero.alt}
-            fill
-            priority
-            sizes="100vw"
-            className="-z-20 object-cover object-[60%_center]"
-          />
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(20,30,25,.9),rgba(20,30,25,.65))] sm:bg-[linear-gradient(90deg,rgba(20,30,25,.88)_0%,rgba(20,30,25,.65)_35%,rgba(20,30,25,.1)_80%)]" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-bluestone/55 via-transparent to-transparent" />
+        {/* Hero, after topcash4cars.com.au */}
+        <section className="relative isolate overflow-hidden text-white">
+          <SkyBackdrop image={hero} />
           <div
-            className={`${container} flex min-h-[650px] flex-col justify-center pb-9 pt-16 sm:min-h-[680px] sm:pb-10 sm:pt-20`}
+            className={`${container} grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:py-20`}
           >
-            <div className="max-w-2xl py-8 sm:py-10">
-              <p className="mb-7 flex items-center gap-3 text-[0.65rem] font-semibold tracking-[0.18em] text-white/85 uppercase sm:text-xs">
-                <span className="h-px w-8 bg-[#e4a083]" />
-                Render &amp; cladding. Adelaide, SA.
+            <div>
+              <p className="mb-5 text-sm font-bold tracking-[0.14em] uppercase drop-shadow-sm">
+                Render &amp; cladding · Adelaide, SA
               </p>
-              <h1 className="hero-title font-semibold">
-                Great walls.
+              <h1 className="hero-title">
+                <span className="text-bluestone">Great walls.</span>
                 <br />
-                <span className="text-[#e9dfcd]">Better homes.</span>
+                <span className="drop-shadow-sm">Better homes.</span>
               </h1>
-              <p className="mt-7 max-w-md text-base leading-[1.8] text-white/85 sm:text-lg">
-                Thoughtful finishes. Skilled hands. From a fresh facade to a
-                brand-new build, we bring your walls to life.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Button href="/contact" className="gap-7">
-                  Get a free quote <Arrow />
-                </Button>
-                <Button
-                  href="#services"
-                  variant="outline-light"
-                  className="border-white/30 bg-white/5"
+              <ul className="mt-8 space-y-3 text-[1.2rem] font-bold">
+                {heroPoints.map((point) => (
+                  <li key={point} className="flex items-start gap-3 drop-shadow-sm">
+                    <Check className="mt-1 h-5 w-5 text-white" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <a
+                  href={phoneHref}
+                  className="inline-flex items-center gap-3 rounded-full bg-ochre py-2 pl-2 pr-7 font-display text-2xl font-bold text-white uppercase shadow-lg shadow-black/20 transition-colors hover:bg-ochre-dark"
                 >
-                  Explore our services
-                </Button>
+                  <span className="grid h-11 w-11 place-items-center rounded-full bg-white text-ochre">
+                    <PhoneIcon className="h-5 w-5" />
+                  </span>
+                  Call {site.phone}
+                </a>
+                <span className="text-[1.2rem] font-bold drop-shadow-sm lg:hidden">
+                  or{" "}
+                  <a href="#quote" className="underline underline-offset-4">
+                    get a free quote
+                  </a>
+                </span>
               </div>
-              <p className="mt-5 flex items-center gap-2 text-xs text-white/70">
-                <Check className="text-[#e4a083]" />
-                Free on-site quotes. No obligation.
-              </p>
             </div>
-            <div className="mt-auto flex items-center justify-between gap-4 border-t border-white/20 pt-6 text-[0.6rem] font-medium tracking-[0.12em] text-white/75 uppercase sm:text-[0.65rem]">
-              <p>Homes. Extensions. New beginnings.</p>
-              <a
-                href="#services"
-                aria-label="Discover our services below"
-                className="flex min-h-10 items-center gap-3 hover:text-white"
-              >
-                <span className="hidden sm:inline">Discover Max Wall</span>
-                <Arrow className="h-4 w-4 rotate-90" />
-              </a>
+
+            <div id="quote" className="scroll-mt-24">
+              <div className="border-t-4 border-ochre bg-white p-6 text-ink shadow-2xl shadow-bluestone/30 sm:p-7">
+                <h2 className="text-center font-display text-3xl font-bold text-ochre-dark uppercase">
+                  Get a free quote
+                </h2>
+                <p className="mb-5 mt-1 text-center text-sm text-ink-soft">
+                  We usually reply within the hour.
+                </p>
+                <QuoteForm compact />
+              </div>
             </div>
+          </div>
+
+          {/* Navy band */}
+          <div className="bg-bluestone">
+            <ul className={`${container} grid gap-3 py-5 text-sm font-semibold sm:grid-cols-3`}>
+              {heroBand.map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <Check className="mt-0 text-ochre" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -201,7 +220,7 @@ export default function Home() {
             </div>
             <Reveal className="flex flex-col justify-center pt-3 md:py-8">
               <Eyebrow light>Built on care. Finished with pride.</Eyebrow>
-              <h2 className="section-title mt-4 font-semibold">
+              <h2 className="section-title mt-4">
                 Your home.
                 <br />
                 Our craftsmanship.
@@ -224,14 +243,14 @@ export default function Home() {
                   "A clear scope from day one",
                 ].map((item) => (
                   <li key={item} className="flex gap-2">
-                    <Check className="text-[#e4a083]" />
+                    <Check className="text-sky" />
                     {item}
                   </li>
                 ))}
               </ul>
               <Link
                 href="/about"
-                className="inline-flex min-h-11 items-center gap-4 self-start border-b border-white/30 pb-2 text-sm font-semibold transition-colors hover:border-[#e4a083] hover:text-[#e4a083]"
+                className="inline-flex min-h-11 items-center gap-4 self-start border-b border-white/30 pb-2 text-sm font-semibold transition-colors hover:border-sky hover:text-sky"
               >
                 Get to know Max Wall <Arrow />
               </Link>
@@ -333,7 +352,7 @@ export default function Home() {
                 <p className="text-xs font-semibold tracking-[0.14em] text-ochre uppercase">
                   A good fit for your project / {type.number}
                 </p>
-                <h2 className="mt-4 text-3xl font-semibold">{type.title}</h2>
+                <h2 className="font-display mt-4 text-3xl font-bold text-bluestone">{type.title}</h2>
                 <p className="mt-4 max-w-lg flex-1 text-sm leading-[1.9] text-ink-soft">
                   {type.body}
                 </p>
@@ -357,7 +376,7 @@ export default function Home() {
           >
             <Reveal>
               <Eyebrow>A few things you might be wondering</Eyebrow>
-              <h2 className="section-title mt-4 font-semibold">
+              <h2 className="section-title mt-4 text-bluestone">
                 Good questions.
                 <br />
                 Straight answers.
@@ -386,7 +405,7 @@ export default function Home() {
           <div className={`${container} grid gap-10 md:grid-cols-2 md:gap-16`}>
             <Reveal className="flex flex-col justify-center">
               <Eyebrow>Proudly local</Eyebrow>
-              <h2 className="section-title mt-4 font-semibold">
+              <h2 className="section-title mt-4 text-bluestone">
                 Adelaide is home.
                 <br />
                 Your suburb is, too.

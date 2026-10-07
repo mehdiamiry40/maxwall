@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Arrow, Logo, PhoneIcon } from "@/components/brand";
+import { Arrow, Logo, MailIcon, PhoneIcon } from "@/components/brand";
 import { nav, phoneHref, services, site } from "@/lib/site";
 
 const isActive = (pathname: string, href: string) =>
@@ -11,7 +11,12 @@ const isActive = (pathname: string, href: string) =>
     ? pathname === "/"
     : pathname === href || pathname.startsWith(`${href}/`);
 
-export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
+/**
+ * Two-tier header after topcash4cars.com.au: a white bar with the logo, email and a
+ * coral call pill, then a navy menu bar that sticks to the top while scrolling.
+ * On phones the white bar sticks instead and the menu opens in a dialog.
+ */
+export function SiteHeader() {
   const pathname = usePathname();
   const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
@@ -42,96 +47,29 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-render/95 text-ink backdrop-blur-md">
-        <div className="bg-bluestone text-white/80">
-          <div className="mx-auto flex h-8 max-w-7xl items-center justify-between px-6 text-[0.65rem] sm:px-10 lg:px-12">
-            <p className="flex items-center gap-2 tracking-[0.09em] uppercase">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#dc9474]" />{" "}
-              Adelaide&apos;s render &amp; cladding specialists
-            </p>
-            <div className="hidden items-center gap-6 sm:flex">
-              <span>{site.hours}</span>
-              <a
-                href={phoneHref}
-                className="flex items-center gap-2 font-medium text-white hover:text-[#edb59b]"
-              >
-                <PhoneIcon className="h-3 w-3" />
-                {site.phone}
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-5 px-6 sm:px-10 lg:h-20 lg:px-12">
+      <div className="sticky top-0 z-40 border-b border-line bg-white text-bluestone lg:static">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-6 sm:px-10 lg:h-24 lg:px-12">
           <Logo />
-          <nav
-            aria-label="Main navigation"
-            className="hidden items-center gap-6 text-[0.8rem] font-medium lg:flex"
+          <a
+            href={`mailto:${site.email}`}
+            className="hidden items-center gap-2 text-sm text-ink-soft transition-colors hover:text-ochre-dark md:flex"
           >
-            {nav.map((n) => {
-              const active = isActive(pathname, n.href);
-              const link = (
-                <Link
-                  href={n.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`relative flex min-h-11 items-center gap-1.5 transition-colors hover:text-ochre ${active ? "text-ochre" : "text-ink-soft"}`}
-                >
-                  {n.label}
-                  {n.href === "/services" && (
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-3 w-3 transition-transform group-hover:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
-                  )}
-                  {active && (
-                    <span className="absolute inset-x-0 bottom-1 h-px bg-ochre" />
-                  )}
-                </Link>
-              );
-              if (n.href !== "/services") return <div key={n.href}>{link}</div>;
-              return (
-                <div key={n.href} className="group relative">
-                  {link}
-                  <div className="invisible absolute left-1/2 top-full z-50 w-[34rem] -translate-x-1/2 pt-4 opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                    <div className="grid grid-cols-2 gap-1 rounded-sm border border-line bg-white p-3 shadow-xl shadow-ink/10">
-                      {services.map((s) => (
-                        <Link
-                          key={s.slug}
-                          href={`/services/${s.slug}`}
-                          className="rounded-sm p-3 transition-colors hover:bg-render"
-                        >
-                          <span className="block text-sm font-semibold">
-                            {s.title}
-                          </span>
-                          <span className="mt-1 block text-xs leading-relaxed font-normal text-ink-soft">
-                            {s.body}
-                          </span>
-                        </Link>
-                      ))}
-                      <Link
-                        href="/services"
-                        className="col-span-2 mt-1 flex items-center justify-between rounded-sm bg-sandstone px-3 py-3 text-xs font-semibold text-ochre-dark hover:bg-line"
-                      >
-                        Explore all services <Arrow />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </nav>
+            <MailIcon className="h-4 w-4 text-ochre" />
+            {site.email}
+          </a>
           <div className="flex items-center gap-2">
-            <Link
-              href="/contact"
-              className="hidden min-h-11 items-center gap-5 rounded-sm bg-ochre px-5 text-[0.8rem] font-semibold text-white transition-colors hover:bg-ochre-dark sm:inline-flex"
+            <a
+              href={phoneHref}
+              aria-label={`Call ${site.phone}`}
+              className="flex items-center gap-3 rounded-full bg-ochre text-white shadow-md shadow-ochre/30 transition-colors hover:bg-ochre-dark sm:py-1.5 sm:pl-1.5 sm:pr-6"
             >
-              Get a free quote <Arrow />
-            </Link>
+              <span className="grid h-11 w-11 place-items-center rounded-full sm:bg-white sm:text-ochre">
+                <PhoneIcon className="h-5 w-5" />
+              </span>
+              <span className="hidden font-display text-2xl font-bold sm:inline">
+                Call {site.phone}
+              </span>
+            </a>
             <button
               type="button"
               onClick={openMenu}
@@ -140,20 +78,73 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
               aria-label="Open menu"
               className="grid h-11 w-11 place-items-center lg:hidden"
             >
-              <svg
-                viewBox="0 0 24 24"
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                aria-hidden="true"
-              >
+              <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
                 <path d="M3 7h18M3 12h18M3 17h18" />
               </svg>
             </button>
           </div>
         </div>
-      </header>
+      </div>
+
+      <nav
+        aria-label="Main navigation"
+        className="sticky top-0 z-40 hidden bg-bluestone text-white shadow-sm lg:block"
+      >
+        <div className="mx-auto flex max-w-7xl items-stretch justify-between px-6 sm:px-10 lg:px-12">
+          <div className="flex items-stretch">
+            {[{ label: "Home", href: "/" }, ...nav].map((n) => {
+              const active = isActive(pathname, n.href);
+              const linkClass = `flex h-12 items-center gap-1.5 px-4 font-display text-[0.95rem] tracking-wide uppercase transition-colors ${
+                active ? "bg-ochre text-white" : "hover:bg-white/10"
+              }`;
+              if (n.href !== "/services") {
+                return (
+                  <Link key={n.href} href={n.href} aria-current={active ? "page" : undefined} className={linkClass}>
+                    {n.label}
+                  </Link>
+                );
+              }
+              // Services opens a panel listing every service on hover or keyboard focus
+              return (
+                <div key={n.href} className="group relative flex">
+                  <Link href={n.href} aria-current={active ? "page" : undefined} className={linkClass}>
+                    {n.label}
+                    <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </Link>
+                  <div className="invisible absolute left-0 top-full z-50 w-[34rem] opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                    <div className="grid grid-cols-2 gap-1 border-t-4 border-ochre bg-white p-3 text-ink shadow-xl shadow-ink/15">
+                      {services.map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/services/${s.slug}`}
+                          className="p-3 transition-colors hover:bg-sky-soft"
+                        >
+                          <span className="block text-sm font-semibold text-bluestone">{s.title}</span>
+                          <span className="mt-1 block text-xs leading-relaxed font-normal text-ink-soft">{s.body}</span>
+                        </Link>
+                      ))}
+                      <Link
+                        href="/services"
+                        className="col-span-2 mt-1 flex items-center justify-between bg-bluestone px-3 py-3 text-xs font-semibold text-white hover:bg-bluestone-soft"
+                      >
+                        Explore all services <Arrow />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <Link
+            href="/contact"
+            className="my-2 flex items-center gap-3 border border-white/60 px-4 font-display text-[0.95rem] tracking-wide uppercase transition-colors hover:bg-white hover:text-bluestone"
+          >
+            Free quote <Arrow />
+          </Link>
+        </div>
+      </nav>
 
       <dialog
         ref={dialog}
@@ -162,7 +153,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
         onClose={() => setOpen(false)}
         className="mobile-menu"
       >
-        <div className="flex h-26 shrink-0 items-center justify-between border-b border-line px-6">
+        <div className="flex h-20 shrink-0 items-center justify-between border-b border-line px-6 text-bluestone">
           <span onClick={closeMenu}>
             <Logo />
           </span>
@@ -195,10 +186,10 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
                   href={n.href}
                   onClick={closeMenu}
                   aria-current={isActive(pathname, n.href) ? "page" : undefined}
-                  className={`flex min-h-14 items-center justify-between py-4 text-xl font-semibold ${isActive(pathname, n.href) ? "text-ochre" : ""}`}
+                  className={`flex min-h-14 items-center justify-between py-4 font-display text-xl tracking-wide uppercase ${isActive(pathname, n.href) ? "text-ochre-dark" : "text-bluestone"}`}
                 >
                   {n.label}
-                  <Arrow className="h-5 w-5 text-ink-soft" />
+                  <Arrow className="h-5 w-5 text-ochre" />
                 </Link>
                 {n.href === "/services" && (
                   <ul className="grid grid-cols-2 gap-2 pb-4">
@@ -221,20 +212,19 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
           <Link
             href="/contact"
             onClick={closeMenu}
-            className="mt-6 flex min-h-13 items-center justify-between rounded-sm bg-ochre px-5 font-semibold text-white"
+            className="mt-6 flex min-h-13 items-center justify-between rounded-full bg-bluestone px-6 font-display text-lg tracking-wide text-white uppercase"
           >
             Get a free quote <Arrow />
           </Link>
           <a
             href={phoneHref}
-            className="mt-5 flex min-h-11 items-center justify-center gap-3 font-semibold"
+            className="mt-3 flex min-h-13 items-center justify-center gap-3 rounded-full bg-ochre font-display text-lg tracking-wide text-white uppercase"
           >
             <PhoneIcon />
             {site.phone}
           </a>
         </nav>
       </dialog>
-      {!overlay && <div aria-hidden="true" className="h-26 lg:h-28" />}
     </>
   );
 }
@@ -246,14 +236,14 @@ export function MobileActionBar() {
     <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-3 border-t border-line bg-render/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur md:hidden">
       <a
         href={phoneHref}
-        className="flex min-h-12 items-center justify-center gap-2 rounded-sm border border-ink text-sm font-semibold"
+        className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-ochre font-display text-lg tracking-wide text-white uppercase"
       >
         <PhoneIcon />
-        Call us
+        Call now
       </a>
       <Link
         href="/contact"
-        className="flex min-h-12 items-center justify-center gap-2 rounded-sm bg-ochre text-sm font-semibold text-white"
+        className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-bluestone font-display text-lg tracking-wide text-white uppercase"
       >
         Free quote <Arrow />
       </Link>

@@ -1,21 +1,32 @@
 @import "tailwindcss";
 
-/* Max Wall identity: Adelaide bluestone, sandstone and an ochre accent */
+/*
+ * Palette after topcash4cars.com.au. The original token names are kept so every
+ * component picks the new colours up: "bluestone" is now the deep teal-navy and
+ * "ochre" the coral call-to-action colour.
+ */
 :root {
-  --bluestone: #222a27;
-  --bluestone-soft: #34403a;
-  --sandstone: #eeebe4;
-  --render: #f8f7f3;
-  --ochre: #a94b2b;
-  --ochre-dark: #863a22;
-  --ink: #242b27;
-  --ink-soft: #626861;
-  --line: #dedfd6;
+  --bluestone: #00374b;
+  --bluestone-soft: #0b4a62;
+  --sky: #3caaff;
+  --sky-deep: #1e8fe6;
+  --sky-soft: #e8f4fd;
+  --sandstone: #eef3f6;
+  --render: #f8f8f8;
+  --ochre: #f95446;
+  /* Darker coral for small text and hovers, so it stays readable on white */
+  --ochre-dark: #c93a2d;
+  --ink: #252525;
+  --ink-soft: #51595e;
+  --line: #dde3e7;
 }
 
 @theme inline {
   --color-bluestone: var(--bluestone);
   --color-bluestone-soft: var(--bluestone-soft);
+  --color-sky: var(--sky);
+  --color-sky-deep: var(--sky-deep);
+  --color-sky-soft: var(--sky-soft);
   --color-sandstone: var(--sandstone);
   --color-render: var(--render);
   --color-ochre: var(--ochre);
@@ -24,13 +35,13 @@
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
   --font-sans: var(--font-body);
-  --font-display: var(--font-body);
+  --font-display: var(--font-display);
   --font-brand: var(--font-brand);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 8rem;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -73,19 +84,29 @@ summary {
   cursor: pointer;
 }
 
+/* Condensed uppercase display type (Oswald) for big headings */
+.hero-title,
+.section-title,
+.font-display {
+  font-family: var(--font-display), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+
 .hero-title {
-  font-size: clamp(3.1rem, 6.1vw, 5.65rem);
-  line-height: 1.04;
-  letter-spacing: -0.065em;
+  font-size: clamp(2.7rem, 5.6vw, 4.6rem);
+  line-height: 1.02;
+  font-weight: 700;
 }
 
 .section-title {
-  font-size: clamp(2.15rem, 3.5vw, 3.3rem);
-  line-height: 1.12;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.08;
+  font-weight: 700;
 }
 
 .mobile-menu::backdrop {
-  background: rgb(34 42 39 / 0.45);
+  background: rgb(0 55 75 / 0.45);
 }
 
 .mobile-menu {

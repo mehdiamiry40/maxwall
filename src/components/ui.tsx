@@ -14,12 +14,12 @@ export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-ochre text-white hover:bg-ochre-dark",
+  primary: "bg-ochre text-white shadow-md shadow-ochre/25 hover:bg-ochre-dark",
   dark: "bg-bluestone text-white hover:bg-bluestone-soft",
-  light: "bg-white text-ink hover:bg-sandstone",
-  outline: "border border-ink/80 text-ink hover:bg-ink hover:text-white",
+  light: "bg-white text-bluestone hover:bg-sandstone",
+  outline: "border-2 border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
   "outline-light":
-    "border border-white/70 text-white hover:bg-white hover:text-ink",
+    "border-2 border-white text-white hover:bg-white hover:text-bluestone",
 };
 
 export function Button({
@@ -33,7 +33,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-sm px-6 py-3.5 text-[0.9rem] font-semibold transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-12 items-center justify-center gap-3 px-7 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -107,7 +107,7 @@ export function SectionHead({
     <Reveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2 className="section-title mt-3 font-semibold">{title}</h2>
+        <h2 className="section-title mt-3 text-bluestone">{title}</h2>
         {intro && (
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">{intro}</p>
         )}
@@ -136,16 +136,36 @@ export function Check({ className = "text-ochre" }: { className?: string }) {
   );
 }
 
-export function Header({ overlay = false }: { overlay?: boolean }) {
+export function Header() {
   return (
     <>
-      <SiteHeader overlay={overlay} />
+      <SiteHeader />
       <MobileActionBar />
     </>
   );
 }
 
-/** Photo header used at the top of inner pages. */
+/** Sky-blue backdrop with the photo blended in on the right (home and inner-page heroes). */
+export function SkyBackdrop({ image }: { image: Photo }) {
+  return (
+    <>
+      <div className="absolute inset-0 -z-30 bg-[linear-gradient(90deg,var(--sky-deep)_0%,#2a9cf2_45%,var(--sky)_100%)]" />
+      <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent_15%,black_70%)] md:w-3/4">
+        <Image
+          src={image.src}
+          {...blurProps(image)}
+          alt=""
+          fill
+          priority
+          sizes="75vw"
+          className="object-cover opacity-60 mix-blend-multiply grayscale"
+        />
+      </div>
+    </>
+  );
+}
+
+/** Sky-blue header used at the top of inner pages, with breadcrumbs in a navy band. */
 export function PageHero({
   crumb,
   title,
@@ -160,53 +180,43 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden bg-bluestone pb-14 pt-36 text-white sm:pb-16">
-      <Image
-        src={image.src}
-        {...blurProps(image)}
-        alt={image.alt}
-        fill
-        priority
-        sizes="100vw"
-        className="-z-20 object-cover"
-      />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(28_38_45/0.55)_0%,rgb(28_38_45/0.3)_40%,rgb(28_38_45/0.88)_100%)]" />
-      <div className={container}>
-        {crumb && (
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-5 flex flex-wrap items-center gap-2 text-sm text-white/75"
-          >
+    <>
+      <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
+        <SkyBackdrop image={image} />
+        <div className={container}>
+          <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] drop-shadow-sm sm:text-6xl">
+            {title}
+          </h1>
+          {intro && (
+            <p className="mt-5 max-w-xl text-[1.2rem] font-bold leading-snug drop-shadow-sm">
+              {intro}
+            </p>
+          )}
+          {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
+        </div>
+      </section>
+      {crumb && (
+        <nav aria-label="Breadcrumb" className="bg-bluestone text-sm text-white/80">
+          <div className={`${container} flex flex-wrap items-center gap-2 py-3`}>
             <Link href="/" className="hover:text-white">
               Home
             </Link>
             {crumb.map((c) => (
               <span key={c.label} className="flex items-center gap-2">
-                <span aria-hidden="true">/</span>
+                <span aria-hidden="true" className="text-ochre">›</span>
                 {c.href ? (
                   <Link href={c.href} className="hover:text-white">
                     {c.label}
                   </Link>
                 ) : (
-                  <span className="text-white">{c.label}</span>
+                  <span className="font-semibold text-white">{c.label}</span>
                 )}
               </span>
             ))}
-          </nav>
-        )}
-        <h1 className="max-w-3xl text-4xl font-bold leading-[1.05] sm:text-6xl">
-          {title}
-        </h1>
-        {intro && (
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/85">
-            {intro}
-          </p>
-        )}
-        {children && (
-          <div className="mt-8 flex flex-wrap gap-3">{children}</div>
-        )}
-      </div>
-    </section>
+          </div>
+        </nav>
+      )}
+    </>
   );
 }
 
@@ -285,15 +295,15 @@ export function CtaSection({
   body?: string;
 }) {
   return (
-    <section className="bg-bluestone text-white">
+    <section className="border-t-4 border-ochre bg-bluestone text-white">
       <Reveal
         className={`${container} grid gap-8 py-16 sm:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}
       >
         <div>
-          <h2 className="text-3xl font-bold leading-tight sm:text-[2.6rem]">
+          <h2 className="font-display text-3xl font-bold leading-tight sm:text-[2.6rem]">
             {title}
           </h2>
-          <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/75">
+          <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/80">
             {body}
           </p>
         </div>

@@ -37,7 +37,7 @@ export default async function Contact(props: PageProps<"/contact">) {
         >
           <div>
             <Eyebrow>Free quote</Eyebrow>
-            <h1 className="mt-3 text-4xl font-bold leading-[1.05] sm:text-5xl">
+            <h1 className="font-display mt-3 text-4xl font-bold leading-[1.05] sm:text-5xl text-bluestone">
               Let&apos;s talk walls
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-ink-soft">

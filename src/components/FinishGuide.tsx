@@ -16,7 +16,7 @@ export function FinishGuide() {
         <Reveal className="mb-10 grid gap-6 md:grid-cols-2 md:items-end">
           <div>
             <Eyebrow>A little guidance goes a long way</Eyebrow>
-            <h2 className="section-title mt-4 font-semibold">
+            <h2 className="section-title mt-4 text-bluestone">
               A finish that fits
               <br className="hidden sm:block" /> your home.
             </h2>

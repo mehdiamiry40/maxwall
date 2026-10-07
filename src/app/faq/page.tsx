@@ -41,7 +41,7 @@ export default function FaqPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header overlay />
+      <Header />
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "FAQ" }]}

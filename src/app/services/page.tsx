@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <Header overlay />
+      <Header />
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Services" }]}
@@ -49,7 +49,7 @@ export default function ServicesPage() {
             className={`${container} grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center`}
           >
             <div>
-              <h2 className="text-2xl font-bold sm:text-3xl">
+              <h2 className="font-display text-2xl font-bold sm:text-3xl text-bluestone">
                 Not sure which finish suits your home?
               </h2>
               <p className="mt-3 max-w-xl leading-relaxed text-ink-soft">

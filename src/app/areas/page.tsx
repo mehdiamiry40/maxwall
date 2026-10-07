@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function AreasPage() {
   return (
     <>
-      <Header overlay />
+      <Header />
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Areas" }]}
@@ -40,7 +40,7 @@ export default function AreasPage() {
         <section className="border-t border-line bg-white py-16">
           <div className={`${container} grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-center`}>
             <div>
-              <h2 className="text-2xl font-bold sm:text-3xl">Don&apos;t see your suburb?</h2>
+              <h2 className="font-display text-2xl font-bold sm:text-3xl text-bluestone">Don&apos;t see your suburb?</h2>
               <p className="mt-3 max-w-lg leading-relaxed text-ink-soft">
                 These are just some of the areas we cover. Anywhere in greater Adelaide, get in touch
                 and we&apos;ll let you know.

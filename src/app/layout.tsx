@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Belleza, Manrope } from "next/font/google";
+import { Belleza, Manrope, Oswald } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
@@ -8,6 +8,12 @@ import "./globals.css";
 // Manrope carries the whole UI; Belleza is kept only for the MAX WALL wordmark
 const body = Manrope({
   variable: "--font-body",
+  subsets: ["latin"],
+});
+
+// Oswald for big uppercase headings and call-to-action buttons
+const display = Oswald({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
@@ -38,7 +44,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-AU" className={`${body.variable} ${brand.variable} h-full antialiased`}>
+    <html lang="en-AU" className={`${body.variable} ${display.variable} ${brand.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         <a
           href="#main"

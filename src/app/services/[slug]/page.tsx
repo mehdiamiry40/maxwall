@@ -54,7 +54,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Header overlay />
+      <Header />
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Services", href: "/services" }, { label: service.title }]}
@@ -71,7 +71,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           <div className={`${container} grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16`}>
             <div>
               <Eyebrow>Overview</Eyebrow>
-              <h2 className="mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem]">What to expect</h2>
+              <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem] text-bluestone">What to expect</h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-soft">{service.intro}</p>
 
               <h3 className="mt-12 text-xl font-bold">What&apos;s included</h3>
@@ -122,7 +122,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           <div className={`${container} grid gap-10 lg:grid-cols-[1fr_2fr]`}>
             <div>
               <Eyebrow>FAQ</Eyebrow>
-              <h2 className="mt-3 text-3xl font-bold leading-[1.1]">Common questions</h2>
+              <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] text-bluestone">Common questions</h2>
             </div>
             <FaqList items={service.faqs} />
           </div>

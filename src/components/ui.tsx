@@ -149,7 +149,7 @@ export function Header() {
 export function SkyBackdrop({ image }: { image: Photo }) {
   return (
     <>
-      <div className="absolute inset-0 -z-30 bg-[linear-gradient(90deg,var(--sky-deep)_0%,#2a9cf2_45%,var(--sky)_100%)]" />
+      <div className="absolute inset-0 -z-30 bg-[linear-gradient(90deg,#185aa5_0%,var(--sky-deep)_45%,#2f86d9_100%)]" />
       <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent_15%,black_70%)] md:w-3/4">
         <Image
           src={image.src}

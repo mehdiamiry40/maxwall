@@ -1,29 +1,32 @@
 @import "tailwindcss";
 
 /*
- * Palette after topcash4cars.com.au. The original token names are kept so every
- * component picks the new colours up: "bluestone" is now the deep teal-navy and
- * "ochre" the coral call-to-action colour.
+ * "Trade blue and orange" palette. The original token names are kept so every
+ * component picks it up: "bluestone" is the deep navy, "sky" the hero blue and
+ * "ochre" the construction-orange call-to-action colour.
  */
 :root {
-  --bluestone: #00374b;
-  --bluestone-soft: #0b4a62;
-  --sky: #3caaff;
-  --sky-deep: #1e8fe6;
-  /* Readable blue for links, labels and small text on white (5.3:1) */
-  --sky-ink: #0b6cc0;
-  --sky-soft: #edf6fd;
-  /* Pale sky tint for alternating sections */
-  --sandstone: #edf6fd;
+  --bluestone: #0d2c45;
+  --bluestone-soft: #173c5c;
+  /* Light accent blue for use on navy (5:1 on --bluestone) */
+  --sky: #4a9fe8;
+  /* Main hero blue; white text on it is 5:1 */
+  --sky-deep: #1f6fc5;
+  /* Readable blue for links, labels and small text on white (6.4:1) */
+  --sky-ink: #1a5fae;
+  --sky-soft: #eef4fa;
+  /* Pale blue tint for alternating sections */
+  --sandstone: #eef4fa;
   /* Cool off-white for inputs and subtle surfaces */
-  --render: #f5f8fb;
-  /* Coral is reserved for actions: calls, quotes, the current menu item */
-  --ochre: #f95446;
-  --ochre-dark: #c93a2d;
+  --render: #f4f7fa;
+  /* Orange is reserved for actions: calls, quotes, the current menu item */
+  --ochre: #f26a21;
+  /* Darker orange for small text and hovers (4.7:1 on white) */
+  --ochre-dark: #c44f12;
   /* Navy-tinted text so type and headings feel like one family */
-  --ink: #12303d;
-  --ink-soft: #4a6170;
-  --line: #d8e5ee;
+  --ink: #12283a;
+  --ink-soft: #4b5e6e;
+  --line: #d9e3ec;
 }
 
 @theme inline {
@@ -112,7 +115,7 @@ summary {
 }
 
 .mobile-menu::backdrop {
-  background: rgb(0 55 75 / 0.45);
+  background: rgb(13 44 69 / 0.5);
 }
 
 .mobile-menu {

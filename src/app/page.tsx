@@ -89,9 +89,9 @@ export default function Home() {
                   Render &amp; cladding Adelaide
                 </span>
                 <span className="hero-title block">
-                  <span className="text-bluestone">Great walls.</span>
+                  <span className="drop-shadow-sm">Great walls.</span>
                   <br />
-                  <span className="drop-shadow-sm">Better homes.</span>
+                  <span className="text-[#bfe0ff] drop-shadow-sm">Better homes.</span>
                 </span>
               </h1>
               <ul className="mt-8 space-y-3 text-[1.2rem] font-bold">

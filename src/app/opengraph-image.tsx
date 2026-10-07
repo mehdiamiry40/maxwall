@@ -21,7 +21,7 @@ export default async function Image() {
         width: "100%",
         height: "100%",
         display: "flex",
-        background: "#222a27",
+        background: "#002b38",
         color: "#ffffff",
       }}
     >
@@ -37,7 +37,7 @@ export default async function Image() {
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div style={{ width: 56, height: 11, background: "#ffffff" }} />
-            <div style={{ width: 40, height: 11, background: "#a94b2b" }} />
+            <div style={{ width: 40, height: 11, background: "#ff5145" }} />
             <div style={{ width: 56, height: 11, background: "#ffffff" }} />
           </div>
           <div style={{ fontSize: 40, letterSpacing: 6 }}>MAX WALL</div>
@@ -63,7 +63,7 @@ export default async function Image() {
             Free on-site quotes · Fixed written prices
           </div>
         </div>
-        <div style={{ fontSize: 24, color: "#d79a6b" }}>maxwall.com.au</div>
+        <div style={{ fontSize: 24, color: "#309aeb" }}>maxwall.com.au</div>
       </div>
       <img
         src={photoSrc}

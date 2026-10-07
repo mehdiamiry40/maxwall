@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
-/* Max Wall identity: Adelaide bluestone, sandstone and an ochre accent */
+/* Reference-inspired palette: bright blue, deep navy, coral and white.
+   Existing colour aliases keep every page consistent with the refreshed hero. */
 :root {
-  --bluestone: #222a27;
-  --bluestone-soft: #34403a;
-  --sandstone: #eeebe4;
-  --render: #f8f7f3;
-  --ochre: #a94b2b;
-  --ochre-dark: #863a22;
-  --ink: #242b27;
-  --ink-soft: #626861;
-  --line: #dedfd6;
+  --navy: #002b38;
+  --navy-soft: #0b4f64;
+  --coral: #ff5145;
+  --coral-dark: #ba3027;
+  --sky: #309aeb;
+  --sky-soft: #edf7ff;
+  --bluestone: var(--navy);
+  --bluestone-soft: var(--navy-soft);
+  --sandstone: var(--sky-soft);
+  --render: #ffffff;
+  --ochre: var(--coral);
+  --ochre-dark: var(--coral-dark);
+  --ink: var(--navy);
+  --ink-soft: #496371;
+  --line: #d2e1e8;
 }
 
 @theme inline {
+  --color-navy: var(--navy);
+  --color-navy-soft: var(--navy-soft);
+  --color-coral: var(--coral);
+  --color-coral-dark: var(--coral-dark);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
   --color-bluestone: var(--bluestone);
   --color-bluestone-soft: var(--bluestone-soft);
   --color-sandstone: var(--sandstone);
@@ -24,13 +37,13 @@
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
   --font-sans: var(--font-body);
-  --font-display: var(--font-body);
-  --font-brand: var(--font-brand);
+  --font-display: var(--font-heading);
+  --font-brand: var(--font-heading);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 8rem;
+  scroll-padding-top: 11rem;
 }
 
 body {
@@ -42,8 +55,9 @@ body {
 h1,
 h2,
 h3 {
+  font-family: var(--font-heading), sans-serif;
   text-wrap: balance;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.015em;
 }
 
 p {
@@ -74,9 +88,9 @@ summary {
 }
 
 .hero-title {
-  font-size: clamp(3.1rem, 6.1vw, 5.65rem);
-  line-height: 1.04;
-  letter-spacing: -0.065em;
+  font-size: clamp(2.1rem, 4.5vw, 4.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.018em;
 }
 
 .section-title {
@@ -85,7 +99,7 @@ summary {
 }
 
 .mobile-menu::backdrop {
-  background: rgb(34 42 39 / 0.45);
+  background: rgb(0 43 56 / 0.5);
 }
 
 .mobile-menu {

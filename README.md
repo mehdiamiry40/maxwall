@@ -11,6 +11,8 @@ Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel.
 - Photos: `src/lib/images.ts` and `public/images/` (locally hosted, optimised Unsplash images — swap in real job photos when available)
 
 The homepage and services page share a filterable service catalogue and a finish comparison guide.
+The hero uses a blue, navy and coral palette with condensed Oswald headings and a compact quote form.
+Both quote forms use the existing email action and retain entered details when validation fails.
 The mobile navigation uses a native modal dialog for keyboard focus management and Escape dismissal.
 Inspiration photographs are labelled as examples, rather than presented as completed Max Wall jobs.
 

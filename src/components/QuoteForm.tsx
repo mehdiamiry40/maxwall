@@ -1,29 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState, type ChangeEvent } from "react";
 import { requestQuote, type QuoteState } from "@/app/actions";
 import { services } from "@/lib/site";
 
 const initialState: QuoteState = { ok: false, message: "" };
-
-const input =
-  "mt-2 min-h-12 w-full rounded-sm border border-line bg-render px-4 py-3 text-base transition placeholder:text-ink-soft/70 focus:border-ochre focus:bg-white";
 const label = "block text-sm font-semibold";
 
 export function QuoteForm({
   defaultService = "",
+  compact = false,
 }: {
   defaultService?: string;
+  compact?: boolean;
 }) {
   const [state, formAction, pending] = useActionState(
     requestQuote,
     initialState,
   );
+  // Controlled fields retain the customer's details when a server action returns an error.
+  const [values, setValues] = useState(() => ({
+    name: "",
+    mobile: "",
+    suburb: "",
+    service: defaultService,
+    email: "",
+    details: "",
+    size: "",
+  }));
+  function handleChange(
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) {
+    const { name, value } = event.target;
+    setValues((current) => ({ ...current, [name]: value }));
+  }
+  const id = (field: string) => (compact ? `hero-${field}` : field);
+  const input = `mt-1.5 min-h-11 w-full rounded-sm border border-navy/55 bg-white px-3 text-base transition placeholder:text-ink-soft focus:border-navy ${compact ? "py-2" : "min-h-12 bg-sky-soft/40 px-4 py-3"}`;
+  const fieldLabel = compact ? "block text-xs font-semibold" : label;
+  const fullWidth = compact ? "col-span-2" : "sm:col-span-2";
 
   if (state.ok) {
     return (
       <div className="py-10 text-center" role="status">
+        <span
+          aria-hidden="true"
+          className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-sky-soft text-2xl text-navy"
+        >
+          ✓
+        </span>
         <p className="text-2xl font-bold">Thanks, we&apos;ve got it.</p>
         <p className="mt-3 text-ink-soft">{state.message}</p>
       </div>
@@ -31,109 +58,128 @@ export function QuoteForm({
   }
 
   return (
-    <form action={formAction} className="grid gap-x-5 gap-y-5 sm:grid-cols-2">
-      <div className="sm:col-span-2">
-        <label htmlFor="service" className={label}>
-          What do you need?
-        </label>
-        <select
-          id="service"
-          name="service"
-          className={`${input} cursor-pointer`}
-          defaultValue={defaultService}
-        >
-          <option value="" disabled>
-            Choose a service
-          </option>
-          {services.map((s) => (
-            <option key={s.title}>{s.title}</option>
-          ))}
-          <option>Not sure yet</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="suburb" className={label}>
-          Suburb
-        </label>
-        <input
-          id="suburb"
-          name="suburb"
-          required
-          autoComplete="address-level2"
-          placeholder="e.g. Mawson Lakes"
-          className={input}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="size" className={label}>
-          Approx. wall area{" "}
-          <span className="font-normal text-ink-soft">(optional)</span>
-        </label>
-        <input
-          id="size"
-          name="size"
-          placeholder="e.g. 80 m²"
-          className={input}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="name" className={label}>
+    <form
+      aria-label="Request a free quote"
+      action={formAction}
+      className={`grid ${compact ? "grid-cols-2 gap-x-3 gap-y-3" : "gap-x-5 gap-y-5 sm:grid-cols-2"}`}
+    >
+      <div className={compact ? "col-span-2" : ""}>
+        <label htmlFor={id("name")} className={fieldLabel}>
           Name
         </label>
         <input
-          id="name"
+          id={id("name")}
           name="name"
+          value={values.name}
+          onChange={handleChange}
           required
           autoComplete="name"
+          placeholder={compact ? "Your name" : undefined}
           className={input}
         />
       </div>
-
       <div>
-        <label htmlFor="mobile" className={label}>
+        <label htmlFor={id("mobile")} className={fieldLabel}>
           Mobile
         </label>
         <input
-          id="mobile"
+          id={id("mobile")}
           name="mobile"
+          value={values.mobile}
+          onChange={handleChange}
           type="tel"
           required
           autoComplete="tel"
           inputMode="tel"
+          placeholder={compact ? "04xx xxx xxx" : undefined}
           className={input}
         />
       </div>
-
-      <div className="sm:col-span-2">
-        <label htmlFor="email" className={label}>
+      <div>
+        <label htmlFor={id("suburb")} className={fieldLabel}>
+          Suburb
+        </label>
+        <input
+          id={id("suburb")}
+          name="suburb"
+          value={values.suburb}
+          onChange={handleChange}
+          required
+          autoComplete="address-level2"
+          placeholder={compact ? "Your suburb" : "e.g. Mawson Lakes"}
+          className={input}
+        />
+      </div>
+      <div className={compact ? "col-span-2" : ""}>
+        <label htmlFor={id("service")} className={fieldLabel}>
+          What do you need?
+        </label>
+        <select
+          id={id("service")}
+          name="service"
+          className={`${input} cursor-pointer`}
+          value={values.service}
+          onChange={handleChange}
+        >
+          <option value="" disabled>
+            Choose a service
+          </option>
+          {services.map((service) => (
+            <option key={service.slug}>{service.title}</option>
+          ))}
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      {!compact && (
+        <div className={fullWidth}>
+          <label htmlFor="size" className={label}>
+            Approx. wall area{" "}
+            <span className="font-normal text-ink-soft">(optional)</span>
+          </label>
+          <input
+            id="size"
+            name="size"
+            value={values.size}
+            onChange={handleChange}
+            placeholder="e.g. 80 m²"
+            className={input}
+          />
+        </div>
+      )}
+      <div className={fullWidth}>
+        <label htmlFor={id("email")} className={fieldLabel}>
           Email <span className="font-normal text-ink-soft">(optional)</span>
         </label>
         <input
-          id="email"
+          id={id("email")}
           name="email"
+          value={values.email}
+          onChange={handleChange}
           type="email"
           autoComplete="email"
+          placeholder={compact ? "you@example.com" : undefined}
           className={input}
         />
       </div>
-
-      <div className="sm:col-span-2">
-        <label htmlFor="details" className={label}>
-          Anything else?{" "}
+      <div className={fullWidth}>
+        <label htmlFor={id("details")} className={fieldLabel}>
+          Project details{" "}
           <span className="font-normal text-ink-soft">(optional)</span>
         </label>
         <textarea
-          id="details"
+          id={id("details")}
           name="details"
-          rows={3}
-          placeholder="Tell us about your walls, the look you're after and your ideal timing…"
-          className={input}
+          value={values.details}
+          onChange={handleChange}
+          rows={compact ? 2 : 3}
+          placeholder={
+            compact
+              ? "New build, facade refresh or repairs?"
+              : "Tell us about your walls, the look you're after and your ideal timing…"
+          }
+          className={`${input} resize-y`}
         />
       </div>
-
       <input
         type="text"
         name="company"
@@ -142,10 +188,9 @@ export function QuoteForm({
         aria-hidden="true"
         className="hidden"
       />
-
-      <div className="sm:col-span-2">
+      <div className={fullWidth}>
         {state.message && (
-          <p className="mb-4 text-sm text-ochre-dark" aria-live="polite">
+          <p className="mb-4 text-sm text-coral-dark" role="alert">
             {state.message}
           </p>
         )}
@@ -153,16 +198,17 @@ export function QuoteForm({
           type="submit"
           disabled={pending}
           aria-busy={pending}
-          className="w-full rounded-[3px] bg-ochre px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-ochre-dark disabled:opacity-60"
+          className={`flex min-h-12 w-full items-center justify-center gap-3 rounded-sm px-5 py-3 font-display text-lg font-semibold tracking-[0.04em] uppercase transition-colors disabled:opacity-60 ${compact ? "bg-navy text-white hover:bg-navy-soft" : "bg-coral text-navy hover:bg-coral-dark hover:text-white"}`}
         >
           {pending ? "Sending…" : "Get my free quote"}
+          {!pending && <span aria-hidden="true">→</span>}
         </button>
-        <p className="mt-4 text-center text-xs text-ink-soft">
-          No obligation. We only use your details to quote your job (
-          <Link href="/privacy" className="underline">
-            privacy policy
+        <p className="mt-3 text-center text-[0.65rem] leading-relaxed text-ink-soft">
+          Free quote. No obligation. Your details stay private.
+          <br />
+          <Link href="/privacy" className="underline underline-offset-2">
+            Privacy policy
           </Link>
-          ).
         </p>
       </div>
     </form>

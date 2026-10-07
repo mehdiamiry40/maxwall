@@ -54,7 +54,7 @@ export default function FaqPage() {
           <div className={`${container} grid gap-12 lg:grid-cols-[14rem_1fr]`}>
             <nav
               aria-label="FAQ topics"
-              className="self-start lg:sticky lg:top-36"
+              className="self-start lg:sticky lg:top-44"
             >
               <ul className="flex flex-wrap gap-2 text-sm lg:block lg:space-y-2 lg:border-l lg:border-line">
                 {groups.map((g) => (

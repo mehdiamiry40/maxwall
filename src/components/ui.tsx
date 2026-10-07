@@ -14,7 +14,7 @@ export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-ochre text-white hover:bg-ochre-dark",
+  primary: "bg-coral text-navy hover:bg-coral-dark hover:text-white",
   dark: "bg-bluestone text-white hover:bg-bluestone-soft",
   light: "bg-white text-ink hover:bg-sandstone",
   outline: "border border-ink/80 text-ink hover:bg-ink hover:text-white",
@@ -33,7 +33,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-sm px-6 py-3.5 text-[0.9rem] font-semibold transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-sm px-6 py-3.5 font-display text-base font-semibold tracking-[0.04em] uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -160,7 +160,7 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden bg-bluestone pb-14 pt-36 text-white sm:pb-16">
+    <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden bg-bluestone pb-14 pt-52 text-white sm:pb-16">
       <Image
         src={image.src}
         {...blurProps(image)}
@@ -170,7 +170,7 @@ export function PageHero({
         sizes="100vw"
         className="-z-20 object-cover"
       />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(28_38_45/0.55)_0%,rgb(28_38_45/0.3)_40%,rgb(28_38_45/0.88)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(0_43_56/0.55)_0%,rgb(0_43_56/0.3)_40%,rgb(0_43_56/0.9)_100%)]" />
       <div className={container}>
         {crumb && (
           <nav

@@ -14,6 +14,7 @@ import {
   SectionHead,
   TextLink,
 } from "@/components/ui";
+import { QuoteForm } from "@/components/QuoteForm";
 import { FinishGuide } from "@/components/FinishGuide";
 import { ServiceCatalogue } from "@/components/ServiceCatalogue";
 import { blurProps, images } from "@/lib/images";
@@ -60,75 +61,128 @@ export default function Home() {
       />
       <Header />
       <main id="main" className="flex-1">
-        <section className="relative isolate mx-3 mt-3 overflow-hidden rounded-sm bg-bluestone text-white sm:mx-5 sm:mt-5">
-          <Image
-            src={hero.src}
-            {...blurProps(hero)}
-            alt={hero.alt}
-            fill
-            priority
-            sizes="100vw"
-            className="-z-20 object-cover object-[60%_center]"
-          />
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(20,30,25,.9),rgba(20,30,25,.65))] sm:bg-[linear-gradient(90deg,rgba(20,30,25,.88)_0%,rgba(20,30,25,.65)_35%,rgba(20,30,25,.1)_80%)]" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-bluestone/55 via-transparent to-transparent" />
+        <section
+          aria-label="Render and cladding in Adelaide"
+          className="relative overflow-hidden bg-sky"
+        >
           <div
-            className={`${container} flex min-h-[650px] flex-col justify-center pb-9 pt-16 sm:min-h-[680px] sm:pb-10 sm:pt-20`}
+            className={`${container} grid gap-10 py-9 sm:py-12 lg:grid-cols-[1.55fr_1fr] lg:gap-14 lg:py-10`}
           >
-            <div className="max-w-2xl py-8 sm:py-10">
-              <p className="mb-7 flex items-center gap-3 text-[0.65rem] font-semibold tracking-[0.18em] text-white/85 uppercase sm:text-xs">
-                <span className="h-px w-8 bg-[#e4a083]" />
-                Render &amp; cladding. Adelaide, SA.
+            <div className="min-w-0">
+              <p className="mb-4 flex items-center gap-2 text-xs font-bold tracking-[0.12em] text-navy uppercase">
+                <span className="h-2 w-2 rounded-full bg-white" />{" "}
+                Adelaide&apos;s local wall specialists
               </p>
-              <h1 className="hero-title font-semibold">
-                Great walls.
+              <h1 className="hero-title font-bold uppercase">
+                Render &amp; cladding.
                 <br />
-                <span className="text-[#e9dfcd]">Better homes.</span>
+                <span className="text-white">Built for Adelaide.</span>
               </h1>
-              <p className="mt-7 max-w-md text-base leading-[1.8] text-white/85 sm:text-lg">
-                Thoughtful finishes. Skilled hands. From a fresh facade to a
-                brand-new build, we bring your walls to life.
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-navy">
+                Give your home a finish that lasts. Expert cement and acrylic
+                render, Hebel and cladding for renovations, extensions and new
+                builds.
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Button href="/contact" className="gap-7">
-                  Get a free quote <Arrow />
+              <ul className="mt-6 grid grid-cols-2 gap-x-3 gap-y-3 text-[0.8rem] font-semibold text-navy sm:gap-x-5 sm:text-base">
+                {[
+                  "Free on-site quotes",
+                  "Fixed written prices",
+                  "Install to final coat",
+                  "All of Adelaide",
+                ].map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-2.5">
+                    <Check className="text-white" />
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Button href="#hero-quote" className="gap-3 max-sm:px-5">
+                  <span className="sm:hidden">Free quote</span>
+                  <span className="hidden sm:inline">
+                    Get a free quote
+                  </span>{" "}
+                  <Arrow />
                 </Button>
-                <Button
-                  href="#services"
-                  variant="outline-light"
-                  className="border-white/30 bg-white/5"
-                >
-                  Explore our services
+                <Button href="#services" variant="dark" className="max-sm:px-5">
+                  <span className="sm:hidden">Our services</span>
+                  <span className="hidden sm:inline">
+                    Explore services
+                  </span>{" "}
+                  <Arrow />
                 </Button>
               </div>
-              <p className="mt-5 flex items-center gap-2 text-xs text-white/70">
-                <Check className="text-[#e4a083]" />
-                Free on-site quotes. No obligation.
-              </p>
+              <div className="relative mt-8 h-52 sm:h-64 lg:h-60">
+                <div className="absolute inset-y-0 left-0 right-8 overflow-hidden rounded-sm border-4 border-white bg-white shadow-lg shadow-navy/15 sm:right-12">
+                  <Image
+                    src={hero.src}
+                    {...blurProps(hero)}
+                    alt={hero.alt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 90vw"
+                    className="object-cover object-[50%_56%]"
+                  />
+                  <p className="absolute bottom-3 left-3 max-w-[65%] rounded-sm bg-navy/95 px-3 py-2 text-[0.65rem] font-semibold tracking-[0.06em] text-white uppercase">
+                    Render &amp; cladding finish inspiration
+                  </p>
+                </div>
+                <div className="absolute -bottom-3 right-0 h-32 w-32 overflow-hidden rounded-sm border-4 border-white bg-white shadow-xl shadow-navy/20 sm:h-40 sm:w-40">
+                  <Image
+                    src={images.about.src}
+                    {...blurProps(images.about)}
+                    alt={images.about.alt}
+                    fill
+                    sizes="160px"
+                    className="object-cover object-[25%_50%]"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="mt-auto flex items-center justify-between gap-4 border-t border-white/20 pt-6 text-[0.6rem] font-medium tracking-[0.12em] text-white/75 uppercase sm:text-[0.65rem]">
-              <p>Homes. Extensions. New beginnings.</p>
-              <a
-                href="#services"
-                aria-label="Discover our services below"
-                className="flex min-h-10 items-center gap-3 hover:text-white"
+            <aside
+              id="hero-quote"
+              aria-labelledby="hero-quote-heading"
+              tabIndex={-1}
+              className="relative self-start rounded-sm bg-white p-6 shadow-[0_12px_40px_rgb(3_55_71/0.22)] sm:p-7"
+            >
+              <svg
+                viewBox="0 0 60 100"
+                fill="none"
+                aria-hidden="true"
+                className="absolute -left-14 top-8 hidden h-24 w-12 text-coral lg:block"
               >
-                <span className="hidden sm:inline">Discover Max Wall</span>
-                <Arrow className="h-4 w-4 rotate-90" />
-              </a>
-            </div>
+                <path
+                  d="M7 89C2 48 16 15 49 19m-13-13 14 13-16 12"
+                  stroke="currentColor"
+                  strokeWidth="4.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <h2
+                id="hero-quote-heading"
+                className="text-center text-3xl font-bold tracking-normal text-coral uppercase"
+              >
+                Get a free quote
+              </h2>
+              <p className="mb-5 mt-2 text-center text-xs leading-relaxed text-ink-soft">
+                Tell us a little about your walls. We&apos;ll take it from
+                there.
+              </p>
+              <QuoteForm compact />
+            </aside>
           </div>
         </section>
 
         <section
           aria-label="The Max Wall difference"
-          className="border-b border-line"
+          className="border-b border-white/15 bg-navy text-white"
         >
           <div className={`${container} grid sm:grid-cols-3`}>
             {pillars.map((pillar, index) => (
               <div
                 key={pillar.title}
-                className={`flex items-start gap-4 py-7 sm:py-9 ${index > 0 ? "border-t border-line sm:border-l sm:border-t-0 sm:pl-6 lg:pl-9" : ""} ${index < 2 ? "sm:pr-5" : ""}`}
+                className={`flex items-start gap-4 py-7 sm:py-9 ${index > 0 ? "border-t border-white/15 sm:border-l sm:border-t-0 sm:pl-6 lg:pl-9" : ""} ${index < 2 ? "sm:pr-5" : ""}`}
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -150,7 +204,7 @@ export default function Home() {
                         ? "Local people. Local knowledge."
                         : "Care in every coat."}
                   </h2>
-                  <p className="mt-2 text-xs leading-[1.8] text-ink-soft">
+                  <p className="mt-2 text-xs leading-[1.8] text-white/75">
                     {index === 0
                       ? "On-site measurements and a fixed price in writing."
                       : index === 1
@@ -224,14 +278,14 @@ export default function Home() {
                   "A clear scope from day one",
                 ].map((item) => (
                   <li key={item} className="flex gap-2">
-                    <Check className="text-[#e4a083]" />
+                    <Check className="text-[#309aeb]" />
                     {item}
                   </li>
                 ))}
               </ul>
               <Link
                 href="/about"
-                className="inline-flex min-h-11 items-center gap-4 self-start border-b border-white/30 pb-2 text-sm font-semibold transition-colors hover:border-[#e4a083] hover:text-[#e4a083]"
+                className="inline-flex min-h-11 items-center gap-4 self-start border-b border-white/30 pb-2 text-sm font-semibold transition-colors hover:border-[#309aeb] hover:text-[#309aeb]"
               >
                 Get to know Max Wall <Arrow />
               </Link>
@@ -330,7 +384,7 @@ export default function Home() {
           <div className={`${container} grid gap-10 md:grid-cols-2 md:gap-16`}>
             {projectTypes.map((type) => (
               <Reveal key={type.title} className="flex flex-col">
-                <p className="text-xs font-semibold tracking-[0.14em] text-ochre uppercase">
+                <p className="text-xs font-semibold tracking-[0.14em] text-coral-dark uppercase">
                   A good fit for your project / {type.number}
                 </p>
                 <h2 className="mt-4 text-3xl font-semibold">{type.title}</h2>

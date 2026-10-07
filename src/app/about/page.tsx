@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
-import { container, CtaSection, Eyebrow, Footer, Header, PageHero, SectionHead, SplitSection } from "@/components/ui";
+import {
+  container,
+  CtaSection,
+  Eyebrow,
+  Footer,
+  Header,
+  PageHero,
+  SectionHead,
+  SplitSection,
+} from "@/components/ui";
 import { images } from "@/lib/images";
 import { pillars, site } from "@/lib/site";
 
@@ -11,16 +20,37 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  { title: "Straight talking", body: "We tell you what your walls need, not what's most expensive. If a patch will do, we'll say so." },
-  { title: "Respect for your home", body: "Paths, windows and gardens get covered before we start, and the site is left clean every day." },
-  { title: "Detail in the finish", body: "Straight corners, crisp edges and even texture. The small things are what make a wall look right." },
-  { title: "Easy to deal with", body: "We turn up when we say, keep you in the loop and answer the phone." },
+  {
+    title: "Straight talking",
+    body: "We tell you what your walls need, not what's most expensive. If a patch will do, we'll say so.",
+  },
+  {
+    title: "Respect for your home",
+    body: "Paths, windows and gardens get covered before we start, and the site is left clean every day.",
+  },
+  {
+    title: "Detail in the finish",
+    body: "Straight corners, crisp edges and even texture. The small things are what make a wall look right.",
+  },
+  {
+    title: "Easy to deal with",
+    body: "We turn up when we say, keep you in the loop and answer the phone.",
+  },
 ];
 
 const clients = [
-  { title: "Homeowners", body: "Facade makeovers, re-renders, extensions and repairs on the family home." },
-  { title: "Builders", body: "Reliable render and cladding crews who fit your schedule on new homes and units." },
-  { title: "Investors & strata", body: "Pre-sale refreshes and maintenance that lift value and street appeal." },
+  {
+    title: "Homeowners",
+    body: "Facade makeovers, re-renders, extensions and repairs on the family home.",
+  },
+  {
+    title: "Builders",
+    body: "Reliable render and cladding crews who fit your schedule on new homes and units.",
+  },
+  {
+    title: "Investors & strata",
+    body: "Pre-sale refreshes and maintenance that lift value and street appeal.",
+  },
 ];
 
 export default function AboutPage() {
@@ -42,16 +72,18 @@ export default function AboutPage() {
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">
             <p>
-              Max Wall started with a simple idea: walls finished properly, by people who actually pick
-              up the phone.
+              Max Wall started with a simple idea: walls finished properly, by
+              people who actually pick up the phone.
             </p>
             <p>
-              Based in Adelaide&apos;s northern suburbs, we work with homeowners, builders and investors
-              from Gawler to Seaford and up into the Hills.
+              Based in Adelaide&apos;s northern suburbs, we work with
+              homeowners, builders and investors from Gawler to Seaford and up
+              into the Hills.
             </p>
             <p>
-              We handle the whole wall, from Hebel, foam and fibre cement installs through to render,
-              texture and paint, so you&apos;re not juggling trades.
+              We handle the whole wall, from Hebel, foam and fibre cement
+              installs through to render, texture and paint, so you&apos;re not
+              juggling trades.
             </p>
           </div>
         </SplitSection>
@@ -63,7 +95,7 @@ export default function AboutPage() {
                 key={p.title}
                 className={`py-10 md:px-8 ${i > 0 ? "border-t border-line md:border-l md:border-t-0" : "md:pl-0"} ${i === 2 ? "md:pr-0" : ""}`}
               >
-                <p className="text-sm font-bold text-ochre">0{i + 1}</p>
+                <p className="text-sm font-bold text-coral-dark">0{i + 1}</p>
                 <h3 className="mt-3 text-xl font-bold">{p.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink-soft">{p.body}</p>
               </div>
@@ -87,7 +119,10 @@ export default function AboutPage() {
 
         <section className="border-t border-line bg-white py-20 sm:py-24">
           <div className={container}>
-            <SectionHead eyebrow="Who we work for" title="Homes, builders and investors" />
+            <SectionHead
+              eyebrow="Who we work for"
+              title="Homes, builders and investors"
+            />
             <div className="grid gap-10 md:grid-cols-3">
               {clients.map((c) => (
                 <div key={c.title}>

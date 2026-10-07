@@ -11,7 +11,7 @@ import { finishOptions } from "@/lib/home";
 
 export function FinishGuide() {
   return (
-    <section id="finish-guide" className="bg-sandstone py-20 sm:py-24">
+    <section id="finish-guide" className="bg-sandstone py-16 sm:py-20 lg:py-24">
       <div className={container}>
         <Reveal className="mb-10 grid gap-6 md:grid-cols-2 md:items-end">
           <div>

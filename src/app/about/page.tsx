@@ -85,7 +85,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="border-t border-line bg-white py-20 sm:py-24">
+        <section className="border-t border-line bg-white py-16 sm:py-20 lg:py-24">
           <div className={container}>
             <SectionHead eyebrow="Who we work for" title="Homes, builders and investors" />
             <div className="grid gap-10 md:grid-cols-3">

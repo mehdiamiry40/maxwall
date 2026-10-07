@@ -11,6 +11,9 @@ export { ServiceCard } from "@/components/ServiceCard";
 
 export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
 
+/** Vertical rhythm shared by every full-width section: 64px phone, 80px tablet, 96px desktop. */
+export const section = "py-16 sm:py-20 lg:py-24";
+
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
@@ -104,16 +107,16 @@ export function SectionHead({
   action?: { href: string; label: string };
 }) {
   return (
-    <Reveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-10 lg:mb-12">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2 className="section-title mt-3 text-bluestone">{title}</h2>
+        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>{title}</h2>
         {intro && (
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">{intro}</p>
         )}
       </div>
       {action && (
-        <div className="shrink-0">
+        <div className="shrink-0 pb-1">
           <TextLink href={action.href}>{action.label}</TextLink>
         </div>
       )}
@@ -297,13 +300,13 @@ export function CtaSection({
   return (
     <section className="border-t-4 border-ochre bg-bluestone text-white">
       <Reveal
-        className={`${container} grid gap-8 py-16 sm:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}
+        className={`${container} grid gap-6 py-14 sm:gap-8 sm:py-16 lg:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}
       >
         <div>
           <h2 className="font-display text-3xl font-bold leading-tight sm:text-[2.6rem]">
             {title}
           </h2>
-          <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/80">
+          <p className="mt-3 max-w-lg text-lg leading-relaxed text-white/80">
             {body}
           </p>
         </div>

@@ -50,7 +50,7 @@ export default function FaqPage() {
           image={images.faqBanner}
         />
 
-        <section className="py-20 sm:py-24">
+        <section className="py-16 sm:py-20 lg:py-24">
           <div className={`${container} grid gap-12 lg:grid-cols-[14rem_1fr]`}>
             <nav
               aria-label="FAQ topics"

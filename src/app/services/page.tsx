@@ -31,7 +31,7 @@ export default function ServicesPage() {
           image={images.servicesBanner}
         />
 
-        <section id="services" className="py-20 sm:py-24">
+        <section id="services" className="py-16 sm:py-20 lg:py-24">
           <div className={container}>
             <SectionHead
               eyebrow="From preparation to the final coat"

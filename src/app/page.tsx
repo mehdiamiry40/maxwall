@@ -11,6 +11,7 @@ import {
   Header,
   PhoneIcon,
   Reveal,
+  section,
   SectionHead,
   SkyBackdrop,
   TextLink,
@@ -133,7 +134,7 @@ export default function Home() {
         </section>
 
         {/* Services */}
-        <section id="services" className="bg-sandstone py-20 sm:py-24">
+        <section id="services" className={`bg-sandstone ${section}`}>
           <div className={container}>
             <SectionHead title="Our services" action={{ href: "/services", label: "All services" }} />
             <ServiceCatalogue />
@@ -142,8 +143,8 @@ export default function Home() {
 
         {/* About */}
         <section className="overflow-hidden bg-bluestone text-white">
-          <div className={`${container} grid gap-12 py-16 md:grid-cols-2 md:gap-16 md:py-20`}>
-            <div className="relative min-h-72 md:min-h-[420px]">
+          <div className={`${container} grid gap-10 ${section} md:grid-cols-2 md:gap-16`}>
+            <div className="relative min-h-64 md:min-h-[420px]">
               <Image
                 src={images.about.src}
                 {...blurProps(images.about)}
@@ -153,19 +154,19 @@ export default function Home() {
                 className="rounded-sm object-cover object-[28%_50%]"
               />
             </div>
-            <Reveal className="flex flex-col justify-center md:py-8">
+            <Reveal className="flex flex-col justify-center">
               <h2 className="section-title">
                 Your home.
                 <br />
                 Our craftsmanship.
               </h2>
-              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/80">
+              <p className="mt-4 max-w-md text-lg leading-relaxed text-white/80">
                 A local Adelaide team that preps properly, keeps a tidy site and finishes every wall
                 with care.
               </p>
               <Link
                 href="/about"
-                className="mt-8 inline-flex min-h-11 items-center gap-4 self-start border-b border-white/30 pb-2 text-sm font-semibold transition-colors hover:border-sky hover:text-sky"
+                className="mt-6 inline-flex min-h-11 items-center gap-4 self-start border-b border-white/30 pb-2 text-sm font-semibold transition-colors hover:border-sky hover:text-sky"
               >
                 About Max Wall <Arrow />
               </Link>
@@ -174,10 +175,10 @@ export default function Home() {
         </section>
 
         {/* Inspiration */}
-        <section id="inspiration" className="py-20 sm:py-24">
+        <section id="inspiration" className={section}>
           <div className={container}>
             <SectionHead title="Ideas for your home" />
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
               {projectIdeas.map((idea, index) => (
                 <Reveal key={idea.label} delay={index * 70}>
                   <Link href={idea.href} className="group block">
@@ -201,46 +202,46 @@ export default function Home() {
                 </Reveal>
               ))}
             </div>
-            <p className="mt-6 text-xs text-ink-soft">Inspiration photos, not Max Wall projects.</p>
+            <p className="mt-4 text-xs text-ink-soft">Inspiration photos, not Max Wall projects.</p>
           </div>
         </section>
 
         {/* Process */}
-        <section className="bg-bluestone py-20 text-white sm:py-24">
+        <section className={`bg-bluestone text-white ${section}`}>
           <div className={container}>
-            <Reveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-10 lg:mb-12">
               <h2 className="section-title">How it works</h2>
               <Link
                 href="/how-we-work"
-                className="group inline-flex shrink-0 items-center gap-2 text-[0.95rem] font-semibold text-sky"
+                className="group inline-flex shrink-0 items-center gap-2 pb-1 text-[0.95rem] font-semibold text-sky"
               >
                 Our process
                 <Arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Reveal>
-            <ol className="grid gap-5 md:grid-cols-3">
+            <ol className="grid gap-4 md:grid-cols-3 md:gap-5">
               {steps.map((step, index) => (
                 <li key={step.title}>
-                  <Reveal delay={index * 70} className="h-full border-t-4 border-sky bg-white/5 p-7">
-                    <span className="font-display text-5xl font-bold text-sky">0{index + 1}</span>
-                    <h3 className="mt-4 font-display text-2xl tracking-wide uppercase">{step.title}</h3>
+                  <Reveal delay={index * 70} className="h-full border-t-4 border-sky bg-white/5 p-6 lg:p-7">
+                    <span className="font-display text-4xl font-bold text-sky sm:text-5xl">0{index + 1}</span>
+                    <h3 className="mt-3 font-display text-2xl tracking-wide uppercase">{step.title}</h3>
                     <p className="mt-2 text-white/75">{step.body}</p>
                   </Reveal>
                 </li>
               ))}
             </ol>
-            <div className="mt-10">
+            <div className="mt-8 sm:mt-10">
               <Button href="/contact">Get a free quote</Button>
             </div>
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="py-20 sm:py-24">
-          <div className={`${container} grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20`}>
-            <Reveal>
+        <section className={section}>
+          <div className={`${container} grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20`}>
+            <Reveal className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3 lg:block">
               <h2 className="section-title text-bluestone">Questions</h2>
-              <div className="mt-6">
+              <div className="pb-1 lg:mt-6 lg:pb-0">
                 <TextLink href="/faq">All FAQs</TextLink>
               </div>
             </Reveal>
@@ -249,8 +250,8 @@ export default function Home() {
         </section>
 
         {/* Areas */}
-        <section className="bg-sandstone py-16">
-          <div className={`${container} flex flex-col gap-6 md:flex-row md:items-center md:justify-between`}>
+        <section className="bg-sandstone py-12 sm:py-14">
+          <div className={`${container} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
             <h2 className="section-title text-bluestone">All of Adelaide</h2>
             <ul className="flex flex-wrap gap-2">
               {areas.map((area) => (

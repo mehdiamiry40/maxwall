@@ -67,7 +67,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
         </PageHero>
 
         {/* Overview */}
-        <section className="py-20 sm:py-24">
+        <section className="py-16 sm:py-20 lg:py-24">
           <div className={`${container} grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16`}>
             <div>
               <Eyebrow>Overview</Eyebrow>
@@ -118,7 +118,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
         </SplitSection>
 
         {/* FAQs */}
-        <section className="py-20 sm:py-24">
+        <section className="py-16 sm:py-20 lg:py-24">
           <div className={`${container} grid gap-10 lg:grid-cols-[1fr_2fr]`}>
             <div>
               <Eyebrow>FAQ</Eyebrow>
@@ -129,7 +129,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
         </section>
 
         {/* Related */}
-        <section className="border-t border-line bg-white py-20 sm:py-24">
+        <section className="border-t border-line bg-white py-16 sm:py-20 lg:py-24">
           <div className={container}>
             <SectionHead title="Other services" action={{ href: "/services", label: "All services" }} />
             <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

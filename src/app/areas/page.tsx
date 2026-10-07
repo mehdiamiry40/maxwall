@@ -22,7 +22,7 @@ export default function AreasPage() {
           image={images.skyline}
         />
 
-        <section className="py-20 sm:py-24">
+        <section className="py-16 sm:py-20 lg:py-24">
           <div className={`${container} grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2`}>
             {areas.map((a) => (
               <div key={a.name} id={a.id} className="scroll-mt-24 bg-render p-8 sm:p-10">

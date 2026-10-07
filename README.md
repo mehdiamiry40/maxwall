@@ -7,7 +7,12 @@ Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel.
 ## Editing content
 
 - Business details, services, areas, FAQs: `src/lib/site.ts`
-- Photos: `src/lib/images.ts` (Unsplash for now — swap in real job photos under `public/images/`)
+- Homepage inspiration, finish guide and project types: `src/lib/home.ts`
+- Photos: `src/lib/images.ts` and `public/images/` (locally hosted, optimised Unsplash images — swap in real job photos when available)
+
+The homepage and services page share a filterable service catalogue and a finish comparison guide.
+The mobile navigation uses a native modal dialog for keyboard focus management and Escape dismissal.
+Inspiration photographs are labelled as examples, rather than presented as completed Max Wall jobs.
 
 ## Quote form email
 

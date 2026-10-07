@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { container, CtaSection, FaqList, Footer, Header, PageHero } from "@/components/ui";
+import {
+  container,
+  CtaSection,
+  FaqList,
+  Footer,
+  Header,
+  PageHero,
+} from "@/components/ui";
 import { images } from "@/lib/images";
 import { faqs, services } from "@/lib/site";
 
@@ -22,12 +29,18 @@ const jsonLd = {
   })),
 };
 
-const groups = [{ id: "general", title: "General", items: faqs }, ...services.map((s) => ({ id: s.slug, title: s.title, items: s.faqs }))];
+const groups = [
+  { id: "general", title: "General", items: faqs },
+  ...services.map((s) => ({ id: s.slug, title: s.title, items: s.faqs })),
+];
 
 export default function FaqPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header overlay />
       <main id="main" className="flex-1">
         <PageHero
@@ -39,11 +52,17 @@ export default function FaqPage() {
 
         <section className="py-20 sm:py-24">
           <div className={`${container} grid gap-12 lg:grid-cols-[14rem_1fr]`}>
-            <nav aria-label="FAQ topics" className="hidden self-start lg:sticky lg:top-28 lg:block">
-              <ul className="space-y-2 border-l border-line text-[0.95rem]">
+            <nav
+              aria-label="FAQ topics"
+              className="self-start lg:sticky lg:top-36"
+            >
+              <ul className="flex flex-wrap gap-2 text-sm lg:block lg:space-y-2 lg:border-l lg:border-line">
                 {groups.map((g) => (
                   <li key={g.id}>
-                    <a href={`#${g.id}`} className="-ml-px block border-l-2 border-transparent py-1 pl-4 text-ink-soft hover:border-ochre hover:text-ink">
+                    <a
+                      href={`#${g.id}`}
+                      className="flex min-h-11 items-center rounded-sm border border-line px-3 py-2 text-ink-soft hover:border-ochre hover:text-ink lg:-ml-px lg:border-0 lg:border-l-2 lg:border-transparent lg:pl-4"
+                    >
                       {g.title}
                     </a>
                   </li>
@@ -61,7 +80,10 @@ export default function FaqPage() {
           </div>
         </section>
 
-        <CtaSection title="Still have questions?" body="Call us or send a message. We're happy to talk through your walls, with no obligation." />
+        <CtaSection
+          title="Still have questions?"
+          body="Call us or send a message. We're happy to talk through your walls, with no obligation."
+        />
       </main>
       <Footer />
     </>

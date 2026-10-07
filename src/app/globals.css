@@ -2,15 +2,15 @@
 
 /* Max Wall identity: Adelaide bluestone, sandstone and an ochre accent */
 :root {
-  --bluestone: #1c262d;
-  --bluestone-soft: #2b3943;
-  --sandstone: #ece6dd;
-  --render: #f7f5f1;
-  --ochre: #a35f2c;
-  --ochre-dark: #874c21;
-  --ink: #161e23;
-  --ink-soft: #4d5860;
-  --line: #d9d3c9;
+  --bluestone: #222a27;
+  --bluestone-soft: #34403a;
+  --sandstone: #eeebe4;
+  --render: #f8f7f3;
+  --ochre: #a94b2b;
+  --ochre-dark: #863a22;
+  --ink: #242b27;
+  --ink-soft: #626861;
+  --line: #dedfd6;
 }
 
 @theme inline {
@@ -30,7 +30,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 8rem;
 }
 
 body {
@@ -43,7 +43,7 @@ h1,
 h2,
 h3 {
   text-wrap: balance;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.045em;
 }
 
 p {
@@ -57,6 +57,60 @@ p {
 
 details summary::-webkit-details-marker {
   display: none;
+}
+
+button,
+summary,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled),
+summary {
+  cursor: pointer;
+}
+
+.hero-title {
+  font-size: clamp(3.1rem, 6.1vw, 5.65rem);
+  line-height: 1.04;
+  letter-spacing: -0.065em;
+}
+
+.section-title {
+  font-size: clamp(2.15rem, 3.5vw, 3.3rem);
+  line-height: 1.12;
+}
+
+.mobile-menu::backdrop {
+  background: rgb(34 42 39 / 0.45);
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  border: 0;
+  padding: 0;
+  background: var(--render);
+  color: var(--ink);
+}
+
+.mobile-menu[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.texture-swatch {
+  background-image: url("/images/photo-1632711057336-ddd25c1d921f.webp");
+  background-size: 600%;
+  background-position: 38% 90%;
 }
 
 /* Gentle reveal-on-scroll (see components/Reveal.tsx) */

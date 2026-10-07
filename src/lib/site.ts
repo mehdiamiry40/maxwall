@@ -232,7 +232,8 @@ export const services: Service[] = [
   },
 ];
 
-export const serviceBySlug = (slug: string) => services.find((s) => s.slug === slug);
+export const serviceBySlug = (slug: string) =>
+  services.find((s) => s.slug === slug);
 
 export const steps = [
   {
@@ -260,32 +261,60 @@ export const areas = [
     id: "north",
     name: "Northern suburbs",
     suburbs: [
-      "Parafield Gardens", "Salisbury", "Mawson Lakes", "Paralowie", "Elizabeth",
-      "Munno Para", "Golden Grove", "Modbury", "Gawler",
+      "Parafield Gardens",
+      "Salisbury",
+      "Mawson Lakes",
+      "Paralowie",
+      "Elizabeth",
+      "Munno Para",
+      "Golden Grove",
+      "Modbury",
+      "Gawler",
     ],
   },
   {
     id: "west",
     name: "Western suburbs",
     suburbs: [
-      "Woodville", "West Lakes", "Henley Beach", "Grange", "Findon",
-      "Seaton", "Semaphore", "Port Adelaide", "Torrensville",
+      "Woodville",
+      "West Lakes",
+      "Henley Beach",
+      "Grange",
+      "Findon",
+      "Seaton",
+      "Semaphore",
+      "Port Adelaide",
+      "Torrensville",
     ],
   },
   {
     id: "east",
     name: "Eastern suburbs & Hills",
     suburbs: [
-      "Norwood", "Burnside", "Campbelltown", "Magill", "Paradise",
-      "Newton", "Stirling", "Aldgate", "Mount Barker",
+      "Norwood",
+      "Burnside",
+      "Campbelltown",
+      "Magill",
+      "Paradise",
+      "Newton",
+      "Stirling",
+      "Aldgate",
+      "Mount Barker",
     ],
   },
   {
     id: "south",
     name: "Southern suburbs",
     suburbs: [
-      "Marion", "Glenelg", "Brighton", "Hallett Cove", "Aberfoyle Park",
-      "Happy Valley", "Morphett Vale", "Noarlunga", "Seaford",
+      "Marion",
+      "Glenelg",
+      "Brighton",
+      "Hallett Cove",
+      "Aberfoyle Park",
+      "Happy Valley",
+      "Morphett Vale",
+      "Noarlunga",
+      "Seaford",
     ],
   },
 ];
@@ -322,5 +351,21 @@ export const faqs = [
   {
     q: "Are you insured?",
     a: "Yes. We carry public liability insurance and are happy to provide certificates for builders and strata managers.",
+  },
+  {
+    q: "What should I have ready for a quote?",
+    a: "Your suburb, a few clear photos and a short description of the project are enough to start. Rough wall measurements, plans and your preferred timing help too, but aren't essential. We'll check the surface and measure accurately during the site visit before preparing a written quote.",
+  },
+  {
+    q: "Can I stay at home while the work is done?",
+    a: "For many exterior jobs, yes. We'll discuss site access, scaffolding and any areas that need to be kept clear before starting. Keep children and pets away from the work area, and let us know about access requirements so we can plan around them.",
+  },
+  {
+    q: "How do I look after the finished walls?",
+    a: "Use gentle cleaning methods and follow the care instructions for your render, coating or cladding system. Avoid high-pressure cleaning unless the manufacturer permits it. Check sealants, joints and coatings periodically, and have new cracks or water marks assessed early. We'll explain the care needs of your chosen finish at handover.",
+  },
+  {
+    q: "Can you help me choose a colour and texture?",
+    a: "Yes. Tell us the look you're after and we'll discuss finishes that suit your walls, roof, windows and surrounding materials. Colour and texture can look different in outdoor light, so we recommend reviewing samples before the final selection. Available options depend on the coating system chosen for your home.",
   },
 ];

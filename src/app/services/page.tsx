@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
-import { Button, container, CtaSection, Footer, Header, PageHero, ServiceCard } from "@/components/ui";
+import {
+  Button,
+  container,
+  CtaSection,
+  Footer,
+  Header,
+  PageHero,
+  SectionHead,
+} from "@/components/ui";
+import { ServiceCatalogue } from "@/components/ServiceCatalogue";
+import { FinishGuide } from "@/components/FinishGuide";
 import { images } from "@/lib/images";
-import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Render & Cladding Services Adelaide",
@@ -22,25 +31,37 @@ export default function ServicesPage() {
           image={images.servicesBanner}
         />
 
-        <section className="py-20 sm:py-24">
-          <div className={`${container} grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3`}>
-            {services.map((s, i) => (
-              <ServiceCard key={s.slug} service={s} index={i} />
-            ))}
+        <section id="services" className="py-20 sm:py-24">
+          <div className={container}>
+            <SectionHead
+              eyebrow="From preparation to the final coat"
+              title="The right system for every wall."
+              intro="Explore our render, cladding and repair services. Each service includes the details, suitable wall types and answers to common questions."
+            />
+            <ServiceCatalogue />
           </div>
         </section>
 
+        <FinishGuide />
+
         <section className="border-t border-line bg-white py-16">
-          <div className={`${container} grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center`}>
+          <div
+            className={`${container} grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center`}
+          >
             <div>
-              <h2 className="text-2xl font-bold sm:text-3xl">Not sure which finish suits your home?</h2>
+              <h2 className="text-2xl font-bold sm:text-3xl">
+                Not sure which finish suits your home?
+              </h2>
               <p className="mt-3 max-w-xl leading-relaxed text-ink-soft">
-                We&apos;ll look at your walls and the look you&apos;re after, then recommend the right
-                system. Often it&apos;s a mix, like a rendered base with cladding above.
+                We&apos;ll look at your walls and the look you&apos;re after,
+                then recommend the right system. Often it&apos;s a mix, like a
+                rendered base with cladding above.
               </p>
             </div>
             <div className="md:justify-self-end">
-              <Button href="/contact" variant="dark">Ask for advice</Button>
+              <Button href="/contact" variant="dark">
+                Ask for advice
+              </Button>
             </div>
           </div>
         </section>

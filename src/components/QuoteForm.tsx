@@ -8,11 +8,18 @@ import { services } from "@/lib/site";
 const initialState: QuoteState = { ok: false, message: "" };
 
 const input =
-  "mt-2 w-full rounded-[3px] border border-line bg-render px-4 py-3 text-base outline-none transition placeholder:text-ink-soft/50 focus:border-ink focus:bg-white";
+  "mt-2 min-h-12 w-full rounded-sm border border-line bg-render px-4 py-3 text-base transition placeholder:text-ink-soft/70 focus:border-ochre focus:bg-white";
 const label = "block text-sm font-semibold";
 
-export function QuoteForm({ defaultService = "" }: { defaultService?: string }) {
-  const [state, formAction, pending] = useActionState(requestQuote, initialState);
+export function QuoteForm({
+  defaultService = "",
+}: {
+  defaultService?: string;
+}) {
+  const [state, formAction, pending] = useActionState(
+    requestQuote,
+    initialState,
+  );
 
   if (state.ok) {
     return (
@@ -29,7 +36,12 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
         <label htmlFor="service" className={label}>
           What do you need?
         </label>
-        <select id="service" name="service" className={`${input} cursor-pointer`} defaultValue={defaultService}>
+        <select
+          id="service"
+          name="service"
+          className={`${input} cursor-pointer`}
+          defaultValue={defaultService}
+        >
           <option value="" disabled>
             Choose a service
           </option>
@@ -44,21 +56,40 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
         <label htmlFor="suburb" className={label}>
           Suburb
         </label>
-        <input id="suburb" name="suburb" required autoComplete="address-level2" className={input} />
+        <input
+          id="suburb"
+          name="suburb"
+          required
+          autoComplete="address-level2"
+          placeholder="e.g. Mawson Lakes"
+          className={input}
+        />
       </div>
 
       <div>
         <label htmlFor="size" className={label}>
-          Approx. wall area <span className="font-normal text-ink-soft">(optional)</span>
+          Approx. wall area{" "}
+          <span className="font-normal text-ink-soft">(optional)</span>
         </label>
-        <input id="size" name="size" placeholder="e.g. 80 m²" className={input} />
+        <input
+          id="size"
+          name="size"
+          placeholder="e.g. 80 m²"
+          className={input}
+        />
       </div>
 
       <div>
         <label htmlFor="name" className={label}>
           Name
         </label>
-        <input id="name" name="name" required autoComplete="name" className={input} />
+        <input
+          id="name"
+          name="name"
+          required
+          autoComplete="name"
+          className={input}
+        />
       </div>
 
       <div>
@@ -80,18 +111,25 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
         <label htmlFor="email" className={label}>
           Email <span className="font-normal text-ink-soft">(optional)</span>
         </label>
-        <input id="email" name="email" type="email" autoComplete="email" className={input} />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          className={input}
+        />
       </div>
 
       <div className="sm:col-span-2">
         <label htmlFor="details" className={label}>
-          Anything else? <span className="font-normal text-ink-soft">(optional)</span>
+          Anything else?{" "}
+          <span className="font-normal text-ink-soft">(optional)</span>
         </label>
         <textarea
           id="details"
           name="details"
           rows={3}
-          placeholder="New build, re-render, single or double storey…"
+          placeholder="Tell us about your walls, the look you're after and your ideal timing…"
           className={input}
         />
       </div>
@@ -114,6 +152,7 @@ export function QuoteForm({ defaultService = "" }: { defaultService?: string }) 
         <button
           type="submit"
           disabled={pending}
+          aria-busy={pending}
           className="w-full rounded-[3px] bg-ochre px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-ochre-dark disabled:opacity-60"
         >
           {pending ? "Sending…" : "Get my free quote"}

@@ -32,13 +32,6 @@ export function ServiceCard({
           </div>
         )}
         <div className="relative flex flex-1 flex-col p-6">
-          <p className="mb-3 text-[0.65rem] font-semibold tracking-[0.16em] text-sky-ink uppercase">
-            {service.slug === "render-repairs"
-              ? "Repair & restore"
-              : service.slug.includes("render")
-                ? "Render systems"
-                : "Cladding systems"}
-          </p>
           <h3 className="flex items-center justify-between gap-4 text-xl font-bold text-bluestone transition-colors group-hover:text-sky-ink">
             {service.title}
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line transition-colors group-hover:border-ochre group-hover:bg-ochre group-hover:text-white">

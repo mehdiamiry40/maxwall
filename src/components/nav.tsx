@@ -52,9 +52,9 @@ export function SiteHeader() {
           <Logo />
           <a
             href={`mailto:${site.email}`}
-            className="hidden items-center gap-2 text-sm text-ink-soft transition-colors hover:text-ochre-dark md:flex"
+            className="hidden items-center gap-2 text-sm text-ink-soft transition-colors hover:text-sky-ink md:flex"
           >
-            <MailIcon className="h-4 w-4 text-ochre" />
+            <MailIcon className="h-4 w-4 text-sky-deep" />
             {site.email}
           </a>
           <div className="flex items-center gap-2">
@@ -189,7 +189,7 @@ export function SiteHeader() {
                   className={`flex min-h-14 items-center justify-between py-4 font-display text-xl tracking-wide uppercase ${isActive(pathname, n.href) ? "text-ochre-dark" : "text-bluestone"}`}
                 >
                   {n.label}
-                  <Arrow className="h-5 w-5 text-ochre" />
+                  <Arrow className="h-5 w-5 text-sky-deep" />
                 </Link>
                 {n.href === "/services" && (
                   <ul className="grid grid-cols-2 gap-2 pb-4">

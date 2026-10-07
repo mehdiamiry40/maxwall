@@ -147,7 +147,7 @@ export default function Home() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     aria-hidden="true"
-                    className="mt-0.5 h-7 w-7 shrink-0 text-ochre"
+                    className="mt-0.5 h-7 w-7 shrink-0 text-sky"
                   >
                     {icons[index]}
                   </svg>
@@ -161,7 +161,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="services" className="py-20 sm:py-24">
+        <section id="services" className="bg-sandstone py-20 sm:py-24">
           <div className={container}>
             <SectionHead
               eyebrow="What we do"
@@ -305,8 +305,8 @@ export default function Home() {
             <ol className="grid gap-5 md:grid-cols-3">
               {steps.map((step, index) => (
                 <li key={step.title}>
-                  <Reveal delay={index * 70} className="h-full border-t-4 border-ochre bg-white/5 p-7">
-                    <span className="font-display text-5xl font-bold text-ochre">0{index + 1}</span>
+                  <Reveal delay={index * 70} className="h-full border-t-4 border-sky bg-white/5 p-7 transition-colors hover:bg-white/10">
+                    <span className="font-display text-5xl font-bold text-sky">0{index + 1}</span>
                     <h3 className="mt-5 font-display text-2xl tracking-wide uppercase">{step.title}</h3>
                     <p className="mt-3 text-sm leading-[1.9] text-white/75">{step.detail}</p>
                   </Reveal>
@@ -329,7 +329,7 @@ export default function Home() {
           <div className={`${container} grid gap-10 md:grid-cols-2 md:gap-16`}>
             {projectTypes.map((type) => (
               <Reveal key={type.title} className="flex flex-col">
-                <p className="text-xs font-semibold tracking-[0.14em] text-ochre-dark uppercase">
+                <p className="text-xs font-semibold tracking-[0.14em] text-sky-ink uppercase">
                   A good fit for your project / {type.number}
                 </p>
                 <h2 className="font-display mt-4 text-3xl font-bold text-bluestone">{type.title}</h2>
@@ -409,7 +409,7 @@ export default function Home() {
                     {area.name}
                     <span
                       aria-hidden="true"
-                      className="text-xl font-normal text-ochre transition-transform group-open:rotate-45"
+                      className="text-xl font-normal text-sky-deep transition-transform group-open:rotate-45"
                     >
                       +
                     </span>
@@ -423,7 +423,7 @@ export default function Home() {
                 Don&apos;t see your suburb?{" "}
                 <Link
                   href="/contact"
-                  className="font-semibold text-ochre-dark underline underline-offset-4"
+                  className="font-semibold text-sky-ink underline underline-offset-4"
                 >
                   Get in touch
                 </Link>{" "}

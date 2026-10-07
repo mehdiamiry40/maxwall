@@ -107,7 +107,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           <ol className="mt-6 space-y-7">
             {steps.map((s, i) => (
               <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-2">
-                <span className="text-lg font-bold text-ochre">{i + 1}</span>
+                <span className="text-lg font-bold text-sky-ink">{i + 1}</span>
                 <div>
                   <h3 className="text-lg font-bold">{s.title}</h3>
                   <p className="mt-1 leading-relaxed text-ink-soft">{s.body}</p>

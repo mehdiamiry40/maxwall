@@ -10,15 +10,20 @@
   --bluestone-soft: #0b4a62;
   --sky: #3caaff;
   --sky-deep: #1e8fe6;
-  --sky-soft: #e8f4fd;
-  --sandstone: #eef3f6;
-  --render: #f8f8f8;
+  /* Readable blue for links, labels and small text on white (5.3:1) */
+  --sky-ink: #0b6cc0;
+  --sky-soft: #edf6fd;
+  /* Pale sky tint for alternating sections */
+  --sandstone: #edf6fd;
+  /* Cool off-white for inputs and subtle surfaces */
+  --render: #f5f8fb;
+  /* Coral is reserved for actions: calls, quotes, the current menu item */
   --ochre: #f95446;
-  /* Darker coral for small text and hovers, so it stays readable on white */
   --ochre-dark: #c93a2d;
-  --ink: #252525;
-  --ink-soft: #51595e;
-  --line: #dde3e7;
+  /* Navy-tinted text so type and headings feel like one family */
+  --ink: #12303d;
+  --ink-soft: #4a6170;
+  --line: #d8e5ee;
 }
 
 @theme inline {
@@ -27,6 +32,7 @@
   --color-sky: var(--sky);
   --color-sky-deep: var(--sky-deep);
   --color-sky-soft: var(--sky-soft);
+  --color-sky-ink: var(--sky-ink);
   --color-sandstone: var(--sandstone);
   --color-render: var(--render);
   --color-ochre: var(--ochre);
@@ -45,7 +51,7 @@ html {
 }
 
 body {
-  background: var(--render);
+  background: #ffffff;
   color: var(--ink);
   font-feature-settings: "ss01", "cv11";
 }
@@ -62,7 +68,7 @@ p {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ochre);
+  outline: 2px solid var(--sky-deep);
   outline-offset: 3px;
 }
 
@@ -166,6 +172,6 @@ summary {
 }
 
 ::selection {
-  background: var(--ochre);
+  background: var(--sky-deep);
   color: #ffffff;
 }

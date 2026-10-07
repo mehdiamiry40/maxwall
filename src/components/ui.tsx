@@ -14,8 +14,8 @@ export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-ochre text-white shadow-md shadow-ochre/25 hover:bg-ochre-dark",
-  dark: "bg-bluestone text-white hover:bg-bluestone-soft",
+  primary: "bg-ochre text-white shadow-md shadow-ochre/25 hover:-translate-y-0.5 hover:bg-ochre-dark hover:shadow-lg",
+  dark: "bg-bluestone text-white hover:-translate-y-0.5 hover:bg-bluestone-soft hover:shadow-lg",
   light: "bg-white text-bluestone hover:bg-sandstone",
   outline: "border-2 border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
   "outline-light":
@@ -67,7 +67,7 @@ export function TextLink({
   return (
     <Link
       href={href}
-      className="group inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ochre-dark"
+      className="group inline-flex items-center gap-2 text-[0.95rem] font-semibold text-sky-ink transition-colors hover:text-bluestone"
     >
       {children}
       <Arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -84,7 +84,7 @@ export function Eyebrow({
 }) {
   return (
     <p
-      className={`text-xs font-bold tracking-[0.2em] uppercase ${light ? "text-white/70" : "text-ochre-dark"}`}
+      className={`text-xs font-bold tracking-[0.2em] uppercase ${light ? "text-sky" : "text-sky-ink"}`}
     >
       {children}
     </p>
@@ -121,7 +121,7 @@ export function SectionHead({
   );
 }
 
-export function Check({ className = "text-ochre" }: { className?: string }) {
+export function Check({ className = "text-sky-deep" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -203,7 +203,7 @@ export function PageHero({
             </Link>
             {crumb.map((c) => (
               <span key={c.label} className="flex items-center gap-2">
-                <span aria-hidden="true" className="text-ochre">›</span>
+                <span aria-hidden="true" className="text-sky">›</span>
                 {c.href ? (
                   <Link href={c.href} className="hover:text-white">
                     {c.label}
@@ -270,11 +270,11 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
     <div className="divide-y divide-line border-y border-line">
       {items.map((f) => (
         <details key={f.q} className="group">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-base font-semibold transition-colors hover:text-ochre-dark sm:text-lg">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-base font-semibold transition-colors hover:text-sky-ink sm:text-lg">
             {f.q}
             <span
               aria-hidden="true"
-              className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-ochre transition-transform group-open:rotate-45"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-sky-deep transition-transform group-open:rotate-45"
             >
               +
             </span>
@@ -338,7 +338,7 @@ export function Footer() {
           />
           <FooterList title="Company" links={company} />
           <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-white/50 uppercase">
+            <p className="text-xs font-bold tracking-[0.2em] text-sky uppercase">
               Contact
             </p>
             <div className="mt-5 space-y-2.5 text-[0.95rem] text-white/80">
@@ -393,7 +393,7 @@ function FooterList({
 }) {
   return (
     <div>
-      <p className="text-xs font-bold tracking-[0.2em] text-white/50 uppercase">
+      <p className="text-xs font-bold tracking-[0.2em] text-sky uppercase">
         {title}
       </p>
       <ul className="mt-5 space-y-2.5 text-[0.95rem]">

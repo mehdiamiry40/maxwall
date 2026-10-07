@@ -63,7 +63,7 @@ export default function AboutPage() {
                 key={p.title}
                 className={`py-10 md:px-8 ${i > 0 ? "border-t border-line md:border-l md:border-t-0" : "md:pl-0"} ${i === 2 ? "md:pr-0" : ""}`}
               >
-                <p className="text-sm font-bold text-ochre-dark">0{i + 1}</p>
+                <p className="text-sm font-bold text-sky-ink">0{i + 1}</p>
                 <h3 className="mt-3 text-xl font-bold">{p.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink-soft">{p.body}</p>
               </div>

@@ -198,7 +198,7 @@ export function SiteHeader() {
                         <Link
                           href={`/services/${s.slug}`}
                           onClick={closeMenu}
-                          className="flex min-h-11 items-center text-sm leading-relaxed text-ink-soft hover:text-ochre"
+                          className="flex min-h-11 items-center text-sm leading-relaxed text-ink-soft hover:text-ochre-dark"
                         >
                           {s.title}
                         </Link>

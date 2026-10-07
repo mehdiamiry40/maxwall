@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Arrow,
+  Button,
   Check,
   container,
   CtaSection,
@@ -49,7 +50,12 @@ const heroPoints = [
   "Servicing all of Adelaide & the Hills",
 ];
 
-const heroBand = ["Free on-site quotes", "Fixed written prices", "Thoughtful finishes. Skilled hands."];
+const bandTitles = ["Clear quotes. No surprises.", "Local people. Local knowledge.", "Care in every coat."];
+const bandBodies = [
+  "On-site measurements and a fixed price in writing.",
+  "Adelaide based, from the coast to the Hills.",
+  "Proper preparation. A finish made to last.",
+];
 const icons = [
   <path key="quote" d="M8 3h8l4 4v14H4V3h4Zm8 0v5h4M8 12h8m-8 4h5" />,
   <path
@@ -78,13 +84,15 @@ export default function Home() {
             className={`${container} grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:py-20`}
           >
             <div>
-              <p className="mb-5 text-sm font-bold tracking-[0.14em] uppercase drop-shadow-sm">
-                Render &amp; cladding · Adelaide, SA
-              </p>
-              <h1 className="hero-title">
-                <span className="text-bluestone">Great walls.</span>
-                <br />
-                <span className="drop-shadow-sm">Better homes.</span>
+              <h1>
+                <span className="mb-5 block text-sm font-bold tracking-[0.14em] uppercase drop-shadow-sm">
+                  Render &amp; cladding Adelaide
+                </span>
+                <span className="hero-title block">
+                  <span className="text-bluestone">Great walls.</span>
+                  <br />
+                  <span className="drop-shadow-sm">Better homes.</span>
+                </span>
               </h1>
               <ul className="mt-8 space-y-3 text-[1.2rem] font-bold">
                 {heroPoints.map((point) => (
@@ -126,59 +134,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Navy band */}
+          {/* Navy band: the Max Wall difference */}
           <div className="bg-bluestone">
-            <ul className={`${container} grid gap-3 py-5 text-sm font-semibold sm:grid-cols-3`}>
-              {heroBand.map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <Check className="mt-0 text-ochre" />
-                  {item}
+            <ul aria-label="The Max Wall difference" className={`${container} grid gap-5 py-6 sm:grid-cols-3 sm:gap-8`}>
+              {pillars.map((pillar, index) => (
+                <li key={pillar.title} className="flex items-start gap-4">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="mt-0.5 h-7 w-7 shrink-0 text-ochre"
+                  >
+                    {icons[index]}
+                  </svg>
+                  <div>
+                    <p className="font-display text-lg tracking-wide uppercase">{bandTitles[index]}</p>
+                    <p className="mt-1 text-sm text-white/75">{bandBodies[index]}</p>
+                  </div>
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-
-        <section
-          aria-label="The Max Wall difference"
-          className="border-b border-line"
-        >
-          <div className={`${container} grid sm:grid-cols-3`}>
-            {pillars.map((pillar, index) => (
-              <div
-                key={pillar.title}
-                className={`flex items-start gap-4 py-7 sm:py-9 ${index > 0 ? "border-t border-line sm:border-l sm:border-t-0 sm:pl-6 lg:pl-9" : ""} ${index < 2 ? "sm:pr-5" : ""}`}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="mt-1 h-7 w-7 shrink-0 text-ochre"
-                >
-                  {icons[index]}
-                </svg>
-                <div>
-                  <h2 className="text-sm font-semibold tracking-normal">
-                    {index === 0
-                      ? "Clear quotes. No surprises."
-                      : index === 1
-                        ? "Local people. Local knowledge."
-                        : "Care in every coat."}
-                  </h2>
-                  <p className="mt-2 text-xs leading-[1.8] text-ink-soft">
-                    {index === 0
-                      ? "On-site measurements and a fixed price in writing."
-                      : index === 1
-                        ? "Adelaide based, from the coast to the Hills."
-                        : "Proper preparation. A finish made to last."}
-                  </p>
-                </div>
-              </div>
-            ))}
           </div>
         </section>
 
@@ -267,7 +246,7 @@ export default function Home() {
             />
             <div className="grid gap-9 md:grid-cols-3 md:gap-6">
               {projectIdeas.map((idea, index) => {
-                const photo = images.services[idea.image];
+                const photo = idea.image;
                 return (
                   <Reveal key={idea.title} delay={index * 70}>
                     <Link href={idea.href} className="group block">
@@ -307,40 +286,41 @@ export default function Home() {
 
         <FinishGuide />
 
-        <section className="py-20 sm:py-24">
+        {/* Process, on navy to break up the light sections */}
+        <section className="bg-bluestone py-20 text-white sm:py-24">
           <div className={container}>
-            <SectionHead
-              eyebrow="From hello to handover"
-              title="Less hassle. More peace of mind."
-              action={{ href: "/how-we-work", label: "Our process, in detail" }}
-            />
-            <ol className="grid gap-9 md:grid-cols-3 md:gap-8">
+            <Reveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-2xl">
+                <Eyebrow light>From hello to handover</Eyebrow>
+                <h2 className="section-title mt-3">Less hassle. More peace of mind.</h2>
+              </div>
+              <Link
+                href="/how-we-work"
+                className="group inline-flex shrink-0 items-center gap-2 text-[0.95rem] font-semibold text-sky"
+              >
+                Our process, in detail
+                <Arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Reveal>
+            <ol className="grid gap-5 md:grid-cols-3">
               {steps.map((step, index) => (
                 <li key={step.title}>
-                  <Reveal
-                    delay={index * 70}
-                    className="border-t border-line pt-7"
-                  >
-                    <div className="mb-7 flex items-center justify-between">
-                      <span className="font-brand text-4xl text-ochre">
-                        0{index + 1}
-                      </span>
-                      <Arrow className="h-5 w-5 text-ink-soft/50" />
-                    </div>
-                    <h3 className="text-xl font-semibold">{step.title}</h3>
-                    <p className="mt-3 text-sm leading-[1.9] text-ink-soft">
-                      {step.detail}
-                    </p>
+                  <Reveal delay={index * 70} className="h-full border-t-4 border-ochre bg-white/5 p-7">
+                    <span className="font-display text-5xl font-bold text-ochre">0{index + 1}</span>
+                    <h3 className="mt-5 font-display text-2xl tracking-wide uppercase">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-[1.9] text-white/75">{step.detail}</p>
                   </Reveal>
                 </li>
               ))}
             </ol>
-            <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-ink-soft">
-                A few photos, your suburb and an idea of what you&apos;re after.
-                That&apos;s all you need to get started.
+            <div className="mt-12 flex flex-col gap-5 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-white/75">
+                A few photos, your suburb and an idea of what you&apos;re after. That&apos;s all you need
+                to get started.
               </p>
-              <TextLink href="/contact">Tell us about your project</TextLink>
+              <Button href="/contact" className="shrink-0">
+                Tell us about your project
+              </Button>
             </div>
           </div>
         </section>
@@ -349,7 +329,7 @@ export default function Home() {
           <div className={`${container} grid gap-10 md:grid-cols-2 md:gap-16`}>
             {projectTypes.map((type) => (
               <Reveal key={type.title} className="flex flex-col">
-                <p className="text-xs font-semibold tracking-[0.14em] text-ochre uppercase">
+                <p className="text-xs font-semibold tracking-[0.14em] text-ochre-dark uppercase">
                   A good fit for your project / {type.number}
                 </p>
                 <h2 className="font-display mt-4 text-3xl font-bold text-bluestone">{type.title}</h2>

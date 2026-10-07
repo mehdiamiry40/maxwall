@@ -1,24 +1,26 @@
 // Editorial content for the homepage. Inspiration images are not completed Max Wall jobs.
+import { images } from "@/lib/images";
+
 export const projectIdeas = [
   {
     title: "Clean lines. A fresh perspective.",
     label: "Contemporary render",
     body: "A smooth rendered facade brings different wall surfaces together for a crisp, considered finish.",
-    image: "acrylic-render",
+    image: images.hero,
     href: "/services/acrylic-render",
   },
   {
     title: "Character, with a modern edge.",
-    label: "Weatherboard cladding",
+    label: "Feature cladding",
     body: "Horizontal profiles add texture and depth, whether you're updating a classic home or finishing an extension.",
-    image: "fibre-cement-cladding",
+    image: images.faqBanner,
     href: "/services/fibre-cement-cladding",
   },
   {
     title: "Give your walls a new beginning.",
     label: "Facade refresh",
     body: "Repaired surfaces and a consistent finish can help an existing home feel like a whole new place.",
-    image: "cement-render",
+    image: images.areasBanner,
     href: "/services/render-repairs",
   },
 ];

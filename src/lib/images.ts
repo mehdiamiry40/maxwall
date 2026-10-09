@@ -18,10 +18,11 @@ const unsplash = (id: string) => `/images/${id}.webp`;
 
 export const images = {
   homeHero: {
-    src: unsplash("photo-1777106322601-578dc9213ace"),
-    alt: "Stock photograph of a rendered two-storey home with a tiled roof and dark garage door",
+    src: unsplash("photo-1756541790216-2b23c9113e43-hero"),
+    alt: "Modern Australian townhouse facades with white render, grey panels and timber balconies",
     credit: "Troy Mortier",
-    source: "https://unsplash.com/photos/modern-two-story-house-with-a-dark-garage-door-HckCpdBDeDk",
+    source: "https://unsplash.com/photos/modern-townhouses-with-geometric-designs-on-a-street-44FRvkxNwcY",
+    location: "Clyde North VIC, Australia",
   },
   hero: {
     src: unsplash("photo-1776685107181-c6caafb712bc"),

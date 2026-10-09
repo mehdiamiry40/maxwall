@@ -57,7 +57,7 @@ export default function Home() {
             fill
             preload
             sizes="100vw"
-            className="object-cover object-[50%_40%]"
+            className="object-cover object-[50%_25%]"
           />
           <a href={hero.source} className="absolute bottom-3 right-4 bg-white px-2 py-1 text-xs text-bluestone underline underline-offset-2" rel="noopener noreferrer" target="_blank">
             Stock photo · {hero.credit}

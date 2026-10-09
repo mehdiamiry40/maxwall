@@ -48,7 +48,7 @@ export default function HowWeWorkPage() {
                   key={s.title}
                   className="surface-card flex flex-col gap-6 p-6 sm:p-8"
                 >
-                  <p className="font-display flex h-16 w-16 items-center justify-center rounded-xl bg-sky-soft text-4xl font-bold text-sky-ink">
+                  <p className="font-display flex h-16 w-16 items-center justify-center  bg-sky-soft text-4xl font-bold text-sky-ink">
                     0{i + 1}
                   </p>
                   <div>

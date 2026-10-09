@@ -30,7 +30,7 @@ export function QuoteForm({
   });
   const prefix = compact ? "hero-" : "";
   const input =
-    "mt-1.5 min-h-12 w-full rounded-lg border border-line bg-render/70 px-3 py-2.5 text-base text-ink transition placeholder:text-ink-soft focus:border-sky-deep focus:bg-white focus:ring-2 focus:ring-sky/20";
+    "mt-1.5 min-h-12 w-full  border border-line bg-render px-3 py-2.5 text-base text-ink transition placeholder:text-ink-soft focus:border-sky-deep focus:bg-white focus:ring-2 focus:ring-sky/20";
   const label = "block text-sm font-semibold text-bluestone";
   const optional = (
     <span className="font-normal text-ink-soft">(optional)</span>
@@ -54,7 +54,7 @@ export function QuoteForm({
       <div className="py-10 text-center" role="status">
         <span
           aria-hidden="true"
-          className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-sky-soft text-xl text-sky-ink"
+          className="mx-auto grid h-12 w-12 place-items-center  bg-sky-soft text-xl text-sky-ink"
         >
           ✓
         </span>
@@ -106,7 +106,7 @@ export function QuoteForm({
     >
       <div>
         <label htmlFor={`${prefix}name`} className={label}>
-          Name <span className="text-ochre-dark">*</span>
+          Name <span className="text-bluestone">*</span>
         </label>
         <input
           {...field("name")}
@@ -118,7 +118,7 @@ export function QuoteForm({
       </div>
       <div>
         <label htmlFor={`${prefix}mobile`} className={label}>
-          Mobile <span className="text-ochre-dark">*</span>
+          Mobile <span className="text-bluestone">*</span>
         </label>
         <input
           {...field("mobile")}
@@ -146,7 +146,7 @@ export function QuoteForm({
       </div>
       <div>
         <label htmlFor={`${prefix}suburb`} className={label}>
-          Suburb <span className="text-ochre-dark">*</span>
+          Suburb <span className="text-bluestone">*</span>
         </label>
         <input
           {...field("suburb")}
@@ -195,7 +195,7 @@ export function QuoteForm({
       <div className={compact ? "col-span-2" : "sm:col-span-2"}>
         {state.message && (
           <p
-            className="mb-3 rounded-lg border border-ochre/20 bg-orange-50 p-3 text-sm font-semibold text-ochre-dark"
+            className="mb-3  border border-ochre bg-white p-3 text-sm font-semibold text-bluestone"
             role="alert"
           >
             {state.message}
@@ -205,7 +205,7 @@ export function QuoteForm({
           type="submit"
           disabled={pending}
           aria-busy={pending}
-          className="flex min-h-12 w-full items-center justify-center gap-3 rounded-lg bg-ochre px-5 py-3 font-display text-xl font-bold tracking-wide text-white uppercase transition-colors hover:bg-ochre-dark disabled:opacity-60"
+          className="flex min-h-12 w-full items-center justify-center gap-3  bg-ochre px-5 py-3 font-display text-xl font-bold tracking-wide text-white uppercase transition-colors hover:bg-ochre-dark disabled:opacity-60"
         >
           {pending ? "Sending…" : "Get my free quote"}
           {!pending && <span aria-hidden="true">→</span>}

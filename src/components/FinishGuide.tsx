@@ -1,3 +1,4 @@
+import { WallIcon } from "@/components/brand";
 import {
   Arrow,
   Button,
@@ -32,19 +33,15 @@ export function FinishGuide() {
             <Reveal
               key={option.slug}
               delay={index * 70}
-              className="flex flex-col surface-card p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bluestone/10 sm:p-7"
+              className="flex flex-col surface-card p-6 transition duration-300 hover:-translate-y-0.5   sm:p-7"
             >
               <div className="mb-6 flex items-center justify-between">
                 <span className="text-[0.65rem] font-semibold tracking-[0.12em] text-ink-soft uppercase">
                   {option.label}
                 </span>
-                <span
-                  aria-hidden="true"
-                  className={`h-13 w-13 rounded-full border border-black/5 ${index < 2 ? "texture-swatch" : "bg-[repeating-linear-gradient(0deg,transparent,transparent_10px,#ffffff50_10px,#ffffff50_12px)]"}`}
-                  style={{
-                    backgroundColor: option.colour,
-                    backgroundBlendMode: "multiply",
-                  }}
+                <WallIcon
+                  name={index < 2 ? "wall" : "cladding"}
+                  className="h-10 w-10 text-ochre"
                 />
               </div>
               <h3 className="text-xl font-semibold text-bluestone">

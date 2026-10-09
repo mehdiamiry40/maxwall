@@ -1,23 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Arrow, Logo, Mark, PhoneIcon } from "@/components/brand";
+import { Arrow, Logo, MailIcon, PhoneIcon } from "@/components/brand";
 import { MobileActionBar, SiteHeader } from "@/components/nav";
 import { Reveal } from "@/components/Reveal";
 import { blurProps, type Photo } from "@/lib/images";
-import { nav, phoneHref, services, site } from "@/lib/site";
+import { nav, phoneHref, site } from "@/lib/site";
 
 export { Arrow, Logo, PhoneIcon, Reveal };
 export { ServiceCard } from "@/components/ServiceCard";
 
 export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
 
-/** Vertical rhythm shared by every full-width section: 64px phone, 80px tablet, 96px desktop. */
+/** Vertical rhythm shared by every full-width section: 48px phone, 64px tablet, 80px desktop. */
 export const section = "py-12 sm:py-16 lg:py-20";
 
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-ochre text-white shadow-sm hover:bg-ochre-dark hover:shadow-md",
+  primary: "bg-bluestone text-white hover:bg-ochre",
   dark: "bg-bluestone text-white hover:bg-bluestone-soft",
   light: "bg-white text-bluestone hover:bg-sandstone",
   outline:
@@ -37,7 +37,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-sm px-6 py-3 font-display text-[1rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-12 items-center justify-center gap-3  px-6 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -151,21 +151,20 @@ export function Header() {
   );
 }
 
-/** Sky-blue backdrop with the photo blended in on the right (home and inner-page heroes). */
+/** Photograph beside a solid brand-blue panel; never a gradient or tint. */
 export function SkyBackdrop({ image }: { image: Photo }) {
   return (
     <>
       <div className="absolute inset-0 -z-30 bg-bluestone" />
-      <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent,black_85%)] md:w-3/4">
+      <div className="absolute inset-y-0 right-0 -z-20 hidden w-[38%] md:block">
         <Image
           src={image.src}
           {...blurProps(image)}
           alt=""
           fill
           loading="eager"
-          fetchPriority="high"
-          sizes="(min-width: 768px) 75vw, 100vw"
-          className="object-cover opacity-25"
+          sizes="38vw"
+          className="object-cover"
         />
       </div>
     </>
@@ -191,11 +190,11 @@ export function PageHero({
       <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
         <SkyBackdrop image={image} />
         <div className={container}>
-          <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] drop-shadow-sm sm:text-6xl">
+          <h1 className="max-w-3xl md:max-w-[58%] font-display text-4xl font-bold leading-[1.05]  sm:text-6xl">
             {title}
           </h1>
           {intro && (
-            <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-white/90">
+            <p className="mt-5 max-w-xl md:max-w-[55%] text-lg font-medium leading-relaxed text-white">
               {intro}
             </p>
           )}
@@ -217,7 +216,7 @@ export function PageHero({
             </Link>
             {crumb.map((c) => (
               <span key={c.label} className="flex items-center gap-2">
-                <span aria-hidden="true" className="text-sky">
+                <span aria-hidden="true" className="text-ochre">
                   ›
                 </span>
                 {c.href ? (
@@ -287,15 +286,12 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   return (
     <div className="surface-card overflow-hidden divide-y divide-line">
       {items.map((f) => (
-        <details
-          key={f.q}
-          className="group transition-colors open:bg-sky-soft/70"
-        >
+        <details key={f.q} className="group transition-colors open:bg-sky-soft">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-5 py-5 text-base font-semibold transition-colors hover:text-sky-ink sm:text-lg">
             {f.q}
             <span
               aria-hidden="true"
-              className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-sky-deep transition-transform group-open:rotate-45"
+              className="grid h-8 w-8 shrink-0 place-items-center  border border-line text-sky-deep transition-transform group-open:rotate-45"
             >
               +
             </span>
@@ -326,7 +322,7 @@ export function CtaSection({
           <h2 className="font-display text-3xl font-bold leading-tight sm:text-[2.6rem]">
             {title}
           </h2>
-          <p className="mt-3 max-w-lg text-lg leading-relaxed text-white/80">
+          <p className="mt-3 max-w-lg text-lg leading-relaxed text-white">
             {body}
           </p>
         </div>
@@ -340,97 +336,61 @@ export function CtaSection({
 }
 
 export function Footer() {
-  const company = nav.filter((n) => n.href !== "/services");
   return (
-    <footer className="border-t border-line bg-white pb-24 text-bluestone md:pb-0">
-      <div className="border-b border-line bg-sandstone px-6 py-9 text-center">
-        <a href={`mailto:${site.email}`} className="text-2xl font-semibold text-bluestone hover:text-ochre-dark sm:text-3xl">{site.email}</a>
-      </div>
-      <div className={`${container} pb-10 pt-16`}>
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
-          <div>
-            <Logo />
-            <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-ink-soft">
-              Render and cladding for homeowners and builders across {site.city}
-              .
-            </p>
-          </div>
-          <FooterList
-            title="Services"
-            links={services.map((s) => ({
-              label: s.title,
-              href: `/services/${s.slug}`,
-            }))}
-          />
-          <FooterList title="Company" links={company} />
-          <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-ochre-dark uppercase">
-              Contact
-            </p>
-            <div className="mt-5 space-y-2.5 text-[0.95rem] text-ink-soft">
-              <a
-                href={phoneHref}
-                className="flex items-center gap-2 text-lg font-bold text-bluestone"
-              >
-                <PhoneIcon className="h-4 w-4 text-ochre" /> {site.phone}
-              </a>
-              <p>
-                <a href={`mailto:${site.email}`} className="hover:text-ochre-dark">
-                  {site.email}
-                </a>
-              </p>
-              <p>{site.hours}</p>
-              <p>
-                {site.city}, {site.region}
-              </p>
-            </div>
-          </div>
+    <footer className="bg-white pb-24 text-bluestone md:pb-0">
+      <div className="bg-bluestone text-white">
+        <div
+          className={`${container} flex flex-col items-start justify-between gap-5 py-8 sm:flex-row sm:items-center`}
+        >
+          <a
+            href={`mailto:${site.email}`}
+            className="inline-flex items-center gap-3 text-xl font-semibold sm:text-2xl"
+          >
+            <MailIcon className="h-6 w-6" />
+            {site.email}
+          </a>
+          <a
+            href={phoneHref}
+            className="inline-flex min-h-11 items-center gap-3 text-lg font-semibold"
+          >
+            <PhoneIcon />
+            {site.phone}
+          </a>
         </div>
-        <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 text-sm text-ink-soft md:flex-row md:items-center md:justify-between">
+      </div>
+      <div className={`${container} py-9`}>
+        <div className="flex flex-wrap items-center justify-between gap-7">
+          <Logo />
+          <nav
+            aria-label="Footer navigation"
+            className="flex flex-wrap gap-x-6 gap-y-3"
+          >
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="inline-flex min-h-11 items-center text-sm font-semibold"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="mt-7 flex flex-wrap justify-between gap-3 text-xs">
           <p>
-            © {new Date().getFullYear()} {site.legalName} · ABN {site.abn} ·{" "}
-            <Link href="/privacy" className="hover:text-ochre-dark">
-              Privacy
-            </Link>
+            © {new Date().getFullYear()} {site.legalName} · ABN {site.abn}
           </p>
-          <p className="flex items-center gap-3">
-            <Mark className="h-4 w-4 text-bluestone/40" />
-            Photography via{" "}
-            <a
-              href="https://unsplash.com"
-              className="underline hover:text-ochre-dark"
-              rel="noopener"
-            >
+          <p>
+            <Link href="/privacy" className="underline">
+              Privacy
+            </Link>{" "}
+            · Photography via{" "}
+            <a href="https://unsplash.com" className="underline" rel="noopener">
               Unsplash
             </a>
           </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterList({
-  title,
-  links,
-}: {
-  title: string;
-  links: { label: string; href: string }[];
-}) {
-  return (
-    <div>
-      <p className="text-xs font-bold tracking-[0.2em] text-ochre-dark uppercase">
-        {title}
-      </p>
-      <ul className="mt-5 space-y-2.5 text-[0.95rem]">
-        {links.map((l) => (
-          <li key={l.href}>
-            <Link href={l.href} className="text-ink-soft hover:text-ochre-dark">
-              {l.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

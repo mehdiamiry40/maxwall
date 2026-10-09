@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
-/* Royal blue, warm orange and white, inspired by the RMI reference. */
+/* RMI’s exact main palette: blue, orange and white. */
 :root {
-  --bluestone: #262484;
-  --bluestone-soft: #36339b;
-  --sky: #c9d6ff;
-  --sky-deep: #3936a0;
-  --sky-ink: #262484;
-  --sky-soft: #f2f3fa;
-  --sandstone: #f5f5fa;
-  --render: #fafafd;
-  --ochre: #b85b32;
-  --ochre-dark: #964522;
-  --ink: #282b43;
-  --ink-soft: #606276;
-  --line: #e3e3ed;
+  /* Exact main colors sampled from rmi.com.au's rendered headings/navigation. */
+  --bluestone: #1e25a4;
+  --bluestone-soft: #1e25a4;
+  --sky: #ffffff;
+  --sky-deep: #1e25a4;
+  --sky-ink: #1e25a4;
+  --sky-soft: #ffffff;
+  --sandstone: #ffffff;
+  --render: #ffffff;
+  --ochre: #e16633;
+  --ochre-dark: #e16633;
+  --ink: #1e25a4;
+  --ink-soft: #1e25a4;
+  --line: #1e25a4;
 }
 
 @theme inline {
@@ -104,7 +105,7 @@ summary {
 }
 
 .mobile-menu::backdrop {
-  background: rgb(38 36 132 / 0.5);
+  background: var(--bluestone);
 }
 
 .mobile-menu {
@@ -170,8 +171,8 @@ summary {
 
 /* Shared surfaces keep every page visually consistent. */
 .surface-card {
-  border: 1px solid var(--line);
-  border-radius: 0.25rem;
+  border: 0;
+  border-radius: 0;
   background: #fff;
   box-shadow: none;
 }
@@ -182,4 +183,14 @@ summary {
   *::after {
     transition-duration: 0.01ms !important;
   }
+}
+
+/* The visual system uses square geometry on every route, including controls. */
+input,
+select,
+textarea,
+button,
+details,
+dialog {
+  border-radius: 0;
 }

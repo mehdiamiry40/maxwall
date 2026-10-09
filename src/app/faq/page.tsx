@@ -54,14 +54,14 @@ export default function FaqPage() {
           <div className={`${container} grid gap-12 lg:grid-cols-[14rem_1fr]`}>
             <nav
               aria-label="FAQ topics"
-              className="self-start rounded-xl border border-line bg-render p-4 lg:sticky lg:top-24"
+              className="self-start  border border-line bg-render p-4 lg:sticky lg:top-24"
             >
               <ul className="flex flex-wrap gap-2 text-sm lg:block lg:space-y-1">
                 {groups.map((g) => (
                   <li key={g.id}>
                     <a
                       href={`#${g.id}`}
-                      className="flex min-h-11 items-center rounded-lg border border-line bg-white px-3 py-2 text-ink-soft transition-colors hover:border-sky-deep hover:bg-sky-soft hover:text-sky-ink lg:border-transparent lg:bg-transparent"
+                      className="flex min-h-11 items-center  border border-line bg-white px-3 py-2 text-ink-soft transition-colors hover:border-sky-deep hover:bg-sky-soft hover:text-sky-ink lg:border-transparent lg:bg-transparent"
                     >
                       {g.title}
                     </a>

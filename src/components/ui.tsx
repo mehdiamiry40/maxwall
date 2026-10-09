@@ -17,7 +17,7 @@ export const section = "py-12 sm:py-16 lg:py-20";
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-bluestone text-white hover:bg-ochre",
+  primary: "bg-ochre text-white hover:bg-bluestone",
   dark: "bg-bluestone text-white hover:bg-bluestone-soft",
   light: "bg-white text-bluestone hover:bg-sandstone",
   outline:
@@ -101,17 +101,19 @@ export function SectionHead({
   title,
   intro,
   action,
+  accent = false,
 }: {
   eyebrow?: string;
   title: string;
   intro?: string;
   action?: { href: string; label: string };
+  accent?: boolean;
 }) {
   return (
     <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-10 lg:mb-12">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>
+        <h2 className={`section-title ${accent ? "text-ochre" : "text-bluestone"} ${eyebrow ? "mt-3" : ""}`}>
           {title}
         </h2>
         {intro && (

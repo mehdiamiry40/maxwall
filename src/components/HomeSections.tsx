@@ -49,7 +49,7 @@ export function ProjectTypesSection() {
       <div className={container}>
         <h2
           id="project-types-heading"
-          className="section-title mb-8 text-bluestone sm:mb-10"
+          className="section-title mb-8 text-ochre sm:mb-10"
         >
           Your project. Our expertise.
         </h2>
@@ -163,7 +163,7 @@ export function HomeFaqSection() {
       >
         <Reveal>
           <WallIcon name="quote" className="mb-5 h-10 w-10 text-ochre" />
-          <h2 id="home-faq-heading" className="section-title text-bluestone">
+          <h2 id="home-faq-heading" className="section-title text-ochre">
             A few helpful answers.
           </h2>
           <p className="mb-5 mt-4 max-w-sm text-bluestone">

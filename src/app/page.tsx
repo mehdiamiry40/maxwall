@@ -110,6 +110,7 @@ export default function Home() {
           <div className={container}>
             <SectionHead
               title="Our services"
+              accent
               action={{ href: "/services", label: "Explore all services" }}
             />
             <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -128,6 +129,7 @@ export default function Home() {
           <div className={container}>
             <SectionHead
               title="A finish for every home"
+              accent
               action={{ href: "/about", label: "About Max Wall" }}
             />
             <div className="grid gap-5 md:grid-cols-3">
@@ -158,7 +160,7 @@ export default function Home() {
           </div>
         </section>
         <CraftsmanshipSection />
-        <section className="bg-bluestone text-white">
+        <section className="bg-ochre text-white">
           <div
             className={`${container} grid gap-8 py-10 sm:grid-cols-3 sm:py-12`}
           >
@@ -166,8 +168,8 @@ export default function Home() {
               <div key={item.title} className="flex items-center gap-4">
                 <WallIcon name={item.icon} className="h-10 w-10 text-white" />
                 <div>
-                  <span className="text-xs font-bold">0{index + 1}</span>
-                  <h2 className="text-lg font-semibold">{item.title}</h2>
+                  <span className="text-xl font-bold">0{index + 1}</span>
+                  <h2 className="text-xl font-bold">{item.title}</h2>
                 </div>
               </div>
             ))}

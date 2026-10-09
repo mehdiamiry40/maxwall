@@ -12,9 +12,8 @@ const isActive = (pathname: string, href: string) =>
     : pathname === href || pathname.startsWith(`${href}/`);
 
 /**
- * Two-tier header after topcash4cars.com.au: a white bar with the logo, email and a
- * orange call button, then a navy menu bar that sticks to the top while scrolling.
- * On phones the white bar sticks instead and the menu opens in a dialog.
+ * RMI-inspired white header: brand at left, contacts above blue navigation.
+ * The mobile navigation retains native modal focus and Escape handling.
  */
 export function SiteHeader() {
   const pathname = usePathname();
@@ -47,62 +46,24 @@ export function SiteHeader() {
 
   return (
     <>
-      <div className="sticky top-0 z-40 border-b border-line bg-white text-bluestone lg:static">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-6 sm:px-10 lg:h-20 lg:px-12">
-          <Logo />
-          <a
-            href={`mailto:${site.email}`}
-            className="hidden items-center gap-2 text-sm text-ink-soft transition-colors hover:text-sky-ink md:flex"
-          >
-            <MailIcon className="h-4 w-4 text-sky-deep" />
-            {site.email}
-          </a>
-          <div className="flex items-center gap-2">
-            <a
-              href={phoneHref}
-              aria-label={`Call ${site.phone}`}
-              className="flex items-center gap-3 rounded-lg bg-ochre text-white shadow-sm transition-colors hover:bg-ochre-dark sm:py-1.5 sm:pl-1.5 sm:pr-6"
-            >
-              <span className="grid h-11 w-11 place-items-center rounded-md sm:bg-white sm:text-ochre">
-                <PhoneIcon className="h-5 w-5" />
-              </span>
-              <span className="hidden font-display text-xl font-bold sm:inline">
-                Call {site.phone}
-              </span>
-            </a>
-            <button
-              type="button"
-              onClick={openMenu}
-              aria-expanded={open}
-              aria-controls="mobile-navigation"
-              aria-label="Open menu"
-              className="grid h-11 w-11 place-items-center rounded-lg border border-line lg:hidden"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                className="h-7 w-7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                aria-hidden="true"
-              >
-                <path d="M3 7h18M3 12h18M3 17h18" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <nav
-        aria-label="Main navigation"
-        className="sticky top-0 z-40 hidden bg-bluestone text-white shadow-sm lg:block"
-      >
-        <div className="mx-auto flex max-w-7xl items-stretch justify-between px-6 sm:px-10 lg:px-12">
-          <div className="flex items-stretch">
+      <header className="sticky top-0 z-40 border-b border-line bg-white text-bluestone">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-6 py-4 sm:gap-5 sm:px-10 lg:min-h-28 lg:px-12 lg:py-0">
+          <Logo className="shrink-0" />
+          <div className="hidden flex-col items-end lg:flex">
+            <div className="flex items-center gap-7 py-2 text-sm font-semibold">
+              <span className="text-ochre-dark">Adelaide &amp; the Hills</span>
+              <a href={phoneHref} className="inline-flex min-h-9 items-center gap-2 hover:text-ochre-dark">
+                <PhoneIcon /> {site.phone}
+              </a>
+              <a href={`mailto:${site.email}`} className="inline-flex min-h-9 items-center gap-2 hover:text-ochre-dark">
+                <MailIcon /> {site.email}
+              </a>
+            </div>
+            <nav aria-label="Main navigation" className="relative flex items-center">
             {[{ label: "Home", href: "/" }, ...nav].map((n) => {
               const active = isActive(pathname, n.href);
-              const linkClass = `flex h-12 items-center gap-1.5 px-4 font-display text-[0.95rem] tracking-wide uppercase transition-colors ${
-                active ? "bg-ochre text-white" : "hover:bg-white/10"
+              const linkClass = `flex min-h-12 items-center gap-1.5 px-3 text-sm font-semibold uppercase transition-colors ${
+                active ? "text-ochre-dark" : "hover:text-ochre-dark"
               }`;
               if (n.href !== "/services") {
                 return (
@@ -118,7 +79,7 @@ export function SiteHeader() {
               }
               // Services opens a panel listing every service on hover or keyboard focus
               return (
-                <div key={n.href} className="group relative flex">
+                <div key={n.href} className="group flex">
                   <Link
                     href={n.href}
                     aria-current={active ? "page" : undefined}
@@ -136,13 +97,13 @@ export function SiteHeader() {
                       <path d="m6 9 6 6 6-6" />
                     </svg>
                   </Link>
-                  <div className="invisible absolute left-0 top-full z-50 w-[34rem] opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                    <div className="grid grid-cols-2 gap-1 rounded-b-xl border border-line bg-white p-3 text-ink shadow-xl shadow-ink/15">
+                  <div className="invisible absolute right-0 top-full z-50 w-[34rem] max-w-[calc(100vw-3rem)] opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                    <div className="grid grid-cols-2 gap-1 rounded-b-sm border border-line bg-white p-3 text-ink shadow-xl shadow-ink/15">
                       {services.map((s) => (
                         <Link
                           key={s.slug}
                           href={`/services/${s.slug}`}
-                          className="rounded-lg p-3 transition-colors hover:bg-sky-soft"
+                          className="rounded-sm p-3 transition-colors hover:bg-sky-soft"
                         >
                           <span className="block text-sm font-semibold text-bluestone">
                             {s.title}
@@ -163,15 +124,20 @@ export function SiteHeader() {
                 </div>
               );
             })}
+            </nav>
           </div>
-          <Link
-            href={pathname === "/" ? "/#quote" : "/contact"}
-            className="my-2 flex items-center gap-3 rounded-md border border-white/60 px-4 font-display text-[0.95rem] tracking-wide uppercase transition-colors hover:bg-white hover:text-bluestone"
-          >
-            Free quote <Arrow />
-          </Link>
+          <div className="flex items-center gap-2 lg:hidden">
+            <a href={phoneHref} aria-label={`Call ${site.phone}`} className="grid h-11 w-11 place-items-center rounded-sm bg-bluestone text-white">
+              <PhoneIcon className="h-5 w-5" />
+            </a>
+            <button type="button" onClick={openMenu} aria-expanded={open} aria-controls="mobile-navigation" aria-label="Open menu" className="grid h-11 w-11 place-items-center rounded-sm border border-line">
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <path d="M3 7h18M3 12h18M3 17h18" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </nav>
+      </header>
 
       <dialog
         ref={dialog}

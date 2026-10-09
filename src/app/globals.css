@@ -1,32 +1,20 @@
 @import "tailwindcss";
 
-/*
- * "Trade blue and orange" palette. The original token names are kept so every
- * component picks it up: "bluestone" is the deep navy, "sky" the hero blue and
- * "ochre" the construction-orange call-to-action colour.
- */
+/* Royal blue, warm orange and white, inspired by the RMI reference. */
 :root {
-  --bluestone: #0d2c45;
-  --bluestone-soft: #173c5c;
-  /* Light accent blue for use on navy (5:1 on --bluestone) */
-  --sky: #4a9fe8;
-  /* Main hero blue; white text on it is 5:1 */
-  --sky-deep: #1f6fc5;
-  /* Readable blue for links, labels and small text on white (6.4:1) */
-  --sky-ink: #1a5fae;
-  --sky-soft: #eef4fa;
-  /* Pale blue tint for alternating sections */
-  --sandstone: #eef4fa;
-  /* Cool off-white for inputs and subtle surfaces */
-  --render: #f4f7fa;
-  /* Orange actions keep readable white text on every screen. */
-  --ochre: #c94f0b;
-  /* Darker orange for small text and hover states. */
-  --ochre-dark: #a13e08;
-  /* Navy-tinted text so type and headings feel like one family */
-  --ink: #12283a;
-  --ink-soft: #4b5e6e;
-  --line: #d9e3ec;
+  --bluestone: #262484;
+  --bluestone-soft: #36339b;
+  --sky: #c9d6ff;
+  --sky-deep: #3936a0;
+  --sky-ink: #262484;
+  --sky-soft: #f2f3fa;
+  --sandstone: #f5f5fa;
+  --render: #fafafd;
+  --ochre: #b85b32;
+  --ochre-dark: #964522;
+  --ink: #282b43;
+  --ink-soft: #606276;
+  --line: #e3e3ed;
 }
 
 @theme inline {
@@ -44,7 +32,7 @@
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
   --font-sans: var(--font-body);
-  --font-display: var(--font-heading);
+  --font-display: var(--font-body);
   --font-brand: var(--font-heading);
 }
 
@@ -94,30 +82,29 @@ summary {
   cursor: pointer;
 }
 
-/* Condensed uppercase display type (Barlow Condensed) for headings and buttons */
+/* Open, sentence-case headings echo the reference's straightforward type. */
 .hero-title,
 .section-title,
 .font-display {
-  font-family: var(--font-heading), sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
+  font-family: var(--font-body), sans-serif;
+  text-transform: none;
+  letter-spacing: -0.015em;
 }
 
-/* Barlow Condensed is narrower than Oswald, so headings run a touch larger */
 .hero-title {
-  font-size: clamp(3rem, 6.2vw, 5.1rem);
-  line-height: 0.98;
-  font-weight: 700;
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 .section-title {
-  font-size: clamp(2.2rem, 3.7vw, 3.3rem);
-  line-height: 1.02;
-  font-weight: 700;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 .mobile-menu::backdrop {
-  background: rgb(13 44 69 / 0.5);
+  background: rgb(38 36 132 / 0.5);
 }
 
 .mobile-menu {
@@ -184,9 +171,9 @@ summary {
 /* Shared surfaces keep every page visually consistent. */
 .surface-card {
   border: 1px solid var(--line);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   background: #fff;
-  box-shadow: 0 4px 20px rgb(13 44 69 / 0.035);
+  box-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

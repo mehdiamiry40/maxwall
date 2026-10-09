@@ -13,7 +13,6 @@ import {
   Reveal,
   section,
   SectionHead,
-  SkyBackdrop,
   TextLink,
 } from "@/components/ui";
 import { QuoteForm } from "@/components/QuoteForm";
@@ -41,29 +40,10 @@ const jsonLd = {
 };
 
 const hero = images.services["foam-cladding"];
-
-// Kept deliberately short: one idea per line. Detail lives on the inner pages.
 const heroPoints = [
-  "Render, Hebel and cladding",
-  "Free fixed-price quotes",
-  "All of Adelaide and the Hills",
-];
-
-const band = [
-  "Fixed written quotes",
+  "Quality render and cladding",
+  "Clear, fixed written quotes",
   "Local Adelaide team",
-  "Finishes that last",
-];
-const icons = [
-  <path key="quote" d="M8 3h8l4 4v14H4V3h4Zm8 0v5h4M8 12h8m-8 4h5" />,
-  <path
-    key="local"
-    d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-  />,
-  <path
-    key="finish"
-    d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm-4 9 3 3 5-6"
-  />,
 ];
 
 export default function Home() {
@@ -75,98 +55,56 @@ export default function Home() {
       />
       <Header />
       <main id="main" className="flex-1">
-        {/* Hero */}
-        <section className="relative isolate overflow-hidden text-white">
-          <SkyBackdrop image={hero} />
-          <div
-            className={`${container} grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:py-20`}
-          >
-            <div>
-              <h1>
-                <span className="mb-5 block text-sm font-bold tracking-[0.14em] uppercase drop-shadow-sm">
-                  Render &amp; cladding Adelaide
-                </span>
-                <span className="hero-title block">
-                  <span className="drop-shadow-sm">Great walls.</span>
-                  <br />
-                  <span className="text-[#bfe0ff] drop-shadow-sm">
-                    Better homes.
-                  </span>
-                </span>
-              </h1>
-              <ul className="mt-8 space-y-2.5 text-lg font-medium leading-relaxed">
-                {heroPoints.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-3 drop-shadow-sm"
-                  >
-                    <Check className="mt-1 h-5 w-5 text-white" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
-                <a
-                  href={phoneHref}
-                  className="inline-flex items-center gap-3 rounded-lg bg-ochre py-2 pl-2 pr-7 font-display text-2xl font-bold text-white uppercase shadow-lg shadow-black/20 transition-colors hover:bg-ochre-dark"
-                >
-                  <span className="grid h-11 w-11 place-items-center rounded-md bg-white text-ochre">
-                    <PhoneIcon className="h-5 w-5" />
-                  </span>
-                  Call {site.phone}
-                </a>
-                <a
-                  href="#quote"
-                  className="text-[1.2rem] font-bold underline underline-offset-4 drop-shadow-sm lg:hidden"
-                >
-                  or get a free quote
-                </a>
-              </div>
-            </div>
-
-            <div id="quote" className="scroll-mt-24">
-              <div className="rounded-xl border border-white/70 bg-white p-5 text-ink shadow-2xl shadow-bluestone/20 sm:p-7">
-                <h2 className="mb-1 font-display text-3xl font-bold text-bluestone uppercase">
-                  Get a free quote
-                </h2>
-                <p className="mb-5 text-sm text-ink-soft">
-                  A few details. A clear, fixed written price.
-                </p>
-                <QuoteForm compact />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-bluestone">
-            <ul
-              aria-label="The Max Wall difference"
-              className={`${container} grid gap-4 py-5 sm:grid-cols-3`}
-            >
-              {band.map((item, index) => (
-                <li key={item} className="flex items-center gap-3">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="h-6 w-6 shrink-0 text-sky"
-                  >
-                    {icons[index]}
-                  </svg>
-                  <span className="font-display text-lg tracking-wide uppercase">
-                    {item}
-                  </span>
+        {/* The reference separates its wide photo from the welcome message. */}
+        <div className="relative h-[220px] overflow-hidden bg-sandstone sm:h-[300px] lg:h-[330px]">
+          <Image src={hero.src} {...blurProps(hero)} alt={hero.alt} fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover object-[50%_55%]" />
+          <span className="absolute bottom-3 right-4 rounded-sm bg-white/90 px-2 py-1 text-[10px] text-ink-soft">Inspiration photograph</span>
+        </div>
+        <section className="bg-white text-center text-bluestone">
+          <div className={`${container} py-9 sm:py-12`}>
+            <h1 className="hero-title">
+              <span className="text-ochre">Welcome</span> to Max Wall Building Solutions
+            </h1>
+            <p className="mt-3 text-lg sm:text-xl">Render &amp; cladding specialists in Adelaide</p>
+            <ul className="mx-auto mt-5 flex w-fit flex-col gap-1.5 text-left text-lg sm:text-xl">
+              {heroPoints.map((point) => (
+                <li key={point} className="flex items-center gap-2.5">
+                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bluestone text-white"><Check className="m-0 h-3.5 w-3.5" /></span>
+                  {point}
                 </li>
               ))}
             </ul>
+            <h2 className="mt-7 text-2xl font-semibold sm:text-3xl">Great walls. Better homes.</h2>
+            <p className="mt-2 text-lg">Homeowners &amp; builders · All of Adelaide &amp; the Hills</p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Button href="#quote">Get a free quote <Arrow /></Button>
+              <Button href={phoneHref} variant="outline"><PhoneIcon /> Call {site.phone}</Button>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="quote-heading" className="border-y border-line bg-sandstone py-12 sm:py-16">
+          <div className={`${container} grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-20`}>
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider text-ochre-dark">Let’s talk about your project</p>
+              <h2 id="quote-heading" className="section-title mt-3 text-bluestone">A fresh finish starts here.</h2>
+              <p className="mt-4 max-w-lg text-lg text-ink-soft">New build, renovation or a wall that needs some care. Tell us what you have in mind and we’ll help you choose the right finish.</p>
+              <ul className="mt-6 space-y-2 text-bluestone">
+                <li className="flex gap-3"><Check /> Free on-site measure</li>
+                <li className="flex gap-3"><Check /> A clear, fixed written price</li>
+                <li className="flex gap-3"><Check /> No obligation</li>
+              </ul>
+            </div>
+            <div id="quote" className="surface-card scroll-mt-32 border-t-4 border-t-bluestone p-5 sm:p-7">
+              <h3 className="text-2xl font-semibold text-bluestone">Get a free quote</h3>
+              <p className="mb-5 mt-1 text-sm text-ink-soft">A few details and we’ll be in touch.</p>
+              <QuoteForm compact />
+            </div>
           </div>
         </section>
 
         {/* Services */}
-        <section id="services" className={`bg-sandstone ${section}`}>
+        <section id="services" className={`bg-white ${section}`}>
           <div className={container}>
             <SectionHead
               title="Our services"
@@ -177,7 +115,7 @@ export default function Home() {
         </section>
 
         {/* About */}
-        <section className="overflow-hidden bg-bluestone text-white">
+        <section className="overflow-hidden border-y border-line bg-sandstone text-bluestone">
           <div
             className={`${container} grid gap-10 ${section} md:grid-cols-2 md:gap-16`}
           >
@@ -188,7 +126,7 @@ export default function Home() {
                 alt={images.about.alt}
                 fill
                 sizes="(min-width: 768px) 45vw, 90vw"
-                className="rounded-xl object-cover object-[28%_50%]"
+                className="rounded-sm object-cover object-[28%_50%]"
               />
             </div>
             <Reveal className="flex flex-col justify-center">
@@ -197,13 +135,13 @@ export default function Home() {
                 <br />
                 Our craftsmanship.
               </h2>
-              <p className="mt-4 max-w-md text-lg leading-relaxed text-white/80">
+              <p className="mt-4 max-w-md text-lg leading-relaxed text-ink-soft">
                 A local Adelaide team that preps properly, keeps a tidy site and
                 finishes every wall with care.
               </p>
               <Link
                 href="/about"
-                className="mt-6 inline-flex min-h-11 items-center gap-4 self-start border-b border-white/30 pb-2 text-sm font-semibold transition-colors hover:border-sky hover:text-sky"
+                className="mt-6 inline-flex min-h-11 items-center gap-4 self-start border-b border-line pb-2 text-sm font-semibold transition-colors hover:border-ochre hover:text-ochre-dark"
               >
                 About Max Wall <Arrow />
               </Link>
@@ -219,7 +157,7 @@ export default function Home() {
               {projectIdeas.map((idea, index) => (
                 <Reveal key={idea.label} delay={index * 70}>
                   <Link href={idea.href} className="group block">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-sandstone md:aspect-[4/5]">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-sandstone md:aspect-[4/5]">
                       <Image
                         src={idea.image.src}
                         {...blurProps(idea.image)}
@@ -228,7 +166,7 @@ export default function Home() {
                         sizes="(min-width: 768px) 30vw, 90vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       />
-                      <span className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-lg bg-white/95 py-2 pl-4 pr-2 text-sm font-semibold text-bluestone">
+                      <span className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-sm bg-white/95 py-2 pl-4 pr-2 text-sm font-semibold text-bluestone">
                         {idea.label}
                         <span className="grid h-8 w-8 place-items-center rounded-full bg-sandstone transition-colors group-hover:bg-ochre group-hover:text-white">
                           <Arrow className="h-4 w-4" />

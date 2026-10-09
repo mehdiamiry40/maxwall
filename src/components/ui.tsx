@@ -12,7 +12,7 @@ export { ServiceCard } from "@/components/ServiceCard";
 export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
 
 /** Vertical rhythm shared by every full-width section: 64px phone, 80px tablet, 96px desktop. */
-export const section = "py-16 sm:py-20 lg:py-24";
+export const section = "py-12 sm:py-16 lg:py-20";
 
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
@@ -37,7 +37,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-lg px-6 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-sm px-6 py-3 font-display text-[1rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -155,8 +155,8 @@ export function Header() {
 export function SkyBackdrop({ image }: { image: Photo }) {
   return (
     <>
-      <div className="absolute inset-0 -z-30 bg-[linear-gradient(110deg,#103b6d_0%,#1a61ad_55%,#2d7fca_100%)]" />
-      <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent_15%,black_70%)] md:w-3/4">
+      <div className="absolute inset-0 -z-30 bg-bluestone" />
+      <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent,black_85%)] md:w-3/4">
         <Image
           src={image.src}
           {...blurProps(image)}
@@ -165,7 +165,7 @@ export function SkyBackdrop({ image }: { image: Photo }) {
           loading="eager"
           fetchPriority="high"
           sizes="(min-width: 768px) 75vw, 100vw"
-          className="object-cover opacity-35"
+          className="object-cover opacity-25"
         />
       </div>
     </>
@@ -318,7 +318,7 @@ export function CtaSection({
   body?: string;
 }) {
   return (
-    <section className="border-t border-white/10 bg-[linear-gradient(110deg,var(--bluestone),#164b77)] text-white">
+    <section className="border-t border-white/10 bg-bluestone text-white">
       <Reveal
         className={`${container} grid gap-6 py-14 sm:gap-8 sm:py-16 lg:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}
       >
@@ -342,12 +342,15 @@ export function CtaSection({
 export function Footer() {
   const company = nav.filter((n) => n.href !== "/services");
   return (
-    <footer className="border-t border-white/10 bg-bluestone pb-24 text-white md:pb-0">
+    <footer className="border-t border-line bg-white pb-24 text-bluestone md:pb-0">
+      <div className="border-b border-line bg-sandstone px-6 py-9 text-center">
+        <a href={`mailto:${site.email}`} className="text-2xl font-semibold text-bluestone hover:text-ochre-dark sm:text-3xl">{site.email}</a>
+      </div>
       <div className={`${container} pb-10 pt-16`}>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Logo />
-            <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
+            <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-ink-soft">
               Render and cladding for homeowners and builders across {site.city}
               .
             </p>
@@ -361,18 +364,18 @@ export function Footer() {
           />
           <FooterList title="Company" links={company} />
           <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-sky uppercase">
+            <p className="text-xs font-bold tracking-[0.2em] text-ochre-dark uppercase">
               Contact
             </p>
-            <div className="mt-5 space-y-2.5 text-[0.95rem] text-white/80">
+            <div className="mt-5 space-y-2.5 text-[0.95rem] text-ink-soft">
               <a
                 href={phoneHref}
-                className="flex items-center gap-2 text-lg font-bold text-white"
+                className="flex items-center gap-2 text-lg font-bold text-bluestone"
               >
                 <PhoneIcon className="h-4 w-4 text-ochre" /> {site.phone}
               </a>
               <p>
-                <a href={`mailto:${site.email}`} className="hover:text-white">
+                <a href={`mailto:${site.email}`} className="hover:text-ochre-dark">
                   {site.email}
                 </a>
               </p>
@@ -383,19 +386,19 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/65 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 text-sm text-ink-soft md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {site.legalName} · ABN {site.abn} ·{" "}
-            <Link href="/privacy" className="hover:text-white">
+            <Link href="/privacy" className="hover:text-ochre-dark">
               Privacy
             </Link>
           </p>
           <p className="flex items-center gap-3">
-            <Mark className="h-4 w-4 text-white/40" />
+            <Mark className="h-4 w-4 text-bluestone/40" />
             Photography via{" "}
             <a
               href="https://unsplash.com"
-              className="underline hover:text-white"
+              className="underline hover:text-ochre-dark"
               rel="noopener"
             >
               Unsplash
@@ -416,13 +419,13 @@ function FooterList({
 }) {
   return (
     <div>
-      <p className="text-xs font-bold tracking-[0.2em] text-sky uppercase">
+      <p className="text-xs font-bold tracking-[0.2em] text-ochre-dark uppercase">
         {title}
       </p>
       <ul className="mt-5 space-y-2.5 text-[0.95rem]">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-white/80 hover:text-white">
+            <Link href={l.href} className="text-ink-soft hover:text-ochre-dark">
               {l.label}
             </Link>
           </li>

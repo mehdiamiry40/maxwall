@@ -16,63 +16,68 @@ export const contentType = "image/png";
 
 export default async function Image() {
   return new ImageResponse(
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        background: "#0d2c45",
-        color: "#ffffff",
-      }}
-    >
+    (
       <div
         style={{
-          width: 640,
+          width: "100%",
+          height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 64,
+          background: "#1e25a4",
+          color: "#ffffff",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <div style={{ width: 56, height: 11, background: "#ffffff" }} />
-            <div style={{ width: 40, height: 11, background: "#f26a21" }} />
-            <div style={{ width: 56, height: 11, background: "#ffffff" }} />
+        <div
+          style={{
+            width: 640,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: 64,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+            <svg width="64" height="64" viewBox="0 0 64 64">
+              <path
+                fill="#ffffff"
+                fillRule="evenodd"
+                d="M4 25 20 9 32 21 44 9 60 25V55H4V25Zm8 4v18h40V29l-8-8-12 12-12-12-8 8Z"
+              />
+              <path fill="#e16633" d="M28 35h8v12h24v8H28V35Z" />
+            </svg>
+            <div style={{ fontSize: 40, letterSpacing: 6 }}>MAX WALL</div>
           </div>
-          <div style={{ fontSize: 40, letterSpacing: 6 }}>MAX WALL</div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                fontSize: 72,
+                fontWeight: 700,
+                lineHeight: 1.02,
+                letterSpacing: -2,
+              }}
+            >
+              Render &amp; cladding, Adelaide.
+            </div>
+            <div
+              style={{
+                marginTop: 28,
+                fontSize: 28,
+                color: "#ffffff",
+              }}
+            >
+              Free on-site quotes · Fixed written prices
+            </div>
+          </div>
+          <div style={{ fontSize: 24, color: "#ffffff" }}>maxwall.com.au</div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              fontSize: 72,
-              fontWeight: 700,
-              lineHeight: 1.02,
-              letterSpacing: -2,
-            }}
-          >
-            Render &amp; cladding, Adelaide.
-          </div>
-          <div
-            style={{
-              marginTop: 28,
-              fontSize: 28,
-              color: "rgba(255,255,255,0.75)",
-            }}
-          >
-            Free on-site quotes · Fixed written prices
-          </div>
-        </div>
-        <div style={{ fontSize: 24, color: "#4a9fe8" }}>maxwall.com.au</div>
+        <img
+          src={photoSrc}
+          alt=""
+          width={560}
+          height={630}
+          style={{ objectFit: "cover" }}
+        />
       </div>
-      <img
-        src={photoSrc}
-        alt=""
-        width={560}
-        height={630}
-        style={{ objectFit: "cover" }}
-      />
-    </div>,
+    ),
     size,
   );
 }

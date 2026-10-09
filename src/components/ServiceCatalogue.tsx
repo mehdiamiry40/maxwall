@@ -38,7 +38,7 @@ export function ServiceCatalogue() {
             aria-pressed={category === item}
             aria-controls="service-results"
             onClick={() => setCategory(item)}
-            className={`min-h-11 rounded-full border px-5 text-xs font-semibold transition-colors sm:text-sm ${category === item ? "border-bluestone bg-bluestone text-white" : "border-line bg-white text-ink-soft hover:border-sky-deep hover:text-sky-ink"}`}
+            className={`min-h-11  border px-5 text-xs font-semibold transition-colors sm:text-sm ${category === item ? "border-bluestone bg-bluestone text-white" : "border-line bg-white text-ink-soft hover:border-sky-deep hover:text-sky-ink"}`}
           >
             {item}
           </button>

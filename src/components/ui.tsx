@@ -1,28 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Arrow, Logo, Mark, PhoneIcon } from "@/components/brand";
+import { Arrow, Logo, MailIcon, PhoneIcon } from "@/components/brand";
 import { MobileActionBar, SiteHeader } from "@/components/nav";
 import { Reveal } from "@/components/Reveal";
 import { blurProps, type Photo } from "@/lib/images";
-import { nav, phoneHref, services, site } from "@/lib/site";
+import { nav, phoneHref, site } from "@/lib/site";
 
 export { Arrow, Logo, PhoneIcon, Reveal };
 export { ServiceCard } from "@/components/ServiceCard";
 
 export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
 
-/** Vertical rhythm shared by every full-width section: 64px phone, 80px tablet, 96px desktop. */
-export const section = "py-16 sm:py-20 lg:py-24";
+/** Vertical rhythm shared by every full-width section: 48px phone, 64px tablet, 80px desktop. */
+export const section = "py-12 sm:py-16 lg:py-20";
 
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-ochre text-white shadow-md shadow-ochre/25 hover:-translate-y-0.5 hover:bg-ochre-dark hover:shadow-lg",
-  dark: "bg-bluestone text-white hover:-translate-y-0.5 hover:bg-bluestone-soft hover:shadow-lg",
+  primary: "bg-bluestone text-white hover:bg-ochre",
+  dark: "bg-bluestone text-white hover:bg-bluestone-soft",
   light: "bg-white text-bluestone hover:bg-sandstone",
-  outline: "border-2 border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
+  outline:
+    "border border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
   "outline-light":
-    "border-2 border-white text-white hover:bg-white hover:text-bluestone",
+    "border border-white/60 text-white hover:bg-white hover:text-bluestone",
 };
 
 export function Button({
@@ -36,7 +37,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3 px-7 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-12 items-center justify-center gap-3  px-6 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -110,7 +111,9 @@ export function SectionHead({
     <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-10 lg:mb-12">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>{title}</h2>
+        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>
+          {title}
+        </h2>
         {intro && (
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">{intro}</p>
         )}
@@ -148,20 +151,20 @@ export function Header() {
   );
 }
 
-/** Sky-blue backdrop with the photo blended in on the right (home and inner-page heroes). */
+/** Photograph beside a solid brand-blue panel; never a gradient or tint. */
 export function SkyBackdrop({ image }: { image: Photo }) {
   return (
     <>
-      <div className="absolute inset-0 -z-30 bg-[linear-gradient(90deg,#185aa5_0%,var(--sky-deep)_45%,#2f86d9_100%)]" />
-      <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent_15%,black_70%)] md:w-3/4">
+      <div className="absolute inset-0 -z-30 bg-bluestone" />
+      <div className="absolute inset-y-0 right-0 -z-20 hidden w-[38%] md:block">
         <Image
           src={image.src}
           {...blurProps(image)}
           alt=""
           fill
-          priority
-          sizes="75vw"
-          className="object-cover opacity-60 mix-blend-multiply grayscale"
+          loading="eager"
+          sizes="38vw"
+          className="object-cover"
         />
       </div>
     </>
@@ -187,32 +190,43 @@ export function PageHero({
       <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
         <SkyBackdrop image={image} />
         <div className={container}>
-          <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] drop-shadow-sm sm:text-6xl">
+          <h1 className="max-w-3xl md:max-w-[58%] font-display text-4xl font-bold leading-[1.05]  sm:text-6xl">
             {title}
           </h1>
           {intro && (
-            <p className="mt-5 max-w-xl text-[1.2rem] font-bold leading-snug drop-shadow-sm">
+            <p className="mt-5 max-w-xl md:max-w-[55%] text-lg font-medium leading-relaxed text-white">
               {intro}
             </p>
           )}
-          {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
+          {children && (
+            <div className="mt-8 flex flex-wrap gap-3">{children}</div>
+          )}
         </div>
       </section>
       {crumb && (
-        <nav aria-label="Breadcrumb" className="bg-bluestone text-sm text-white/80">
-          <div className={`${container} flex flex-wrap items-center gap-2 py-3`}>
-            <Link href="/" className="hover:text-white">
+        <nav
+          aria-label="Breadcrumb"
+          className="border-b border-line bg-render text-sm text-ink-soft"
+        >
+          <div
+            className={`${container} flex flex-wrap items-center gap-2 py-3`}
+          >
+            <Link href="/" className="hover:text-sky-ink">
               Home
             </Link>
             {crumb.map((c) => (
               <span key={c.label} className="flex items-center gap-2">
-                <span aria-hidden="true" className="text-sky">›</span>
+                <span aria-hidden="true" className="text-ochre">
+                  ›
+                </span>
                 {c.href ? (
-                  <Link href={c.href} className="hover:text-white">
+                  <Link href={c.href} className="hover:text-sky-ink">
                     {c.label}
                   </Link>
                 ) : (
-                  <span className="font-semibold text-white">{c.label}</span>
+                  <span className="font-semibold text-bluestone">
+                    {c.label}
+                  </span>
                 )}
               </span>
             ))}
@@ -270,19 +284,21 @@ export function SplitSection({
 
 export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <div className="divide-y divide-line border-y border-line">
+    <div className="surface-card overflow-hidden divide-y divide-line">
       {items.map((f) => (
-        <details key={f.q} className="group">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-base font-semibold transition-colors hover:text-sky-ink sm:text-lg">
+        <details key={f.q} className="group transition-colors open:bg-sky-soft">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-5 py-5 text-base font-semibold transition-colors hover:text-sky-ink sm:text-lg">
             {f.q}
             <span
               aria-hidden="true"
-              className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-sky-deep transition-transform group-open:rotate-45"
+              className="grid h-8 w-8 shrink-0 place-items-center  border border-line text-sky-deep transition-transform group-open:rotate-45"
             >
               +
             </span>
           </summary>
-          <p className="max-w-2xl pb-6 leading-relaxed text-ink-soft">{f.a}</p>
+          <p className="max-w-2xl px-5 pb-5 leading-relaxed text-ink-soft">
+            {f.a}
+          </p>
         </details>
       ))}
     </div>
@@ -298,7 +314,7 @@ export function CtaSection({
   body?: string;
 }) {
   return (
-    <section className="border-t-4 border-ochre bg-bluestone text-white">
+    <section className="border-t border-white/10 bg-bluestone text-white">
       <Reveal
         className={`${container} grid gap-6 py-14 sm:gap-8 sm:py-16 lg:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}
       >
@@ -306,7 +322,7 @@ export function CtaSection({
           <h2 className="font-display text-3xl font-bold leading-tight sm:text-[2.6rem]">
             {title}
           </h2>
-          <p className="mt-3 max-w-lg text-lg leading-relaxed text-white/80">
+          <p className="mt-3 max-w-lg text-lg leading-relaxed text-white">
             {body}
           </p>
         </div>
@@ -320,94 +336,61 @@ export function CtaSection({
 }
 
 export function Footer() {
-  const company = nav.filter((n) => n.href !== "/services");
   return (
-    <footer className="border-t border-white/10 bg-bluestone pb-24 text-white md:pb-0">
-      <div className={`${container} pb-10 pt-16`}>
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
-          <div>
-            <Logo />
-            <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
-              Render and cladding for homeowners and builders across {site.city}
-              .
-            </p>
-          </div>
-          <FooterList
-            title="Services"
-            links={services.map((s) => ({
-              label: s.title,
-              href: `/services/${s.slug}`,
-            }))}
-          />
-          <FooterList title="Company" links={company} />
-          <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-sky uppercase">
-              Contact
-            </p>
-            <div className="mt-5 space-y-2.5 text-[0.95rem] text-white/80">
-              <a
-                href={phoneHref}
-                className="flex items-center gap-2 text-lg font-bold text-white"
-              >
-                <PhoneIcon className="h-4 w-4 text-ochre" /> {site.phone}
-              </a>
-              <p>
-                <a href={`mailto:${site.email}`} className="hover:text-white">
-                  {site.email}
-                </a>
-              </p>
-              <p>{site.hours}</p>
-              <p>
-                {site.city}, {site.region}
-              </p>
-            </div>
-          </div>
+    <footer className="bg-white pb-24 text-bluestone md:pb-0">
+      <div className="bg-bluestone text-white">
+        <div
+          className={`${container} flex flex-col items-start justify-between gap-5 py-8 sm:flex-row sm:items-center`}
+        >
+          <a
+            href={`mailto:${site.email}`}
+            className="inline-flex items-center gap-3 text-xl font-semibold sm:text-2xl"
+          >
+            <MailIcon className="h-6 w-6" />
+            {site.email}
+          </a>
+          <a
+            href={phoneHref}
+            className="inline-flex min-h-11 items-center gap-3 text-lg font-semibold"
+          >
+            <PhoneIcon />
+            {site.phone}
+          </a>
         </div>
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between">
+      </div>
+      <div className={`${container} py-9`}>
+        <div className="flex flex-wrap items-center justify-between gap-7">
+          <Logo />
+          <nav
+            aria-label="Footer navigation"
+            className="flex flex-wrap gap-x-6 gap-y-3"
+          >
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="inline-flex min-h-11 items-center text-sm font-semibold"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="mt-7 flex flex-wrap justify-between gap-3 text-xs">
           <p>
-            © {new Date().getFullYear()} {site.legalName} · ABN {site.abn} ·{" "}
-            <Link href="/privacy" className="hover:text-white">
-              Privacy
-            </Link>
+            © {new Date().getFullYear()} {site.legalName} · ABN {site.abn}
           </p>
-          <p className="flex items-center gap-3">
-            <Mark className="h-4 w-4 text-white/40" />
-            Photography via{" "}
-            <a
-              href="https://unsplash.com"
-              className="underline hover:text-white"
-              rel="noopener"
-            >
+          <p>
+            <Link href="/privacy" className="underline">
+              Privacy
+            </Link>{" "}
+            · Photography via{" "}
+            <a href="https://unsplash.com" className="underline" rel="noopener">
               Unsplash
             </a>
           </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterList({
-  title,
-  links,
-}: {
-  title: string;
-  links: { label: string; href: string }[];
-}) {
-  return (
-    <div>
-      <p className="text-xs font-bold tracking-[0.2em] text-sky uppercase">
-        {title}
-      </p>
-      <ul className="mt-5 space-y-2.5 text-[0.95rem]">
-        {links.map((l) => (
-          <li key={l.href}>
-            <Link href={l.href} className="text-white/80 hover:text-white">
-              {l.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

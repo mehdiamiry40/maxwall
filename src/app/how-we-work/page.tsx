@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
-import { Button, Check, container, CtaSection, Eyebrow, Footer, Header, PageHero } from "@/components/ui";
+import {
+  Button,
+  Check,
+  container,
+  CtaSection,
+  Eyebrow,
+  Footer,
+  Header,
+  PageHero,
+} from "@/components/ui";
 import { images } from "@/lib/images";
 import { steps } from "@/lib/site";
 
@@ -31,15 +40,24 @@ export default function HowWeWorkPage() {
           <Button href="/contact">Start with a free quote</Button>
         </PageHero>
 
-        <section className="py-20 sm:py-28">
+        <section className="py-16 sm:py-20 lg:py-24">
           <div className={container}>
-            <ol className="divide-y divide-line border-y border-line">
+            <ol className="grid gap-5 lg:grid-cols-3">
               {steps.map((s, i) => (
-                <li key={s.title} className="grid gap-4 py-10 md:grid-cols-[10rem_1fr] md:gap-12">
-                  <p className="font-display text-6xl font-bold text-sky-deep">0{i + 1}</p>
+                <li
+                  key={s.title}
+                  className="surface-card flex flex-col gap-6 p-6 sm:p-8"
+                >
+                  <p className="font-display flex h-16 w-16 items-center justify-center  bg-sky-soft text-4xl font-bold text-sky-ink">
+                    0{i + 1}
+                  </p>
                   <div>
-                    <h2 className="font-display text-2xl font-bold sm:text-3xl text-bluestone">{s.title}</h2>
-                    <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-soft">{s.detail}</p>
+                    <h2 className="font-display text-2xl font-bold sm:text-3xl text-bluestone">
+                      {s.title}
+                    </h2>
+                    <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
+                      {s.detail}
+                    </p>
                   </div>
                 </li>
               ))}
@@ -47,15 +65,20 @@ export default function HowWeWorkPage() {
           </div>
         </section>
 
-        <section className="bg-sandstone py-20">
+        <section className="bg-sandstone py-16 sm:py-20 lg:py-24">
           <div className={`${container} grid gap-10 md:grid-cols-[1fr_1.4fr]`}>
             <div>
               <Eyebrow>Our promise</Eyebrow>
-              <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] text-bluestone">On every job</h2>
+              <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] text-bluestone">
+                On every job
+              </h2>
             </div>
             <ul className="grid gap-4 sm:grid-cols-2">
               {promises.map((p) => (
-                <li key={p} className="flex gap-3 border border-line bg-white p-5 leading-relaxed">
+                <li
+                  key={p}
+                  className="surface-card flex gap-3 p-5 leading-relaxed"
+                >
                   <Check /> {p}
                 </li>
               ))}

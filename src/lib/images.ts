@@ -4,7 +4,7 @@
 
 import { blurs } from "@/lib/blurs";
 
-export type Photo = { src: string; alt: string; credit: string };
+export type Photo = { src: string; alt: string; credit: string; source?: string; location?: string };
 
 /** next/image props that show a tiny blurred preview while the photo loads (if we have one). */
 export function blurProps(photo: Photo) {
@@ -18,14 +18,17 @@ const unsplash = (id: string) => `/images/${id}.webp`;
 
 export const images = {
   homeHero: {
-    src: "/images/maxwall-hero-home.webp",
-    alt: "Architectural inspiration showing a contemporary Australian home with white rendered walls and vertical feature cladding",
-    credit: "AI-generated architectural inspiration",
+    src: unsplash("photo-1777106322601-578dc9213ace"),
+    alt: "Stock photograph of a rendered two-storey home with a tiled roof and dark garage door",
+    credit: "Troy Mortier",
+    source: "https://unsplash.com/photos/modern-two-story-house-with-a-dark-garage-door-HckCpdBDeDk",
   },
   hero: {
-    src: unsplash("photo-1657346088167-b982455bf29a"),
-    alt: "Modern two-storey home with white render and grey cladding at dusk",
-    credit: "George Barros",
+    src: unsplash("photo-1776685107181-c6caafb712bc"),
+    alt: "Modern homes with render, cladding and brick facades in Clyde North, Victoria",
+    credit: "Troy Mortier",
+    source: "https://unsplash.com/photos/modern-houses-with-grey-roofs-and-brick-accents-pxSADPEJEaI",
+    location: "Clyde North VIC, Australia",
   },
   about: {
     src: unsplash("photo-1768839725085-829e6ac7ac26"),
@@ -58,9 +61,11 @@ export const images = {
     credit: "Garvit",
   },
   scaffold: {
-    src: unsplash("photo-1606383446056-eb3fc3cde97b"),
-    alt: "Home extension under construction with scaffolding",
-    credit: "Brett Jordan",
+    src: unsplash("photo-1750500376369-442d5d557b93"),
+    alt: "Homes under construction with timber frames and scaffolding in Clyde North, Victoria",
+    credit: "Troy Mortier",
+    source: "https://unsplash.com/photos/houses-are-under-construction-framing-is-visible-sHQPqnUygmE",
+    location: "Clyde North VIC, Australia",
   },
   services: {
     "cement-render": {

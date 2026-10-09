@@ -49,7 +49,7 @@ export default function Home() {
     <>
       <Header />
       <main id="main" className="flex-1">
-        <div className="relative aspect-[4/3] overflow-hidden bg-white sm:aspect-[16/7] lg:aspect-[21/8]">
+        <div className="relative aspect-[4/3] overflow-hidden bg-white sm:aspect-[16/7] lg:aspect-[16/7]">
           <Image
             src={hero.src}
             {...blurProps(hero)}
@@ -57,11 +57,11 @@ export default function Home() {
             fill
             preload
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-[50%_40%]"
           />
-          <span className="absolute bottom-3 right-4 bg-white px-2 py-1 text-xs text-bluestone">
-            AI architectural inspiration
-          </span>
+          <a href={hero.source} className="absolute bottom-3 right-4 bg-white px-2 py-1 text-xs text-bluestone underline underline-offset-2" rel="noopener noreferrer" target="_blank">
+            Stock photo · {hero.credit}
+          </a>
         </div>
         <section className="bg-white text-center text-bluestone">
           <div className={`${container} py-10 sm:py-12`}>

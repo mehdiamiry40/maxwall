@@ -9,7 +9,7 @@ import { nav, phoneHref, site } from "@/lib/site";
 export { Arrow, Logo, PhoneIcon, Reveal };
 export { ServiceCard } from "@/components/ServiceCard";
 
-export const container = "mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12";
+export const container = "mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-12";
 
 /** Vertical rhythm shared by every full-width section: 48px phone, 64px tablet, 80px desktop. */
 export const section = "py-12 sm:py-16 lg:py-20";
@@ -37,7 +37,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3  px-6 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-3 px-5 py-3 font-display text-[1.25rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -71,7 +71,7 @@ export function TextLink({
   return (
     <Link
       href={href}
-      className="group inline-flex items-center gap-2 text-[0.95rem] font-semibold text-sky-ink transition-colors hover:text-bluestone"
+      className="group inline-flex items-center gap-2 text-base font-semibold text-sky-ink transition-colors hover:text-bluestone"
     >
       {children}
       <Arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -113,7 +113,9 @@ export function SectionHead({
     <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-10 lg:mb-12">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2 className={`section-title ${accent ? "text-ochre" : "text-bluestone"} ${eyebrow ? "mt-3" : ""}`}>
+        <h2
+          className={`section-title ${accent ? "text-ochre" : "text-bluestone"} ${eyebrow ? "mt-3" : ""}`}
+        >
           {title}
         </h2>
         {intro && (
@@ -153,27 +155,7 @@ export function Header() {
   );
 }
 
-/** Photograph beside a solid brand-blue panel; never a gradient or tint. */
-export function SkyBackdrop({ image }: { image: Photo }) {
-  return (
-    <>
-      <div className="absolute inset-0 -z-30 bg-bluestone" />
-      <div className="absolute inset-y-0 right-0 -z-20 hidden w-[38%] md:block">
-        <Image
-          src={image.src}
-          {...blurProps(image)}
-          alt=""
-          fill
-          loading="eager"
-          sizes="38vw"
-          className="object-cover"
-        />
-      </div>
-    </>
-  );
-}
-
-/** Sky-blue header used at the top of inner pages, with breadcrumbs in a navy band. */
+/** One responsive image beside the title; stacks above it on phones. */
 export function PageHero({
   crumb,
   title,
@@ -189,46 +171,59 @@ export function PageHero({
 }) {
   return (
     <>
-      <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
-        <SkyBackdrop image={image} />
-        <div className={container}>
-          <h1 className="max-w-3xl md:max-w-[58%] font-display text-4xl font-bold leading-[1.05]  sm:text-6xl">
-            {title}
-          </h1>
-          {intro && (
-            <p className="mt-5 max-w-xl md:max-w-[55%] text-lg font-medium leading-relaxed text-white">
-              {intro}
-            </p>
-          )}
-          {children && (
-            <div className="mt-8 flex flex-wrap gap-3">{children}</div>
-          )}
+      <section className="bg-bluestone text-white">
+        <div className="mx-auto grid max-w-7xl md:grid-cols-[1.2fr_1fr]">
+          <div className="relative aspect-[16/9] md:order-2 md:aspect-auto md:min-h-80">
+            <Image
+              src={image.src}
+              {...blurProps(image)}
+              alt={image.alt}
+              fill
+              sizes="(min-width:768px)45vw,100vw"
+              className="object-cover"
+            />
+            <span className="absolute bottom-3 right-3 bg-white px-2 py-1 text-xs text-bluestone">
+              Inspiration photograph
+            </span>
+          </div>
+          <div className="px-5 py-10 sm:px-10 sm:py-14 md:order-1 lg:px-12">
+            <h1 className="font-display text-4xl font-bold leading-tight lg:text-5xl">
+              {title}
+            </h1>
+            {intro && (
+              <p className="mt-5 max-w-xl text-lg leading-relaxed">{intro}</p>
+            )}
+            {children && (
+              <div className="mt-7 flex flex-wrap gap-3">{children}</div>
+            )}
+          </div>
         </div>
       </section>
       {crumb && (
         <nav
           aria-label="Breadcrumb"
-          className="border-b border-line bg-render text-sm text-ink-soft"
+          className="border-b border-line bg-white text-sm text-bluestone"
         >
           <div
-            className={`${container} flex flex-wrap items-center gap-2 py-3`}
+            className={`${container} flex flex-wrap items-center gap-2 py-4`}
           >
-            <Link href="/" className="hover:text-sky-ink">
+            <Link href="/" className="inline-flex min-h-11 items-center">
               Home
             </Link>
-            {crumb.map((c) => (
-              <span key={c.label} className="flex items-center gap-2">
+            {crumb.map((item) => (
+              <span key={item.label} className="flex items-center gap-2">
                 <span aria-hidden="true" className="text-ochre">
                   ›
                 </span>
-                {c.href ? (
-                  <Link href={c.href} className="hover:text-sky-ink">
-                    {c.label}
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-11 items-center"
+                  >
+                    {item.label}
                   </Link>
                 ) : (
-                  <span className="font-semibold text-bluestone">
-                    {c.label}
-                  </span>
+                  <span className="font-semibold">{item.label}</span>
                 )}
               </span>
             ))}

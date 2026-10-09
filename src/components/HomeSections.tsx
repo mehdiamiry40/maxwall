@@ -1,3 +1,4 @@
+import { guides } from "@/lib/content";
 import Image from "next/image";
 import Link from "next/link";
 import { Arrow, WallIcon, type WallIconName } from "@/components/brand";
@@ -172,6 +173,113 @@ export function HomeFaqSection() {
           <TextLink href="/faq">All your questions answered</TextLink>
         </Reveal>
         <FaqList items={[faqs[0], faqs[1], faqs[2], faqs[4]]} />
+      </div>
+    </section>
+  );
+}
+
+export function FinishSelectionSection() {
+  const choices = [
+    {
+      icon: "wall" as const,
+      title: "Render",
+      text: "A unified finish for brick, block and compatible wall systems.",
+      href: "/guides/cement-vs-acrylic-render",
+    },
+    {
+      icon: "cladding" as const,
+      title: "Cladding",
+      text: "Profiles and panels that bring texture to a facade or extension.",
+      href: "/services/fibre-cement-cladding",
+    },
+    {
+      icon: "repair" as const,
+      title: "Repair & refresh",
+      text: "Prepare tired surfaces before giving your walls a fresh look.",
+      href: "/projects/renovations",
+    },
+  ];
+  return (
+    <section
+      id="choose-your-finish"
+      aria-labelledby="finish-choice-heading"
+      className={`bg-white ${section}`}
+    >
+      <div className={container}>
+        <h2
+          id="finish-choice-heading"
+          className="section-title mb-8 text-ochre"
+        >
+          Find the right finish.
+        </h2>
+        <div className="grid gap-7 md:grid-cols-3">
+          {choices.map((choice) => (
+            <Link
+              key={choice.title}
+              href={choice.href}
+              className="group border-t-4 border-ochre py-6"
+            >
+              <WallIcon
+                name={choice.icon}
+                className="mb-5 h-10 w-10 text-ochre"
+              />
+              <h3 className="text-2xl font-semibold text-bluestone">
+                {choice.title}
+              </h3>
+              <p className="mt-3 mb-4 text-base">{choice.text}</p>
+              <span className="inline-flex min-h-11 items-center gap-3 font-semibold">
+                Explore the options <Arrow />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function AdviceSection() {
+  return (
+    <section
+      id="planning-advice"
+      aria-labelledby="planning-advice-heading"
+      className={`bg-white ${section}`}
+    >
+      <div className={container}>
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <h2 id="planning-advice-heading" className="section-title text-ochre">
+            Plan with confidence.
+          </h2>
+          <TextLink href="/guides">All guides</TextLink>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2">
+          {guides.map((guide) => (
+            <Link
+              key={guide.slug}
+              href={`/guides/${guide.slug}`}
+              className="group block"
+            >
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <Image
+                  src={guide.image.src}
+                  {...blurProps(guide.image)}
+                  alt={guide.image.alt}
+                  fill
+                  sizes="(min-width:768px)45vw,90vw"
+                  className="object-cover transition-transform group-hover:scale-[1.03]"
+                />
+              </div>
+              <h3 className="mt-5 flex items-start justify-between gap-4 text-2xl font-semibold text-bluestone">
+                {guide.title}
+                <Arrow className="mt-2 h-5 w-5 shrink-0" />
+              </h3>
+              <p className="mt-3 text-base">{guide.intro}</p>
+              <span className="mt-5 inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+                Read the guide
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

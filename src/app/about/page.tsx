@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import {
   container,
   CtaSection,
@@ -12,12 +12,11 @@ import {
 import { images } from "@/lib/images";
 import { pillars, site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Max Wall Building Solutions is an Adelaide render and cladding business focused on honest pricing, tidy sites and a finish that lasts.",
-  alternates: { canonical: "/about" },
-};
+export const metadata = pageMetadata(
+  "Adelaide Render & Cladding Specialists",
+  "Meet Max Wall Building Solutions, an Adelaide team providing render, Hebel and cladding with careful preparation and fixed written quotes.",
+  "/about",
+);
 
 const values = [
   {

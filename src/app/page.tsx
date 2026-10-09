@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -16,6 +17,8 @@ import {
   CraftsmanshipSection,
   HomeFaqSection,
   ProjectTypesSection,
+  FinishSelectionSection,
+  AdviceSection,
 } from "@/components/HomeSections";
 import { QuoteForm } from "@/components/QuoteForm";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -23,25 +26,13 @@ import { blurProps, images } from "@/lib/images";
 import { projectIdeas } from "@/lib/home";
 import { areas, phoneHref, services, site } from "@/lib/site";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  name: site.name,
-  legalName: site.legalName,
-  url: site.url,
-  telephone: site.phone,
-  email: site.email,
-  areaServed: { "@type": "City", name: "Adelaide" },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: site.city,
-    addressRegion: "SA",
-    addressCountry: "AU",
-  },
-  taxID: site.abn,
-};
+export const metadata = pageMetadata(
+  "Rendering & Wall Cladding Adelaide",
+  "Render, Hebel and wall cladding for Adelaide homes, renovations and new builds. Free on-site measures and fixed written quotes from Max Wall.",
+  "/",
+);
 
-const hero = images.services["foam-cladding"];
+const hero = images.homeHero;
 const promises = [
   { icon: "wall" as const, title: "Render & cladding" },
   { icon: "quote" as const, title: "Fixed written quotes" },
@@ -56,43 +47,44 @@ const process = [
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <Header />
       <main id="main" className="flex-1">
-        <div className="relative h-[260px] overflow-hidden bg-white sm:h-[360px] lg:h-[400px]">
+        <div className="relative aspect-[4/3] overflow-hidden bg-white sm:aspect-[16/7] lg:aspect-[21/8]">
           <Image
             src={hero.src}
             {...blurProps(hero)}
             alt={hero.alt}
             fill
-            loading="eager"
-            fetchPriority="high"
+            preload
             sizes="100vw"
-            className="object-cover object-[50%_55%]"
+            className="object-cover object-center"
           />
-          <span className="absolute bottom-3 right-4 bg-white px-2 py-1 text-[10px] text-bluestone">
-            Inspiration photograph
+          <span className="absolute bottom-3 right-4 bg-white px-2 py-1 text-xs text-bluestone">
+            AI architectural inspiration
           </span>
         </div>
         <section className="bg-white text-center text-bluestone">
           <div className={`${container} py-10 sm:py-12`}>
-            <h1 className="hero-title">
-              <span className="text-ochre">Great walls.</span> Better homes.
+            <h1>
+              <span className="mb-3 block text-base font-semibold">
+                Rendering &amp; wall cladding in Adelaide
+              </span>
+              <span className="hero-title block">
+                <span className="text-ochre">Great walls.</span> Better homes.
+              </span>
             </h1>
-            <p className="mt-3 text-lg sm:text-xl">
-              Render &amp; cladding specialists in Adelaide
-            </p>
-            <ul className="mx-auto mt-8 grid max-w-3xl gap-6 sm:grid-cols-3">
+
+            <ul className="mx-auto mt-8 grid max-w-3xl grid-cols-3 gap-3 sm:gap-6">
               {promises.map((item) => (
                 <li
                   key={item.title}
-                  className="flex flex-col items-center gap-3"
+                  className="flex flex-col items-center gap-2 sm:gap-3"
                 >
-                  <WallIcon name={item.icon} className="h-9 w-9 text-ochre" />
-                  <span className="text-base font-semibold">{item.title}</span>
+                  <WallIcon
+                    name={item.icon}
+                    className="h-7 w-7 text-ochre sm:h-9 sm:w-9"
+                  />
+                  <span className="text-sm font-semibold">{item.title}</span>
                 </li>
               ))}
             </ul>
@@ -124,6 +116,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <FinishSelectionSection />
         <ProjectTypesSection />
         <section id="inspiration" className={`bg-white ${section}`}>
           <div className={container}>
@@ -198,6 +191,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <AdviceSection />
         <HomeFaqSection />
         <section className="bg-white">
           <div

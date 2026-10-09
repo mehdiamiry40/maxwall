@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import {
   Button,
   container,
@@ -12,12 +12,11 @@ import { ServiceCatalogue } from "@/components/ServiceCatalogue";
 import { FinishGuide } from "@/components/FinishGuide";
 import { images } from "@/lib/images";
 
-export const metadata: Metadata = {
-  title: "Render & Cladding Services Adelaide",
-  description:
-    "Cement render, acrylic render, Hebel and AAC panels, foam cladding, fibre cement cladding and render repairs across Adelaide.",
-  alternates: { canonical: "/services" },
-};
+export const metadata = pageMetadata(
+  "Render & Wall Cladding Services Adelaide",
+  "Explore Max Wall's cement render, acrylic render, Hebel, foam cladding, fibre cement and repair services across Adelaide.",
+  "/services",
+);
 
 export default function ServicesPage() {
   return (

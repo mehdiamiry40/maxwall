@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import {
   container,
   CtaSection,
@@ -10,12 +10,11 @@ import {
 import { images } from "@/lib/images";
 import { faqs, services } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Rendering & Cladding FAQs",
-  description:
-    "Answers to common questions about render and cladding costs, finishes, timing and more from Max Wall in Adelaide.",
-  alternates: { canonical: "/faq" },
-};
+export const metadata = pageMetadata(
+  "Rendering & Cladding FAQs Adelaide",
+  "Answers to questions about render and cladding costs, finishes, preparation, timing and quotes from Max Wall in Adelaide.",
+  "/faq",
+);
 
 const allFaqs = [...faqs, ...services.flatMap((s) => s.faqs)];
 

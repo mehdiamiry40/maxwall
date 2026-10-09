@@ -24,7 +24,7 @@ export function SiteHeader() {
     if (!open) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const desktop = window.matchMedia("(min-width: 1024px)");
+    const desktop = window.matchMedia("(min-width: 1280px)");
     const closeOnDesktop = () => {
       if (desktop.matches) dialog.current?.close();
     };
@@ -47,9 +47,9 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-line bg-white text-bluestone">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-6 py-4 sm:gap-5 sm:px-10 lg:min-h-28 lg:px-12 lg:py-0">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:gap-5 sm:px-10 xl:min-h-28 lg:px-12 xl:py-0">
           <Logo className="shrink-0" />
-          <div className="hidden flex-col items-end lg:flex">
+          <div className="hidden flex-col items-end xl:flex">
             <div className="flex items-center gap-7 py-2 text-sm font-semibold">
               <span className="text-bluestone">Adelaide &amp; the Hills</span>
               <a
@@ -137,7 +137,7 @@ export function SiteHeader() {
               })}
             </nav>
           </div>
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-2 xl:hidden">
             <a
               href={phoneHref}
               aria-label={`Call ${site.phone}`}
@@ -214,7 +214,7 @@ export function SiteHeader() {
                   <Arrow className="h-5 w-5 text-sky-deep" />
                 </Link>
                 {n.href === "/services" && (
-                  <ul className="grid grid-cols-2 gap-2 pb-4">
+                  <ul className="grid grid-cols-1 gap-2 pb-4 sm:grid-cols-2">
                     {services.map((s) => (
                       <li key={s.slug}>
                         <Link

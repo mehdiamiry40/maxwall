@@ -1,3 +1,5 @@
+import { pageMetadata, businessId, breadcrumbSchema } from "@/lib/seo";
+import { StructuredData } from "@/components/StructuredData";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -28,11 +30,11 @@ export async function generateMetadata(
   const { slug } = await props.params;
   const service = serviceBySlug(slug);
   if (!service) return {};
-  return {
-    title: `${service.title} Adelaide`,
-    description: `${service.body} Free fixed-price quotes across Adelaide from Max Wall.`,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+  return pageMetadata(
+    `${service.title} Adelaide`,
+    `${service.body} Free fixed-price quotes across Adelaide from Max Wall.`,
+    `/services/${service.slug}`,
+  );
 }
 
 export default async function ServicePage(
@@ -52,12 +54,8 @@ export default async function ServicePage(
     name: service.title,
     description: service.intro,
     areaServed: { "@type": "City", name: "Adelaide" },
-    provider: {
-      "@type": "HomeAndConstructionBusiness",
-      name: site.legalName,
-      telephone: site.phone,
-      url: site.url,
-    },
+    url: `${site.url}/services/${service.slug}`,
+    provider: { "@id": businessId },
   };
 
   return (
@@ -65,6 +63,12 @@ export default async function ServicePage(
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <StructuredData
+        value={breadcrumbSchema([
+          { label: "Services", href: "/services" },
+          { label: service.title, href: `/services/${service.slug}` },
+        ])}
       />
       <Header />
       <main id="main" className="flex-1">

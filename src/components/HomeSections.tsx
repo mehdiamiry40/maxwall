@@ -2,7 +2,14 @@ import { guides } from "@/lib/content";
 import Image from "next/image";
 import Link from "next/link";
 import { Arrow, WallIcon, type WallIconName } from "@/components/brand";
-import { container, FaqList, Reveal, section, TextLink } from "@/components/ui";
+import {
+  Button,
+  container,
+  FaqList,
+  Reveal,
+  section,
+  TextLink,
+} from "@/components/ui";
 import { projectTypes } from "@/lib/home";
 import { blurProps, images } from "@/lib/images";
 import { faqs } from "@/lib/site";
@@ -280,6 +287,57 @@ export function AdviceSection() {
             </Link>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function PaintingSection() {
+  const photo = images.services.painting;
+  return (
+    <section
+      id="painting"
+      aria-labelledby="painting-heading"
+      className={`bg-white ${section}`}
+    >
+      <div
+        className={`${container} grid gap-8 md:grid-cols-2 md:items-center md:gap-14`}
+      >
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <Image
+            src={photo.src}
+            {...blurProps(photo)}
+            alt={photo.alt}
+            fill
+            sizes="(min-width:768px)45vw,90vw"
+            className="object-cover"
+          />
+          <span className="absolute bottom-3 right-3 bg-white px-2 py-1 text-xs text-bluestone">
+            Stock photograph
+          </span>
+        </div>
+        <Reveal>
+          <WallIcon name="finish" className="mb-5 h-10 w-10 text-ochre" />
+          <h2 id="painting-heading" className="section-title text-bluestone">
+            <span className="text-ochre">Fresh colour.</span> Inside and out.
+          </h2>
+          <p className="mt-4 text-lg">
+            Interior and exterior wall painting, with proper preparation and a
+            finish chosen for your walls.
+          </p>
+          <p className="mt-3 mb-6 text-base">
+            Book painting on its own or combine it with your render, cladding or
+            renovation work.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button href="/services/painting">
+              Explore painting <Arrow />
+            </Button>
+            <Button href="/contact?service=painting" variant="outline">
+              Get a painting quote
+            </Button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

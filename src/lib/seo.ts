@@ -26,7 +26,7 @@ export function pageMetadata(
           url: `${site.url}/opengraph-image`,
           width: 1200,
           height: 630,
-          alt: "Max Wall — Render and cladding Adelaide",
+          alt: "Max Wall — Rendering, cladding and painting Adelaide",
         },
       ],
     },

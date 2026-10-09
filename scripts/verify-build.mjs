@@ -20,6 +20,7 @@ const routes = [
   "/services/foam-cladding",
   "/services/fibre-cement-cladding",
   "/services/render-repairs",
+  "/services/painting",
 ];
 const titles = new Set();
 for (const route of routes) {

@@ -230,6 +230,41 @@ export const services: Service[] = [
       },
     ],
   },
+  {
+    slug: "painting",
+    title: "Painting",
+    body: "Interior and exterior wall painting, from fresh colours to finishing render and cladding.",
+    intro:
+      "Give your walls a fresh finish, inside and out. We provide interior and exterior wall painting across Adelaide, with careful preparation, a coating suited to the surface and a clear written scope. Painting can be booked on its own or coordinated with your render, cladding or repair work.",
+    includes: [
+      "On-site wall assessment and written quote",
+      "Protection of floors, windows, fixtures and adjoining areas",
+      "Surface cleaning and preparation suited to the existing finish",
+      "Minor filling and compatible primer where needed",
+      "Wall painting in your selected colour and finish",
+      "Final inspection and site clean-up",
+    ],
+    idealFor: [
+      "Interior wall refreshes and colour changes",
+      "Exterior facades and painted walls",
+      "New render and fibre cement cladding",
+      "Finishing renovations and wall repairs",
+    ],
+    faqs: [
+      {
+        q: "Do you paint both interior and exterior walls?",
+        a: "Yes. We paint interior and exterior walls across Adelaide. Tell us which areas you would like included and we will confirm the preparation, finish and scope during the on-site measure.",
+      },
+      {
+        q: "Can painting be combined with rendering or cladding?",
+        a: "Yes. We can coordinate painting with your render, cladding or repair work. The surface must be ready for the selected coating, so we discuss preparation and drying or curing requirements before scheduling the final coats.",
+      },
+      {
+        q: "Can you help me choose a colour and finish?",
+        a: "Yes. We discuss the look you want, the existing wall and how the area is used. Colours can look different in natural and indoor light, so reviewing a sample before the final selection is helpful.",
+      },
+    ],
+  },
 ];
 
 export const serviceBySlug = (slug: string) =>
@@ -334,7 +369,7 @@ export const faqs = [
   },
   {
     q: "Do you do the painting too?",
-    a: "Yes. We can apply a matching membrane or paint finish after rendering so the job is fully complete.",
+    a: "Yes. We provide interior and exterior wall painting, including paint or membrane finishes after rendering and cladding. Painting can be quoted separately or coordinated with your wall work.",
   },
   {
     q: "How long does a typical job take?",

@@ -1,6 +1,6 @@
 # Max Wall — maxwall.com.au
 
-Website for Max Wall Building Solutions Pty Ltd, render and cladding specialists in Adelaide, SA.
+Website for Max Wall Building Solutions Pty Ltd, render, cladding and interior/exterior wall painting services in Adelaide, SA.
 
 Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel.
 

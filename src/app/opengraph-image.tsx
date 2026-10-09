@@ -10,7 +10,7 @@ const photo = await readFile(
 const photoSrc = `data:image/jpeg;base64,${photo}`;
 
 // Preview card shown when the site is shared (Facebook, Messages, WhatsApp, Google)
-export const alt = "Max Wall — Render & Cladding Adelaide";
+export const alt = "Max Wall — Rendering, Cladding & Painting Adelaide";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -55,7 +55,7 @@ export default async function Image() {
                 letterSpacing: -2,
               }}
             >
-              Render &amp; cladding, Adelaide.
+              Render, cladding &amp; painting.
             </div>
             <div
               style={{

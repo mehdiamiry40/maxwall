@@ -31,7 +31,7 @@ export const projects = [
         body: "Tell us about access, gardens, paths and windows that need protection. We discuss scaffolding, working areas and timing before starting so you know what to expect. Preparation and clean-up are part of the job, with a clear scope recorded in your written quote.",
       },
     ],
-    services: ["render-repairs", "acrylic-render", "fibre-cement-cladding"],
+    services: ["render-repairs", "acrylic-render", "painting"],
   },
   {
     slug: "new-builds",

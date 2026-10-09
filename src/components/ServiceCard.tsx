@@ -14,11 +14,13 @@ export function ServiceCard({
 }) {
   const image = images.services[service.slug];
   const icon =
-    service.slug === "render-repairs"
-      ? "repair"
-      : service.slug.includes("cladding")
-        ? "cladding"
-        : "wall";
+    service.slug === "painting"
+      ? "finish"
+      : service.slug === "render-repairs"
+        ? "repair"
+        : service.slug.includes("cladding")
+          ? "cladding"
+          : "wall";
   return (
     <Reveal delay={(index % 3) * 70} className="flex">
       <Link href={`/services/${service.slug}`} className="group block w-full">

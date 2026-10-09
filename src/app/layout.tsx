@@ -17,15 +17,15 @@ const body = Barlow({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Rendering & Wall Cladding Adelaide | Max Wall",
+    default: "Rendering, Cladding & Painting Adelaide | Max Wall",
     template: "%s | Max Wall",
   },
   description:
-    "Cement render, acrylic render, Hebel and cladding across Adelaide. Free fixed-price quotes from Max Wall.",
+    "Render, wall cladding and interior or exterior painting across Adelaide. Free fixed-price quotes from Max Wall.",
   openGraph: {
-    title: "Rendering & Wall Cladding Adelaide | Max Wall",
+    title: "Rendering, Cladding & Painting Adelaide | Max Wall",
     description:
-      "Cement render, acrylic render, Hebel and cladding across Adelaide. Free fixed-price quotes.",
+      "Render, wall cladding and interior or exterior painting across Adelaide. Free fixed-price quotes.",
     url: site.url,
     siteName: site.name,
     locale: "en_AU",

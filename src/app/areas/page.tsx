@@ -11,8 +11,8 @@ import { images } from "@/lib/images";
 import { areas } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Adelaide Render & Cladding Service Areas",
-  "Max Wall provides rendering and wall cladding across Adelaide's northern, western, eastern and southern suburbs and the Hills.",
+  "Adelaide Rendering, Cladding & Painting Areas",
+  "Max Wall provides rendering, cladding and wall painting across Adelaide's northern, western, eastern and southern suburbs and the Hills.",
   "/areas",
 );
 
@@ -23,7 +23,7 @@ export default function AreasPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Areas" }]}
-          title="Rendering and cladding right across Adelaide"
+          title="Render, cladding and painting across Adelaide"
           intro="Based in the north, working from Gawler to Seaford and up into the Hills."
           image={images.skyline}
         />

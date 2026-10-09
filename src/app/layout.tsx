@@ -1,22 +1,20 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { DM_Serif_Display, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// One family throughout: Barlow for text, Barlow Condensed for headings,
-// buttons and the MAX WALL wordmark. Both were drawn for signage, so they
-// read well big and small.
-const body = Barlow({
+// Self-hosted, clear sans-serif type with an editorial serif for hero accents.
+const body = Manrope({
   variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
-const display = Barlow_Condensed({
-  variable: "--font-display",
-  weight: ["500", "600", "700"],
+const display = DM_Serif_Display({
+  variable: "--font-editorial",
+  weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
@@ -41,7 +39,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-AU" className={`${body.variable} ${display.variable} h-full antialiased`}>
+    <html
+      lang="en-AU"
+      className={`${body.variable} ${display.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col font-sans">
         <a
           href="#main"

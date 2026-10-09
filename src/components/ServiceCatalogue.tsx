@@ -29,7 +29,7 @@ export function ServiceCatalogue() {
       <div
         role="group"
         aria-label="Filter services"
-        className="mb-9 flex flex-wrap gap-2"
+        className="mb-8 flex flex-wrap gap-2"
       >
         {categories.map((item) => (
           <button
@@ -38,7 +38,7 @@ export function ServiceCatalogue() {
             aria-pressed={category === item}
             aria-controls="service-results"
             onClick={() => setCategory(item)}
-            className={`min-h-11 rounded-full border px-5 text-xs font-semibold transition-colors sm:text-sm ${category === item ? "border-bluestone bg-bluestone text-white" : "border-line bg-white text-ink-soft hover:border-sky-deep hover:text-sky-ink"}`}
+            className={`min-h-11 rounded-md border px-4 text-xs font-medium transition-colors sm:text-sm ${category === item ? "border-bluestone bg-bluestone text-white" : "border-line bg-white text-ink-soft hover:border-sky-deep hover:text-sky-ink"}`}
           >
             {item}
           </button>

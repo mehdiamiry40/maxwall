@@ -6,7 +6,7 @@ export const projectIdeas = [
     title: "Clean lines. A fresh perspective.",
     label: "Contemporary render",
     body: "A smooth rendered facade brings different wall surfaces together for a crisp, considered finish.",
-    image: images.hero,
+    image: images.services["foam-cladding"],
     href: "/services/acrylic-render",
   },
   {

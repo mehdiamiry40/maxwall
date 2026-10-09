@@ -70,7 +70,7 @@ export default async function Contact(props: PageProps<"/contact">) {
               </p>
             </div>
           </div>
-          <div className="self-start rounded-sm border border-line bg-white p-6 shadow-xl shadow-ink/[0.03] sm:p-10">
+          <div className="self-start rounded-xl border border-line bg-white p-6 shadow-xl shadow-ink/[0.03] sm:p-10">
             <p className="mb-3 text-xs font-semibold tracking-[0.14em] text-sky-ink uppercase">
               Your next step
             </p>

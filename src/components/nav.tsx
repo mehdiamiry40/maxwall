@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Arrow, Logo, MailIcon, PhoneIcon } from "@/components/brand";
+import { Arrow, Logo, PhoneIcon } from "@/components/brand";
 import { nav, phoneHref, services, site } from "@/lib/site";
 
 const isActive = (pathname: string, href: string) =>
@@ -11,11 +11,7 @@ const isActive = (pathname: string, href: string) =>
     ? pathname === "/"
     : pathname === href || pathname.startsWith(`${href}/`);
 
-/**
- * Two-tier header after topcash4cars.com.au: a white bar with the logo, email and a
- * coral call pill, then a navy menu bar that sticks to the top while scrolling.
- * On phones the white bar sticks instead and the menu opens in a dialog.
- */
+/** A compact, sticky header with keyboard-accessible service navigation. */
 export function SiteHeader() {
   const pathname = usePathname();
   const dialog = useRef<HTMLDialogElement>(null);
@@ -47,28 +43,83 @@ export function SiteHeader() {
 
   return (
     <>
-      <div className="sticky top-0 z-40 border-b border-line bg-white text-bluestone lg:static">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-6 sm:px-10 lg:h-24 lg:px-12">
+      <header className="sticky top-0 z-40 border-b border-line/70 bg-render/95 text-bluestone backdrop-blur-xl">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-6 sm:px-10 lg:h-24 lg:px-12">
           <Logo />
-          <a
-            href={`mailto:${site.email}`}
-            className="hidden items-center gap-2 text-sm text-ink-soft transition-colors hover:text-sky-ink md:flex"
+          <nav
+            aria-label="Main navigation"
+            className="hidden h-full items-center gap-5 lg:flex xl:gap-7"
           >
-            <MailIcon className="h-4 w-4 text-sky-deep" />
-            {site.email}
-          </a>
-          <div className="flex items-center gap-2">
+            {nav.map((n) => {
+              const active = isActive(pathname, n.href);
+              const linkClass = `inline-flex min-h-11 items-center gap-1.5 border-b text-[0.8rem] font-semibold transition-colors ${active ? "border-ochre text-bluestone" : "border-transparent text-ink-soft hover:text-bluestone"}`;
+              return (
+                <div
+                  key={n.href}
+                  className="group relative flex h-full items-center"
+                >
+                  <Link
+                    href={n.href}
+                    aria-current={active ? "page" : undefined}
+                    className={linkClass}
+                  >
+                    {n.label}
+                    {n.href === "/services" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-3 w-3"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        aria-hidden="true"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    )}
+                  </Link>
+                  {n.href === "/services" && (
+                    <div className="invisible absolute left-0 top-full z-50 w-[34rem] pt-2 opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                      <div className="grid grid-cols-2 gap-1 rounded-xl border border-line bg-white p-3 text-ink shadow-xl shadow-ink/10">
+                        {services.map((s) => (
+                          <Link
+                            key={s.slug}
+                            href={`/services/${s.slug}`}
+                            className="rounded-lg p-3 transition-colors hover:bg-sandstone"
+                          >
+                            <span className="block text-sm font-semibold">
+                              {s.title}
+                            </span>
+                            <span className="mt-1 block text-xs leading-relaxed text-ink-soft">
+                              {s.body}
+                            </span>
+                          </Link>
+                        ))}
+                        <Link
+                          href="/services"
+                          className="col-span-2 mt-1 flex items-center justify-between rounded-lg bg-sandstone px-3 py-3 text-xs font-semibold"
+                        >
+                          Explore all services <Arrow />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+          <div className="flex items-center gap-3">
+            <Link
+              href={pathname === "/" ? "/#quote" : "/contact"}
+              className="hidden min-h-11 items-center gap-3 rounded-md bg-bluestone px-5 text-xs font-semibold text-white transition-colors hover:bg-bluestone-soft sm:inline-flex"
+            >
+              Free quote <Arrow />
+            </Link>
             <a
               href={phoneHref}
               aria-label={`Call ${site.phone}`}
-              className="flex items-center gap-3 rounded-full bg-ochre text-white shadow-md shadow-ochre/30 transition-colors hover:bg-ochre-dark sm:py-1.5 sm:pl-1.5 sm:pr-6"
+              className="grid h-11 w-11 place-items-center rounded-md border border-line sm:hidden"
             >
-              <span className="grid h-11 w-11 place-items-center rounded-full sm:bg-white sm:text-ochre">
-                <PhoneIcon className="h-5 w-5" />
-              </span>
-              <span className="hidden font-display text-2xl font-bold sm:inline">
-                Call {site.phone}
-              </span>
+              <PhoneIcon className="h-5 w-5" />
             </a>
             <button
               type="button"
@@ -78,73 +129,20 @@ export function SiteHeader() {
               aria-label="Open menu"
               className="grid h-11 w-11 place-items-center lg:hidden"
             >
-              <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                aria-hidden="true"
+              >
                 <path d="M3 7h18M3 12h18M3 17h18" />
               </svg>
             </button>
           </div>
         </div>
-      </div>
-
-      <nav
-        aria-label="Main navigation"
-        className="sticky top-0 z-40 hidden bg-bluestone text-white shadow-sm lg:block"
-      >
-        <div className="mx-auto flex max-w-7xl items-stretch justify-between px-6 sm:px-10 lg:px-12">
-          <div className="flex items-stretch">
-            {[{ label: "Home", href: "/" }, ...nav].map((n) => {
-              const active = isActive(pathname, n.href);
-              const linkClass = `flex h-12 items-center gap-1.5 px-4 font-display text-[0.95rem] tracking-wide uppercase transition-colors ${
-                active ? "bg-ochre text-white" : "hover:bg-white/10"
-              }`;
-              if (n.href !== "/services") {
-                return (
-                  <Link key={n.href} href={n.href} aria-current={active ? "page" : undefined} className={linkClass}>
-                    {n.label}
-                  </Link>
-                );
-              }
-              // Services opens a panel listing every service on hover or keyboard focus
-              return (
-                <div key={n.href} className="group relative flex">
-                  <Link href={n.href} aria-current={active ? "page" : undefined} className={linkClass}>
-                    {n.label}
-                    <svg viewBox="0 0 24 24" className="h-3 w-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
-                  </Link>
-                  <div className="invisible absolute left-0 top-full z-50 w-[34rem] opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                    <div className="grid grid-cols-2 gap-1 border-t-4 border-ochre bg-white p-3 text-ink shadow-xl shadow-ink/15">
-                      {services.map((s) => (
-                        <Link
-                          key={s.slug}
-                          href={`/services/${s.slug}`}
-                          className="p-3 transition-colors hover:bg-sky-soft"
-                        >
-                          <span className="block text-sm font-semibold text-bluestone">{s.title}</span>
-                          <span className="mt-1 block text-xs leading-relaxed font-normal text-ink-soft">{s.body}</span>
-                        </Link>
-                      ))}
-                      <Link
-                        href="/services"
-                        className="col-span-2 mt-1 flex items-center justify-between bg-bluestone px-3 py-3 text-xs font-semibold text-white hover:bg-bluestone-soft"
-                      >
-                        Explore all services <Arrow />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <Link
-            href="/contact"
-            className="my-2 flex items-center gap-3 border border-white/60 px-4 font-display text-[0.95rem] tracking-wide uppercase transition-colors hover:bg-white hover:text-bluestone"
-          >
-            Free quote <Arrow />
-          </Link>
-        </div>
-      </nav>
+      </header>
 
       <dialog
         ref={dialog}
@@ -186,7 +184,7 @@ export function SiteHeader() {
                   href={n.href}
                   onClick={closeMenu}
                   aria-current={isActive(pathname, n.href) ? "page" : undefined}
-                  className={`flex min-h-14 items-center justify-between py-4 font-display text-xl tracking-wide uppercase ${isActive(pathname, n.href) ? "text-ochre-dark" : "text-bluestone"}`}
+                  className={`flex min-h-14 items-center justify-between py-4 text-lg font-medium ${isActive(pathname, n.href) ? "text-ochre-dark" : "text-bluestone"}`}
                 >
                   {n.label}
                   <Arrow className="h-5 w-5 text-sky-deep" />
@@ -212,13 +210,13 @@ export function SiteHeader() {
           <Link
             href="/contact"
             onClick={closeMenu}
-            className="mt-6 flex min-h-13 items-center justify-between rounded-full bg-bluestone px-6 font-display text-lg tracking-wide text-white uppercase"
+            className="mt-6 flex min-h-13 items-center justify-between rounded-md bg-bluestone px-6 text-sm font-semibold text-white"
           >
             Get a free quote <Arrow />
           </Link>
           <a
             href={phoneHref}
-            className="mt-3 flex min-h-13 items-center justify-center gap-3 rounded-full bg-ochre font-display text-lg tracking-wide text-white uppercase"
+            className="mt-3 flex min-h-13 items-center justify-center gap-3 rounded-md bg-ochre text-sm font-semibold text-white"
           >
             <PhoneIcon />
             {site.phone}
@@ -236,14 +234,14 @@ export function MobileActionBar() {
     <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-3 border-t border-line bg-render/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur md:hidden">
       <a
         href={phoneHref}
-        className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-ochre font-display text-lg tracking-wide text-white uppercase"
+        className="flex min-h-12 items-center justify-center gap-2 rounded-md bg-ochre text-sm font-semibold text-white"
       >
         <PhoneIcon />
         Call now
       </a>
       <Link
-        href="/contact"
-        className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-bluestone font-display text-lg tracking-wide text-white uppercase"
+        href={pathname === "/" ? "/#quote" : "/contact"}
+        className="flex min-h-12 items-center justify-center gap-2 rounded-md bg-bluestone text-sm font-semibold text-white"
       >
         Free quote <Arrow />
       </Link>

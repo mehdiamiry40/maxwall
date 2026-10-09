@@ -17,12 +17,13 @@ export const section = "py-16 sm:py-20 lg:py-24";
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-ochre text-white shadow-md shadow-ochre/25 hover:-translate-y-0.5 hover:bg-ochre-dark hover:shadow-lg",
-  dark: "bg-bluestone text-white hover:-translate-y-0.5 hover:bg-bluestone-soft hover:shadow-lg",
+  primary: "bg-ochre text-white hover:bg-ochre-dark",
+  dark: "bg-bluestone text-white hover:bg-bluestone-soft",
   light: "bg-white text-bluestone hover:bg-sandstone",
-  outline: "border-2 border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
+  outline:
+    "border border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
   "outline-light":
-    "border-2 border-white text-white hover:bg-white hover:text-bluestone",
+    "border border-white/40 text-white hover:bg-white hover:text-bluestone",
 };
 
 export function Button({
@@ -36,7 +37,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3 px-7 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-md px-6 py-3 text-sm font-semibold transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -87,7 +88,7 @@ export function Eyebrow({
 }) {
   return (
     <p
-      className={`text-xs font-bold tracking-[0.2em] uppercase ${light ? "text-sky" : "text-sky-ink"}`}
+      className={`text-[0.65rem] font-semibold tracking-[0.18em] uppercase ${light ? "text-sky" : "text-sky-ink"}`}
     >
       {children}
     </p>
@@ -110,7 +111,9 @@ export function SectionHead({
     <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-10 lg:mb-12">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>{title}</h2>
+        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>
+          {title}
+        </h2>
         {intro && (
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">{intro}</p>
         )}
@@ -148,27 +151,28 @@ export function Header() {
   );
 }
 
-/** Sky-blue backdrop with the photo blended in on the right (home and inner-page heroes). */
+/** Natural photography with a navy overlay that keeps inner-page headings readable. */
 export function SkyBackdrop({ image }: { image: Photo }) {
   return (
     <>
-      <div className="absolute inset-0 -z-30 bg-[linear-gradient(90deg,#185aa5_0%,var(--sky-deep)_45%,#2f86d9_100%)]" />
-      <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent_15%,black_70%)] md:w-3/4">
+      <div className="absolute inset-0 -z-20 bg-bluestone">
         <Image
           src={image.src}
           {...blurProps(image)}
           alt=""
           fill
-          priority
-          sizes="75vw"
-          className="object-cover opacity-60 mix-blend-multiply grayscale"
+          loading="eager"
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center opacity-45"
         />
       </div>
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-bluestone via-bluestone/80 to-bluestone/30" />
     </>
   );
 }
 
-/** Sky-blue header used at the top of inner pages, with breadcrumbs in a navy band. */
+/** Quiet photo hero and breadcrumbs shared across inner pages. */
 export function PageHero({
   crumb,
   title,
@@ -187,26 +191,35 @@ export function PageHero({
       <section className="relative isolate overflow-hidden py-16 text-white sm:py-20">
         <SkyBackdrop image={image} />
         <div className={container}>
-          <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] drop-shadow-sm sm:text-6xl">
+          <h1 className="max-w-3xl font-display text-4xl font-medium leading-[1.1] sm:text-5xl">
             {title}
           </h1>
           {intro && (
-            <p className="mt-5 max-w-xl text-[1.2rem] font-bold leading-snug drop-shadow-sm">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
               {intro}
             </p>
           )}
-          {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
+          {children && (
+            <div className="mt-8 flex flex-wrap gap-3">{children}</div>
+          )}
         </div>
       </section>
       {crumb && (
-        <nav aria-label="Breadcrumb" className="bg-bluestone text-sm text-white/80">
-          <div className={`${container} flex flex-wrap items-center gap-2 py-3`}>
+        <nav
+          aria-label="Breadcrumb"
+          className="bg-bluestone text-sm text-white/80"
+        >
+          <div
+            className={`${container} flex flex-wrap items-center gap-2 py-3`}
+          >
             <Link href="/" className="hover:text-white">
               Home
             </Link>
             {crumb.map((c) => (
               <span key={c.label} className="flex items-center gap-2">
-                <span aria-hidden="true" className="text-sky">›</span>
+                <span aria-hidden="true" className="text-sky">
+                  ›
+                </span>
                 {c.href ? (
                   <Link href={c.href} className="hover:text-white">
                     {c.label}
@@ -298,12 +311,12 @@ export function CtaSection({
   body?: string;
 }) {
   return (
-    <section className="border-t-4 border-ochre bg-bluestone text-white">
+    <section className="border-t border-white/10 bg-bluestone text-white">
       <Reveal
         className={`${container} grid gap-6 py-14 sm:gap-8 sm:py-16 lg:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}
       >
         <div>
-          <h2 className="font-display text-3xl font-bold leading-tight sm:text-[2.6rem]">
+          <h2 className="font-display text-3xl font-medium leading-tight sm:text-[2.6rem]">
             {title}
           </h2>
           <p className="mt-3 max-w-lg text-lg leading-relaxed text-white/80">

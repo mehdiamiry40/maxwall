@@ -5,8 +5,7 @@ export const site = {
   legalName: "Max Wall Building Solutions Pty Ltd",
   abn: "89 657 571 590",
   url: "https://maxwall.com.au",
-  // TODO: replace with the real business phone number
-  phone: "0400 000 000",
+  phone: "0401 300 331",
   email: "info@maxwall.com.au",
   city: "Adelaide",
   region: "South Australia",

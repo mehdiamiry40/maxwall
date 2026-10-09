@@ -13,8 +13,8 @@ import { FinishGuide } from "@/components/FinishGuide";
 import { images } from "@/lib/images";
 
 export const metadata = pageMetadata(
-  "Render & Wall Cladding Services Adelaide",
-  "Explore Max Wall's cement render, acrylic render, Hebel, foam cladding, fibre cement and repair services across Adelaide.",
+  "Rendering, Cladding & Painting Services Adelaide",
+  "Explore Max Wall's cement render, acrylic render, Hebel, foam cladding, fibre cement, repair and painting services across Adelaide.",
   "/services",
 );
 
@@ -25,7 +25,7 @@ export default function ServicesPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Services" }]}
-          title="Render, cladding and everything in between"
+          title="Render, cladding and painting"
           intro="New builds, extensions or a tired facade. If it's a wall, we can finish it."
           image={images.servicesBanner}
         />

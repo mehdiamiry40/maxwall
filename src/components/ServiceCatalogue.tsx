@@ -9,6 +9,7 @@ const categories = [
   "Rendering",
   "Cladding",
   "Repairs",
+  "Painting",
 ] as const;
 type Category = (typeof categories)[number];
 
@@ -19,7 +20,11 @@ export function ServiceCatalogue() {
       return (
         service.slug === "cement-render" || service.slug === "acrylic-render"
       );
-    if (category === "Cladding") return !service.slug.includes("render");
+    if (category === "Cladding")
+      return (
+        service.slug.includes("cladding") || service.slug === "hebel-aac-panels"
+      );
+    if (category === "Painting") return service.slug === "painting";
     if (category === "Repairs") return service.slug === "render-repairs";
     return true;
   });

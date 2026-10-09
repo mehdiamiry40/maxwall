@@ -19,6 +19,7 @@ import {
   ProjectTypesSection,
   FinishSelectionSection,
   AdviceSection,
+  PaintingSection,
 } from "@/components/HomeSections";
 import { QuoteForm } from "@/components/QuoteForm";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -27,14 +28,14 @@ import { projectIdeas } from "@/lib/home";
 import { areas, phoneHref, services, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Rendering & Wall Cladding Adelaide",
-  "Render, Hebel and wall cladding for Adelaide homes, renovations and new builds. Free on-site measures and fixed written quotes from Max Wall.",
+  "Rendering, Cladding & Painting Adelaide",
+  "Render, cladding and interior or exterior painting for Adelaide homes, renovations and new builds. Free on-site measures and fixed written quotes from Max Wall.",
   "/",
 );
 
 const hero = images.homeHero;
 const promises = [
-  { icon: "wall" as const, title: "Render & cladding" },
+  { icon: "wall" as const, title: "Render, clad & paint" },
   { icon: "quote" as const, title: "Fixed written quotes" },
   { icon: "location" as const, title: "Adelaide & the Hills" },
 ];
@@ -59,7 +60,12 @@ export default function Home() {
             sizes="100vw"
             className="object-cover object-[50%_25%]"
           />
-          <a href={hero.source} className="absolute bottom-3 right-4 bg-white px-2 py-1 text-xs text-bluestone underline underline-offset-2" rel="noopener noreferrer" target="_blank">
+          <a
+            href={hero.source}
+            className="absolute bottom-3 right-4 bg-white px-2 py-1 text-xs text-bluestone underline underline-offset-2"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             Stock photo · {hero.credit}
           </a>
         </div>
@@ -67,7 +73,7 @@ export default function Home() {
           <div className={`${container} py-10 sm:py-12`}>
             <h1>
               <span className="mb-3 block text-base font-semibold">
-                Rendering &amp; wall cladding in Adelaide
+                Render, cladding &amp; painting in Adelaide
               </span>
               <span className="hero-title block">
                 <span className="text-ochre">Great walls.</span> Better homes.
@@ -106,16 +112,19 @@ export default function Home() {
               action={{ href: "/services", label: "Explore all services" }}
             />
             <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service, index) => (
-                <ServiceCard
-                  key={service.slug}
-                  service={service}
-                  index={index}
-                />
-              ))}
+              {services
+                .filter((service) => service.slug !== "painting")
+                .map((service, index) => (
+                  <ServiceCard
+                    key={service.slug}
+                    service={service}
+                    index={index}
+                  />
+                ))}
             </div>
           </div>
         </section>
+        <PaintingSection />
         <FinishSelectionSection />
         <ProjectTypesSection />
         <section id="inspiration" className={`bg-white ${section}`}>

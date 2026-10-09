@@ -11,8 +11,8 @@ import { images } from "@/lib/images";
 import { faqs, services } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Rendering & Cladding FAQs Adelaide",
-  "Answers to questions about render and cladding costs, finishes, preparation, timing and quotes from Max Wall in Adelaide.",
+  "Rendering, Cladding & Painting FAQs Adelaide",
+  "Answers to questions about render, cladding and painting costs, finishes, preparation, timing and quotes from Max Wall in Adelaide.",
   "/faq",
 );
 

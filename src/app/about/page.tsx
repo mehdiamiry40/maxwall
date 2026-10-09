@@ -13,8 +13,8 @@ import { images } from "@/lib/images";
 import { pillars, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Adelaide Render & Cladding Specialists",
-  "Meet Max Wall Building Solutions, an Adelaide team providing render, Hebel and cladding with careful preparation and fixed written quotes.",
+  "Adelaide Rendering, Cladding & Painting",
+  "Meet Max Wall Building Solutions, an Adelaide team providing render, cladding and interior/exterior painting with careful preparation and fixed written quotes.",
   "/about",
 );
 
@@ -60,14 +60,14 @@ export default function AboutPage() {
         <PageHero
           crumb={[{ label: "About" }]}
           title="Local tradespeople who care how your walls turn out"
-          intro={`${site.legalName} renders and clads homes right across Adelaide.`}
+          intro={`${site.legalName} renders, clads and paints homes right across Adelaide.`}
           image={images.about}
         />
 
         <SplitSection image={images.services["hebel-aac-panels"]} side="right">
           <Eyebrow>Our story</Eyebrow>
           <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem] text-bluestone">
-            Rendering and cladding done properly
+            Render, cladding and painting done properly
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">
             <p>

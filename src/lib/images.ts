@@ -4,7 +4,13 @@
 
 import { blurs } from "@/lib/blurs";
 
-export type Photo = { src: string; alt: string; credit: string; source?: string; location?: string };
+export type Photo = {
+  src: string;
+  alt: string;
+  credit: string;
+  source?: string;
+  location?: string;
+};
 
 /** next/image props that show a tiny blurred preview while the photo loads (if we have one). */
 export function blurProps(photo: Photo) {
@@ -21,14 +27,16 @@ export const images = {
     src: unsplash("photo-1756541790216-2b23c9113e43-hero"),
     alt: "Modern Australian townhouse facades with white render, grey panels and timber balconies",
     credit: "Troy Mortier",
-    source: "https://unsplash.com/photos/modern-townhouses-with-geometric-designs-on-a-street-44FRvkxNwcY",
+    source:
+      "https://unsplash.com/photos/modern-townhouses-with-geometric-designs-on-a-street-44FRvkxNwcY",
     location: "Clyde North VIC, Australia",
   },
   hero: {
     src: unsplash("photo-1776685107181-c6caafb712bc"),
     alt: "Modern homes with render, cladding and brick facades in Clyde North, Victoria",
     credit: "Troy Mortier",
-    source: "https://unsplash.com/photos/modern-houses-with-grey-roofs-and-brick-accents-pxSADPEJEaI",
+    source:
+      "https://unsplash.com/photos/modern-houses-with-grey-roofs-and-brick-accents-pxSADPEJEaI",
     location: "Clyde North VIC, Australia",
   },
   about: {
@@ -65,10 +73,18 @@ export const images = {
     src: unsplash("photo-1750500376369-442d5d557b93"),
     alt: "Homes under construction with timber frames and scaffolding in Clyde North, Victoria",
     credit: "Troy Mortier",
-    source: "https://unsplash.com/photos/houses-are-under-construction-framing-is-visible-sHQPqnUygmE",
+    source:
+      "https://unsplash.com/photos/houses-are-under-construction-framing-is-visible-sHQPqnUygmE",
     location: "Clyde North VIC, Australia",
   },
   services: {
+    painting: {
+      src: unsplash("photo-1562259949-e8e7689d7828"),
+      alt: "Stock photograph of a paint roller applying blue paint to a white wall",
+      credit: "Theme Photos",
+      source:
+        "https://unsplash.com/photos/paint-roller-applying-blue-paint-Cl-OpYWFFm0",
+    },
     "cement-render": {
       src: unsplash("photo-1633519659201-8b8510d54afa"),
       alt: "White rendered gable wall against a blue sky",

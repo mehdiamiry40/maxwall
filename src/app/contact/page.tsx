@@ -11,8 +11,8 @@ import {
 import { phoneHref, serviceBySlug, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Free Render & Cladding Quote Adelaide",
-  "Request a free on-site measure and fixed written render or cladding quote in Adelaide. Call Max Wall on 0401 300 331.",
+  "Free Render, Cladding & Painting Quote Adelaide",
+  "Request a free on-site measure and fixed written render, cladding or painting quote in Adelaide. Call Max Wall on 0401 300 331.",
   "/contact",
 );
 

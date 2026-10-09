@@ -12,6 +12,11 @@ import {
   SectionHead,
 } from "@/components/ui";
 import { WallIcon } from "@/components/brand";
+import {
+  CraftsmanshipSection,
+  HomeFaqSection,
+  ProjectTypesSection,
+} from "@/components/HomeSections";
 import { QuoteForm } from "@/components/QuoteForm";
 import { ServiceCard } from "@/components/ServiceCard";
 import { blurProps, images } from "@/lib/images";
@@ -118,6 +123,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <ProjectTypesSection />
         <section id="inspiration" className={`bg-white ${section}`}>
           <div className={container}>
             <SectionHead
@@ -151,6 +157,7 @@ export default function Home() {
             </p>
           </div>
         </section>
+        <CraftsmanshipSection />
         <section className="bg-bluestone text-white">
           <div
             className={`${container} grid gap-8 py-10 sm:grid-cols-3 sm:py-12`}
@@ -189,6 +196,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <HomeFaqSection />
         <section className="bg-white">
           <div
             className={`${container} flex flex-wrap items-center justify-between gap-5 pb-12`}

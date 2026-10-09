@@ -17,7 +17,7 @@ export function ServiceCard({
     <Reveal delay={(index % 3) * 70} className="flex">
       <Link
         href={`/services/${service.slug}`}
-        className="group flex w-full flex-col overflow-hidden rounded-xl border border-line/70 bg-white transition duration-300 hover:border-sky-deep/40 hover:shadow-lg hover:shadow-bluestone/5"
+        className="group flex w-full flex-col overflow-hidden rounded-sm border border-line bg-white transition duration-300 hover:-translate-y-1 shadow-sm shadow-bluestone/5 hover:border-sky/60 hover:shadow-xl hover:shadow-bluestone/10"
       >
         {img && (
           <div className="relative aspect-[16/10] overflow-hidden bg-sandstone">
@@ -32,16 +32,16 @@ export function ServiceCard({
           </div>
         )}
         <div className="relative flex flex-1 flex-col p-6">
-          <h3 className="flex items-center justify-between gap-4 text-lg font-semibold text-bluestone transition-colors group-hover:text-sky-ink">
+          <h3 className="flex items-center justify-between gap-4 text-xl font-bold text-bluestone transition-colors group-hover:text-sky-ink">
             {service.title}
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line transition-colors group-hover:border-bluestone group-hover:bg-bluestone group-hover:text-white">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line transition-colors group-hover:border-ochre group-hover:bg-ochre group-hover:text-white">
               <Arrow className="h-4 w-4" />
             </span>
           </h3>
           <p className="mt-2 text-[0.9rem] leading-relaxed text-ink-soft">
             {service.body}
           </p>
-          <span className="absolute inset-x-0 -bottom-px h-0.5 origin-left scale-x-0 bg-ochre transition-transform duration-300 group-hover:scale-x-100" />
+          <span className="absolute inset-x-0 -bottom-px h-0.5 origin-left scale-x-0 bg-sky-deep transition-transform duration-300 group-hover:scale-x-100" />
         </div>
       </Link>
     </Reveal>

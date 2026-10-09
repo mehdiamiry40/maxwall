@@ -14,8 +14,6 @@ The homepage and services page share a filterable service catalogue and a finish
 The mobile navigation uses a native modal dialog for keyboard focus management and Escape dismissal.
 Inspiration photographs are labelled as examples, rather than presented as completed Max Wall jobs.
 
-The visual system uses warm off-white, navy and terracotta, with Manrope type and a DM Serif Display hero accent. Shared colour and spacing tokens live in `src/app/globals.css` and `src/components/ui.tsx`. Homepage quote buttons jump to the labelled form at `#quote`.
-
 ## Quote form email
 
 Quote requests are emailed via [Resend](https://resend.com), connected through the Vercel Marketplace

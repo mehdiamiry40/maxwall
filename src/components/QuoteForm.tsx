@@ -8,8 +8,8 @@ import { services } from "@/lib/site";
 const initialState: QuoteState = { ok: false, message: "" };
 
 /**
- * Quote request form. `compact` is the short version in the home quote section:
- * the optional wall-area field is dropped. Labels stay visible for clarity.
+ * Quote request form. `compact` is the short version in the home hero card:
+ * labels become placeholders and the optional wall-area field is dropped.
  */
 export function QuoteForm({
   defaultService = "",
@@ -23,20 +23,16 @@ export function QuoteForm({
     initialState,
   );
 
-  const input = `mt-2 w-full rounded-md border border-line text-base transition placeholder:text-ink-soft focus:border-sky-deep focus:bg-white focus:ring-2 focus:ring-sky/25 ${
-    compact ? "min-h-11 bg-white px-3 py-2.5" : "min-h-12 bg-render px-4 py-3"
+  const input = `w-full border border-line text-base transition placeholder:text-ink-soft/70 focus:border-sky focus:bg-white focus:ring-2 focus:ring-sky/25 ${
+    compact ? "min-h-11 bg-white px-3 py-2.5" : "mt-2 min-h-12 bg-render px-4 py-3"
   }`;
-  const label = "block text-xs font-semibold text-bluestone";
-  const optional = (
-    <span className="font-normal text-ink-soft">(optional)</span>
-  );
+  const label = compact ? "sr-only" : "block text-sm font-semibold text-bluestone";
+  const optional = <span className="font-normal text-ink-soft">(optional)</span>;
 
   if (state.ok) {
     return (
       <div className="py-10 text-center" role="status">
-        <p className="font-display text-3xl font-bold text-bluestone">
-          Thanks, we&apos;ve got it.
-        </p>
+        <p className="font-display text-3xl font-bold text-bluestone">Thanks, we&apos;ve got it.</p>
         <p className="mt-3 text-ink-soft">{state.message}</p>
       </div>
     );
@@ -45,7 +41,7 @@ export function QuoteForm({
   return (
     <form
       action={formAction}
-      className={`grid sm:grid-cols-2 ${compact ? "gap-x-4 gap-y-5" : "gap-x-5 gap-y-5"}`}
+      className={`grid sm:grid-cols-2 ${compact ? "gap-3" : "gap-x-5 gap-y-5"}`}
     >
       <div className={compact ? "" : "sm:col-span-2"}>
         <label htmlFor="service" className={label}>
@@ -76,7 +72,7 @@ export function QuoteForm({
           name="suburb"
           required
           autoComplete="address-level2"
-          placeholder={compact ? "e.g. Glenelg" : "e.g. Mawson Lakes"}
+          placeholder={compact ? "Suburb*" : "e.g. Mawson Lakes"}
           className={input}
         />
       </div>
@@ -86,12 +82,7 @@ export function QuoteForm({
           <label htmlFor="size" className={label}>
             Approx. wall area {optional}
           </label>
-          <input
-            id="size"
-            name="size"
-            placeholder="e.g. 80 m²"
-            className={input}
-          />
+          <input id="size" name="size" placeholder="e.g. 80 m²" className={input} />
         </div>
       )}
 
@@ -104,7 +95,7 @@ export function QuoteForm({
           name="name"
           required
           autoComplete="name"
-          placeholder={compact ? "Your name" : undefined}
+          placeholder={compact ? "Name*" : undefined}
           className={input}
         />
       </div>
@@ -120,7 +111,7 @@ export function QuoteForm({
           required
           autoComplete="tel"
           inputMode="tel"
-          placeholder={compact ? "Your mobile number" : undefined}
+          placeholder={compact ? "Mobile*" : undefined}
           className={input}
         />
       </div>
@@ -134,7 +125,7 @@ export function QuoteForm({
           name="email"
           type="email"
           autoComplete="email"
-          placeholder={compact ? "you@example.com" : undefined}
+          placeholder={compact ? "Email (optional)" : undefined}
           className={input}
         />
       </div>
@@ -167,10 +158,7 @@ export function QuoteForm({
 
       <div className="sm:col-span-2">
         {state.message && (
-          <p
-            className="mb-3 text-sm font-semibold text-ochre-dark"
-            aria-live="polite"
-          >
+          <p className="mb-3 text-sm font-semibold text-ochre-dark" aria-live="polite">
             {state.message}
           </p>
         )}
@@ -178,13 +166,13 @@ export function QuoteForm({
           type="submit"
           disabled={pending}
           aria-busy={pending}
-          className={`min-h-12 w-full rounded-md bg-bluestone px-6 text-sm font-semibold text-white transition-colors hover:bg-bluestone-soft disabled:opacity-60 ${
+          className={`w-full bg-bluestone px-6 font-display text-[1.2rem] font-bold tracking-wide text-white uppercase transition-colors hover:bg-bluestone-soft disabled:opacity-60 ${
             compact ? "py-3" : "py-4"
           }`}
         >
           {pending ? "Sending…" : "Get my free quote"}
         </button>
-        <p className="mt-3 text-center text-xs leading-relaxed text-ink-soft">
+        <p className="mt-3 text-center text-xs text-ink-soft">
           No obligation. We only use your details to quote your job (
           <Link href="/privacy" className="underline">
             privacy policy

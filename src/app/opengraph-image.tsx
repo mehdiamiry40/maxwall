@@ -37,7 +37,7 @@ export default async function Image() {
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div style={{ width: 56, height: 11, background: "#ffffff" }} />
-            <div style={{ width: 40, height: 11, background: "#f26a21" }} />
+            <div style={{ width: 40, height: 11, background: "#c94f0b" }} />
             <div style={{ width: 56, height: 11, background: "#ffffff" }} />
           </div>
           <div style={{ fontSize: 40, letterSpacing: 6 }}>MAX WALL</div>

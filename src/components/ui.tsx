@@ -17,12 +17,13 @@ export const section = "py-16 sm:py-20 lg:py-24";
 type ButtonVariant = "primary" | "dark" | "light" | "outline" | "outline-light";
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  primary: "bg-ochre text-white shadow-md shadow-ochre/25 hover:-translate-y-0.5 hover:bg-ochre-dark hover:shadow-lg",
-  dark: "bg-bluestone text-white hover:-translate-y-0.5 hover:bg-bluestone-soft hover:shadow-lg",
+  primary: "bg-ochre text-white shadow-sm hover:bg-ochre-dark hover:shadow-md",
+  dark: "bg-bluestone text-white hover:bg-bluestone-soft",
   light: "bg-white text-bluestone hover:bg-sandstone",
-  outline: "border-2 border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
+  outline:
+    "border border-bluestone text-bluestone hover:bg-bluestone hover:text-white",
   "outline-light":
-    "border-2 border-white text-white hover:bg-white hover:text-bluestone",
+    "border border-white/60 text-white hover:bg-white hover:text-bluestone",
 };
 
 export function Button({
@@ -36,7 +37,7 @@ export function Button({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const cls = `inline-flex min-h-12 items-center justify-center gap-3 px-7 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
+  const cls = `inline-flex min-h-12 items-center justify-center gap-3 rounded-lg px-6 py-3 font-display text-[1.2rem] font-bold tracking-wide uppercase transition duration-200 ${buttonStyles[variant]} ${className}`;
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>
       {children}
@@ -110,7 +111,9 @@ export function SectionHead({
     <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-10 lg:mb-12">
       <div className="max-w-2xl">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>{title}</h2>
+        <h2 className={`section-title text-bluestone ${eyebrow ? "mt-3" : ""}`}>
+          {title}
+        </h2>
         {intro && (
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">{intro}</p>
         )}
@@ -152,16 +155,17 @@ export function Header() {
 export function SkyBackdrop({ image }: { image: Photo }) {
   return (
     <>
-      <div className="absolute inset-0 -z-30 bg-[linear-gradient(90deg,#185aa5_0%,var(--sky-deep)_45%,#2f86d9_100%)]" />
+      <div className="absolute inset-0 -z-30 bg-[linear-gradient(110deg,#103b6d_0%,#1a61ad_55%,#2d7fca_100%)]" />
       <div className="absolute inset-y-0 right-0 -z-20 w-full [mask-image:linear-gradient(90deg,transparent_15%,black_70%)] md:w-3/4">
         <Image
           src={image.src}
           {...blurProps(image)}
           alt=""
           fill
-          priority
-          sizes="75vw"
-          className="object-cover opacity-60 mix-blend-multiply grayscale"
+          loading="eager"
+          fetchPriority="high"
+          sizes="(min-width: 768px) 75vw, 100vw"
+          className="object-cover opacity-35"
         />
       </div>
     </>
@@ -191,28 +195,39 @@ export function PageHero({
             {title}
           </h1>
           {intro && (
-            <p className="mt-5 max-w-xl text-[1.2rem] font-bold leading-snug drop-shadow-sm">
+            <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-white/90">
               {intro}
             </p>
           )}
-          {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
+          {children && (
+            <div className="mt-8 flex flex-wrap gap-3">{children}</div>
+          )}
         </div>
       </section>
       {crumb && (
-        <nav aria-label="Breadcrumb" className="bg-bluestone text-sm text-white/80">
-          <div className={`${container} flex flex-wrap items-center gap-2 py-3`}>
-            <Link href="/" className="hover:text-white">
+        <nav
+          aria-label="Breadcrumb"
+          className="border-b border-line bg-render text-sm text-ink-soft"
+        >
+          <div
+            className={`${container} flex flex-wrap items-center gap-2 py-3`}
+          >
+            <Link href="/" className="hover:text-sky-ink">
               Home
             </Link>
             {crumb.map((c) => (
               <span key={c.label} className="flex items-center gap-2">
-                <span aria-hidden="true" className="text-sky">›</span>
+                <span aria-hidden="true" className="text-sky">
+                  ›
+                </span>
                 {c.href ? (
-                  <Link href={c.href} className="hover:text-white">
+                  <Link href={c.href} className="hover:text-sky-ink">
                     {c.label}
                   </Link>
                 ) : (
-                  <span className="font-semibold text-white">{c.label}</span>
+                  <span className="font-semibold text-bluestone">
+                    {c.label}
+                  </span>
                 )}
               </span>
             ))}
@@ -270,10 +285,13 @@ export function SplitSection({
 
 export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <div className="divide-y divide-line border-y border-line">
+    <div className="surface-card overflow-hidden divide-y divide-line">
       {items.map((f) => (
-        <details key={f.q} className="group">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-base font-semibold transition-colors hover:text-sky-ink sm:text-lg">
+        <details
+          key={f.q}
+          className="group transition-colors open:bg-sky-soft/70"
+        >
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-5 py-5 text-base font-semibold transition-colors hover:text-sky-ink sm:text-lg">
             {f.q}
             <span
               aria-hidden="true"
@@ -282,7 +300,9 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
               +
             </span>
           </summary>
-          <p className="max-w-2xl pb-6 leading-relaxed text-ink-soft">{f.a}</p>
+          <p className="max-w-2xl px-5 pb-5 leading-relaxed text-ink-soft">
+            {f.a}
+          </p>
         </details>
       ))}
     </div>
@@ -298,7 +318,7 @@ export function CtaSection({
   body?: string;
 }) {
   return (
-    <section className="border-t-4 border-ochre bg-bluestone text-white">
+    <section className="border-t border-white/10 bg-[linear-gradient(110deg,var(--bluestone),#164b77)] text-white">
       <Reveal
         className={`${container} grid gap-6 py-14 sm:gap-8 sm:py-16 lg:py-20 md:grid-cols-[1.4fr_1fr] md:items-center`}
       >
@@ -324,7 +344,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-bluestone pb-24 text-white md:pb-0">
       <div className={`${container} pb-10 pt-16`}>
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Logo />
             <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
@@ -363,7 +383,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/65 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {site.legalName} · ABN {site.abn} ·{" "}
             <Link href="/privacy" className="hover:text-white">

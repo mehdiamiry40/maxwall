@@ -15,7 +15,7 @@ const body = Barlow({
 });
 
 const display = Barlow_Condensed({
-  variable: "--font-display",
+  variable: "--font-heading",
   weight: ["500", "600", "700"],
   subsets: ["latin"],
 });
@@ -41,7 +41,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-AU" className={`${body.variable} ${display.variable} h-full antialiased`}>
+    <html
+      lang="en-AU"
+      className={`${body.variable} ${display.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col font-sans">
         <a
           href="#main"

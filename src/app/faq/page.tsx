@@ -54,14 +54,14 @@ export default function FaqPage() {
           <div className={`${container} grid gap-12 lg:grid-cols-[14rem_1fr]`}>
             <nav
               aria-label="FAQ topics"
-              className="self-start lg:sticky lg:top-36"
+              className="self-start rounded-xl border border-line bg-render p-4 lg:sticky lg:top-24"
             >
-              <ul className="flex flex-wrap gap-2 text-sm lg:block lg:space-y-2 lg:border-l lg:border-line">
+              <ul className="flex flex-wrap gap-2 text-sm lg:block lg:space-y-1">
                 {groups.map((g) => (
                   <li key={g.id}>
                     <a
                       href={`#${g.id}`}
-                      className="flex min-h-11 items-center rounded-sm border border-line px-3 py-2 text-ink-soft hover:border-ochre hover:text-ink lg:-ml-px lg:border-0 lg:border-l-2 lg:border-transparent lg:pl-4"
+                      className="flex min-h-11 items-center rounded-lg border border-line bg-white px-3 py-2 text-ink-soft transition-colors hover:border-sky-deep hover:bg-sky-soft hover:text-sky-ink lg:border-transparent lg:bg-transparent"
                     >
                       {g.title}
                     </a>
@@ -71,7 +71,7 @@ export default function FaqPage() {
             </nav>
             <div className="space-y-16">
               {groups.map((g) => (
-                <div key={g.id} id={g.id}>
+                <div key={g.id} id={g.id} className="scroll-mt-24">
                   <h2 className="mb-4 text-2xl font-bold">{g.title}</h2>
                   <FaqList items={g.items} />
                 </div>

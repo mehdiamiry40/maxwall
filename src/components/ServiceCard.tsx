@@ -17,7 +17,7 @@ export function ServiceCard({
     <Reveal delay={(index % 3) * 70} className="flex">
       <Link
         href={`/services/${service.slug}`}
-        className="group flex w-full flex-col overflow-hidden rounded-sm border border-line bg-white transition duration-300 hover:-translate-y-1 shadow-sm shadow-bluestone/5 hover:border-sky/60 hover:shadow-xl hover:shadow-bluestone/10"
+        className="group flex w-full flex-col overflow-hidden surface-card transition duration-300 hover:-translate-y-0.5 hover:border-sky-deep/40 hover:shadow-lg hover:shadow-bluestone/10"
       >
         {img && (
           <div className="relative aspect-[16/10] overflow-hidden bg-sandstone">
@@ -34,7 +34,7 @@ export function ServiceCard({
         <div className="relative flex flex-1 flex-col p-6">
           <h3 className="flex items-center justify-between gap-4 text-xl font-bold text-bluestone transition-colors group-hover:text-sky-ink">
             {service.title}
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line transition-colors group-hover:border-ochre group-hover:bg-ochre group-hover:text-white">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-line transition-colors group-hover:border-ochre group-hover:bg-ochre group-hover:text-white">
               <Arrow className="h-4 w-4" />
             </span>
           </h3>

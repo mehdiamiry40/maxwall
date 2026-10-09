@@ -32,7 +32,7 @@ export function FinishGuide() {
             <Reveal
               key={option.slug}
               delay={index * 70}
-              className="flex flex-col rounded-sm border border-line bg-white p-6 shadow-sm shadow-bluestone/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-bluestone/10 sm:p-7"
+              className="flex flex-col surface-card p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bluestone/10 sm:p-7"
             >
               <div className="mb-6 flex items-center justify-between">
                 <span className="text-[0.65rem] font-semibold tracking-[0.12em] text-ink-soft uppercase">
@@ -47,7 +47,9 @@ export function FinishGuide() {
                   }}
                 />
               </div>
-              <h3 className="text-xl font-semibold text-bluestone">{option.title}</h3>
+              <h3 className="text-xl font-semibold text-bluestone">
+                {option.title}
+              </h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">
                 {option.description}
               </p>

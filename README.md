@@ -11,6 +11,7 @@ Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel.
 - Photos: `src/lib/images.ts` and `public/images/` (locally hosted, optimised Unsplash images — swap in real job photos when available)
 
 The homepage and services page share a filterable service catalogue and a finish comparison guide.
+Shared cards, buttons, FAQ panels and form fields use consistent rounded surfaces. The hero form starts with essential details and lets visitors expand optional fields; entered details are retained after validation errors.
 The mobile navigation uses a native modal dialog for keyboard focus management and Escape dismissal.
 Inspiration photographs are labelled as examples, rather than presented as completed Max Wall jobs.
 

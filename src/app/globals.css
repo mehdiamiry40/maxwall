@@ -19,10 +19,10 @@
   --sandstone: #eef4fa;
   /* Cool off-white for inputs and subtle surfaces */
   --render: #f4f7fa;
-  /* Orange is reserved for actions: calls, quotes, the current menu item */
-  --ochre: #f26a21;
-  /* Darker orange for small text and hovers (4.7:1 on white) */
-  --ochre-dark: #c44f12;
+  /* Orange actions keep readable white text on every screen. */
+  --ochre: #c94f0b;
+  /* Darker orange for small text and hover states. */
+  --ochre-dark: #a13e08;
   /* Navy-tinted text so type and headings feel like one family */
   --ink: #12283a;
   --ink-soft: #4b5e6e;
@@ -44,8 +44,8 @@
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
   --font-sans: var(--font-body);
-  --font-display: var(--font-display);
-  --font-brand: var(--font-display);
+  --font-display: var(--font-heading);
+  --font-brand: var(--font-heading);
 }
 
 html {
@@ -98,7 +98,7 @@ summary {
 .hero-title,
 .section-title,
 .font-display {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-heading), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.01em;
 }
@@ -179,4 +179,20 @@ summary {
 ::selection {
   background: var(--sky-deep);
   color: #ffffff;
+}
+
+/* Shared surfaces keep every page visually consistent. */
+.surface-card {
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 4px 20px rgb(13 44 69 / 0.035);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }

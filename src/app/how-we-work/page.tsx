@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import {
   Button,
   Check,
@@ -12,12 +12,11 @@ import {
 import { images } from "@/lib/images";
 import { steps } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "How We Work",
-  description:
-    "From first call to final clean-up: how Max Wall quotes, prepares and completes render and cladding jobs across Adelaide.",
-  alternates: { canonical: "/how-we-work" },
-};
+export const metadata = pageMetadata(
+  "Our Rendering & Cladding Process",
+  "See how Max Wall plans, measures, quotes, prepares and finishes Adelaide render and cladding projects.",
+  "/how-we-work",
+);
 
 const promises = [
   "Scope, price and timing in writing before we start",

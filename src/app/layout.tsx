@@ -1,35 +1,29 @@
-import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Barlow } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/site";
+import { StructuredData } from "@/components/StructuredData";
+import { businessSchema, websiteSchema } from "@/lib/seo";
 import "./globals.css";
 
-// One family throughout: Barlow for text, Barlow Condensed for headings,
-// buttons and the MAX WALL wordmark. Both were drawn for signage, so they
-// read well big and small.
+// Barlow is self-hosted for readable type without browser font-provider requests.
 const body = Barlow({
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
-const display = Barlow_Condensed({
-  variable: "--font-heading",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Wall Cladding & Render Adelaide | Max Wall",
+    default: "Rendering & Wall Cladding Adelaide | Max Wall",
     template: "%s | Max Wall",
   },
   description:
     "Cement render, acrylic render, Hebel and cladding across Adelaide. Free fixed-price quotes from Max Wall.",
   openGraph: {
-    title: "Wall Cladding & Render Adelaide | Max Wall",
+    title: "Rendering & Wall Cladding Adelaide | Max Wall",
     description:
       "Cement render, acrylic render, Hebel and cladding across Adelaide. Free fixed-price quotes.",
     url: site.url,
@@ -39,12 +33,15 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#1e25a4",
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en-AU"
-      className={`${body.variable} ${display.variable} h-full antialiased`}
-    >
+    <html lang="en-AU" className={`${body.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         <a
           href="#main"
@@ -56,6 +53,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{`.reveal{opacity:1 !important;animation:none !important}`}</style>
         </noscript>
+        <StructuredData value={businessSchema} />
+        <StructuredData value={websiteSchema} />
         {children}
         <Analytics />
         <SpeedInsights />

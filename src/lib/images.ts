@@ -17,6 +17,11 @@ export function blurProps(photo: Photo) {
 const unsplash = (id: string) => `/images/${id}.webp`;
 
 export const images = {
+  homeHero: {
+    src: "/images/maxwall-hero-home.webp",
+    alt: "Architectural inspiration showing a contemporary Australian home with white rendered walls and vertical feature cladding",
+    credit: "AI-generated architectural inspiration",
+  },
   hero: {
     src: unsplash("photo-1657346088167-b982455bf29a"),
     alt: "Modern two-storey home with white render and grey cladding at dusk",

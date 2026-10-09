@@ -68,8 +68,8 @@ export const projectTypes = [
       "Extensions & additions",
       "Repairs & matching finishes",
     ],
-    href: "/contact",
-    link: "Talk about your home",
+    href: "/projects/renovations",
+    link: "Explore renovations",
   },
   {
     number: "02",
@@ -80,7 +80,7 @@ export const projectTypes = [
       "Hebel & AAC panel installation",
       "Coordinated cladding & render",
     ],
-    href: "/contact?service=hebel-aac-panels",
-    link: "Discuss your next build",
+    href: "/projects/new-builds",
+    link: "Explore new builds",
   },
 ];

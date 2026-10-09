@@ -34,12 +34,22 @@
   --color-line: var(--line);
   --font-sans: var(--font-body);
   --font-display: var(--font-body);
-  --font-brand: var(--font-heading);
+  --font-brand: var(--font-body);
+  --text-xs: 0.875rem;
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.125rem;
+  --text-4xl: 2.625rem;
+  --text-5xl: 3.25rem;
+  --text-6xl: 4rem;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 7rem;
 }
 
 body {
@@ -47,6 +57,7 @@ body {
   color: var(--ink);
   line-height: 1.65;
   font-kerning: normal;
+  font-size: 1.125rem;
 }
 
 h1,
@@ -93,13 +104,13 @@ summary {
 }
 
 .hero-title {
-  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-size: clamp(2.375rem, 5vw, 4rem);
   line-height: 1.2;
   font-weight: 600;
 }
 
 .section-title {
-  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-size: clamp(2rem, 3.3vw, 3rem);
   line-height: 1.2;
   font-weight: 600;
 }
@@ -193,4 +204,23 @@ button,
 details,
 dialog {
   border-radius: 0;
+}
+
+/* Larger text must remain readable without pushing mobile layouts wider. */
+p,
+h1,
+h2,
+h3,
+li,
+a {
+  overflow-wrap: break-word;
+}
+main,
+main section,
+main section > div {
+  min-width: 0;
+}
+.mobile-menu nav {
+  min-height: 0;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
 }

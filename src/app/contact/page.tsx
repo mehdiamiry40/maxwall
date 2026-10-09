@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { QuoteForm } from "@/components/QuoteForm";
 import {
   Check,
@@ -10,12 +10,11 @@ import {
 } from "@/components/ui";
 import { phoneHref, serviceBySlug, site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Get a Free Quote",
-  description:
-    "Request a free, fixed-price render or cladding quote anywhere in Adelaide.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata = pageMetadata(
+  "Free Render & Cladding Quote Adelaide",
+  "Request a free on-site measure and fixed written render or cladding quote in Adelaide. Call Max Wall on 0401 300 331.",
+  "/contact",
+);
 
 const reassurances = [
   "Free on-site measure and quote",

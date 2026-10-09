@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import {
   Button,
   container,
@@ -10,12 +10,11 @@ import {
 import { images } from "@/lib/images";
 import { areas } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Areas We Service in Adelaide",
-  description:
-    "Max Wall provides render and cladding across Adelaide's northern, western, eastern and southern suburbs and the Adelaide Hills.",
-  alternates: { canonical: "/areas" },
-};
+export const metadata = pageMetadata(
+  "Adelaide Render & Cladding Service Areas",
+  "Max Wall provides rendering and wall cladding across Adelaide's northern, western, eastern and southern suburbs and the Hills.",
+  "/areas",
+);
 
 export default function AreasPage() {
   return (

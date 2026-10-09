@@ -102,7 +102,7 @@ export function QuoteForm({
       // React resets the native form after an action, including validation failures.
       // Preserve the controlled fields; successful submissions replace the form.
       onReset={(event) => event.preventDefault()}
-      className={`grid gap-x-4 gap-y-4 ${compact ? "grid-cols-2" : "sm:grid-cols-2"}`}
+      className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2"
     >
       <div>
         <label htmlFor={`${prefix}name`} className={label}>
@@ -169,7 +169,7 @@ export function QuoteForm({
         </div>
       )}
       {compact ? (
-        <details className="group col-span-2 border-y border-line py-3">
+        <details className="group sm:col-span-2 border-y border-line py-3">
           <summary className="flex min-h-8 list-none items-center justify-between gap-3 text-sm font-semibold text-sky-ink">
             Add email or project details{" "}
             <span
@@ -192,7 +192,7 @@ export function QuoteForm({
         aria-hidden="true"
         className="hidden"
       />
-      <div className={compact ? "col-span-2" : "sm:col-span-2"}>
+      <div className="sm:col-span-2">
         {state.message && (
           <p
             className="mb-3  border border-ochre bg-white p-3 text-sm font-semibold text-bluestone"

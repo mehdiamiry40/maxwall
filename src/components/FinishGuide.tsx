@@ -18,14 +18,14 @@ export function FinishGuide() {
           <div>
             <Eyebrow>A little guidance goes a long way</Eyebrow>
             <h2 className="section-title mt-4 text-bluestone">
-              A finish that fits
-              <br className="hidden sm:block" /> your home.
+              The right system
+              <br className="hidden sm:block" /> for your home.
             </h2>
           </div>
           <p className="max-w-lg leading-relaxed text-ink-soft md:justify-self-end">
-            The right choice starts with what&apos;s underneath. Here&apos;s a
-            simple guide to three popular options. We&apos;ll check your walls
-            and help you narrow it down on site.
+            We work with three proven Australian systems. Here&apos;s a simple
+            guide to what each one does. We&apos;ll look at your home and help
+            you choose on site.
           </p>
         </Reveal>
         <div className="grid gap-5 md:grid-cols-3">
@@ -40,7 +40,7 @@ export function FinishGuide() {
                   {option.label}
                 </span>
                 <WallIcon
-                  name={index < 2 ? "wall" : "cladding"}
+                  name={option.icon}
                   className="h-10 w-10 text-ochre"
                 />
               </div>
@@ -64,7 +64,7 @@ export function FinishGuide() {
                 href={`/services/${option.slug}`}
                 className="flex min-h-11 items-center justify-between border-t border-line pt-4 text-sm font-semibold text-sky-ink hover:text-ink"
               >
-                Explore this finish <Arrow />
+                Explore this service <Arrow />
               </Link>
             </Reveal>
           ))}

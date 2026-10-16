@@ -89,7 +89,7 @@ export function QuoteForm({
         <textarea
           {...field("details")}
           rows={compact ? 2 : 3}
-          placeholder="Your walls, preferred finish or timing…"
+          placeholder="What you need, preferred product or finish, timing…"
           className={input}
         />
       </div>
@@ -159,7 +159,7 @@ export function QuoteForm({
       {!compact && (
         <div className="sm:col-span-2">
           <label htmlFor="size" className={label}>
-            Approx. wall area {optional}
+            Approx. area {optional}
           </label>
           <input
             {...field("size")}

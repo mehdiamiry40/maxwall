@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 import {
+  BrandStrip,
   Button,
   container,
   CtaSection,
@@ -13,8 +14,8 @@ import { FinishGuide } from "@/components/FinishGuide";
 import { images } from "@/lib/images";
 
 export const metadata = pageMetadata(
-  "Rendering, Cladding & Painting Services Adelaide",
-  "Explore Max Wall's cement render, acrylic render, Hebel, foam cladding, fibre cement, repair and painting services across Adelaide.",
+  "Cladding, Insulation & Microcement Services Adelaide",
+  "James Hardie cladding, re-cladding, AAC panels, eaves, CSR Bradford insulation, Dulux AcraStone microcement and painting across Adelaide. Free quotes.",
   "/services",
 );
 
@@ -25,21 +26,23 @@ export default function ServicesPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Services" }]}
-          title="Render, cladding and painting"
-          intro="New builds, extensions or a tired facade. If it's a wall, we can finish it."
+          title="Cladding, insulation and microcement services"
+          intro="New builds, re-clads, cold houses or a tired bathroom. One Adelaide team, using proven Australian systems."
           image={images.servicesBanner}
         />
 
         <section id="services" className="py-16 sm:py-20 lg:py-24">
           <div className={container}>
             <SectionHead
-              eyebrow="From preparation to the final coat"
-              title="The right system for every wall."
-              intro="Explore our render, cladding and repair services. Each service includes the details, suitable wall types and answers to common questions."
+              eyebrow="From wall wrap to the final coat"
+              title="The right system for every home."
+              intro="Explore our cladding, insulation and interior finishing services. Each page covers the products, what's included and answers to common questions."
             />
             <ServiceCatalogue />
           </div>
         </section>
+
+        <BrandStrip />
 
         <FinishGuide />
 
@@ -49,12 +52,12 @@ export default function ServicesPage() {
           >
             <div>
               <h2 className="font-display text-2xl font-bold sm:text-3xl text-bluestone">
-                Not sure which finish suits your home?
+                Not sure which system suits your home?
               </h2>
               <p className="mt-3 max-w-xl leading-relaxed text-ink-soft">
-                We&apos;ll look at your walls and the look you&apos;re after,
-                then recommend the right system. Often it&apos;s a mix, like a
-                rendered base with cladding above.
+                We&apos;ll look at your home and the result you&apos;re after,
+                then recommend the right system. Often it&apos;s a mix, like
+                new cladding with wall insulation behind it.
               </p>
             </div>
             <div className="md:justify-self-end">

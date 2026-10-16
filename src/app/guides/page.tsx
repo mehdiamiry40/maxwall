@@ -9,13 +9,12 @@ import {
   PageHero,
   section,
 } from "@/components/ui";
-import { StructuredData } from "@/components/StructuredData";
 import { guides } from "@/lib/content";
 import { blurProps, images } from "@/lib/images";
-import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata(
-  "Render & Cladding Guides Adelaide",
-  "Practical guides from Max Wall to help Adelaide homeowners choose a render finish, plan wall cladding and prepare for a quote.",
+  "Cladding, Insulation & Microcement Guides",
+  "Practical guides for Adelaide homeowners: choosing James Hardie cladding, insulating your home, microcement bathrooms and planning a project.",
   "/guides",
 );
 export default function GuidesPage() {
@@ -23,13 +22,10 @@ export default function GuidesPage() {
     <>
       <Header />
       <main id="main" className="flex-1">
-        <StructuredData
-          value={breadcrumbSchema([{ label: "Guides", href: "/guides" }])}
-        />
         <PageHero
           crumb={[{ label: "Guides" }]}
           title="Good advice. Better walls."
-          intro="Simple guidance for choosing a finish and planning your project."
+          intro="Simple guidance for choosing cladding, insulating your home and planning a renovation."
           image={images.servicesBanner}
         />
         <section className={`bg-white ${section}`}>

@@ -8,11 +8,12 @@ import {
   PageHero,
 } from "@/components/ui";
 import { images } from "@/lib/images";
-import { areas } from "@/lib/site";
+import Link from "next/link";
+import { areas, services } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Adelaide Rendering, Cladding & Painting Areas",
-  "Max Wall provides rendering, cladding and wall painting across Adelaide's northern, western, eastern and southern suburbs and the Hills.",
+  "Service Areas: Cladding & Insulation Across Adelaide",
+  "Max Wall installs James Hardie cladding, Bradford insulation and AcraStone microcement across Adelaide's north, west, east, south and the Adelaide Hills.",
   "/areas",
 );
 
@@ -23,7 +24,7 @@ export default function AreasPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Areas" }]}
-          title="Render, cladding and painting across Adelaide"
+          title="Cladding, insulation and microcement across Adelaide"
           intro="Based in the north, working from Gawler to Seaford and up into the Hills."
           image={images.skyline}
         />
@@ -37,6 +38,10 @@ export default function AreasPage() {
                 className="surface-card scroll-mt-24 p-6 sm:p-8"
               >
                 <h2 className="text-2xl font-bold">{a.name}</h2>
+                <p className="mt-2 text-sm text-ink-soft">
+                  Cladding, insulation, microcement and painting in{" "}
+                  {a.suburbs.slice(0, 3).join(", ")} and nearby suburbs.
+                </p>
                 <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 text-ink-soft">
                   {a.suburbs.map((s) => (
                     <li key={s}>{s}</li>
@@ -44,6 +49,26 @@ export default function AreasPage() {
                 </ul>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="bg-white py-16 sm:py-20">
+          <div className={container}>
+            <h2 className="section-title text-bluestone">
+              Services available in every area
+            </h2>
+            <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                  >
+                    {s.title} in Adelaide
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

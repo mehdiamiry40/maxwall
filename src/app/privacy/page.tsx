@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 
 export const metadata = pageMetadata(
   "Privacy Policy",
-  "How Max Wall handles the personal information you provide when requesting a rendering or cladding quote.",
+  "How Max Wall handles the personal information you provide when requesting a cladding, insulation, microcement or painting quote.",
   "/privacy",
 );
 

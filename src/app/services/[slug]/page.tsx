@@ -1,4 +1,4 @@
-import { pageMetadata, businessId, breadcrumbSchema } from "@/lib/seo";
+import { pageMetadata, businessId } from "@/lib/seo";
 import { StructuredData } from "@/components/StructuredData";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -31,8 +31,8 @@ export async function generateMetadata(
   const service = serviceBySlug(slug);
   if (!service) return {};
   return pageMetadata(
-    `${service.title} Adelaide`,
-    `${service.body} Free fixed-price quotes across Adelaide from Max Wall.`,
+    service.seoTitle,
+    service.metaDescription,
     `/services/${service.slug}`,
   );
 }
@@ -45,31 +45,44 @@ export default async function ServicePage(
   if (!service) notFound();
 
   const photo = images.services[service.slug];
-  const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  // Related services: same category first, then the rest
+  const others = services
+    .filter((s) => s.slug !== service.slug)
+    .sort(
+      (a, b) =>
+        Number(b.category === service.category) -
+        Number(a.category === service.category),
+    )
+    .slice(0, 3);
   const quoteHref = `/contact?service=${service.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
+    serviceType: service.title,
     description: service.intro,
     areaServed: { "@type": "City", name: "Adelaide" },
     url: `${site.url}/services/${service.slug}`,
+    image: `${site.url}${photo.src}`,
     provider: { "@id": businessId },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: service.title,
+      itemListElement: service.products.map((product) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: product.name,
+          description: product.body,
+        },
+      })),
+    },
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <StructuredData
-        value={breadcrumbSchema([
-          { label: "Services", href: "/services" },
-          { label: service.title, href: `/services/${service.slug}` },
-        ])}
-      />
+      <StructuredData value={jsonLd} />
       <Header />
       <main id="main" className="flex-1">
         <PageHero
@@ -126,6 +139,34 @@ export default async function ServicePage(
           </div>
         </section>
 
+        {/* Products */}
+        <section
+          className="border-t border-line bg-white py-16 sm:py-20 lg:py-24"
+        >
+          <div className={container}>
+            <SectionHead
+              eyebrow="Options"
+              title="Products & finishes"
+              intro="We'll recommend the right option for your home during the on-site measure."
+            />
+            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {service.products.map((product) => (
+                <li
+                  key={product.name}
+                  className="border-t-4 border-ochre bg-sandstone p-6"
+                >
+                  <h3 className="text-xl font-semibold text-bluestone">
+                    {product.name}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-ink-soft">
+                    {product.body}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         {/* Process */}
         <SplitSection image={photo}>
           <Eyebrow>How it works</Eyebrow>
@@ -148,7 +189,7 @@ export default async function ServicePage(
             <div>
               <Eyebrow>FAQ</Eyebrow>
               <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] text-bluestone">
-                Common questions
+                {service.title}: common questions
               </h2>
             </div>
             <FaqList items={service.faqs} />

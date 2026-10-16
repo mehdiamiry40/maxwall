@@ -12,14 +12,16 @@ const routes = [
   "/projects/renovations",
   "/projects/new-builds",
   "/guides",
-  "/guides/cement-vs-acrylic-render",
+  "/guides/choosing-james-hardie-cladding",
+  "/guides/insulation-for-adelaide-homes",
+  "/guides/microcement-bathroom-renovation",
   "/guides/planning-your-project",
-  "/services/cement-render",
-  "/services/acrylic-render",
-  "/services/hebel-aac-panels",
-  "/services/foam-cladding",
-  "/services/fibre-cement-cladding",
-  "/services/render-repairs",
+  "/services/james-hardie-cladding",
+  "/services/re-cladding",
+  "/services/aac-panels",
+  "/services/eaves-linings",
+  "/services/insulation",
+  "/services/microcement",
   "/services/painting",
 ];
 const titles = new Set();
@@ -28,7 +30,9 @@ for (const route of routes) {
     `.next/server/app/${route === "/" ? "index" : route.slice(1)}.html`,
     "utf8",
   );
-  const title = html.match(/<title>(.*?)<\/title>/)?.[1];
+  const title = html
+    .match(/<title>(.*?)<\/title>/)?.[1]
+    ?.replace(/&amp;/g, "&");
   assert.ok(
     title && title.includes("Max Wall"),
     `${route}: branded title is missing`,
@@ -57,8 +61,19 @@ for (const route of routes) {
     `${route}: sharing URL must identify this page`,
   );
   assert.ok(
-    html.includes("tel:0401300331"),
+    html.includes("tel:0431278034"),
     `${route}: correct contact link is missing`,
+  );
+  const description = html.match(
+    /<meta[^>]+name="description"[^>]+content="([^"]+)"/,
+  )?.[1];
+  assert.ok(
+    description && description.length >= 70 && description.length <= 170,
+    `${route}: meta description missing or not 70–170 characters (${description?.length})`,
+  );
+  assert.ok(
+    title.length <= 75,
+    `${route}: title is ${title.length} characters, aim for 75 or fewer`,
   );
   const blocks = [
     ...html.matchAll(

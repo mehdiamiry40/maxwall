@@ -42,6 +42,7 @@ export type WallIconName =
   | "quote"
   | "measure"
   | "finish"
+  | "insulation"
   | "location";
 const iconPaths: Record<WallIconName, React.ReactNode> = {
   wall: (
@@ -72,6 +73,12 @@ const iconPaths: Record<WallIconName, React.ReactNode> = {
   finish: (
     <>
       <path d="M4 3h14v7H4zM18 6h3v8H11v7M4 6H2" />
+    </>
+  ),
+  insulation: (
+    <>
+      <path d="M2 11 12 3l10 8M5 9v12h14V9" />
+      <path d="M7 14c1.25-1.5 2.5-1.5 3.75 0s2.5 1.5 3.75 0 1.25-1 1.5-1M7 18c1.25-1.5 2.5-1.5 3.75 0s2.5 1.5 3.75 0 1.25-1 1.5-1" />
     </>
   ),
   location: (

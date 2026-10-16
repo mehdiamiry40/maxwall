@@ -13,13 +13,14 @@ import { images } from "@/lib/images";
 import { steps } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Our Rendering & Cladding Process",
-  "See how Max Wall plans, measures, quotes, prepares and finishes Adelaide render and cladding projects.",
+  "How We Work: Measure, Quote & Install",
+  "How Max Wall measures, quotes and installs cladding, insulation and microcement in Adelaide: fixed written prices, protected homes and clean sites.",
   "/how-we-work",
 );
 
 const promises = [
-  "Scope, price and timing in writing before we start",
+  "Scope, products, price and timing in writing before we start",
+  "Products installed to the manufacturer's published specifications",
   "Windows, paths and gardens covered and protected",
   "Tidy work areas every day and a full clean-up at the end",
   "A final walk-through together before we call it done",
@@ -32,7 +33,7 @@ export default function HowWeWorkPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "How we work" }]}
-          title="Simple from first call to final coat"
+          title="Simple from first call to final finish"
           intro="Three clear steps, a fixed price and no surprises along the way."
           image={images.scaffold}
         >

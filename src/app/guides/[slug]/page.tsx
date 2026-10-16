@@ -13,7 +13,7 @@ import {
 } from "@/components/ui";
 import { StructuredData } from "@/components/StructuredData";
 import { guides } from "@/lib/content";
-import { breadcrumbSchema, businessId, pageMetadata } from "@/lib/seo";
+import { businessId, pageMetadata } from "@/lib/seo";
 import { services, site } from "@/lib/site";
 export function generateStaticParams() {
   return guides.map((guide) => ({ slug: guide.slug }));
@@ -35,12 +35,6 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
     <>
       <Header />
       <main id="main" className="flex-1">
-        <StructuredData
-          value={breadcrumbSchema([
-            { label: "Guides", href: "/guides" },
-            { label: guide.title, href: `/guides/${slug}` },
-          ])}
-        />
         <StructuredData
           value={{
             "@context": "https://schema.org",
@@ -83,7 +77,7 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
                 href="/contact"
                 className="mt-6 inline-flex min-h-11 items-center font-bold underline"
               >
-                Ask about your walls
+                Ask about your project
               </Link>
             </nav>
             <div className="max-w-3xl space-y-10">

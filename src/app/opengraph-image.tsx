@@ -10,7 +10,7 @@ const photo = await readFile(
 const photoSrc = `data:image/jpeg;base64,${photo}`;
 
 // Preview card shown when the site is shared (Facebook, Messages, WhatsApp, Google)
-export const alt = "Max Wall — Rendering, Cladding & Painting Adelaide";
+export const alt = "Max Wall: cladding, insulation and microcement in Adelaide";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -49,13 +49,13 @@ export default async function Image() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div
               style={{
-                fontSize: 72,
+                fontSize: 64,
                 fontWeight: 700,
                 lineHeight: 1.02,
                 letterSpacing: -2,
               }}
             >
-              Render, cladding &amp; painting.
+              Cladding, insulation &amp; microcement.
             </div>
             <div
               style={{
@@ -64,7 +64,7 @@ export default async function Image() {
                 color: "#ffffff",
               }}
             >
-              Free on-site quotes · Fixed written prices
+              Adelaide · Free on-site quotes · Fixed written prices
             </div>
           </div>
           <div style={{ fontSize: 24, color: "#ffffff" }}>maxwall.com.au</div>

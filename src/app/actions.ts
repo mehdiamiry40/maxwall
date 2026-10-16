@@ -75,7 +75,7 @@ export async function requestQuote(
       to: to.split(",").map((s) => s.trim()),
       // Lets you hit "reply" to answer the customer directly
       ...(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) ? { reply_to: lead.email } : {}),
-      subject: `New quote request: ${lead.service || "Render/cladding"} in ${lead.suburb}`,
+      subject: `New quote request: ${lead.service || "General enquiry"} in ${lead.suburb}`,
       text,
     }),
   });

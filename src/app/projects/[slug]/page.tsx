@@ -14,7 +14,7 @@ import {
 } from "@/components/ui";
 import { StructuredData } from "@/components/StructuredData";
 import { projects } from "@/lib/content";
-import { businessId, breadcrumbSchema, pageMetadata } from "@/lib/seo";
+import { businessId, pageMetadata } from "@/lib/seo";
 import { services, site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -26,7 +26,7 @@ export async function generateMetadata(
   const { slug } = await props.params;
   const project = projects.find((item) => item.slug === slug);
   return project
-    ? pageMetadata(project.title, project.description, `/projects/${slug}`)
+    ? pageMetadata(project.seoTitle, project.description, `/projects/${slug}`)
     : {};
 }
 export default async function ProjectPage(
@@ -39,11 +39,6 @@ export default async function ProjectPage(
     <>
       <Header />
       <main id="main" className="flex-1">
-        <StructuredData
-          value={breadcrumbSchema([
-            { label: project.shortTitle, href: `/projects/${slug}` },
-          ])}
-        />
         <StructuredData
           value={{
             "@context": "https://schema.org",
@@ -102,7 +97,7 @@ export default async function ProjectPage(
           </div>
         </section>
         <CtaSection
-          title="Let’s plan your wall finish."
+          title="Let’s plan your project."
           body="A free on-site measure and a clear, fixed written quote."
         />
       </main>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Arrow,
+  BrandStrip,
   Button,
   container,
   Footer,
@@ -28,19 +29,19 @@ import { projectIdeas } from "@/lib/home";
 import { areas, phoneHref, services, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Rendering, Cladding & Painting Adelaide",
-  "Render, cladding and interior or exterior painting for Adelaide homes, renovations and new builds. Free on-site measures and fixed written quotes from Max Wall.",
+  "James Hardie Cladding, Insulation & Microcement Adelaide",
+  "Adelaide installers of James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement. Free on-site measure and fixed written quotes.",
   "/",
 );
 
 const hero = images.homeHero;
 const promises = [
-  { icon: "wall" as const, title: "Render, clad & paint" },
+  { icon: "cladding" as const, title: "Clad, insulate & finish" },
   { icon: "quote" as const, title: "Fixed written quotes" },
   { icon: "location" as const, title: "Adelaide & the Hills" },
 ];
 const process = [
-  { icon: "quote" as const, title: "Tell us about your walls" },
+  { icon: "quote" as const, title: "Tell us about your home" },
   { icon: "measure" as const, title: "Get a fixed quote" },
   { icon: "finish" as const, title: "Enjoy the finish" },
 ];
@@ -73,12 +74,17 @@ export default function Home() {
           <div className={`${container} py-10 sm:py-12`}>
             <h1>
               <span className="mb-3 block text-base font-semibold">
-                Render, cladding &amp; painting in Adelaide
+                Cladding, insulation &amp; microcement in Adelaide
               </span>
               <span className="hero-title block">
                 <span className="text-ochre">Great walls.</span> Better homes.
               </span>
             </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed">
+              James Hardie cladding, CSR Bradford insulation and Dulux AcraStone
+              microcement, installed by one Adelaide team with fixed written
+              quotes.
+            </p>
 
             <ul className="mx-auto mt-8 grid max-w-3xl grid-cols-3 gap-3 sm:gap-6">
               {promises.map((item) => (
@@ -104,6 +110,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <BrandStrip />
         <section id="services" className={`bg-white ${section}`}>
           <div className={container}>
             <SectionHead
@@ -191,7 +198,7 @@ export default function Home() {
             </div>
             <div id="quote" className="scroll-mt-32">
               <h2 className="section-title text-bluestone">
-                <span className="text-ochre">Let’s talk</span> about your walls.
+                <span className="text-ochre">Let’s talk</span> about your home.
               </h2>
               <p className="mb-6 mt-3 text-bluestone">
                 Free measure. Fixed written price. No obligation.

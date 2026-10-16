@@ -1,4 +1,5 @@
-import { pageMetadata } from "@/lib/seo";
+import { faqSchema, pageMetadata } from "@/lib/seo";
+import { StructuredData } from "@/components/StructuredData";
 import {
   container,
   CtaSection,
@@ -11,22 +12,14 @@ import { images } from "@/lib/images";
 import { faqs, services } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Rendering, Cladding & Painting FAQs Adelaide",
-  "Answers to questions about render, cladding and painting costs, finishes, preparation, timing and quotes from Max Wall in Adelaide.",
+  "Cladding, Insulation & Microcement FAQs Adelaide",
+  "Answers about James Hardie cladding, CSR Bradford insulation, Dulux AcraStone microcement and painting: costs, products, timing and quotes in Adelaide.",
   "/faq",
 );
 
 const allFaqs = [...faqs, ...services.flatMap((s) => s.faqs)];
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: allFaqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
+const jsonLd = faqSchema(allFaqs);
 
 const groups = [
   { id: "general", title: "General", items: faqs },
@@ -36,10 +29,7 @@ const groups = [
 export default function FaqPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <StructuredData value={jsonLd} />
       <Header />
       <main id="main" className="flex-1">
         <PageHero
@@ -81,7 +71,7 @@ export default function FaqPage() {
 
         <CtaSection
           title="Still have questions?"
-          body="Call us or send a message. We're happy to talk through your walls, with no obligation."
+          body="Call us or send a message. We're happy to talk through your project, with no obligation."
         />
       </main>
       <Footer />

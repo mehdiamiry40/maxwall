@@ -17,15 +17,34 @@ const body = Barlow({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Rendering, Cladding & Painting Adelaide | Max Wall",
+    default: "James Hardie Cladding, Insulation & Microcement Adelaide | Max Wall",
     template: "%s | Max Wall",
   },
   description:
-    "Render, wall cladding and interior or exterior painting across Adelaide. Free fixed-price quotes from Max Wall.",
+    "Adelaide installers of James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement. Free on-site measure and fixed written quotes.",
+  applicationName: site.name,
+  authors: [{ name: site.legalName, url: site.url }],
+  creator: site.legalName,
+  publisher: site.legalName,
+  formatDetection: { telephone: true, email: true, address: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  other: {
+    "geo.region": "AU-SA",
+    "geo.placename": "Adelaide",
+  },
   openGraph: {
-    title: "Rendering, Cladding & Painting Adelaide | Max Wall",
+    title: "James Hardie Cladding, Insulation & Microcement Adelaide | Max Wall",
     description:
-      "Render, wall cladding and interior or exterior painting across Adelaide. Free fixed-price quotes.",
+      "Adelaide installers of James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement. Free fixed-price quotes.",
     url: site.url,
     siteName: site.name,
     locale: "en_AU",

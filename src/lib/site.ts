@@ -509,6 +509,8 @@ export const steps = [
 export const areas = [
   {
     id: "north",
+    /** URL segment for the region page, /areas/[slug]. */
+    slug: "north",
     name: "Northern suburbs",
     suburbs: [
       "Parafield Gardens",
@@ -524,6 +526,7 @@ export const areas = [
   },
   {
     id: "west",
+    slug: "west",
     name: "Western suburbs",
     suburbs: [
       "Woodville",
@@ -539,6 +542,7 @@ export const areas = [
   },
   {
     id: "east",
+    slug: "east-hills",
     name: "Eastern suburbs & Hills",
     suburbs: [
       "Norwood",
@@ -554,6 +558,7 @@ export const areas = [
   },
   {
     id: "south",
+    slug: "south",
     name: "Southern suburbs",
     suburbs: [
       "Marion",
@@ -568,6 +573,9 @@ export const areas = [
     ],
   },
 ];
+
+export const areaBySlug = (slug: string) =>
+  areas.find((area) => area.slug === slug);
 
 export const faqs = [
   {

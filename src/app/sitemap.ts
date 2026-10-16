@@ -1,4 +1,4 @@
-import { guides, projects } from "@/lib/content";
+import { areaPages, guides, projects } from "@/lib/content";
 import { images } from "@/lib/images";
 import type { MetadataRoute } from "next";
 import { services, site } from "@/lib/site";
@@ -29,6 +29,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.6 },
     { path: "/how-we-work", priority: 0.5 },
     { path: "/areas", priority: 0.7 },
+    ...areaPages.map((a) => ({
+      path: `/areas/${a.slug}`,
+      priority: 0.7,
+      image: a.image.src,
+    })),
     { path: "/faq", priority: 0.6 },
     { path: "/contact", priority: 0.8 },
     { path: "/privacy", priority: 0.2 },

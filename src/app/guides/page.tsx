@@ -14,7 +14,7 @@ import { blurProps, images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata(
   "Cladding, Insulation & Microcement Guides",
-  "Practical guides for Adelaide homeowners: choosing James Hardie cladding, insulating your home, microcement bathrooms and planning a project.",
+  "Practical guides for Adelaide homeowners: choosing James Hardie cladding, what drives cladding costs, insulating your home and microcement bathrooms.",
   "/guides",
 );
 export default function GuidesPage() {
@@ -25,7 +25,7 @@ export default function GuidesPage() {
         <PageHero
           crumb={[{ label: "Guides" }]}
           title="Good advice. Better walls."
-          intro="Simple guidance for choosing cladding, insulating your home and planning a renovation."
+          intro="Simple guidance for choosing cladding, understanding what it costs, insulating your home and planning a renovation."
           image={images.servicesBanner}
         />
         <section className={`bg-white ${section}`}>

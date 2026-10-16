@@ -220,7 +220,7 @@ export default function Home() {
               {areas.map((area) => (
                 <li key={area.id}>
                   <Link
-                    href={`/areas#${area.id}`}
+                    href={`/areas/${area.slug}`}
                     className="inline-flex min-h-11 items-center text-sm font-semibold text-bluestone underline underline-offset-4"
                   >
                     {area.name}

@@ -93,6 +93,10 @@ for (const route of routes) {
     title.length <= 75,
     `${route}: title is ${title.length} characters, aim for 75 or fewer`,
   );
+  assert.ok(
+    html.includes(`${origin}/images/og-card.jpg`),
+    `${route}: share image is missing`,
+  );
   const blocks = [
     ...html.matchAll(
       /<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,

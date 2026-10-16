@@ -7,7 +7,12 @@ const absolute = (path: string) => new URL(path, site.url).href;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const pages: { path: string; priority: number; image?: string }[] = [
+  const pages: {
+    path: string;
+    priority: number;
+    image?: string;
+    updated?: string;
+  }[] = [
     { path: "/", priority: 1, image: images.homeHero.src },
     { path: "/services", priority: 0.9, image: images.servicesBanner.src },
     ...services.map((s) => ({
@@ -25,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       path: `/guides/${g.slug}`,
       priority: 0.6,
       image: g.image.src,
+      updated: g.updated,
     })),
     { path: "/about", priority: 0.6 },
     { path: "/how-we-work", priority: 0.5 },
@@ -38,9 +44,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/contact", priority: 0.8 },
     { path: "/privacy", priority: 0.2 },
   ];
-  return pages.map(({ path, priority, image }) => ({
+  return pages.map(({ path, priority, image, updated }) => ({
     url: absolute(path),
-    lastModified,
+    lastModified: updated ? new Date(updated) : lastModified,
     changeFrequency: "monthly" as const,
     priority,
     ...(image ? { images: [absolute(image)] } : {}),

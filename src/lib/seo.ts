@@ -4,8 +4,9 @@ import { areas, phoneIntl, services, site } from "@/lib/site";
 export const businessId = `${site.url}/#business`;
 export const websiteId = `${site.url}/#website`;
 
+// Pre-rendered share card: a compressed JPEG keeps it under WhatsApp's ~300 KB preview limit
 const ogImage = {
-  url: `${site.url}/opengraph-image`,
+  url: `${site.url}/images/og-card.jpg`,
   width: 1200,
   height: 630,
   alt: "Max Wall: cladding, insulation and microcement in Adelaide",
@@ -52,7 +53,7 @@ export const businessSchema = {
   telephone: phoneIntl,
   email: site.email,
   logo: `${site.url}/icon.svg`,
-  image: `${site.url}/opengraph-image`,
+  image: `${site.url}/images/og-card.jpg`,
   taxID: site.abn,
   currenciesAccepted: "AUD",
   address: {

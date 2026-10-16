@@ -72,6 +72,9 @@ export const projects = [
 export const guides = [
   {
     slug: "choosing-james-hardie-cladding",
+    // ISO dates (YYYY-MM-DD): bump `updated` when the guide changes meaningfully
+    published: "2026-10-17",
+    updated: "2026-10-17",
     title: "Choosing James Hardie cladding for your home",
     seoTitle: "Choosing James Hardie Cladding: Linea vs Axon vs Stria",
     image: images.services["james-hardie-cladding"],
@@ -150,6 +153,8 @@ export const guides = [
   },
   {
     slug: "insulation-for-adelaide-homes",
+    published: "2026-10-17",
+    updated: "2026-10-17",
     title: "Insulating an Adelaide home: where to start",
     seoTitle: "Home Insulation Guide Adelaide: Ceiling, Walls & Floors",
     image: images.services.insulation,
@@ -226,6 +231,8 @@ export const guides = [
   },
   {
     slug: "microcement-bathroom-renovation",
+    published: "2026-10-17",
+    updated: "2026-10-17",
     title: "Microcement bathrooms: renovating over tiles",
     seoTitle: "Microcement Over Tiles: Dulux AcraStone Bathroom Guide",
     image: images.services.microcement,
@@ -309,6 +316,8 @@ export const guides = [
   },
   {
     slug: "planning-your-project",
+    published: "2026-10-10",
+    updated: "2026-10-17",
     title: "Planning your cladding or renovation project",
     seoTitle: "Planning a Cladding or Renovation Project Adelaide",
     image: images.scaffold,

@@ -15,6 +15,13 @@ import { StructuredData } from "@/components/StructuredData";
 import { guides } from "@/lib/content";
 import { businessId, pageMetadata } from "@/lib/seo";
 import { services, site } from "@/lib/site";
+const formatDate = (iso: string) =>
+  new Date(`${iso}T00:00:00`).toLocaleDateString("en-AU", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
 export function generateStaticParams() {
   return guides.map((guide) => ({ slug: guide.slug }));
 }
@@ -43,6 +50,8 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
             description: guide.description,
             image: `${site.url}${guide.image.src}`,
             mainEntityOfPage: `${site.url}/guides/${slug}`,
+            datePublished: guide.published,
+            dateModified: guide.updated,
             inLanguage: "en-AU",
             author: { "@id": businessId },
             publisher: { "@id": businessId },
@@ -81,6 +90,12 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
               </Link>
             </nav>
             <div className="max-w-3xl space-y-10">
+              <p className="text-sm text-ink-soft">
+                By {site.name} · Updated{" "}
+                <time dateTime={guide.updated}>
+                  {formatDate(guide.updated)}
+                </time>
+              </p>
               {guide.sections.map((item, index) => (
                 <section
                   key={item.title}

@@ -17,28 +17,29 @@ import { faqs } from "@/lib/site";
 const audiences = [
   {
     ...projectTypes[0],
-    image: images.services["acrylic-render"],
+    image: images.services["re-cladding"],
     icon: "wall" as const,
-    summary: "Refresh your facade, finish an extension or repair tired walls.",
+    summary:
+      "Re-clad a tired facade, insulate a hot or cold home, or renovate a bathroom.",
   },
   {
     ...projectTypes[1],
     image: images.scaffold,
     icon: "measure" as const,
     summary:
-      "Render, panels and cladding that work with your plans and schedule.",
+      "Wraps, insulation, cladding, AAC and eaves that work with your plans and schedule.",
   },
 ];
 const craftsmanship: { icon: WallIconName; title: string; body: string }[] = [
   {
     icon: "wall",
-    title: "Proper preparation",
-    body: "Sound surfaces before the first coat.",
+    title: "Installed to specification",
+    body: "Every system fitted to the manufacturer's published guide.",
   },
   {
     icon: "finish",
     title: "Care in every detail",
-    body: "Clean lines and a consistent finish.",
+    body: "Straight lines, neat junctions and a consistent finish.",
   },
   {
     icon: "repair",
@@ -134,7 +135,7 @@ export function CraftsmanshipSection() {
             <span className="text-ochre">The difference</span> is in the detail.
           </h2>
           <p className="mt-4 max-w-md text-lg text-bluestone">
-            A local team. Proper prep. Walls finished with care.
+            A local team. Proven products. Homes finished with care.
           </p>
           <ul className="my-7 space-y-6">
             {craftsmanship.map((item) => (
@@ -175,7 +176,7 @@ export function HomeFaqSection() {
             A few helpful answers.
           </h2>
           <p className="mb-5 mt-4 max-w-sm text-bluestone">
-            Choosing a finish or planning the job? Start here.
+            Choosing a product or planning the job? Start here.
           </p>
           <TextLink href="/faq">All your questions answered</TextLink>
         </Reveal>
@@ -188,22 +189,22 @@ export function HomeFaqSection() {
 export function FinishSelectionSection() {
   const choices = [
     {
-      icon: "wall" as const,
-      title: "Render",
-      text: "A unified finish for brick, block and compatible wall systems.",
-      href: "/guides/cement-vs-acrylic-render",
-    },
-    {
       icon: "cladding" as const,
       title: "Cladding",
-      text: "Profiles and panels that bring texture to a facade or extension.",
-      href: "/services/fibre-cement-cladding",
+      text: "Weatherboards, grooved boards and textured panels from James Hardie.",
+      href: "/guides/choosing-james-hardie-cladding",
     },
     {
-      icon: "repair" as const,
-      title: "Repair & refresh",
-      text: "Prepare tired surfaces before giving your walls a fresh look.",
-      href: "/projects/renovations",
+      icon: "insulation" as const,
+      title: "Insulation",
+      text: "Where insulation makes the biggest difference in an Adelaide home.",
+      href: "/guides/insulation-for-adelaide-homes",
+    },
+    {
+      icon: "finish" as const,
+      title: "Microcement",
+      text: "A seamless bathroom, often without removing the old tiles.",
+      href: "/guides/microcement-bathroom-renovation",
     },
   ];
   return (
@@ -217,7 +218,7 @@ export function FinishSelectionSection() {
           id="finish-choice-heading"
           className="section-title mb-8 text-ochre"
         >
-          Find the right finish.
+          Find the right system.
         </h2>
         <div className="grid gap-7 md:grid-cols-3">
           {choices.map((choice) => (
@@ -235,7 +236,7 @@ export function FinishSelectionSection() {
               </h3>
               <p className="mt-3 mb-4 text-base">{choice.text}</p>
               <span className="inline-flex min-h-11 items-center gap-3 font-semibold">
-                Explore the options <Arrow />
+                Read the guide <Arrow />
               </span>
             </Link>
           ))}
@@ -260,7 +261,7 @@ export function AdviceSection() {
           <TextLink href="/guides">All guides</TextLink>
         </div>
         <div className="grid gap-8 md:grid-cols-2">
-          {guides.map((guide) => (
+          {guides.slice(0, 2).map((guide) => (
             <Link
               key={guide.slug}
               href={`/guides/${guide.slug}`}
@@ -319,15 +320,15 @@ export function PaintingSection() {
         <Reveal>
           <WallIcon name="finish" className="mb-5 h-10 w-10 text-ochre" />
           <h2 id="painting-heading" className="section-title text-bluestone">
-            <span className="text-ochre">Fresh colour.</span> Inside and out.
+            <span className="text-ochre">The finishing coat.</span> Inside and out.
           </h2>
           <p className="mt-4 text-lg">
-            Interior and exterior wall painting, with proper preparation and a
-            finish chosen for your walls.
+            New James Hardie cladding arrives pre-primed and ready for paint. We
+            finish it, along with eaves, linings and interior walls.
           </p>
           <p className="mt-3 mb-6 text-base">
-            Book painting on its own or combine it with your render, cladding or
-            renovation work.
+            Book painting on its own or as the final step of your cladding or
+            renovation project.
           </p>
           <div className="flex flex-wrap gap-3">
             <Button href="/services/painting">

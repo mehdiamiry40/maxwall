@@ -11,8 +11,8 @@ import {
 import { phoneHref, serviceBySlug, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Free Render, Cladding & Painting Quote Adelaide",
-  "Request a free on-site measure and fixed written render, cladding or painting quote in Adelaide. Call Max Wall on 0401 300 331.",
+  "Free Cladding, Insulation & Microcement Quote Adelaide",
+  `Request a free on-site measure and fixed written quote for cladding, insulation, microcement or painting in Adelaide. Call Max Wall on ${site.phone}.`,
   "/contact",
 );
 
@@ -37,7 +37,7 @@ export default async function Contact(props: PageProps<"/contact">) {
           <div>
             <Eyebrow>Free quote</Eyebrow>
             <h1 className="font-display mt-3 text-4xl font-bold leading-[1.05] sm:text-5xl text-bluestone">
-              Let&apos;s talk walls
+              Let&apos;s talk about your home
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-ink-soft">
               Tell us a little about the job and we&apos;ll get back to you with
@@ -77,8 +77,8 @@ export default async function Contact(props: PageProps<"/contact">) {
               Tell us about your project
             </h2>
             <p className="mb-8 mt-3 text-sm leading-relaxed text-ink-soft">
-              Just a few details to get started. Don&apos;t know your wall area
-              or which finish to choose? That&apos;s fine — we&apos;ll help you
+              Just a few details to get started. Don&apos;t know the area or
+              which product to choose? That&apos;s fine — we&apos;ll help you
               work it out.
             </p>
             <QuoteForm

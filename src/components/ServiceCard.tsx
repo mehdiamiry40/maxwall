@@ -13,14 +13,6 @@ export function ServiceCard({
   index?: number;
 }) {
   const image = images.services[service.slug];
-  const icon =
-    service.slug === "painting"
-      ? "finish"
-      : service.slug === "render-repairs"
-        ? "repair"
-        : service.slug.includes("cladding")
-          ? "cladding"
-          : "wall";
   return (
     <Reveal delay={(index % 3) * 70} className="flex">
       <Link href={`/services/${service.slug}`} className="group block w-full">
@@ -37,7 +29,7 @@ export function ServiceCard({
           </div>
         )}
         <div className="flex items-center gap-3 border-b-2 border-ochre py-4">
-          <WallIcon name={icon} className="h-7 w-7 text-ochre" />
+          <WallIcon name={service.icon} className="h-7 w-7 text-ochre" />
           <h3 className="flex-1 text-lg font-semibold text-bluestone">
             {service.title}
           </h3>

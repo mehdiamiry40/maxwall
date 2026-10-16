@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 import {
+  BrandStrip,
   container,
   CtaSection,
   Eyebrow,
@@ -13,15 +14,15 @@ import { images } from "@/lib/images";
 import { pillars, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Adelaide Rendering, Cladding & Painting",
-  "Meet Max Wall Building Solutions, an Adelaide team providing render, cladding and interior/exterior painting with careful preparation and fixed written quotes.",
+  "About Our Adelaide Cladding & Insulation Team",
+  "Meet Max Wall Building Solutions, the Adelaide team installing James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement.",
   "/about",
 );
 
 const values = [
   {
     title: "Straight talking",
-    body: "We tell you what your walls need, not what's most expensive. If a patch will do, we'll say so.",
+    body: "We tell you what your home needs, not what's most expensive. If a simpler option will do, we'll say so.",
   },
   {
     title: "Respect for your home",
@@ -29,7 +30,7 @@ const values = [
   },
   {
     title: "Detail in the finish",
-    body: "Straight corners, crisp edges and even texture. The small things are what make a wall look right.",
+    body: "Straight lines, neat trims and flashings, and clearances done right. The small things are what make a job last.",
   },
   {
     title: "Easy to deal with",
@@ -40,15 +41,15 @@ const values = [
 const clients = [
   {
     title: "Homeowners",
-    body: "Facade makeovers, re-renders, extensions and repairs on the family home.",
+    body: "Facade makeovers, insulation upgrades, extensions and microcement bathrooms on the family home.",
   },
   {
     title: "Builders",
-    body: "Reliable render and cladding crews who fit your schedule on new homes and units.",
+    body: "Reliable cladding, AAC and insulation crews who fit your schedule on new homes and units.",
   },
   {
     title: "Investors & strata",
-    body: "Pre-sale refreshes and maintenance that lift value and street appeal.",
+    body: "Pre-sale facade updates, bathroom refreshes and insulation that lift value, comfort and street appeal.",
   },
 ];
 
@@ -60,18 +61,18 @@ export default function AboutPage() {
         <PageHero
           crumb={[{ label: "About" }]}
           title="Local tradespeople who care how your walls turn out"
-          intro={`${site.legalName} renders, clads and paints homes right across Adelaide.`}
+          intro={`${site.legalName} clads, insulates and finishes homes right across Adelaide.`}
           image={images.about}
         />
 
-        <SplitSection image={images.services["hebel-aac-panels"]} side="right">
+        <SplitSection image={images.services.install} side="right">
           <Eyebrow>Our story</Eyebrow>
           <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem] text-bluestone">
-            Render, cladding and painting done properly
+            The whole building envelope, done properly
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">
             <p>
-              Max Wall started with a simple idea: walls finished properly, by
+              Max Wall started with a simple idea: homes finished properly, by
               people who actually pick up the phone.
             </p>
             <p>
@@ -80,9 +81,10 @@ export default function AboutPage() {
               into the Hills.
             </p>
             <p>
-              We handle the whole wall, from Hebel, foam and fibre cement
-              installs through to render, texture and paint, so you&apos;re not
-              juggling trades.
+              We handle the whole wall: wrap and insulation, James Hardie
+              cladding or AAC panels, eaves and linings, and paint. Inside, we
+              transform bathrooms and floors with Dulux AcraStone microcement.
+              One team means you&apos;re not juggling trades.
             </p>
           </div>
         </SplitSection>
@@ -101,6 +103,8 @@ export default function AboutPage() {
             ))}
           </div>
         </section>
+
+        <BrandStrip />
 
         <section className="py-16 sm:py-20 lg:py-24">
           <div className={container}>

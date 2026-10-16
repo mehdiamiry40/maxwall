@@ -2,32 +2,20 @@
 
 import { useState } from "react";
 import { ServiceCard } from "@/components/ServiceCard";
-import { services } from "@/lib/site";
+import { services, type ServiceCategory } from "@/lib/site";
 
 const categories = [
   "All services",
-  "Rendering",
-  "Cladding",
-  "Repairs",
-  "Painting",
+  ...new Set(services.map((service) => service.category)),
 ] as const;
-type Category = (typeof categories)[number];
+type Category = "All services" | ServiceCategory;
 
 export function ServiceCatalogue() {
   const [category, setCategory] = useState<Category>("All services");
-  const visible = services.filter((service) => {
-    if (category === "Rendering")
-      return (
-        service.slug === "cement-render" || service.slug === "acrylic-render"
-      );
-    if (category === "Cladding")
-      return (
-        service.slug.includes("cladding") || service.slug === "hebel-aac-panels"
-      );
-    if (category === "Painting") return service.slug === "painting";
-    if (category === "Repairs") return service.slug === "render-repairs";
-    return true;
-  });
+  const visible =
+    category === "All services"
+      ? services
+      : services.filter((service) => service.category === category);
 
   return (
     <>

@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Arrow, Logo, MailIcon, PhoneIcon } from "@/components/brand";
 import { MobileActionBar, SiteHeader } from "@/components/nav";
 import { Reveal } from "@/components/Reveal";
+import { StructuredData } from "@/components/StructuredData";
 import { blurProps, type Photo } from "@/lib/images";
-import { nav, phoneHref, site } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/seo";
+import { brands, nav, phoneHref, services, site } from "@/lib/site";
 
 export { Arrow, Logo, PhoneIcon, Reveal };
 export { ServiceCard } from "@/components/ServiceCard";
@@ -199,6 +201,7 @@ export function PageHero({
           </div>
         </div>
       </section>
+      {crumb && <StructuredData value={breadcrumbSchema(crumb)} />}
       {crumb && (
         <nav
           aria-label="Breadcrumb"
@@ -304,8 +307,8 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
 
 /** Closing call to action shared by every page. */
 export function CtaSection({
-  title = "Ready for walls you'll love?",
-  body = "We'll come out, measure up and give you a fixed written quote. Free, with no obligation.",
+  title = "Ready for a better home?",
+  body = "We'll come out, measure up and recommend the right system, then give you a fixed written quote. Free, with no obligation.",
 }: {
   title?: string;
   body?: string;
@@ -355,25 +358,60 @@ export function Footer() {
           </a>
         </div>
       </div>
-      <div className={`${container} py-9`}>
-        <div className="flex flex-wrap items-center justify-between gap-7">
-          <Logo />
-          <nav
-            aria-label="Footer navigation"
-            className="flex flex-wrap gap-x-6 gap-y-3"
-          >
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="inline-flex min-h-11 items-center text-sm font-semibold"
-              >
-                {item.label}
-              </Link>
-            ))}
+      <div className={`${container} py-10`}>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-9 md:grid-cols-[1.2fr_1fr_1fr]">
+          <div className="col-span-2 md:col-span-1">
+            <Logo />
+            <p className="mt-5 max-w-sm text-sm leading-relaxed">
+              James Hardie cladding, CSR Bradford insulation and Dulux AcraStone
+              microcement, installed across Adelaide and the Hills.
+            </p>
+            <p className="mt-4 text-sm">{site.hours}</p>
+          </div>
+          <nav aria-label="Footer services">
+            <h2 className="text-sm font-bold uppercase tracking-wide">
+              Services
+            </h2>
+            <ul className="mt-3">
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="inline-flex min-h-10 items-center text-sm"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav aria-label="Footer navigation">
+            <h2 className="text-sm font-bold uppercase tracking-wide">
+              Company
+            </h2>
+            <ul className="mt-3">
+              {nav
+                .filter((item) => item.href !== "/services")
+                .map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="inline-flex min-h-10 items-center text-sm"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
           </nav>
         </div>
-        <div className="mt-7 flex flex-wrap justify-between gap-3 text-xs">
+        <p className="mt-9 border-t border-line pt-6 text-xs leading-relaxed">
+          {brands.map((brand) => brand.name).join(", ")} and their product
+          names are trademarks of their respective owners. {site.name} is an
+          independent installer and is not affiliated with or endorsed by these
+          manufacturers.
+        </p>
+        <div className="mt-4 flex flex-wrap justify-between gap-3 text-xs">
           <p>
             © {new Date().getFullYear()} {site.legalName} · ABN {site.abn}
           </p>
@@ -389,5 +427,31 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+/** The three manufacturer systems we work with, as a compact trust strip. */
+export function BrandStrip({ className = "bg-sandstone" }: { className?: string }) {
+  return (
+    <section aria-labelledby="brands-heading" className={className}>
+      <div className={`${container} py-10 sm:py-12`}>
+        <h2
+          id="brands-heading"
+          className="text-xs font-bold tracking-[0.2em] text-sky-ink uppercase"
+        >
+          Australian systems we install
+        </h2>
+        <ul className="mt-6 grid gap-6 sm:grid-cols-3">
+          {brands.map((brand) => (
+            <li key={brand.name} className="border-l-4 border-ochre pl-4">
+              <p className="font-display text-2xl font-bold text-bluestone">
+                {brand.name}
+              </p>
+              <p className="mt-1 text-sm text-ink-soft">{brand.range}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }

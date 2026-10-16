@@ -407,6 +407,8 @@ export const guides = [
   },
   {
     slug: "cladding-cost-adelaide",
+    published: "2026-10-17",
+    updated: "2026-10-17",
     title: "What affects the cost of cladding in Adelaide",
     seoTitle: "Cladding Cost in Adelaide: What Affects the Price",
     image: images.faqBanner,

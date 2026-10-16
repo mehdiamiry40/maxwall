@@ -16,6 +16,11 @@ const routes = [
   "/guides/insulation-for-adelaide-homes",
   "/guides/microcement-bathroom-renovation",
   "/guides/planning-your-project",
+  "/guides/cladding-cost-adelaide",
+  "/areas/north",
+  "/areas/west",
+  "/areas/east-hills",
+  "/areas/south",
   "/services/james-hardie-cladding",
   "/services/re-cladding",
   "/services/aac-panels",
@@ -24,6 +29,14 @@ const routes = [
   "/services/microcement",
   "/services/painting",
 ];
+// Pages added after the 2026-10 content audit are held to the tighter 140–160 range
+const strictDescriptions = new Set([
+  "/guides/cladding-cost-adelaide",
+  "/areas/north",
+  "/areas/west",
+  "/areas/east-hills",
+  "/areas/south",
+]);
 const titles = new Set();
 for (const route of routes) {
   const html = await readFile(
@@ -71,6 +84,11 @@ for (const route of routes) {
     description && description.length >= 70 && description.length <= 170,
     `${route}: meta description missing or not 70–170 characters (${description?.length})`,
   );
+  if (strictDescriptions.has(route))
+    assert.ok(
+      description.length >= 140 && description.length <= 160,
+      `${route}: meta description should be 140–160 characters (${description.length})`,
+    );
   assert.ok(
     title.length <= 75,
     `${route}: title is ${title.length} characters, aim for 75 or fewer`,

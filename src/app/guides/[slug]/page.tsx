@@ -128,6 +128,27 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
             </div>
           </div>
         </section>
+        <section className="border-t border-line bg-white py-12 sm:py-16">
+          <div className={container}>
+            <h2 className="text-xl font-semibold text-bluestone">
+              More guides
+            </h2>
+            <ul className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+              {guides
+                .filter((other) => other.slug !== guide.slug)
+                .map((other) => (
+                  <li key={other.slug}>
+                    <Link
+                      href={`/guides/${other.slug}`}
+                      className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                    >
+                      {other.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </section>
         <CtaSection />
       </main>
       <Footer />

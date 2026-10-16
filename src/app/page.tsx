@@ -75,7 +75,7 @@ export default function Home() {
             <h1>
               <span className="mb-3 block text-base font-semibold">
                 Cladding, insulation &amp; microcement in Adelaide
-              </span>
+              </span>{" "}
               <span className="hero-title block">
                 <span className="text-ochre">Great walls.</span> Better homes.
               </span>

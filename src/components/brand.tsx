@@ -19,7 +19,7 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link
       href="/"
-      aria-label={`${site.name} home`}
+      aria-label={`${site.name} Building Solutions home`}
       className={`inline-flex items-center gap-2 sm:gap-3 ${className}`}
     >
       <Mark className="h-9 w-9 shrink-0 sm:h-12 sm:w-12" />

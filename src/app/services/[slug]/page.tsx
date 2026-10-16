@@ -17,6 +17,8 @@ import {
   ServiceCard,
   SplitSection,
 } from "@/components/ui";
+import Link from "next/link";
+import { guides, projects } from "@/lib/content";
 import { images } from "@/lib/images";
 import { serviceBySlug, services, site, steps } from "@/lib/site";
 
@@ -55,6 +57,22 @@ export default async function ServicePage(
     )
     .slice(0, 3);
   const quoteHref = `/contact?service=${service.slug}`;
+  const relatedGuides = guides.filter((g) => g.services.includes(service.slug));
+  const relatedProjects = projects.filter((p) =>
+    p.services.includes(service.slug),
+  );
+  const reading = [
+    ...relatedGuides.map((g) => ({
+      href: `/guides/${g.slug}`,
+      label: g.title,
+      kind: "Guide",
+    })),
+    ...relatedProjects.map((p) => ({
+      href: `/projects/${p.slug}`,
+      label: p.shortTitle,
+      kind: "Project type",
+    })),
+  ];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -192,7 +210,32 @@ export default async function ServicePage(
                 {service.title}: common questions
               </h2>
             </div>
-            <FaqList items={service.faqs} />
+            <div>
+              <FaqList items={service.faqs} />
+              {reading.length > 0 && (
+                <div className="mt-10">
+                  <h3 className="text-lg font-bold">Helpful reading</h3>
+                  <ul className="mt-3 divide-y divide-line border-y border-line">
+                    {reading.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="flex min-h-12 items-center justify-between gap-4 py-3 font-semibold text-bluestone hover:underline"
+                        >
+                          <span>
+                            <span className="mr-2 text-xs font-bold tracking-[0.12em] text-ochre uppercase">
+                              {item.kind}
+                            </span>
+                            {item.label}
+                          </span>
+                          <span aria-hidden="true">→</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 

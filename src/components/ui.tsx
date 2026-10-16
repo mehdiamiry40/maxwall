@@ -5,6 +5,7 @@ import { MobileActionBar, SiteHeader } from "@/components/nav";
 import { Reveal } from "@/components/Reveal";
 import { StructuredData } from "@/components/StructuredData";
 import { blurProps, type Photo } from "@/lib/images";
+import { projects } from "@/lib/content";
 import { breadcrumbSchema } from "@/lib/seo";
 import { brands, nav, phoneHref, services, site } from "@/lib/site";
 
@@ -181,6 +182,7 @@ export function PageHero({
               {...blurProps(image)}
               alt={image.alt}
               fill
+              preload
               sizes="(min-width:768px)45vw,100vw"
               className="object-cover"
             />
@@ -380,6 +382,16 @@ export function Footer() {
                     className="inline-flex min-h-10 items-center text-sm"
                   >
                     {service.title}
+                  </Link>
+                </li>
+              ))}
+              {projects.map((project) => (
+                <li key={project.slug}>
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="inline-flex min-h-10 items-center text-sm"
+                  >
+                    {project.shortTitle}
                   </Link>
                 </li>
               ))}

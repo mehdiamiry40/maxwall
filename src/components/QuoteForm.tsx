@@ -1,11 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState } from "react";
-import { requestQuote, type QuoteState } from "@/app/actions";
+import { useActionState, useEffect, useRef, useState } from "react";
+import {
+  QUOTE_GENERIC_ERROR,
+  type QuoteState,
+} from "@/lib/quote-messages";
 import { services } from "@/lib/site";
 
 const initialState: QuoteState = { ok: false, message: "" };
+
+async function submitQuote(
+  _previous: QuoteState,
+  formData: FormData,
+): Promise<QuoteState> {
+  try {
+    const response = await fetch("/api/quote", {
+      method: "POST",
+      body: formData,
+      headers: { accept: "application/json" },
+    });
+    const data: unknown = await response.json().catch(() => null);
+    if (!isQuoteState(data)) return { ok: false, message: QUOTE_GENERIC_ERROR };
+    return { ok: data.ok, message: data.message };
+  } catch {
+    return { ok: false, message: QUOTE_GENERIC_ERROR };
+  }
+}
+
+function isQuoteState(value: unknown): value is QuoteState {
+  if (!value || typeof value !== "object") return false;
+  const record = value as { ok?: unknown; message?: unknown };
+  return typeof record.ok === "boolean" && typeof record.message === "string";
+}
 
 /** The hero shows the essential fields first; optional details can be expanded. */
 export function QuoteForm({
@@ -16,9 +43,13 @@ export function QuoteForm({
   compact?: boolean;
 }) {
   const [state, formAction, pending] = useActionState(
-    requestQuote,
+    submitQuote,
     initialState,
   );
+  const startedAtRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (startedAtRef.current) startedAtRef.current.value = String(Date.now());
+  }, []);
   const [values, setValues] = useState({
     name: "",
     mobile: "",
@@ -98,10 +129,16 @@ export function QuoteForm({
 
   return (
     <form
-      action={formAction}
+      action="/api/quote"
+      method="POST"
       // React resets the native form after an action, including validation failures.
       // Preserve the controlled fields; successful submissions replace the form.
       onReset={(event) => event.preventDefault()}
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (pending) return;
+        formAction(new FormData(event.currentTarget));
+      }}
       className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2"
     >
       <div>
@@ -184,6 +221,7 @@ export function QuoteForm({
       ) : (
         <div className="grid gap-4 sm:col-span-2">{extras}</div>
       )}
+      <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
       <input
         type="text"
         name="company"

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && tsx scripts/csp-hashes.ts",
+    "build": "VERCEL_PREVIEW_FEEDBACK_ENABLED=0 next build && tsx scripts/csp-hashes.ts",
     "start": "next start",
     "lint": "eslint",
     "test": "node --experimental-strip-types --test src/lib/rate-limit.test.ts && tsx --test tests/csp.test.ts",

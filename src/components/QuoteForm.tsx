@@ -1,14 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   QUOTE_GENERIC_ERROR,
   type QuoteState,
 } from "@/lib/quote-messages";
-import { services } from "@/lib/site";
+import { serviceBySlug, services } from "@/lib/site";
 
 const initialState: QuoteState = { ok: false, message: "" };
+
+function subscribeToServiceQuery() {
+  return () => {};
+}
+
+function serviceSlugFromLocation(): string {
+  return new URLSearchParams(window.location.search).get("service") ?? "";
+}
+
+function emptyServiceSlug(): string {
+  return "";
+}
+
+/** `?service=` is read on the client so /contact can stay a static document. */
+function useRequestedServiceTitle(): string {
+  const slug = useSyncExternalStore(
+    subscribeToServiceQuery,
+    serviceSlugFromLocation,
+    emptyServiceSlug,
+  );
+  return serviceBySlug(slug)?.title ?? "";
+}
 
 async function submitQuote(
   _previous: QuoteState,
@@ -46,10 +68,6 @@ export function QuoteForm({
     submitQuote,
     initialState,
   );
-  const startedAtRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (startedAtRef.current) startedAtRef.current.value = String(Date.now());
-  }, []);
   const [values, setValues] = useState({
     name: "",
     mobile: "",
@@ -59,6 +77,11 @@ export function QuoteForm({
     email: "",
     details: "",
   });
+  const requestedService = useRequestedServiceTitle();
+  const startedAtRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (startedAtRef.current) startedAtRef.current.value = String(Date.now());
+  }, []);
   const prefix = compact ? "hero-" : "";
   const input =
     "mt-1.5 min-h-12 w-full  border border-line bg-render px-3 py-2.5 text-base text-ink transition placeholder:text-ink-soft focus:border-sky-deep focus:bg-white focus:ring-2 focus:ring-sky/20";
@@ -70,7 +93,7 @@ export function QuoteForm({
     return {
       id: `${prefix}${key}`,
       name: key,
-      value: values[key],
+      value: key === "service" ? values.service || requestedService : values[key],
       onChange: (
         event: React.ChangeEvent<
           HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement

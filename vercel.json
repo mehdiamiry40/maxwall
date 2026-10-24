@@ -1,0 +1,3 @@
+{
+  "buildCommand": "next build && ./node_modules/.bin/tsx scripts/csp-hashes.ts"
+}

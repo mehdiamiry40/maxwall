@@ -1,4 +1,6 @@
 import type { NextConfig } from "next";
+import { join } from "node:path";
+import { buildContentSecurityPolicy, buildDevContentSecurityPolicy } from "./src/lib/csp-policy";
 
 // Old service and guide URLs from the render-focused site, kept so links and rankings carry over
 const legacyRedirects: [string, string][] = [
@@ -11,49 +13,15 @@ const legacyRedirects: [string, string][] = [
   ["/guides/cement-vs-acrylic-render", "/guides/choosing-james-hardie-cladding"],
 ];
 
-/**
- * Browser origins this site actually loads. Resend (api.resend.com) is server-side only.
- * - scripts: Next.js chunks and inline bootstrap/JSON-LD, plus Vercel Analytics
- *   (`/_vercel/insights/script.js`) and Speed Insights (`/_vercel/speed-insights/script.js`).
- *   Development, and Speed Insights with a DSN, also load https://va.vercel-scripts.com.
- * - styles: the compiled stylesheet, next/image fill styles, the reveal animation delay,
- *   and the noscript reveal fallback.
- * - images: local /images and /_next/image, plus data: blur placeholders.
- * - fonts: self-hosted Barlow from next/font.
- * - connect: same-origin RSC, the quote form, and /_vercel/insights and speed-insights.
- *   Speed Insights posts to https://vitals.vercel-insights.com when a DSN is set.
- * - frames: none. frame-ancestors 'none' matches X-Frame-Options: DENY.
- * upgrade-insecure-requests is omitted so local http://localhost still loads.
- */
-function contentSecurityPolicy() {
-  const isDev = process.env.NODE_ENV === "development";
-  const scriptSrc = [
-    "'self'",
-    "'unsafe-inline'",
-    "https://va.vercel-scripts.com",
-    ...(isDev ? ["'unsafe-eval'"] : []),
-  ].join(" ");
-  const connectSrc = [
-    "'self'",
-    "https://vitals.vercel-insights.com",
-    ...(isDev ? ["ws:", "wss:"] : []),
-  ].join(" ");
-  return [
-    "default-src 'self'",
-    `script-src ${scriptSrc}`,
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob:",
-    "font-src 'self'",
-    `connect-src ${connectSrc}`,
-    "frame-src 'none'",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'none'",
-    "worker-src 'self'",
-    "manifest-src 'self'",
-  ].join("; ");
-}
+// Production script hashes are unknown until prerender finishes. The placeholder is
+// replaced in the build output by scripts/csp-hashes.ts. On Vercel that is too late
+// for the header the CDN serves: the Next adapter copies it into
+// `.next/output/config.json` during onBuildComplete, while `next build` is still
+// running. scripts/csp-adapter.mjs wraps that adapter and writes the hashes first.
+// Development cannot use those hashes. style-src stays 'unsafe-inline' for the
+// noscript reveal fallback, next/image layout, and the reveal delay attribute.
+const contentSecurityPolicy =
+  process.env.NODE_ENV === "development" ? buildDevContentSecurityPolicy() : buildContentSecurityPolicy([]);
 
 const securityHeaders = [
   {
@@ -72,6 +40,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // A stray package-lock.json in the home folder confuses root detection
   turbopack: { root: __dirname },
+  // Vercel sets NEXT_ADAPTER_PATH to its own adapter. Wrap it so the routing
+  // object it serialises already contains the real script hashes.
+  ...(process.env.NEXT_ADAPTER_PATH ? { adapterPath: join(process.cwd(), "scripts/csp-adapter.mjs") } : {}),
   images: {
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com", pathname: "/**" }],
   },
@@ -88,7 +59,7 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: [
           ...securityHeaders,
-          { key: "Content-Security-Policy", value: contentSecurityPolicy() },
+          { key: "Content-Security-Policy", value: contentSecurityPolicy },
         ],
       },
     ];

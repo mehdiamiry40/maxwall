@@ -8,7 +8,7 @@ import {
   Header,
   PhoneIcon,
 } from "@/components/ui";
-import { phoneHref, serviceBySlug, site } from "@/lib/site";
+import { phoneHref, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
   "Free Cladding, Insulation & Microcement Quote Adelaide",
@@ -22,11 +22,7 @@ const reassurances = [
   "No obligation",
 ];
 
-export default async function Contact(props: PageProps<"/contact">) {
-  const { service } = await props.searchParams;
-  const preselected =
-    typeof service === "string" ? serviceBySlug(service)?.title : undefined;
-
+export default function Contact() {
   return (
     <>
       <Header />
@@ -81,10 +77,7 @@ export default async function Contact(props: PageProps<"/contact">) {
               which product to choose? That&apos;s fine — we&apos;ll help you
               work it out.
             </p>
-            <QuoteForm
-              key={preselected ?? "general"}
-              defaultService={preselected}
-            />
+            <QuoteForm />
           </div>
         </div>
       </main>

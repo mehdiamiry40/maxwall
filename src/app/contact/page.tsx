@@ -11,7 +11,7 @@ import {
 import { phoneHref, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Free Cladding, Insulation & Microcement Quote Adelaide",
+  "Cladding, Insulation & Microcement Quote Adelaide",
   `Request a free on-site measure and fixed written quote for cladding, insulation, microcement or painting in Adelaide. Call Max Wall on ${site.phone}.`,
   "/contact",
 );
@@ -28,18 +28,35 @@ export default function Contact() {
       <Header />
       <main id="main" className="flex-1 bg-sandstone">
         <div
-          className={`${container} grid gap-12 py-14 md:grid-cols-[1fr_1.5fr] md:gap-16 md:py-20`}
+          className={`${container} grid gap-8 py-6 md:grid-cols-[1fr_1.5fr] md:gap-x-16 md:gap-y-10 md:py-20`}
         >
-          <div>
+          <div className="md:col-start-1 md:row-start-1">
             <Eyebrow>Free quote</Eyebrow>
             <h1 className="font-display mt-3 text-4xl font-bold leading-[1.05] sm:text-5xl text-bluestone">
               Let&apos;s talk about your home
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-ink-soft">
-              Tell us a little about the job and we&apos;ll get back to you with
-              a price. We usually reply within the hour.
+              Tell us a little about the job. We&apos;ll book a free on-site
+              measure, then send a fixed written quote. We usually reply within
+              the hour.
             </p>
-            <ul className="mt-8 space-y-3">
+          </div>
+          <div className="self-start surface-card p-6 sm:p-10 md:col-start-2 md:row-span-2 md:row-start-1">
+            <p className="mb-3 text-xs font-semibold tracking-[0.14em] text-sky-ink uppercase">
+              Your next step
+            </p>
+            <h2 className="text-2xl font-semibold">
+              Tell us about your project
+            </h2>
+            <p className="mb-8 mt-3 text-sm leading-relaxed text-ink-soft">
+              Just a few details to get started. Don&apos;t know the area or
+              which product to choose? That&apos;s fine — we&apos;ll help you
+              work it out.
+            </p>
+            <QuoteForm />
+          </div>
+          <div className="md:col-start-1 md:row-start-2">
+            <ul className="space-y-3">
               {reassurances.map((r) => (
                 <li key={r} className="flex gap-3 font-medium">
                   <Check /> {r}
@@ -64,20 +81,6 @@ export default function Contact() {
                 {site.hours}
               </p>
             </div>
-          </div>
-          <div className="self-start surface-card p-6   sm:p-10">
-            <p className="mb-3 text-xs font-semibold tracking-[0.14em] text-sky-ink uppercase">
-              Your next step
-            </p>
-            <h2 className="text-2xl font-semibold">
-              Tell us about your project
-            </h2>
-            <p className="mb-8 mt-3 text-sm leading-relaxed text-ink-soft">
-              Just a few details to get started. Don&apos;t know the area or
-              which product to choose? That&apos;s fine — we&apos;ll help you
-              work it out.
-            </p>
-            <QuoteForm />
           </div>
         </div>
       </main>

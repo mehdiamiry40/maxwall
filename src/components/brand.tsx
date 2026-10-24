@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
 
 /** Architectural M: twin rooflines, a blue wall frame and orange return wall. */
 export function Mark({ className = "h-7 w-7" }: { className?: string }) {
@@ -19,7 +18,6 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link
       href="/"
-      aria-label={`${site.name} Building Solutions home`}
       className={`inline-flex items-center gap-2 sm:gap-3 ${className}`}
     >
       <Mark className="h-9 w-9 shrink-0 sm:h-12 sm:w-12" />

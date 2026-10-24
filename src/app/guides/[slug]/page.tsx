@@ -91,10 +91,25 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
             </nav>
             <div className="max-w-3xl space-y-10">
               <p className="text-sm text-ink-soft">
-                By {site.name} · Updated{" "}
-                <time dateTime={guide.updated}>
-                  {formatDate(guide.updated)}
-                </time>
+                By {site.name}
+                {guide.published ? (
+                  <>
+                    {" "}
+                    · Published{" "}
+                    <time dateTime={guide.published}>
+                      {formatDate(guide.published)}
+                    </time>
+                  </>
+                ) : null}
+                {guide.updated && guide.updated !== guide.published ? (
+                  <>
+                    {" "}
+                    · Updated{" "}
+                    <time dateTime={guide.updated}>
+                      {formatDate(guide.updated)}
+                    </time>
+                  </>
+                ) : null}
               </p>
               {guide.sections.map((item, index) => (
                 <section

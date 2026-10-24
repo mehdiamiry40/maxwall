@@ -207,7 +207,7 @@ export const services: Service[] = [
   {
     slug: "aac-panels",
     title: "AAC panel walls",
-    seoTitle: "AAC Panel Walls Adelaide | Hardie Gravis Installers",
+    seoTitle: "Hardie Gravis AAC Panel Walls Adelaide",
     metaDescription:
       "Hardie Gravis AAC panel walls installed and finished in Adelaide. Lightweight, non-combustible masonry with a texture coat finish. Free fixed-price quotes.",
     category: "Cladding",
@@ -256,7 +256,7 @@ export const services: Service[] = [
   {
     slug: "eaves-linings",
     title: "Eaves, soffits & linings",
-    seoTitle: "Eaves Lining & Soffits Adelaide | Hardie Groove Lining",
+    seoTitle: "Hardie Groove Eaves & Soffits Adelaide",
     metaDescription:
       "Fibre cement eaves, soffits and grooved feature linings for Adelaide homes and alfrescos, including Hardie Groove Lining. Free on-site measure and quote.",
     category: "Cladding",
@@ -301,7 +301,7 @@ export const services: Service[] = [
   {
     slug: "insulation",
     title: "Insulation",
-    seoTitle: "Home Insulation Installers Adelaide | CSR Bradford",
+    seoTitle: "CSR Bradford Insulation Installers Adelaide",
     metaDescription:
       "CSR Bradford ceiling, wall, underfloor and acoustic insulation installed across Adelaide. Cooler summers, warmer winters and quieter rooms. Free quotes.",
     category: "Insulation",

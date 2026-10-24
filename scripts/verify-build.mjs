@@ -9,6 +9,8 @@ const routes = [
   "/faq",
   "/how-we-work",
   "/privacy",
+  "/contact",
+  "/projects",
   "/projects/renovations",
   "/projects/new-builds",
   "/guides",
@@ -90,8 +92,8 @@ for (const route of routes) {
       `${route}: meta description should be 140–160 characters (${description.length})`,
     );
   assert.ok(
-    title.length <= 75,
-    `${route}: title is ${title.length} characters, aim for 75 or fewer`,
+    title.length <= 60,
+    `${route}: title is ${title.length} characters, must be 60 or fewer`,
   );
   assert.ok(
     html.includes(`${origin}/images/og-card.jpg`),

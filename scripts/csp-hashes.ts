@@ -8,7 +8,7 @@
  * file would block every inline script. It fails if that happens.
  */
 import path from "node:path";
-import { assertDeploymentOutput, publishInlineScriptHashes, stripUnconditionalPreviewToolbar } from "../src/lib/csp-publish";
+import { assertDeploymentOutput, publishInlineScriptHashes, retargetUnconditionalToolbarChunks } from "../src/lib/csp-publish";
 
 const root = process.cwd();
 const nextDir = path.join(root, ".next");
@@ -21,6 +21,10 @@ function fail(message: string): never {
 async function main() {
   let published;
   try {
+    const retargeted = await retargetUnconditionalToolbarChunks(nextDir);
+    if (retargeted.length) {
+      console.log(`CSP: retargeted ${retargeted.length} preview toolbar chunk(s)`);
+    }
     published = await publishInlineScriptHashes({ distDir: nextDir });
     const checked = await assertDeploymentOutput({
       projectRoot: root,
@@ -30,21 +34,13 @@ async function main() {
     if (checked.configs.length) {
       console.log(`CSP: checked hashed policy in ${checked.configs.map((file) => path.relative(root, file)).join(", ")}`);
     }
-  } catch (err) {
-    fail(err instanceof Error ? err.message : String(err));
-  }
-
-  const toolbarRoots = [nextDir, path.join(root, ".vercel", "output"), "/vercel/output"];
-  const toolbarFiles: string[] = [];
-  try {
-    for (const dir of toolbarRoots) {
-      for (const file of await stripUnconditionalPreviewToolbar(dir)) toolbarFiles.push(file);
+    const outputRoots = [path.join(root, ".vercel", "output"), "/vercel/output"];
+    for (const dir of outputRoots) {
+      const again = await retargetUnconditionalToolbarChunks(dir);
+      if (again.length) console.log(`CSP: retargeted ${again.length} preview toolbar chunk(s) in deployment output`);
     }
   } catch (err) {
     fail(err instanceof Error ? err.message : String(err));
-  }
-  if (toolbarFiles.length) {
-    console.log(`CSP: removed the unconditional preview toolbar injection from ${toolbarFiles.length} file(s)`);
   }
 
   const headerBytes = Buffer.byteLength(published.policy);

@@ -126,8 +126,15 @@ function cookieGatedToolbarOnly(source: string): boolean {
 }
 
 export function stripPreviewToolbar(source: string): string {
+  UNCONDITIONAL_TOOLBAR_INJECTION.lastIndex = 0;
   const code = source.replace(UNCONDITIONAL_TOOLBAR_INJECTION, "void 0");
   if (!code.includes(PREVIEW_TOOLBAR_URL)) return code;
   if (cookieGatedToolbarOnly(code)) return code;
   throw new Error("unrecognized Vercel preview toolbar injection still references vercel.live");
+}
+
+/** True when this source would load the preview toolbar for every visitor. */
+export function hasUnconditionalPreviewToolbar(source: string): boolean {
+  UNCONDITIONAL_TOOLBAR_INJECTION.lastIndex = 0;
+  return UNCONDITIONAL_TOOLBAR_INJECTION.test(source);
 }

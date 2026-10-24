@@ -24,17 +24,31 @@ export async function modifyConfig(config, context) {
   // Vercel's modifyConfig points adapterPath back at itself. This file has to
   // stay the adapter so hashes are in the routing object before it is serialised.
   config.adapterPath = adapterFile;
+  // Immutable chunks share one URL across deployments. The preview toolbar is
+  // compiled into one of those chunks, so the first unstripped upload would be
+  // what every later preview serves. Deployment-scoped assets (?dpl=) upload
+  // the stripped file for this deployment only.
+  if (process.env.VERCEL_ENV === "preview") {
+    config.supportsImmutableAssets = false;
+    if (config.experimental) config.experimental.supportsImmutableAssets = false;
+  }
   return config;
 }
 
 export async function onBuildComplete(payload) {
   const publish = await loadPublish();
-  // Strip before Vercel copies client chunks into the deployment output.
-  // The post-build walk of .next is too late: those copies are what get served.
-  const strippedEarly = await publish.stripUnconditionalPreviewToolbar(payload.distDir);
-  if (strippedEarly.length) {
-    console.log(`CSP: removed the unconditional preview toolbar injection from ${strippedEarly.length} file(s) before deployment output was written`);
+  // Rename before Vercel copies client chunks. Stripping in place keeps the
+  // content hash in the URL, and the shared immutable cache keeps the first upload.
+  const retargeted = await publish.retargetUnconditionalToolbarChunks(
+    payload.distDir,
+    payload.outputs?.staticFiles,
+  );
+  if (retargeted.length) {
+    console.log(
+      `CSP: retargeted ${retargeted.length} preview toolbar chunk(s) before deployment output was written`,
+    );
   }
+  console.log(`CSP: supportsImmutableAssets=${Boolean(payload.config?.supportsImmutableAssets)}`);
   const published = await publish.publishInlineScriptHashes({
     distDir: payload.distDir,
     routing: payload.routing,
@@ -54,17 +68,16 @@ export async function onBuildComplete(payload) {
   }
 
   const outputRoots = [
-    payload.distDir,
     `${payload.distDir}/output`,
     `${payload.projectDir}/.vercel/output`,
     "/vercel/output",
   ];
-  let strippedLate = 0;
+  let retargetedLate = 0;
   for (const root of outputRoots) {
-    strippedLate += (await publish.stripUnconditionalPreviewToolbar(root)).length;
+    retargetedLate += (await publish.retargetUnconditionalToolbarChunks(root)).length;
   }
-  if (strippedLate) {
-    console.log(`CSP: removed the unconditional preview toolbar injection from ${strippedLate} deployed file(s)`);
+  if (retargetedLate) {
+    console.log(`CSP: retargeted ${retargetedLate} preview toolbar chunk(s) in the deployment output`);
   }
 
   const checked = await publish.assertDeploymentOutput({

@@ -1,5 +1,4 @@
-import { createHash } from "node:crypto";
-import { readdir, readFile, unlink, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
   CSP_HASH_PLACEHOLDER,
@@ -7,7 +6,7 @@ import {
   buildContentSecurityPolicy,
   missingScriptHashes,
 } from "./csp-policy";
-import { hasUnconditionalPreviewToolbar, requiredScriptHashes, stripPreviewToolbar } from "./csp-inline";
+import { requiredScriptHashes, stripPreviewToolbar } from "./csp-inline";
 
 const SKIP_DIRS = new Set(["cache", "dev", "node_modules"]);
 
@@ -154,146 +153,24 @@ async function patchFiles(distDir: string, hashList: string): Promise<string[]> 
   return patched;
 }
 
-const REFERENCE_EXTENSIONS = new Set([".js", ".html", ".json", ".css", ".txt", ".rsc"]);
-
-export type StaticFileOutput = {
-  id: string;
-  filePath: string;
-  pathname: string;
-  immutableHash?: string;
-};
-
-function clientAsset(file: string): boolean {
-  return file.includes(`${path.sep}static${path.sep}`);
-}
-
-function chunkIdentity(seed: string, content: string): { filename: string; immutableHash: string } {
-  const immutableHash = `csp${createHash("sha256").update(seed).update("\0").update(content).digest("hex")}`;
-  return { immutableHash, filename: `${immutableHash.slice(0, 16)}.js` };
-}
-
 /**
- * Preview builds inject a script that loads vercel.live on every page. Turbopack
- * content-hashes that chunk, and Vercel stores immutable assets in a namespace
- * shared by every deployment. Rewriting the bytes in place leaves the first
- * (unstripped) upload at that URL. Rename the chunk, point the pages at the new
- * name, and give the adapter a hash it has never uploaded.
- *
- * Cookie-gated toolbar code is left as-is. Server files are stripped in place:
- * the browser never requests them.
+ * Remove the unconditional preview injector. Cookie-gated toolbar code is left in place.
+ * Preview builds turn immutable assets off, so these files are deployment-scoped and the
+ * stripped bytes are what gets uploaded. Renaming them would change the content hash the
+ * deployer checks.
  */
-export async function retargetUnconditionalToolbarChunks(
-  root: string,
-  staticFiles?: StaticFileOutput[],
-): Promise<string[]> {
-  const renamed: { file: string; content: string; from: string; to: string; immutableHash: string }[] = [];
-  const seen = new Set<string>();
-
-  const claim = (file: string, content: string) => {
-    if (seen.has(file)) return;
-    seen.add(file);
-    const identity = chunkIdentity(path.basename(file), content);
-    renamed.push({
-      file,
-      content,
-      from: path.basename(file),
-      to: identity.filename,
-      immutableHash: identity.immutableHash,
-    });
-  };
-
+export async function stripUnconditionalPreviewToolbar(root: string): Promise<string[]> {
+  const strippedFiles: string[] = [];
   await walk(root, async (file) => {
     if (!file.endsWith(".js") && !file.endsWith(".html")) return;
     const body = await readFile(file, "utf8");
-    if (!hasUnconditionalPreviewToolbar(body)) return;
+    if (!body.includes("https://vercel.live/_next-live/feedback/feedback.js")) return;
     const stripped = stripPreviewToolbar(body);
     if (stripped === body) return;
-    if (clientAsset(file) && file.endsWith(".js")) claim(file, stripped);
-    else await writeFile(file, stripped);
+    await writeFile(file, stripped);
+    strippedFiles.push(file);
   });
-
-  // A client chunk that names a renamed file has to move too. Otherwise the
-  // shared immutable URL keeps serving the copy that still points at vercel.live.
-  for (let pass = 0; pass < 5 && renamed.length > 0; pass += 1) {
-    const found: { file: string; content: string }[] = [];
-    await walk(root, async (file) => {
-      if (!file.endsWith(".js") || !clientAsset(file) || seen.has(file)) return;
-      const body = await readFile(file, "utf8");
-      if (!renamed.some((item) => body.includes(item.from))) return;
-      let content = body;
-      for (const item of renamed) content = content.split(item.from).join(item.to);
-      found.push({ file, content });
-    });
-    if (found.length === 0) break;
-    for (const item of found) claim(item.file, item.content);
-  }
-
-  if (renamed.length === 0) return [];
-
-  for (const item of renamed) {
-    if (item.content.includes(item.from)) {
-      throw new Error(`${item.file} still names ${item.from} after the toolbar rewrite`);
-    }
-    const nextPath = path.join(path.dirname(item.file), item.to);
-    await writeFile(nextPath, item.content);
-    await unlink(item.file);
-  }
-
-  await walk(root, async (file) => {
-    if (path.basename(file) === "immutable-static-hashes.json") return;
-    if (renamed.some((item) => file.endsWith(item.to))) return;
-    if (!REFERENCE_EXTENSIONS.has(path.extname(file))) return;
-    const body = await readFile(file, "utf8");
-    let next = body;
-    for (const item of renamed) next = next.split(item.from).join(item.to);
-    if (next === body) return;
-    if (file.endsWith(".js") && clientAsset(file)) {
-      throw new Error(`${file} references a retargeted toolbar chunk but was not renamed`);
-    }
-    await writeFile(file, next);
-  });
-
-  if (staticFiles) {
-    for (const output of staticFiles) {
-      for (const item of renamed) {
-        if (!output.pathname.includes(item.from) && !output.filePath.endsWith(item.from) && !output.id.endsWith(item.from)) {
-          continue;
-        }
-        output.pathname = output.pathname.split(item.from).join(item.to);
-        output.filePath = output.filePath.split(item.from).join(item.to);
-        output.id = output.id.split(item.from).join(item.to);
-        output.immutableHash = item.immutableHash;
-      }
-    }
-  }
-
-  const manifestPath = path.join(root, "immutable-static-hashes.json");
-  try {
-    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as Record<string, string>;
-    let changed = false;
-    const nextManifest: Record<string, string> = {};
-    for (const [key, value] of Object.entries(manifest)) {
-      let nextKey = key;
-      let nextValue = value;
-      for (const item of renamed) {
-        if (!nextKey.endsWith(item.from)) continue;
-        nextKey = nextKey.split(item.from).join(item.to);
-        nextValue = item.immutableHash;
-        changed = true;
-      }
-      nextManifest[nextKey] = nextValue;
-    }
-    if (changed) await writeFile(manifestPath, JSON.stringify(nextManifest));
-  } catch (err) {
-    if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err;
-  }
-
-  return renamed.map((item) => item.to);
-}
-
-/** Remove the unconditional preview injector. Cookie-gated toolbar code is left in place. */
-export async function stripUnconditionalPreviewToolbar(root: string): Promise<string[]> {
-  return retargetUnconditionalToolbarChunks(root);
+  return strippedFiles;
 }
 
 export async function publishInlineScriptHashes(options: {

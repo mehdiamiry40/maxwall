@@ -132,9 +132,3 @@ export function stripPreviewToolbar(source: string): string {
   if (cookieGatedToolbarOnly(code)) return code;
   throw new Error("unrecognized Vercel preview toolbar injection still references vercel.live");
 }
-
-/** True when this source would load the preview toolbar for every visitor. */
-export function hasUnconditionalPreviewToolbar(source: string): boolean {
-  UNCONDITIONAL_TOOLBAR_INJECTION.lastIndex = 0;
-  return UNCONDITIONAL_TOOLBAR_INJECTION.test(source);
-}

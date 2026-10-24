@@ -17,7 +17,7 @@ import {
   buildDevContentSecurityPolicy,
   directiveValue,
 } from "../src/lib/csp-policy";
-import { assertDeploymentOutput, publishInlineScriptHashes, retargetUnconditionalToolbarChunks } from "../src/lib/csp-publish";
+import { assertDeploymentOutput, publishInlineScriptHashes, stripUnconditionalPreviewToolbar } from "../src/lib/csp-publish";
 
 const GTAG = "window.dataLayer = window.dataLayer || [];";
 
@@ -117,57 +117,22 @@ describe("content security policy", () => {
     await rm(root, { recursive: true, force: true });
   });
 
-  it("renames a preview toolbar chunk so the immutable URL cannot keep the injected script", async () => {
+  it("strips a preview toolbar chunk in place and keeps the cookie gate", async () => {
     const root = await mkdtemp(path.join(tmpdir(), "csp-toolbar-"));
-    const chunkDir = path.join(root, "static", "immutable", "chunks");
-    const htmlDir = path.join(root, "server", "app");
+    const chunkDir = path.join(root, "static", "chunks");
     await mkdir(chunkDir, { recursive: true });
-    await mkdir(htmlDir, { recursive: true });
     const injected =
       'before;var r=document.createElement("script");r.src="https://vercel.live/_next-live/feedback/feedback.js",r.setAttribute("data-deployment-id",globalThis.NEXT_DEPLOYMENT_ID),(document.head||document.documentElement).appendChild(r);after';
-    const chunkName = "0c6saa3i-zv6m.js";
-    await writeFile(path.join(chunkDir, chunkName), injected);
-    await writeFile(path.join(chunkDir, "other.js"), "window.other = true;");
     const gated =
       'if(/(?:^|;\\s)__vercel_toolbar=1(?:;|$)/.test(document.cookie)){var r=document.createElement("script");r.src="https://vercel.live/_next-live/feedback/feedback.js",r.setAttribute("data-explicit-opt-in","true"),r.setAttribute("data-cookie-opt-in","true"),r.setAttribute("data-deployment-id",globalThis.NEXT_DEPLOYMENT_ID),(document.head||document.documentElement).appendChild(r)}';
+    await writeFile(path.join(chunkDir, "toolbar.js"), injected);
     await writeFile(path.join(chunkDir, "gated.js"), gated);
-    await writeFile(
-      path.join(htmlDir, "index.html"),
-      `<!doctype html><script src="/_next/static/immutable/chunks/${chunkName}"></script><script>var ready = true;</script>`,
-    );
-    await writeFile(
-      path.join(root, "immutable-static-hashes.json"),
-      JSON.stringify({ [`static/immutable/chunks/${chunkName}`]: "0c6saa3i-zv6m-full-hash" }),
-    );
-    const staticFiles = [
-      {
-        id: `static/immutable/chunks/${chunkName}`,
-        filePath: path.join(chunkDir, chunkName),
-        pathname: `/_next/static/immutable/chunks/${chunkName}`,
-        immutableHash: "0c6saa3i-zv6m-full-hash",
-      },
-    ];
-    const renamed = await retargetUnconditionalToolbarChunks(root, staticFiles);
-    assert.equal(renamed.length, 1);
-    const nextName = renamed[0]!;
-    assert.equal(nextName.endsWith(".js"), true);
-    assert.equal(nextName.includes(chunkName.slice(0, -3)), false);
-    const nextChunk = await readFile(path.join(chunkDir, nextName), "utf8");
-    assert.equal(nextChunk.includes("vercel.live"), false);
-    assert.match(nextChunk, /void 0/);
-    await assert.rejects(readFile(path.join(chunkDir, chunkName), "utf8"));
-    const html = await readFile(path.join(htmlDir, "index.html"), "utf8");
-    assert.equal(html.includes(chunkName), false);
-    assert.match(html, new RegExp(nextName));
-    assert.equal(await readFile(path.join(chunkDir, "other.js"), "utf8"), "window.other = true;");
+    const stripped = await stripUnconditionalPreviewToolbar(root);
+    assert.deepEqual(stripped.map((file) => path.basename(file)), ["toolbar.js"]);
+    const chunk = await readFile(path.join(chunkDir, "toolbar.js"), "utf8");
+    assert.equal(chunk.includes("vercel.live"), false);
+    assert.match(chunk, /void 0/);
     assert.equal(await readFile(path.join(chunkDir, "gated.js"), "utf8"), gated);
-    assert.equal(staticFiles[0]!.pathname, `/_next/static/immutable/chunks/${nextName}`);
-    assert.equal(staticFiles[0]!.immutableHash?.startsWith("csp"), true);
-    assert.equal(staticFiles[0]!.immutableHash === "0c6saa3i-zv6m-full-hash", false);
-    assert.equal(staticFiles[0]!.pathname.includes(staticFiles[0]!.immutableHash!.slice(0, 13)), true);
-    const manifest = JSON.parse(await readFile(path.join(root, "immutable-static-hashes.json"), "utf8")) as Record<string, string>;
-    assert.equal(manifest[`static/immutable/chunks/${nextName}`], staticFiles[0]!.immutableHash);
-    assert.equal(Object.hasOwn(manifest, `static/immutable/chunks/${chunkName}`), false);
     await rm(root, { recursive: true, force: true });
   });
 

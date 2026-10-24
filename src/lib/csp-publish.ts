@@ -6,7 +6,7 @@ import {
   buildContentSecurityPolicy,
   missingScriptHashes,
 } from "./csp-policy";
-import { requiredScriptHashes } from "./csp-inline";
+import { requiredScriptHashes, stripPreviewToolbar } from "./csp-inline";
 
 const SKIP_DIRS = new Set(["cache", "dev", "node_modules"]);
 
@@ -151,6 +151,23 @@ async function patchFiles(distDir: string, hashList: string): Promise<string[]> 
     patched.push(file);
   });
   return patched;
+}
+
+const PREVIEW_TOOLBAR_URL = "https://vercel.live/_next-live/feedback/feedback.js";
+
+/** Remove the unconditional preview injector. Cookie-gated toolbar code is left in place. */
+export async function stripUnconditionalPreviewToolbar(root: string): Promise<string[]> {
+  const strippedFiles: string[] = [];
+  await walk(root, async (file) => {
+    if (!file.endsWith(".js") && !file.endsWith(".html")) return;
+    const body = await readFile(file, "utf8");
+    if (!body.includes(PREVIEW_TOOLBAR_URL)) return;
+    const stripped = stripPreviewToolbar(body);
+    if (stripped === body) return;
+    await writeFile(file, stripped);
+    strippedFiles.push(file);
+  });
+  return strippedFiles;
 }
 
 export async function publishInlineScriptHashes(options: {

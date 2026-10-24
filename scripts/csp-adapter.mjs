@@ -29,6 +29,12 @@ export async function modifyConfig(config, context) {
 
 export async function onBuildComplete(payload) {
   const publish = await loadPublish();
+  // Strip before Vercel copies client chunks into the deployment output.
+  // The post-build walk of .next is too late: those copies are what get served.
+  const strippedEarly = await publish.stripUnconditionalPreviewToolbar(payload.distDir);
+  if (strippedEarly.length) {
+    console.log(`CSP: removed the unconditional preview toolbar injection from ${strippedEarly.length} file(s) before deployment output was written`);
+  }
   const published = await publish.publishInlineScriptHashes({
     distDir: payload.distDir,
     routing: payload.routing,
@@ -45,6 +51,20 @@ export async function onBuildComplete(payload) {
     throw new Error(
       `CSP adapter could not call onBuildComplete on NEXT_ADAPTER_PATH (${process.env.NEXT_ADAPTER_PATH})`,
     );
+  }
+
+  const outputRoots = [
+    payload.distDir,
+    `${payload.distDir}/output`,
+    `${payload.projectDir}/.vercel/output`,
+    "/vercel/output",
+  ];
+  let strippedLate = 0;
+  for (const root of outputRoots) {
+    strippedLate += (await publish.stripUnconditionalPreviewToolbar(root)).length;
+  }
+  if (strippedLate) {
+    console.log(`CSP: removed the unconditional preview toolbar injection from ${strippedLate} deployed file(s)`);
   }
 
   const checked = await publish.assertDeploymentOutput({

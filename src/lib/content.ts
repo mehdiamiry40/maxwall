@@ -37,7 +37,7 @@ export const projects = [
   {
     slug: "new-builds",
     title: "Cladding, AAC & insulation for new builds in Adelaide",
-    seoTitle: "New Build Cladding, AAC & Insulation Contractors Adelaide",
+    seoTitle: "New Build Cladding, AAC & Insulation Adelaide",
     shortTitle: "New homes & builder projects",
     image: images.scaffold,
     description:
@@ -76,7 +76,7 @@ export const guides = [
     published: "2026-10-17",
     updated: "2026-10-17",
     title: "Choosing James Hardie cladding for your home",
-    seoTitle: "Choosing James Hardie Cladding: Linea vs Axon vs Stria",
+    seoTitle: "James Hardie Cladding: Linea vs Axon vs Stria",
     image: images.services["james-hardie-cladding"],
     description:
       "Compare James Hardie Linea, Axon, Oblique, Stria and textured panels for Adelaide homes: style, detailing, bushfire ratings and what to ask before you choose.",
@@ -156,7 +156,7 @@ export const guides = [
     published: "2026-10-17",
     updated: "2026-10-17",
     title: "Insulating an Adelaide home: where to start",
-    seoTitle: "Home Insulation Guide Adelaide: Ceiling, Walls & Floors",
+    seoTitle: "Adelaide Insulation: Ceilings, Walls, Floors",
     image: images.services.insulation,
     description:
       "A practical guide to insulating an Adelaide home: ceilings, walls, underfloor and acoustic batts, wall wraps and the questions to ask before you insulate.",
@@ -234,7 +234,7 @@ export const guides = [
     published: "2026-10-17",
     updated: "2026-10-17",
     title: "Microcement bathrooms: renovating over tiles",
-    seoTitle: "Microcement Over Tiles: Dulux AcraStone Bathroom Guide",
+    seoTitle: "Microcement Over Tiles: Dulux AcraStone Guide",
     image: images.services.microcement,
     description:
       "How Dulux AcraStone microcement can renovate an Adelaide bathroom over existing tiles: suitable surfaces, waterproofing, finishes, care and what to expect.",
@@ -319,7 +319,7 @@ export const guides = [
     published: "2026-10-10",
     updated: "2026-10-17",
     title: "Planning your cladding or renovation project",
-    seoTitle: "Planning a Cladding or Renovation Project Adelaide",
+    seoTitle: "Planning Cladding & Renovation Adelaide",
     image: images.scaffold,
     description:
       "Prepare for a cladding, insulation or microcement quote in Adelaide with a practical checklist for photos, plans, finish choices, site access and timing.",
@@ -507,7 +507,7 @@ export const guides = [
 export const areaPages = [
   {
     slug: "north",
-    seoTitle: "Cladding & Insulation in Adelaide's Northern Suburbs",
+    seoTitle: "Adelaide Northern Suburbs Cladding & Insulation",
     metaDescription:
       "James Hardie cladding, Bradford insulation, AcraStone microcement and painting in Salisbury, Mawson Lakes, Golden Grove, Elizabeth, Gawler and nearby.",
     title: "Cladding, insulation and microcement in Adelaide's northern suburbs",
@@ -553,7 +553,7 @@ export const areaPages = [
   },
   {
     slug: "west",
-    seoTitle: "Cladding & Insulation in Adelaide's Western Suburbs",
+    seoTitle: "Adelaide Western Suburbs Cladding & Insulation",
     metaDescription:
       "Cladding, insulation, microcement and painting for homes in Woodville, Henley Beach, Grange, West Lakes, Semaphore and Port Adelaide. Free measure and quote.",
     title: "Cladding, insulation and microcement in Adelaide's western suburbs",
@@ -599,7 +599,7 @@ export const areaPages = [
   },
   {
     slug: "east-hills",
-    seoTitle: "Cladding & Insulation in Adelaide's East & the Hills",
+    seoTitle: "Adelaide East & Hills Cladding & Insulation",
     metaDescription:
       "Cladding, insulation, microcement and painting in Norwood, Burnside, Magill, Campbelltown, Stirling, Aldgate and Mount Barker. Fixed written quotes.",
     title:
@@ -646,7 +646,7 @@ export const areaPages = [
   },
   {
     slug: "south",
-    seoTitle: "Cladding & Insulation in Adelaide's Southern Suburbs",
+    seoTitle: "Adelaide Southern Suburbs Cladding & Insulation",
     metaDescription:
       "James Hardie cladding, Bradford insulation, AcraStone microcement and painting in Marion, Glenelg, Brighton, Hallett Cove, Happy Valley and Seaford.",
     title: "Cladding, insulation and microcement in Adelaide's southern suburbs",

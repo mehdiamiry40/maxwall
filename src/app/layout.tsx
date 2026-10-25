@@ -17,7 +17,7 @@ const body = Barlow({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "James Hardie Cladding, Insulation & Microcement Adelaide | Max Wall",
+    default: "James Hardie Cladding & Insulation Adelaide | Max Wall",
     template: "%s | Max Wall",
   },
   description:
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     "geo.placename": "Adelaide",
   },
   openGraph: {
-    title: "James Hardie Cladding, Insulation & Microcement Adelaide | Max Wall",
+    title: "James Hardie Cladding & Insulation Adelaide | Max Wall",
     description:
       "Adelaide installers of James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement. Free fixed-price quotes.",
     url: site.url,

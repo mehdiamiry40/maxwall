@@ -29,7 +29,7 @@ import { projectIdeas } from "@/lib/home";
 import { areas, phoneHref, services, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "James Hardie Cladding, Insulation & Microcement Adelaide",
+  "James Hardie Cladding & Insulation Adelaide",
   "Adelaide installers of James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement. Free on-site measure and fixed written quotes.",
   "/",
 );
@@ -58,6 +58,7 @@ export default function Home() {
             alt={hero.alt}
             fill
             preload
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-[50%_25%]"
           />

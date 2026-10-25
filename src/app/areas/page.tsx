@@ -13,7 +13,7 @@ import Link from "next/link";
 import { areas, services } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Service Areas: Cladding & Insulation Across Adelaide",
+  "Cladding & Insulation Service Areas Adelaide",
   "Max Wall installs James Hardie cladding, Bradford insulation and AcraStone microcement across Adelaide's north, west, east, south and the Adelaide Hills.",
   "/areas",
 );

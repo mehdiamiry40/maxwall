@@ -253,22 +253,27 @@ export function SiteHeader() {
 
 export function MobileActionBar() {
   const pathname = usePathname();
-  if (pathname === "/contact") return null;
+  const onContact = pathname === "/contact";
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-3 border-t border-line bg-render p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]  md:hidden">
+    <nav
+      aria-label="Quick actions"
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-render p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden ${onContact ? "" : "grid grid-cols-2 gap-3"}`}
+    >
       <a
         href={phoneHref}
-        className="flex min-h-12 items-center justify-center gap-2  bg-ochre font-display text-xl font-bold tracking-wide text-white uppercase"
+        className="flex min-h-12 items-center justify-center gap-2 bg-ochre font-display text-xl font-bold tracking-wide text-white uppercase"
       >
         <PhoneIcon />
         Call now
       </a>
-      <Link
-        href={pathname === "/" ? "/#quote" : "/contact"}
-        className="flex min-h-12 items-center justify-center gap-2  bg-bluestone font-display text-lg tracking-wide text-white uppercase"
-      >
-        Free quote <Arrow />
-      </Link>
-    </div>
+      {onContact ? null : (
+        <Link
+          href={pathname === "/" ? "/#quote" : "/contact"}
+          className="flex min-h-12 items-center justify-center gap-2 bg-bluestone font-display text-lg tracking-wide text-white uppercase"
+        >
+          Free quote <Arrow />
+        </Link>
+      )}
+    </nav>
   );
 }

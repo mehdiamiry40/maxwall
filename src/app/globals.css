@@ -12,7 +12,8 @@
   --sandstone: #ffffff;
   --render: #ffffff;
   --ochre: #e16633;
-  --ochre-dark: #e16633;
+  /* Small text only. #e16633 on white is 3.41:1; #c2501f is 4.71:1. */
+  --ochre-dark: #c2501f;
   --ink: #1e25a4;
   --ink-soft: #1e25a4;
   --line: #1e25a4;
@@ -50,6 +51,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 7rem;
+  scroll-padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-bottom: 0;
+  }
 }
 
 body {

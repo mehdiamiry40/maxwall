@@ -14,7 +14,7 @@ import { FinishGuide } from "@/components/FinishGuide";
 import { images } from "@/lib/images";
 
 export const metadata = pageMetadata(
-  "Cladding, Insulation & Microcement Services Adelaide",
+  "Cladding, Insulation & Microcement Adelaide",
   "James Hardie cladding, re-cladding, AAC panels, eaves, CSR Bradford insulation, Dulux AcraStone microcement and painting across Adelaide. Free quotes.",
   "/services",
 );

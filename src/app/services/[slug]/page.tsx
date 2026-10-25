@@ -223,7 +223,7 @@ export default async function ServicePage(
                           className="flex min-h-12 items-center justify-between gap-4 py-3 font-semibold text-bluestone hover:underline"
                         >
                           <span>
-                            <span className="mr-2 text-xs font-bold tracking-[0.12em] text-ochre uppercase">
+                            <span className="mr-2 text-xs font-bold tracking-[0.12em] text-ochre-dark uppercase">
                               {item.kind}
                             </span>
                             {item.label}

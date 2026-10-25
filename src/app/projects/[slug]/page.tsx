@@ -51,7 +51,10 @@ export default async function ProjectPage(
           }}
         />
         <PageHero
-          crumb={[{ label: project.shortTitle }]}
+          crumb={[
+            { label: "Projects", href: "/projects" },
+            { label: project.shortTitle },
+          ]}
           title={project.title}
           intro={project.intro}
           image={project.image}

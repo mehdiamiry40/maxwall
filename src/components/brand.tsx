@@ -25,7 +25,7 @@ export function Logo({ className = "" }: { className?: string }) {
         <span className="font-sans text-[1.35rem] font-bold tracking-[0.035em] sm:text-[1.8rem]">
           MAX WALL
         </span>
-        <span className="mt-1.5 text-[0.5rem] font-semibold tracking-[0.12em] sm:text-[0.6rem]">
+        <span className="mt-1.5 text-[0.625rem] font-semibold tracking-[0.06em] sm:text-[0.75rem] sm:tracking-[0.08em]">
           BUILDING SOLUTIONS
         </span>
       </span>

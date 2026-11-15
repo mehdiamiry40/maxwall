@@ -123,7 +123,7 @@ export function CraftsmanshipSection() {
             sizes="(min-width: 768px) 45vw, 90vw"
             className="object-cover"
           />
-          <span className="absolute bottom-3 right-3 bg-white px-2 py-1 text-[10px] text-bluestone">
+          <span className="absolute bottom-3 right-3 bg-white px-2 py-1 text-xs text-bluestone">
             Inspiration photograph
           </span>
         </div>

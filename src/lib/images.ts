@@ -126,11 +126,6 @@ export const images = {
       alt: "Contemporary home with a smooth white facade",
       credit: "Felix",
     },
-    texture: {
-      src: unsplash("photo-1523217582562-09d0def993a6"),
-      alt: "White modern house with clean lines",
-      credit: "Pixasquare",
-    },
     install: {
       src: unsplash("photo-1701850009190-2859ba2aeea6"),
       alt: "Tradesperson installing lightweight wall blocks",

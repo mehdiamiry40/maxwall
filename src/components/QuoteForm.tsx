@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   QUOTE_GENERIC_ERROR,
   type QuoteState,
@@ -32,21 +32,26 @@ function useRequestedServiceTitle(): string {
   return serviceBySlug(slug)?.title ?? "";
 }
 
-async function submitQuote(
-  _previous: QuoteState,
-  formData: FormData,
-): Promise<QuoteState> {
+/** Stop waiting after this long so the button can never stay on "Sending…". */
+const SUBMIT_TIMEOUT_MS = 30_000;
+
+async function postQuote(formData: FormData): Promise<QuoteState> {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
   try {
     const response = await fetch("/api/quote", {
       method: "POST",
       body: formData,
       headers: { accept: "application/json" },
+      signal: controller.signal,
     });
     const data: unknown = await response.json().catch(() => null);
     if (!isQuoteState(data)) return { ok: false, message: QUOTE_GENERIC_ERROR };
     return { ok: data.ok, message: data.message };
   } catch {
     return { ok: false, message: QUOTE_GENERIC_ERROR };
+  } finally {
+    window.clearTimeout(timer);
   }
 }
 
@@ -64,10 +69,10 @@ export function QuoteForm({
   defaultService?: string;
   compact?: boolean;
 }) {
-  const [state, formAction, pending] = useActionState(
-    submitQuote,
-    initialState,
-  );
+  const [state, setState] = useState<QuoteState>(initialState);
+  const [pending, setPending] = useState(false);
+  // Set synchronously on submit, so a second tap is ignored before React re-renders.
+  const inFlight = useRef(false);
   const [values, setValues] = useState({
     name: "",
     mobile: "",
@@ -78,10 +83,36 @@ export function QuoteForm({
     details: "",
   });
   const requestedService = useRequestedServiceTitle();
-  const startedAtRef = useRef<HTMLInputElement>(null);
+  // When the form became usable, for the server's minimum time-to-submit check.
+  // Added to the request at submit time: a hidden input loses its value on re-render.
+  const startedAt = useRef("");
   useEffect(() => {
-    if (startedAtRef.current) startedAtRef.current.value = String(Date.now());
+    startedAt.current = String(Date.now());
   }, []);
+  // The confirmation is much shorter than the form it replaces, so it can land
+  // above the viewport. Move focus to it and scroll it back into view; "nearest"
+  // leaves the page alone when it is already visible below the sticky header.
+  const confirmation = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const panel = confirmation.current;
+    if (!state.ok || !panel) return;
+    panel.focus({ preventScroll: true });
+    panel.scrollIntoView({ block: "nearest" });
+  }, [state.ok]);
+
+  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (inFlight.current) return;
+    inFlight.current = true;
+    setPending(true);
+    const formData = new FormData(event.currentTarget);
+    if (startedAt.current) formData.set("startedAt", startedAt.current);
+    const result = await postQuote(formData);
+    inFlight.current = false;
+    setState(result);
+    setPending(false);
+  }
+
   const prefix = compact ? "hero-" : "";
   const input =
     "mt-1.5 min-h-12 w-full  border border-line bg-render px-3 py-2.5 text-base text-ink transition placeholder:text-ink-soft focus:border-sky-deep focus:bg-white focus:ring-2 focus:ring-sky/20";
@@ -105,7 +136,12 @@ export function QuoteForm({
 
   if (state.ok)
     return (
-      <div className="py-10 text-center" role="status">
+      <div
+        ref={confirmation}
+        tabIndex={-1}
+        className="py-10 text-center outline-none"
+        role="status"
+      >
         <span
           aria-hidden="true"
           className="mx-auto grid h-12 w-12 place-items-center  bg-sky-soft text-xl text-sky-ink"
@@ -154,14 +190,8 @@ export function QuoteForm({
     <form
       action="/api/quote"
       method="POST"
-      // React resets the native form after an action, including validation failures.
-      // Preserve the controlled fields; successful submissions replace the form.
-      onReset={(event) => event.preventDefault()}
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (pending) return;
-        formAction(new FormData(event.currentTarget));
-      }}
+      // The action and method are the fallback for visitors without JavaScript.
+      onSubmit={handleSubmit}
       className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2"
     >
       <div>
@@ -244,7 +274,6 @@ export function QuoteForm({
       ) : (
         <div className="grid gap-4 sm:col-span-2">{extras}</div>
       )}
-      <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
       <input
         type="text"
         name="company"

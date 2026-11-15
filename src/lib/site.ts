@@ -98,7 +98,7 @@ export const services: Service[] = [
       },
       {
         name: "Axon™ Cladding",
-        body: "Vertically grooved panels with a shiplap joint, in smooth or grained finishes and 133mm or 400mm groove spacing.",
+        body: "Vertically grooved panels with a shiplap joint. Smooth comes with 133mm or 400mm groove spacing, Grained with 133mm.",
       },
       {
         name: "Hardie™ Oblique™ Cladding",
@@ -106,7 +106,7 @@ export const services: Service[] = [
       },
       {
         name: "Stria™ Cladding",
-        body: "Horizontal 14mm boards with deep grooves, in a smooth finish or a fine render texture, for a modern, linear facade.",
+        body: "14mm boards with deep grooves, in a smooth finish or a fine render texture, run horizontally or vertically for a modern, linear facade.",
       },
       {
         name: "Hardie™ Fine Texture & Brushed Concrete",
@@ -267,7 +267,7 @@ export const services: Service[] = [
     products: [
       {
         name: "Hardie™ Groove Lining",
-        body: "V-grooved fibre cement lining at 100mm spacing, for a timber-look ceiling on eaves, soffits, alfrescos and interior feature walls.",
+        body: "V-grooved fibre cement lining at 100mm spacing, for a timber-look finish on eaves, soffits, and interior walls and ceilings.",
       },
       {
         name: "Flat eaves & soffit lining",
@@ -389,8 +389,8 @@ export const services: Service[] = [
         body: "A soft, organic texture with more visible movement, for walls and floors that want a little more character.",
       },
       {
-        name: "Tinted Base Coat",
-        body: "A coarser, more textured look using the tinted base coat as the finish, for a raw, natural-stone feel.",
+        name: "Base Coat",
+        body: "A coarser, more textured look using a tinted Base Coat as the finish, for a raw, natural-stone feel.",
       },
     ],
     includes: [

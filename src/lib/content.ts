@@ -86,7 +86,7 @@ export const guides = [
       {
         title: "Start with the style of the house",
         paragraphs: [
-          "Linea™ weatherboards suit classic, coastal and Hamptons homes, with deep shadow lines that read like timber. Axon™ gives vertical grooves for a modern, linear look, while Stria™ and Oblique™ run horizontally with bolder grooves and shadows.",
+          "Linea™ weatherboards suit classic, coastal and Hamptons homes, with deep shadow lines that read like timber. Axon™ gives vertical grooves for a modern, linear look, while Stria™ and Oblique™ can run horizontally or vertically, with bolder grooves and shadows.",
           "If you want the look of render or concrete on a lightweight wall, Hardie™ Fine Texture and Brushed Concrete panels are pre-textured, and Matrix™ gives an architectural grid with express joints. Many homes combine two profiles, such as weatherboards on the upper storey over a textured base.",
         ],
       },
@@ -94,8 +94,8 @@ export const guides = [
         title: "The main profiles compared",
         paragraphs: [
           "James Hardie describes Linea™ as a 16mm thick, pre-primed weatherboard, made in 150mm and 180mm widths. The thickness gives a deeper shadow line than a thin board, which is why it's often chosen to replace timber weatherboards on older homes without losing their character.",
-          "Axon™ is a vertically grooved panel with a shiplap joint. James Hardie offers it in smooth and grained finishes, with grooves at 133mm or 400mm spacing: the narrow spacing reads like a classic board-and-batten wall, the wide spacing like a cleaner, more minimal panel.",
-          "Oblique™ and Stria™ are both 14mm horizontal boards, according to James Hardie. Oblique comes in 200mm and 300mm widths with angled groove edges that throw shifting shadows through the day. Stria has deep, crisp grooves and comes smooth or with a fine render texture, which suits contemporary homes with long, low facades.",
+          "Axon™ is a vertically grooved panel with a shiplap joint. James Hardie offers a smooth finish with grooves at 133mm or 400mm spacing, and a grained finish at 133mm only. The narrow spacing reads like a classic board-and-batten wall, the wide spacing like a cleaner, more minimal panel.",
+          "Oblique™ and Stria™ are both 14mm boards that, according to James Hardie, can be installed horizontally or vertically. Oblique comes in 200mm and 300mm widths with angled groove edges that throw shifting shadows through the day. Stria has deep, crisp grooves and comes smooth or with a fine render texture, which suits contemporary homes with long, low facades.",
           "Matrix™ is a panel system with a 10mm express joint, which James Hardie designs for cavity construction. It suits grid layouts on modern homes, but the joint layout has to be planned around windows and doors from the start, so it rewards careful set-out.",
         ],
       },
@@ -449,7 +449,7 @@ export const guides = [
         title: "What's coming off the wall",
         paragraphs: [
           "For a re-clad, the existing material usually has to be removed and disposed of before the new cladding goes on. The type of material, how it's fixed and how much there is all affect the cost of removal and tip fees.",
-          "Homes built or renovated before 1990 may have cladding or eaves that contain asbestos. If we suspect asbestos, it has to be tested and, if present, removed by a licensed asbestos removalist under SafeWork SA rules before we start. That's an additional cost, and we'll flag it as early as we can.",
+          "Homes built or renovated before 1990 may have cladding or eaves that contain asbestos. If we suspect asbestos, we won't start until it has been tested and, if present, removed by a licensed asbestos removalist. That's an additional cost, and we'll flag it as early as we can.",
         ],
       },
       {

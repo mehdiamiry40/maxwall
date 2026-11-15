@@ -36,7 +36,7 @@ export function FinishGuide() {
               className="flex flex-col surface-card p-6 transition duration-300 hover:-translate-y-0.5   sm:p-7"
             >
               <div className="mb-6 flex items-center justify-between">
-                <span className="text-[0.65rem] font-semibold tracking-[0.12em] text-ink-soft uppercase">
+                <span className="text-xs font-semibold tracking-[0.12em] text-ink-soft uppercase">
                   {option.label}
                 </span>
                 <WallIcon

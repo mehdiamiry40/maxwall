@@ -22,6 +22,9 @@ import { guides, projects } from "@/lib/content";
 import { images } from "@/lib/images";
 import { serviceBySlug, services, site, steps } from "@/lib/site";
 
+// Only the services in the content files exist; anything else is a 404
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }

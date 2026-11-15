@@ -22,6 +22,9 @@ const formatDate = (iso: string) =>
     year: "numeric",
   });
 
+// Only the guides in the content files exist; anything else is a 404
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return guides.map((guide) => ({ slug: guide.slug }));
 }

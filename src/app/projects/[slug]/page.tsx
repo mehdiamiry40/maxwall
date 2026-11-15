@@ -17,6 +17,9 @@ import { projects } from "@/lib/content";
 import { businessId, pageMetadata } from "@/lib/seo";
 import { services, site } from "@/lib/site";
 
+// Only the projects in the content files exist; anything else is a 404
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }

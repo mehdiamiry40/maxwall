@@ -60,7 +60,7 @@ export async function submitQuote(formData: FormData): Promise<QuoteResult> {
     lead.details || "(no details)",
   ].join("\n");
 
-  // Send from whichever domain is verified in Resend (set by the Vercel Resend integration)
+  // Send from whichever domain is verified in Resend
   const from =
     process.env.QUOTE_FROM_EMAIL ??
     `Max Wall Website <quotes@${process.env.RESEND_EMAIL_DOMAIN ?? "maxwall.com.au"}>`;

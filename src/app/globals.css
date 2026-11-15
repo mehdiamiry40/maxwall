@@ -156,12 +156,6 @@ summary {
   flex-direction: column;
 }
 
-.texture-swatch {
-  background-image: url("/images/photo-1632711057336-ddd25c1d921f.webp");
-  background-size: 600%;
-  background-position: 38% 90%;
-}
-
 /* Gentle reveal-on-scroll (see components/Reveal.tsx) */
 @keyframes reveal-in {
   from {

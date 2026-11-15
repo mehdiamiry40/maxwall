@@ -1,31 +1,44 @@
 # Max Wall — maxwall.com.au
 
-Website for Max Wall Building Solutions Pty Ltd, render, cladding and interior/exterior wall painting services in Adelaide, SA.
+Website for Max Wall Building Solutions Pty Ltd: James Hardie cladding, CSR Bradford insulation, Dulux AcraStone microcement and related wall work in Adelaide, SA.
 
-Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel.
+Built with Next.js (App Router) and Tailwind CSS, deployed on Vercel. Every page is prerendered; the only server code is the quote form endpoint.
 
 ## Editing content
 
 - Business details, services, areas, FAQs: `src/lib/site.ts`
 - Homepage inspiration, finish guide and project types: `src/lib/home.ts`
-- Renovation, new-build and guide content: `src/lib/content.ts`
+- Renovation, new-build, guide and area page content: `src/lib/content.ts`
 - SEO metadata and structured data: `src/lib/seo.ts`
-- Photos: `src/lib/images.ts` and `public/images/` (optimized local stock photography with source and licence records)
+- Photos: `src/lib/images.ts` and `public/images/` (see [Photography](#photography))
 
-The homepage uses photo-led service cards, finish-selection links and project guides. The services page includes a filterable catalogue and finish comparison guide.
-The UI uses only the exact RMI blue, orange and white palette, with square surfaces and larger typography. The hero form starts with essential details and lets visitors expand optional fields; entered details are retained after validation errors.
-The mobile navigation uses a native modal dialog for keyboard focus management and Escape dismissal.
-Inspiration photographs are labelled as examples, rather than presented as completed Max Wall jobs.
+Service, guide, project and area pages are generated from those files. A URL whose slug is not in them returns the 404 page.
 
-## Quote form email
+## Design
 
-Quote requests are emailed via [Resend](https://resend.com), connected through the Vercel Marketplace
-(resource `resend-email-cerulean-magnet`, which provides `RESEND_API_KEY` and `RESEND_EMAIL_DOMAIN`).
+The UI uses a blue, orange and white palette with square surfaces and large type; 14px (`text-xs`) is the smallest text size outside the logo. The colours and the shared focus ring are defined in `src/app/globals.css`.
 
+The mobile navigation is a native modal dialog, which handles keyboard focus and Escape. Inspiration photographs are labelled as examples, not presented as completed Max Wall jobs.
+
+## Quote form
+
+The form (`src/components/QuoteForm.tsx`) posts to `/api/quote` (`src/app/api/quote/route.ts`), which validates the request and emails the lead through [Resend](https://resend.com) (`src/lib/quote.ts`). Without JavaScript the same form submits as a normal POST and gets a plain confirmation page.
+
+Spam and abuse checks, all server-side:
+
+- a hidden honeypot field and a minimum time between showing the form and submitting it (`src/lib/quote-guard.ts`)
+- a same-origin check
+- a limit of 5 requests per 10 minutes per IP (`src/lib/rate-limit.ts`). It is held in memory, so each server instance counts separately.
+
+Environment variables, set on the Vercel project:
+
+- `RESEND_API_KEY` — Resend API key
+- `RESEND_EMAIL_DOMAIN` — the sending domain verified in Resend
 - `QUOTE_TO_EMAIL` — where quote requests go (comma-separated for several)
 - `QUOTE_FROM_EMAIL` — optional sender override; defaults to `quotes@$RESEND_EMAIL_DOMAIN`
+- `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` — optional search console verification codes
 
-Run `vercel env pull .env.local` to get these locally.
+`.env.example` lists them. If the email variables are missing, production answers with a "form isn't working" message; development logs the lead to the console and reports success.
 
 ## Development
 
@@ -34,12 +47,43 @@ npm install
 npm run dev
 ```
 
+`vercel env pull .env.local` copies the project's variables for local use. With a real `RESEND_API_KEY` in `.env.local`, submitting the form locally sends a real email. To test the form without sending, blank the key for that run:
+
+```bash
+RESEND_API_KEY= npm run dev
+```
+
 ## Verification
 
-Run `npm run lint`, `npm run build`, then `npm run verify`. The verification script checks the built static pages for unique titles, canonical and sharing URLs, one h1, contact links, valid JSON-LD and sitemap coverage.
+```bash
+npm run lint
+npm test
+npm run build
+npm run verify
+```
 
-`npm run build -- --webpack` is an alternate local build command when the default Turbopack subprocess is restricted. Vercel uses the default build command.
+- `npm test` covers the rate limiter, the spam checks and the Content-Security-Policy build step.
+- `npm run verify` checks the built static pages for unique titles, canonical and sharing URLs, one h1, contact links, valid JSON-LD and sitemap coverage.
 
-## Photography policy
+## Security headers
+
+`next.config.ts` sets the security headers, including a Content-Security-Policy that allows inline scripts by hash only. The hashes are not known until the pages are prerendered, so they are filled in after the build:
+
+- locally, `npm run build` runs `scripts/csp-hashes.ts` after `next build`
+- on Vercel, `scripts/csp-adapter.mjs` wraps Vercel's Next.js adapter so the hashes are in the header before the deployment's routing config is written
+
+The build fails if a prerendered inline script has no hash. Because the adapter step relies on how Vercel's adapter works, check the `Content-Security-Policy` header on the deployment after upgrading Next.js.
+
+## Deployment
+
+Pushes to `main` deploy to production on Vercel. Other branches and pull requests get preview deployments, which sit behind Vercel sign-in.
+
+## Photography
+
+Photos are local files in `public/images/`, listed in `src/lib/images.ts`. The image optimizer only accepts paths under `/images/`, so a photo placed anywhere else will not load through `next/image`.
 
 Use real licensed stock photography suited to Australian or South Australian housing and construction. Do not use AI-generated photographic assets. Stock images are examples, not completed Max Wall projects. Photo provenance is recorded in `public/images/PHOTO-CREDITS.md`; prefer verified Australian locations when choosing new photos.
+
+## Icons
+
+`src/app/icon.svg` is the source for the site icon. `src/app/favicon.ico`, `src/app/apple-icon.png` and the two files in `public/icons/` (used by `src/app/manifest.ts`) are rasterised copies of it and need regenerating if the mark changes.

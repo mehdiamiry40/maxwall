@@ -79,9 +79,19 @@ p {
   text-wrap: pretty;
 }
 
+/* Two-tone focus ring: a blue line between two white bands. The blue shows on
+   white surfaces and the white shows on blue ones, so it is visible everywhere. */
 :focus-visible {
   outline: 2px solid var(--sky-deep);
-  outline-offset: 3px;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px #ffffff;
+}
+
+/* Elements that only take focus from script, like the quote confirmation, are
+   not keyboard stops and get no ring. */
+[tabindex="-1"]:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 details summary::-webkit-details-marker {

@@ -115,7 +115,7 @@ export function QuoteForm({
 
   const prefix = compact ? "hero-" : "";
   const input =
-    "mt-1.5 min-h-12 w-full  border border-line bg-render px-3 py-2.5 text-base text-ink transition placeholder:text-ink-soft focus:border-sky-deep focus:bg-white focus:ring-2 focus:ring-sky/20";
+    "mt-1.5 min-h-12 w-full  border border-line bg-render px-3 py-2.5 text-base text-ink transition placeholder:text-ink/70 focus:border-sky-deep focus:bg-white";
   const label = "block text-sm font-semibold text-bluestone";
   const optional = (
     <span className="font-normal text-ink-soft">(optional)</span>
@@ -139,7 +139,7 @@ export function QuoteForm({
       <div
         ref={confirmation}
         tabIndex={-1}
-        className="py-10 text-center outline-none"
+        className="py-10 text-center"
         role="status"
       >
         <span

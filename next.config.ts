@@ -43,8 +43,10 @@ const nextConfig: NextConfig = {
   // Vercel sets NEXT_ADAPTER_PATH to its own adapter. Wrap it so the routing
   // object it serialises already contains the real script hashes.
   ...(process.env.NEXT_ADAPTER_PATH ? { adapterPath: join(process.cwd(), "scripts/csp-adapter.mjs") } : {}),
+  // Every photo is served from public/images, so the image optimizer accepts
+  // only those paths and no remote hosts.
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com", pathname: "/**" }],
+    localPatterns: [{ pathname: "/images/**", search: "" }],
   },
   async redirects() {
     return legacyRedirects.map(([source, destination]) => ({

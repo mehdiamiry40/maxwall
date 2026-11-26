@@ -14,9 +14,28 @@ import { blurProps, images } from "@/lib/images";
 import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata(
   "Cladding, Insulation & Microcement Guides",
-  "Practical guides for Adelaide homeowners: choosing James Hardie cladding, what drives cladding costs, insulating your home and microcement bathrooms.",
+  "Plain guides for Adelaide homeowners: Linea vs Axon vs Stria, what affects cladding cost, where to insulate first and microcement over tiles.",
   "/guides",
 );
+// Guides explain the choices; these pages own quoting and installation
+const servicePages = [
+  {
+    href: "/services/james-hardie-cladding",
+    label: "James Hardie cladding installation",
+  },
+  {
+    href: "/services/re-cladding",
+    label: "Re-cladding an existing home or facade",
+  },
+  {
+    href: "/services/insulation",
+    label: "Insulation for ceilings, walls and floors",
+  },
+  {
+    href: "/services/microcement",
+    label: "Microcement for bathrooms, walls and floors",
+  },
+];
 export default function GuidesPage() {
   return (
     <>
@@ -24,8 +43,8 @@ export default function GuidesPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Guides" }]}
-          title="Good advice. Better walls."
-          intro="Simple guidance for choosing cladding, understanding what it costs, insulating your home and planning a renovation."
+          title="Guides for cladding, insulation and microcement projects"
+          intro="Plain answers to the questions people ask before they call: which James Hardie profile to choose, what moves the price, where to insulate first, whether microcement can go over tiles and what to have ready for a quote."
           image={images.servicesBanner}
         />
         <section className={`bg-white ${section}`}>
@@ -56,6 +75,33 @@ export default function GuidesPage() {
                 </span>
               </Link>
             ))}
+          </div>
+        </section>
+        <section className="border-t border-line bg-white py-12 sm:py-16">
+          <div className={container}>
+            <h2 className="text-xl font-semibold text-bluestone">
+              After a price, not a guide?
+            </h2>
+            <p className="mt-3 max-w-2xl leading-relaxed">
+              These guides explain the choices. The service pages set out what
+              we install and what is included, and{" "}
+              <Link href="/how-we-work" className="underline underline-offset-4">
+                how we work
+              </Link>{" "}
+              explains the site measure and fixed written quote.
+            </p>
+            <ul className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+              {servicePages.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
         <CtaSection title="Want advice for your own walls?" />

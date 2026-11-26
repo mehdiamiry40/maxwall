@@ -6,6 +6,9 @@ import { services, site } from "@/lib/site";
 
 const absolute = (path: string) => new URL(path, site.url).href;
 
+/** Editorial date for the 26 November 2026 content rewrite. Not build time. */
+const REWRITE_DATE = "2026-11-26";
+
 const pageFiles: Record<string, string[]> = {
   "/": ["src/app/page.tsx", "src/lib/home.ts"],
   "/services": ["src/app/services/page.tsx"],
@@ -83,18 +86,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     /** Real content date (frontmatter). Git is the fallback. */
     updated?: string;
   }[] = [
-    { path: "/", priority: 1, image: images.homeHero.src },
-    { path: "/services", priority: 0.9, image: images.servicesBanner.src },
+    { path: "/", priority: 1, image: images.homeHero.src, updated: REWRITE_DATE },
+    { path: "/services", priority: 0.9, image: images.servicesBanner.src, updated: REWRITE_DATE },
     ...services.map((s) => ({
       path: `/services/${s.slug}`,
       priority: 0.9,
       image: images.services[s.slug]?.src,
+      updated: REWRITE_DATE,
     })),
-    { path: "/projects", priority: 0.7, image: images.areasBanner.src },
+    { path: "/projects", priority: 0.7, image: images.areasBanner.src, updated: REWRITE_DATE },
     ...projects.map((p) => ({
       path: `/projects/${p.slug}`,
       priority: 0.7,
       image: p.image.src,
+      updated: REWRITE_DATE,
     })),
     { path: "/guides", priority: 0.6, updated: latestGuideUpdate },
     ...guides.map((g) => ({
@@ -103,16 +108,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       image: g.image.src,
       updated: g.updated,
     })),
-    { path: "/about", priority: 0.6 },
-    { path: "/how-we-work", priority: 0.5 },
-    { path: "/areas", priority: 0.7 },
+    { path: "/about", priority: 0.6, updated: REWRITE_DATE },
+    { path: "/how-we-work", priority: 0.5, updated: REWRITE_DATE },
+    { path: "/areas", priority: 0.7, updated: REWRITE_DATE },
     ...areaPages.map((a) => ({
       path: `/areas/${a.slug}`,
       priority: 0.7,
       image: a.image.src,
+      updated: REWRITE_DATE,
     })),
-    { path: "/faq", priority: 0.6 },
-    { path: "/contact", priority: 0.8 },
+    { path: "/faq", priority: 0.6, updated: REWRITE_DATE },
+    { path: "/contact", priority: 0.8, updated: REWRITE_DATE },
     { path: "/privacy", priority: 0.2 },
   ];
   return pages.map(({ path, priority, image, updated }) => {

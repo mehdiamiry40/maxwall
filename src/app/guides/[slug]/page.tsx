@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
   container,
   CtaSection,
+  FaqList,
   Footer,
   Header,
   PageHero,
@@ -13,7 +14,7 @@ import {
 } from "@/components/ui";
 import { StructuredData } from "@/components/StructuredData";
 import { guides } from "@/lib/content";
-import { businessId, pageMetadata } from "@/lib/seo";
+import { businessId, faqSchema, pageMetadata } from "@/lib/seo";
 import { services, site } from "@/lib/site";
 const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00`).toLocaleDateString("en-AU", {
@@ -60,6 +61,7 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
             publisher: { "@id": businessId },
           }}
         />
+        <StructuredData value={faqSchema(guide.faqs)} />
         <PageHero
           crumb={[{ label: "Guides", href: "/guides" }, { label: guide.title }]}
           title={guide.title}
@@ -84,6 +86,14 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <a
+                    href="#questions"
+                    className="inline-flex min-h-11 items-center text-base underline underline-offset-4"
+                  >
+                    Common questions
+                  </a>
+                </li>
               </ol>
               <Link
                 href="/contact"
@@ -130,6 +140,35 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
                   ))}
                 </section>
               ))}
+              <section aria-labelledby="next-steps">
+                <h2
+                  id="next-steps"
+                  className="text-2xl font-semibold text-bluestone"
+                >
+                  Next steps
+                </h2>
+                <ul className="mt-4 divide-y divide-line border-y border-line">
+                  {guide.next.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="flex min-h-12 items-center justify-between gap-4 py-3 font-semibold text-bluestone hover:underline"
+                      >
+                        <span>{item.label}</span>
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <section id="questions" className="scroll-mt-36">
+                <h2 className="text-2xl font-semibold text-bluestone">
+                  Common questions
+                </h2>
+                <div className="mt-4">
+                  <FaqList items={guide.faqs} />
+                </div>
+              </section>
             </div>
           </div>
         </article>

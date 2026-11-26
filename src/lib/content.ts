@@ -545,89 +545,179 @@ export const guides = [
 export const areaPages = [
   {
     slug: "north",
-    seoTitle: "Adelaide Northern Suburbs Cladding & Insulation",
+    seoTitle: "Northern Adelaide Suburbs: Cladding & Insulation",
     metaDescription:
-      "James Hardie cladding, Bradford insulation, AcraStone microcement and painting in Salisbury, Mawson Lakes, Golden Grove, Elizabeth, Gawler and nearby.",
-    title: "Cladding, insulation and microcement in Adelaide's northern suburbs",
+      "Insulation, cladding and facade updates for northern Adelaide homes, from Salisbury and Elizabeth to Mawson Lakes, Golden Grove and Gawler. Fixed quotes.",
+    title: "Cladding and insulation in Adelaide's northern suburbs",
     intro:
-      "The north is our home patch. We work from Parafield Gardens and Mawson Lakes out to Elizabeth, Golden Grove and Gawler, on new builds and on homes families have lived in for decades.",
+      "The north is our home patch. We work from Parafield Gardens and Mawson Lakes out to Elizabeth, Golden Grove and Gawler, on Housing Trust-era brick homes, 1980s family houses and new estates.",
     summary:
-      "Our home patch. Housing Trust-era brick homes in Elizabeth and Salisbury, 1970s–90s family homes in Modbury and Golden Grove, and new estates around Mawson Lakes, Munno Para and Gawler.",
+      "Our home patch. Housing Trust-era brick homes in Elizabeth and Salisbury, 1960s–90s family homes from Parafield Gardens to Golden Grove, and new estates around Mawson Lakes, Munno Para and Gawler.",
     image: images.hero,
     sections: [
       {
-        title: "Homes in the north",
+        title: "Elizabeth and Salisbury: Housing Trust-era brick",
         paragraphs: [
-          "Adelaide's northern suburbs grew in waves, and you can read that history in the walls. Elizabeth and parts of Salisbury were built as planned South Australian Housing Trust communities from the 1950s, so many streets are lined with solid brick and brick-veneer homes, some of them semi-detached. Modbury, Paralowie and Parafield Gardens filled out between the 1960s and the 1990s with brick-veneer family homes, and Golden Grove was laid out as a master-planned community from the mid-1980s.",
-          "Newer estates tell a different story. Mawson Lakes, Munno Para and the growth areas around Gawler are full of contemporary homes and townhouses where lightweight cladding, rendered-look panels and brick share the same facade. Gawler itself mixes these new streets with older stone cottages and villas in and around the historic town centre.",
+          "Elizabeth and parts of Salisbury were built as planned South Australian Housing Trust communities from the 1950s, and many streets are still lined with solid brick and brick-veneer homes, some of them semi-detached. These are sturdy houses. What they tend to be short of is insulation.",
+          "Ceiling insulation from those decades is often thin, patchy or compressed, if it's there at all, and the northern plains feel the full force of an Adelaide summer. So the roof space is usually the place to start. We check what's already there, look at the clearances around downlights and flues, and recommend a CSR Bradford R-value for a top-up or a replacement. Where the house has a raised timber floor, underfloor insulation is the practical second step.",
         ],
       },
       {
-        title: "What northern homes usually need",
+        title:
+          "Parafield Gardens, Paralowie, Modbury and Golden Grove: brick-veneer family homes",
         paragraphs: [
-          "For older brick and brick-veneer homes, the biggest comfort gains usually start in the roof. Ceiling insulation from those decades is often thin, patchy or compressed, if it's there at all, and the northern plains feel the full force of an Adelaide summer. A CSR Bradford ceiling top-up, plus underfloor insulation where there's a raised timber floor, is often the most practical first step.",
-          "Facades are the other common project. A 1970s or 80s brick front can take on a contemporary look with James Hardie Axon, Stria or Oblique boards on a gable, entry or upper storey, and extensions and granny flats are often clad in Linea weatherboards or lightweight panels to keep weight off the existing structure. On new builds we work with builders on wall wrap, insulation, cladding, Hardie Gravis AAC panels and eaves, priced to the plans and energy report.",
+          "Modbury, Paralowie and Parafield Gardens filled out between the 1960s and the 1990s with brick-veneer family homes, and Golden Grove was laid out as a master-planned community from the mid-1980s. The structure of these houses is rarely the issue. The street front is what owners usually want to change.",
+          "Because the walls are brick, the job is seldom a full re-clad. More often we add James Hardie Axon, Stria or Oblique boards to a gable, an entry or a framed upper storey, so a 1970s or 80s front takes on a contemporary look, then paint the new boards and the eaves together. Extensions and granny flats are often clad in Linea weatherboards or lightweight panels, which keeps weight off the existing structure.",
         ],
       },
       {
-        title: "Things we check on northern jobs",
+        title: "Mawson Lakes, Munno Para and Gawler: new estates beside an old town",
         paragraphs: [
-          "Newer estates often come with developer design guidelines or encumbrances that set out materials and colours for the street frontage, so it's worth checking yours before choosing a profile. On tight lots and boundary walls, the wall system has to suit the setback and its fire requirements, which is one reason Hardie Gravis AAC panels are popular for zero-lot walls.",
-          "Some older homes still have original fibre cement sheeting on eaves, wet areas or early extensions. Homes built or renovated before 1990 may contain asbestos, so if we see anything suspicious we stop and recommend testing before anything is cut or removed.",
+          "Mawson Lakes, Munno Para and the growth areas around Gawler are full of contemporary homes and townhouses where lightweight cladding, rendered-look panels and brick share the same facade. For builders and owner-builders we price the building envelope from the plans and energy report: wall wrap, insulation, cladding, Hardie Gravis AAC panels and eaves, scheduled around frame inspections and other trades.",
+          "Newer estates often come with developer design guidelines or encumbrances that set out materials and colours for the street frontage, so check yours before choosing a profile. Lots are tight as well. A wall on or near the boundary has to suit the setback and its fire requirements, which is one reason Hardie Gravis AAC panels are popular for zero-lot walls.",
+          "Gawler itself is a different case. Its new streets sit alongside older stone cottages and villas in and around the historic town centre, and on those homes the practical jobs are usually out of sight of the street: roof-space insulation, the cladding on a rear extension, or new eaves.",
+        ],
+      },
+      {
+        title: "What we check before quoting in the north",
+        paragraphs: [
+          "Some older northern homes still have original fibre cement sheeting on eaves, in wet areas or on early extensions. Homes built or renovated before 1990 may contain asbestos, so if we see anything suspicious we stop and recommend testing before anything is cut or removed.",
+          "At the measure we also confirm safe access to the roof space or subfloor, any estate guideline or boundary condition that affects the wall system, and whether you want painting priced with the cladding so one team finishes the wall. It all goes into a fixed written quote.",
         ],
       },
     ],
+    // City-wide queries belong to the service pages; each region links back to them
+    serviceLinks: {
+      title: "Service details for the whole of Adelaide",
+      intro:
+        "This page is about the northern suburbs. What each service includes, the products we install and the questions people ask are on our service pages, which cover the whole city.",
+      links: [
+        {
+          slug: "insulation",
+          label: "Adelaide insulation installers: ceilings, walls and floors",
+          body: "CSR Bradford batts, wall wraps and roof blankets, with an R-value recommended for each area. The usual first call for older homes in Elizabeth and Salisbury.",
+        },
+        {
+          slug: "re-cladding",
+          label: "Re-cladding and facade updates across Adelaide",
+          body: "New James Hardie boards over a checked frame, or a feature section that updates the 1970s and 80s brick fronts of Modbury and Golden Grove.",
+        },
+        {
+          slug: "james-hardie-cladding",
+          label: "James Hardie cladding installers in Adelaide",
+          body: "Linea, Axon, Oblique, Stria, Matrix and textured panels for new builds, extensions and granny flats from Mawson Lakes to Gawler.",
+        },
+        {
+          slug: "microcement",
+          label: "Microcement bathrooms, walls and floors in Adelaide",
+          body: "Dulux AcraStone over sound existing tiles, for original bathrooms and laundries that need a new surface more than a new layout.",
+        },
+      ],
+    },
     services: ["insulation", "re-cladding", "aac-panels"],
     faqs: [
       {
         q: "Can you insulate the ceiling of an older Elizabeth or Salisbury home?",
-        a: "Usually, yes, as long as there's safe access to the roof space. We check the existing insulation, clearances around downlights and any signs of moisture, then recommend R-values for the ceiling and, where it's practical, the subfloor or walls.",
+        a: "Usually, yes, as long as there's safe access to the roof space. We check the existing insulation, the clearances around downlights and flues, and any signs of moisture, then recommend R-values for the ceiling and, where it's practical, the subfloor or walls.",
       },
       {
-        q: "Do you work with builders on new estates in the north?",
+        q: "Do you work with builders on new estates around Mawson Lakes, Munno Para and Gawler?",
         a: "Yes. We price wall wrap, insulation, cladding, AAC panels, eaves and painting from the plans and specifications, and schedule the work around frame inspections and other trades. Send the drawings and energy report and we'll quote to them.",
+      },
+      {
+        q: "My estate has design guidelines. Can I still use James Hardie cladding on the front?",
+        a: "Often, but read the guidelines or encumbrance first, because some estates set the materials and colours allowed on the street frontage. Send us the document with your plans or bring it to the measure, and we'll talk through which profiles and finishes fit. The developer or council has the final say.",
+      },
+      {
+        q: "Can you clad a granny flat or rear extension in Paralowie or Modbury?",
+        a: "Yes. Extensions and granny flats are often clad in Linea weatherboards or lightweight James Hardie panels, with wall wrap and Bradford wall batts fitted before the boards go on. We measure on site and give you a fixed written quote.",
       },
     ],
   },
   {
     slug: "west",
-    seoTitle: "Adelaide Western Suburbs Cladding & Insulation",
+    seoTitle: "Western Adelaide Suburbs: Cladding & Insulation",
     metaDescription:
-      "Cladding, insulation, microcement and painting for homes in Woodville, Henley Beach, Grange, West Lakes, Semaphore and Port Adelaide. Free measure and quote.",
-    title: "Cladding, insulation and microcement in Adelaide's western suburbs",
+      "Western suburbs cladding, insulation and microcement for homes in Woodville, Henley Beach, Grange, West Lakes, Semaphore and Port Adelaide. Free measure.",
+    title: "Cladding and insulation in Adelaide's western suburbs",
     intro:
-      "From Torrensville and Woodville to the beach at Henley, Grange and Semaphore, the west mixes post-war homes, coastal infill and some of Adelaide's oldest streets.",
+      "From Torrensville and Woodville to the beach at Henley, Grange and Semaphore, the west mixes post-war brick homes, narrow-lot townhouses, salt air and some of Adelaide's oldest streets.",
     summary:
-      "Post-war brick homes and new townhouses in Woodville, Findon and Seaton, coastal homes in Henley Beach, Grange and West Lakes, and historic cottages around Semaphore and Port Adelaide.",
+      "Post-war brick homes and new townhouses in Woodville, Findon and Seaton, salt-air homes in Henley Beach, Grange and West Lakes, and early cottages around Semaphore and Port Adelaide.",
     image: images.services.detail,
     sections: [
       {
-        title: "Homes in the west",
+        title: "Woodville, Findon and Seaton: post-war brick and new townhouses",
         paragraphs: [
-          "Much of the inner west was built after the Second World War, and suburbs such as Woodville, Findon and Seaton still have plenty of Housing Trust and private brick homes from that period. Many of those blocks are now being subdivided, so original homes sit beside new two-storey townhouses on narrow lots. Torrensville has older bungalows and cottages close to the city, and West Lakes was developed around its lake from the 1970s with brick homes and townhouses.",
-          "Closer to the water, Henley Beach and Grange combine older villas and beach houses with large new builds, while Semaphore and Port Adelaide hold some of the city's earliest stone and timber cottages. Parts of these older areas have heritage or character protections, which can affect what you're allowed to change on the street-facing facade.",
+          "Much of the inner west was built after the Second World War, and Woodville, Findon and Seaton still have plenty of Housing Trust and private brick homes from that period. Many of those blocks are now being subdivided, so an original brick home often sits beside new two-storey townhouses on narrow lots.",
+          "The two need different things. On the original homes, the common requests are updating the brick front with a section of James Hardie boards, re-cladding a tired rear extension, and adding ceiling and underfloor insulation. On the infill builds, lightweight cladding usually goes on the upper level and Hardie Gravis AAC panels on the boundary walls, and we can take care of the wall wrap, insulation, cladding, eaves and painting as one package for the builder or owner-builder.",
+          "If a post-war home still has its original fibre cement sheeting on the eaves or an early extension, we treat it as possible asbestos until it has been tested, and nothing is cut or removed before then.",
         ],
       },
       {
-        title: "What western homes usually need",
+        title: "Henley Beach, Grange, West Lakes and Semaphore: building in salt air",
         paragraphs: [
-          "Infill building is a big part of the work here. Two-storey townhouses on narrow blocks often use lightweight cladding on the upper level and Hardie Gravis AAC panels on boundary walls, and we can take care of the wall wrap, insulation, cladding, eaves and painting as one package for the builder or owner-builder.",
-          "For existing homes, common requests are re-cladding a tired rear extension, updating the front of a post-war brick home, and adding ceiling and underfloor insulation. Inside, Dulux AcraStone microcement is a way to renovate a dated bathroom or laundry without stripping it back, as long as the existing tiles are sound and the waterproofing beneath is in good order.",
+          "Closer to the water, Henley Beach and Grange combine older villas and beach houses with large new builds, and West Lakes was developed around its lake from the 1970s with brick homes and townhouses. What these suburbs share is exposure. Salt air and sea breezes are part of every exterior job here.",
+          "James Hardie sets out specific requirements for fixings, trims and accessories on homes close to the coast, and paint manufacturers specify coating systems for marine environments. We check how far your home is from the water and build those requirements into the quote, rather than pricing a beachfront wall in Grange the same way as a sheltered one in Findon.",
+          "Coastal homes also take more wind-driven rain. Wall wrap, flashings around windows and doors, and well-finished joints are what keep that water out of the frame, so they get the most attention on our western suburbs jobs.",
         ],
       },
       {
-        title: "Building near the coast",
+        title:
+          "Port Adelaide, Semaphore and Torrensville: cottages, bungalows and character rules",
         paragraphs: [
-          "Salt air and sea breezes are part of life in Henley Beach, Grange, Semaphore and West Lakes, and they matter for exterior work. James Hardie sets out specific requirements for fixings, trims and accessories on homes close to the coast, and paint manufacturers specify coating systems for marine environments. We check how far your home is from the coast and follow those requirements in the quote, rather than treating every facade the same.",
-          "Coastal homes also take more wind-driven rain. Correct wall wrap, flashings around windows and doors, and well-finished joints are what keep that water out of the frame, so we detail them carefully on every western suburbs job.",
+          "Semaphore and Port Adelaide hold some of the city's earliest stone and timber cottages, and Torrensville has older bungalows and cottages close to the city. Parts of these areas have heritage or character protections, which can limit what you're allowed to change on the street-facing facade.",
+          "That rarely rules out the work that makes an old house more comfortable. Roof-space insulation, and underfloor insulation where there's a raised timber floor, can't be seen from the street. Rear additions can often be re-clad without touching the front, and where timber weatherboards have reached the end of their life, Linea weatherboards keep the classic look. If your home is listed or in a character area, confirm with council or a building certifier first. We can supply product details for the application.",
+        ],
+      },
+      {
+        title: "Bathrooms and laundries in older western suburbs homes",
+        paragraphs: [
+          "Inside, Dulux AcraStone microcement is a way to renovate a dated bathroom or laundry without stripping it back. It can be applied over well-adhered, suitably prepared tiles, which suits the original wet areas in post-war homes around Woodville and Seaton and in the 1970s homes of West Lakes.",
+          "It isn't a way around problems underneath. Loose or drummy tiles, cracks and failed waterproofing have to be fixed first, so we tap-test the tiles and look for signs of leaks at the measure before we quote.",
         ],
       },
     ],
+    serviceLinks: {
+      title: "Looking for a service rather than a suburb?",
+      intro:
+        "This page covers the western suburbs only. For what each service involves anywhere in Adelaide, including products, inclusions and common questions, use the service pages.",
+      links: [
+        {
+          slug: "insulation",
+          label: "Insulation installers across Adelaide",
+          body: "CSR Bradford ceiling, wall, underfloor and acoustic insulation, with wall wraps and sarking. Start here for a ceiling top-up in Findon or a new townhouse in Seaton.",
+        },
+        {
+          slug: "re-cladding",
+          label: "Facade recladding in Adelaide",
+          body: "Removing or preparing old cladding, checking the frame and fitting a new James Hardie facade, whether that's a rear extension in Woodville or a whole house front.",
+        },
+        {
+          slug: "james-hardie-cladding",
+          label: "James Hardie cladding installation, Adelaide-wide",
+          body: "The Linea, Axon, Oblique, Stria and Matrix profiles and how we install them. Near the beach at Henley, Grange and Semaphore we follow James Hardie's requirements for fixings and accessories close to the coast.",
+        },
+        {
+          slug: "microcement",
+          label: "Dulux AcraStone microcement in Adelaide",
+          body: "Seamless, grout-free walls and floors for bathrooms, laundries and kitchens, often applied over the existing tiles.",
+        },
+      ],
+    },
     services: ["re-cladding", "aac-panels", "microcement"],
     faqs: [
       {
         q: "Do you work on heritage homes in Port Adelaide and Semaphore?",
         a: "We can quote on them, but changes to heritage-listed or character-protected homes often need council approval first, especially on the street frontage. Check with the City of Port Adelaide Enfield or a building certifier; we're happy to supply product details to support an application.",
+      },
+      {
+        q: "My home is close to the beach at Henley or Grange. Does that change the cladding?",
+        a: "It can. James Hardie sets specific requirements for fixings, trims and accessories on homes close to the coast, and the paint system needs to suit a marine environment. We check your distance from the water at the measure and quote the fixings and coatings that apply.",
+      },
+      {
+        q: "Can you clad the boundary wall of a new townhouse in Woodville or Seaton?",
+        a: "Yes. Boundary and zero-lot walls on narrow lots are a common use for Hardie Gravis AAC panels, which James Hardie describes as non-combustible. The wall has to suit the setback and fire requirements on your approved plans, so send us the drawings and we'll quote to them.",
       },
       {
         q: "Can microcement go over the tiles in an older western suburbs bathroom?",
@@ -637,39 +727,74 @@ export const areaPages = [
   },
   {
     slug: "east-hills",
-    seoTitle: "Adelaide East & Hills Cladding & Insulation",
+    seoTitle: "Adelaide East & Hills: Cladding & Insulation",
     metaDescription:
-      "Cladding, insulation, microcement and painting in Norwood, Burnside, Magill, Campbelltown, Stirling, Aldgate and Mount Barker. Fixed written quotes.",
-    title:
-      "Cladding, insulation and microcement in the eastern suburbs and Adelaide Hills",
+      "Cladding and insulation for character homes in Norwood and Burnside, post-war Magill streets and bushfire-prone Hills blocks from Stirling to Mount Barker.",
+    title: "Cladding and insulation in Adelaide's east and the Adelaide Hills",
     intro:
-      "Character homes in Norwood and Burnside, post-war streets around Campbelltown and Magill, and leafy, bushfire-prone hills properties from Stirling to Mount Barker.",
+      "Villas and post-war brick homes from Norwood to Campbelltown on the plains, then colder, bushfire-prone properties up the freeway in Stirling, Aldgate and Mount Barker.",
     summary:
-      "Villas and bungalows in Norwood and Burnside, post-war brick homes around Campbelltown, Magill and Paradise, and cooler, bushfire-prone hills properties from Stirling to Mount Barker.",
+      "Villas and bungalows in Norwood and Burnside, post-war brick homes around Campbelltown, Magill, Paradise and Newton, and colder, bushfire-prone Hills properties from Stirling to Mount Barker.",
     image: images.dusk,
     sections: [
       {
-        title: "Homes in the east",
+        title: "Norwood and Burnside: original fronts, new rear extensions",
         paragraphs: [
-          "The inner east is home to many of Adelaide's older villas, bungalows and stone-fronted cottages. In suburbs like Norwood and Burnside, renovations often keep the original front and add a modern extension behind it, which suits lightweight James Hardie cladding on the new section and Hardie Groove Lining on the alfresco ceiling. Parts of these suburbs sit within historic or character areas, so changes visible from the street may need approval.",
-          "Further out, Campbelltown, Magill, Paradise and Newton grew mostly after the war, with brick and brick-veneer homes on generous blocks. Many are now being renovated or subdivided, and a facade update with Axon or Linea boards, a ceiling insulation top-up or a microcement bathroom are all common projects.",
+          "The inner east is home to many of Adelaide's older villas, bungalows and stone-fronted cottages. In Norwood and Burnside, renovations often keep the original front and add a modern extension behind it, and that new section is where we come in: lightweight James Hardie cladding on the walls, Hardie Groove Lining on the alfresco ceiling, and Bradford batts and wall wrap in the frame before it's closed in.",
+          "Parts of these suburbs sit within historic or character areas, so changes visible from the street may need approval. Roof-space insulation, a bathroom finished in Dulux AcraStone microcement and the cladding on a rear addition don't usually change the street view, which is why they're common jobs on these homes. Ask your council early if you're unsure, and we'll supply product information to help.",
         ],
       },
       {
-        title: "Homes in the Hills",
+        title:
+          "Campbelltown, Magill, Paradise and Newton: post-war homes on generous blocks",
+        paragraphs: [
+          "Further out, Campbelltown, Magill, Paradise and Newton grew mostly after the war, with brick and brick-veneer homes on generous blocks. Many are now being renovated or subdivided.",
+          "For a house that's staying, the usual list is a facade update with Axon or Linea boards, a ceiling insulation top-up and a microcement bathroom. Where the block is being divided, the new homes need the full envelope, and we price the wrap, insulation, cladding and eaves from the plans.",
+        ],
+      },
+      {
+        title: "Stirling, Aldgate and Mount Barker: cold winters and sloping blocks",
         paragraphs: [
           "Up the freeway, Stirling and Aldgate are known for leafy, sloping blocks, older timber and stone homes, and cooler, wetter winters than the plains. Mount Barker has grown quickly, with large new estates alongside the original town.",
-          "Hills homes feel the cold. Ceiling insulation is the first priority, and homes on raised timber floors often benefit from underfloor batts or rolls to stop cold air coming up through the floor. Wall insulation and a new wall wrap are worth adding whenever a wall is opened up for re-cladding or an extension.",
+          "Hills homes feel the cold, so insulation is usually the first thing to sort out. The ceiling comes first. Homes on raised timber floors often benefit from underfloor batts or rolls that stop cold air coming up through the floor, and wall insulation with a new wall wrap is worth adding whenever a wall is opened up for re-cladding or an extension.",
+          "Slope changes the job as well. The downhill side of a house can be much taller than the uphill side, so steep blocks may need scaffolding or extra access planning, and we allow for it at the measure.",
         ],
       },
       {
-        title: "Bushfire ratings in the Hills",
+        title: "Bushfire Attack Levels in the Hills",
         paragraphs: [
           "Much of the Adelaide Hills is designated bushfire-prone, and new work there has to meet the Bushfire Attack Level (BAL) assessed for the site. James Hardie lists most of its fibre cement cladding to BAL-40 and Matrix to BAL-29, and describes its Hardie Gravis AAC panel as non-combustible and suitable for all Bushfire Attack Levels when installed as specified.",
-          "We confirm the BAL for your site and the matching product, fixings and detailing before we quote, so the system on the wall matches what your approval requires. Steep blocks may also need scaffolding or extra access planning, which we allow for at the measure.",
+          "We confirm the BAL for your site and the matching product, fixings and detailing before we quote, so the system on the wall matches what your approval requires. If you already have a BAL assessment, send it with your photos or plans.",
         ],
       },
     ],
+    serviceLinks: {
+      title: "The same services, city-wide",
+      intro:
+        "The notes above are specific to the east and the Hills. The services themselves are the same across Adelaide, and each one has its own page.",
+      links: [
+        {
+          slug: "james-hardie-cladding",
+          label: "James Hardie cladding for Adelaide homes: profiles and installation",
+          body: "Linea, Axon, Oblique, Stria, Matrix and textured panels, for rear extensions in Norwood and Burnside and for BAL-rated walls in the Hills.",
+        },
+        {
+          slug: "insulation",
+          label: "Ceiling, wall and underfloor insulation in Adelaide",
+          body: "CSR Bradford batts, rolls and wall wraps. In Stirling, Aldgate and Mount Barker the ceiling and the subfloor are where we start.",
+        },
+        {
+          slug: "re-cladding",
+          label: "Adelaide re-cladding and facade renovations",
+          body: "Replacing worn weatherboards or updating a post-war front in Campbelltown, Magill, Paradise or Newton, with wall insulation added while the frame is open.",
+        },
+        {
+          slug: "microcement",
+          label: "Microcement in Adelaide",
+          body: "Dulux AcraStone for bathrooms, laundries and floors: a way to renew a wet area in an older eastern suburbs home without ripping it out.",
+        },
+      ],
+    },
     services: ["james-hardie-cladding", "insulation", "eaves-linings"],
     faqs: [
       {
@@ -680,42 +805,88 @@ export const areaPages = [
         q: "Is James Hardie cladding suitable for a bushfire-prone Hills property?",
         a: "James Hardie lists most of its cladding to BAL-40, with Matrix to BAL-29. For higher ratings, James Hardie lists its Gravis AAC panel as suitable for all Bushfire Attack Levels. We check your site's BAL and confirm the system before quoting.",
       },
+      {
+        q: "Our Stirling house is cold in winter. What should we insulate first?",
+        a: "The ceiling, in most homes. After that, a raised timber floor is the next place to look, using underfloor batts or rolls. External walls are best insulated whenever they're opened up for re-cladding or an extension. We inspect the roof space and subfloor and recommend an R-value for each.",
+      },
+      {
+        q: "Do you quote for new homes on the Mount Barker estates?",
+        a: "Yes. Send the plans, the energy report and any BAL assessment, and we'll price the wall wrap, insulation, cladding, AAC panels and eaves they call for, then plan the work around the builder's schedule.",
+      },
     ],
   },
   {
     slug: "south",
-    seoTitle: "Adelaide Southern Suburbs Cladding & Insulation",
+    seoTitle: "Southern Adelaide Suburbs: Cladding & Insulation",
     metaDescription:
-      "James Hardie cladding, Bradford insulation, AcraStone microcement and painting in Marion, Glenelg, Brighton, Hallett Cove, Happy Valley and Seaford.",
-    title: "Cladding, insulation and microcement in Adelaide's southern suburbs",
+      "Re-cladding, insulation and microcement for southern Adelaide homes, from Glenelg and Brighton to Hallett Cove, Happy Valley, Morphett Vale and Seaford.",
+    title: "Cladding and insulation in Adelaide's southern suburbs",
     intro:
-      "From the beachside streets of Glenelg and Brighton to Hallett Cove, the foothills of Happy Valley and the newer estates around Seaford.",
+      "From the beachside streets of Glenelg and Brighton to the slopes of Hallett Cove, the foothills at Happy Valley and the newer estates around Seaford.",
     summary:
       "Beachside villas and rebuilds in Glenelg and Brighton, 1970s and 80s family homes from Hallett Cove to Morphett Vale, foothills homes in Happy Valley and newer estates around Seaford.",
     image: images.areasBanner,
     sections: [
       {
-        title: "Homes in the south",
+        title: "Glenelg, Brighton and Marion: villas, flats and rebuilds",
         paragraphs: [
-          "The south covers a lot of ground. Glenelg and Brighton mix older villas, bungalows and blocks of flats with large modern rebuilds, and Marion has a broad spread of post-war and later brick homes, many now being subdivided for townhouses.",
-          "Hallett Cove, Aberfoyle Park, Happy Valley and Morphett Vale grew quickly from the 1970s, so much of the housing is brick and brick-veneer family homes that are now 40 or 50 years old. Further south, Noarlunga mixes established streets with newer housing, and Seaford has grown with new estates since the 1990s.",
+          "Glenelg and Brighton mix older villas, bungalows and blocks of flats with large modern rebuilds, and Marion has a broad spread of post-war and later brick homes, many now being subdivided for townhouses.",
+          "On knock-down rebuilds and new townhouses we handle the building envelope, from wall wrap and insulation through to cladding, AAC panels and eaves. On the older homes the work is more selective: re-cladding a weathered addition, relining eaves, insulating the roof space or resurfacing a tired bathroom.",
+          "If the property is strata or community titled, as many flats and townhouse groups are, the corporation may need to approve changes to external walls. Raise it with them before the measure so the quote covers what you're allowed to do.",
         ],
       },
       {
-        title: "What southern homes usually need",
+        title:
+          "Hallett Cove, Aberfoyle Park, Happy Valley and Morphett Vale: 1970s and 80s homes",
         paragraphs: [
-          "Homes from the 1970s and 80s are now due for updates. Re-cladding a dated facade or gable, adding a James Hardie cladding feature around the entry, repainting tired eaves and upgrading the ceiling insulation can make an established home look and feel newer without a rebuild.",
-          "Inside, original bathrooms and laundries from that era are good candidates for Dulux AcraStone microcement, which can often go over the existing tiles once they've been checked and prepared. On new builds and knock-down rebuilds, we handle the building envelope from wall wrap and insulation through to cladding, AAC panels and eaves.",
+          "Hallett Cove, Aberfoyle Park, Happy Valley and Morphett Vale grew quickly from the 1970s, so much of the housing is brick and brick-veneer family homes that are now 40 or 50 years old.",
+          "Homes of that age are due for updates. Re-cladding a dated gable, adding a James Hardie cladding feature around the entry, repainting tired eaves and upgrading the ceiling insulation can make an established home look and feel newer without a rebuild.",
+          "Inside, original bathrooms and laundries from that era are good candidates for Dulux AcraStone microcement, which can often go over the existing tiles once they've been checked and prepared.",
         ],
       },
       {
-        title: "Coast, slopes and bushfire areas",
+        title: "Noarlunga and Seaford: established streets and newer estates",
         paragraphs: [
-          "Homes along the coast at Glenelg, Brighton, Hallett Cove and Seaford are exposed to salt air and strong sea winds. James Hardie sets requirements for fixings and accessories near the coast, and we follow them along with careful flashing and sealing around windows, doors and corners.",
-          "In the foothills around Happy Valley and Aberfoyle Park, some properties back onto bushland or reserves and fall within bushfire-prone areas. Where a Bushfire Attack Level applies, we confirm the rating and choose cladding and detailing that James Hardie lists for it. Sloping blocks in Hallett Cove and the foothills can also mean split levels, taller walls and scaffolding, which we allow for at the measure.",
+          "Further south, Noarlunga mixes established streets with newer housing, and Seaford has grown with new estates since the 1990s. The work divides the same way. Established homes usually call for insulation and facade updates, while builders on the newer estates send plans and an energy report, and we price the wrap, insulation, cladding and eaves they specify.",
+          "If your estate has a design guideline for the street front, send it with the plans so the profile and colours can be chosen to suit.",
+        ],
+      },
+      {
+        title: "Sea air, slopes and bushfire-prone foothills",
+        paragraphs: [
+          "The southern coastline runs from Glenelg and Brighton past Hallett Cove to Seaford, and homes along it are exposed to salt air and strong sea winds. On those sites we use the fixings and accessories James Hardie requires near the coast, and take extra care with flashing and sealing around windows, doors and corners.",
+          "In the foothills around Happy Valley and Aberfoyle Park, some properties back onto bushland or reserves and fall within bushfire-prone areas. Where a Bushfire Attack Level applies, we confirm the rating and choose cladding and detailing that James Hardie lists for it.",
+          "Sloping blocks in Hallett Cove and the foothills can also mean split levels, taller walls and scaffolding. We look at access on site so that cost is in the quote from the start.",
         ],
       },
     ],
+    serviceLinks: {
+      title: "Our services across Adelaide",
+      intro:
+        "Everything above is particular to the south. For the detail on a service itself, such as products, what's included and common questions, go to the Adelaide-wide pages.",
+      links: [
+        {
+          slug: "re-cladding",
+          label: "Facade recladding for Adelaide homes",
+          body: "New James Hardie cladding over a checked frame, with fresh wall wrap and optional insulation. A common route for 1970s and 80s homes from Hallett Cove to Morphett Vale.",
+        },
+        {
+          slug: "insulation",
+          label: "CSR Bradford insulation installed across Adelaide",
+          body: "Ceiling, wall, underfloor and acoustic batts, with R-values recommended for each part of the house after an inspection.",
+        },
+        {
+          slug: "james-hardie-cladding",
+          label: "Adelaide James Hardie cladding installers",
+          body: "Weatherboards and panels for knock-down rebuilds in Glenelg and Brighton, new estates around Seaford and feature sections on brick homes.",
+        },
+        {
+          slug: "microcement",
+          label: "Adelaide microcement for bathrooms and floors",
+          body: "Dulux AcraStone applied over sound, prepared tiles in the original bathrooms and laundries of established southern homes.",
+        },
+      ],
+    },
     services: ["re-cladding", "insulation", "microcement"],
     faqs: [
       {
@@ -723,8 +894,16 @@ export const areaPages = [
         a: "Start with the roof space. Ceiling insulation from that era has often settled or been disturbed by other trades. We check what's there, recommend a CSR Bradford R-value for the ceiling and look at the walls too if you're also planning a re-clad.",
       },
       {
-        q: "Can you update a brick facade without rendering it?",
+        q: "Can you update the brick front of a home in Hallett Cove or Aberfoyle Park without rendering it?",
         a: "Yes. Instead of rendering, many owners add James Hardie boards or panels to a gable, entry or framed upper section, then paint them to complement the brick. We look at how the cladding meets the brickwork, windows and roofline at the measure.",
+      },
+      {
+        q: "Do you work on units and flats in Glenelg and Brighton?",
+        a: "Yes, for owners and strata managers. In a strata or community-titled property the corporation may need to approve changes to external walls, so start there. We carry public liability insurance and can provide a certificate for the strata manager.",
+      },
+      {
+        q: "Does a bushfire-prone block in Happy Valley limit which cladding I can use?",
+        a: "It can. Some foothills properties, particularly those backing onto bushland or reserves, have a Bushfire Attack Level, and your council or a building certifier can confirm it. Where one applies, we quote cladding and detailing that James Hardie lists for that rating.",
       },
     ],
   },

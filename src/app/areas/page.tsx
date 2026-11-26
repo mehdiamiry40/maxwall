@@ -13,27 +13,45 @@ import Link from "next/link";
 import { areas, services } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Cladding & Insulation Service Areas Adelaide",
-  "Max Wall installs James Hardie cladding, Bradford insulation and AcraStone microcement across Adelaide's north, west, east, south and the Adelaide Hills.",
+  "Service Areas in Adelaide & the Adelaide Hills",
+  "Where Max Wall works: the northern, western, eastern and southern suburbs of Adelaide and the Adelaide Hills. Find your region and its suburbs.",
   "/areas",
 );
 
 const localFactors = [
   {
-    title: "Coastal homes",
-    body: "From Semaphore and Henley Beach down to Glenelg, Hallett Cove and Seaford, salt air and wind-driven rain are part of the brief. James Hardie sets requirements for fixings and accessories near the coast, and flashings and joints need extra care to keep water out of the frame.",
+    title: "Salt air on the coast",
+    body: "From Semaphore and Henley Beach down to Glenelg, Hallett Cove and Seaford, exterior work has to allow for salt air and wind-driven rain. James Hardie sets requirements for fixings and accessories near the coast, and flashings and joints need extra care to keep water out of the frame.",
+    links: [
+      { href: "/areas/west", label: "Coastal homes in the western suburbs" },
+      { href: "/areas/south", label: "The southern coastline" },
+    ],
   },
   {
-    title: "The Adelaide Hills",
-    body: "Stirling, Aldgate, Mount Barker and the foothills are cooler and often bushfire-prone. That shifts the focus to ceiling and underfloor insulation, and to cladding and AAC systems that James Hardie lists for the Bushfire Attack Level assessed for the site.",
+    title: "Cold winters and bushfire ratings in the Hills",
+    body: "Stirling, Aldgate, Mount Barker and the foothills are cooler and often bushfire-prone. That puts ceiling and underfloor insulation first, and it limits walls to the cladding and AAC systems James Hardie lists for the Bushfire Attack Level assessed for the site.",
+    links: [
+      { href: "/areas/east-hills", label: "Stirling, Aldgate and Mount Barker" },
+      { href: "/areas/south", label: "Foothills around Happy Valley" },
+    ],
   },
   {
     title: "Older and character homes",
-    body: "Villas, bungalows and cottages in the inner east and west, and Housing Trust-era homes across the north and west, often need roof-space insulation, careful re-cladding of rear additions and an eye for asbestos in pre-1990 materials. Some sit in heritage or character areas where street-facing changes need approval.",
+    body: "Villas, bungalows and cottages in the inner east and west, and Housing Trust-era homes across the north and west, often need roof-space insulation, careful re-cladding of rear additions and a check for asbestos in pre-1990 materials. Some sit in heritage or character areas where street-facing changes need approval.",
+    links: [
+      { href: "/areas/east-hills", label: "Character homes in Norwood and Burnside" },
+      { href: "/areas/west", label: "Cottages in Semaphore and Port Adelaide" },
+      { href: "/areas/north", label: "Housing Trust-era homes in the north" },
+    ],
   },
   {
     title: "New estates and infill",
     body: "Growth areas in the north and south, and subdivided blocks across the middle-ring suburbs, mean new homes and townhouses with mixed facades and boundary walls. We work to the builder's plans, energy report and any estate design guidelines.",
+    links: [
+      { href: "/areas/north", label: "Estates around Mawson Lakes and Gawler" },
+      { href: "/areas/west", label: "Townhouses in Woodville and Seaton" },
+      { href: "/areas/south", label: "Newer estates around Seaford" },
+    ],
   },
 ];
 
@@ -47,37 +65,48 @@ export default function AreasPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "Areas" }]}
-          title="Cladding, insulation and microcement across Adelaide"
-          intro="Based in the north, working from Gawler to Seaford and up into the Hills."
+          title="Max Wall service areas across Adelaide and the Hills"
+          intro="Four regions, from Gawler in the north to Seaford in the south and up to Mount Barker. Choose yours for the suburbs we cover and what we plan for there."
           image={images.skyline}
         />
 
         <section className="bg-white py-16 sm:py-20">
           <div className={`${container} max-w-3xl space-y-5 text-lg leading-relaxed text-ink-soft`}>
             <h2 className="section-title text-bluestone">
-              One team across greater Adelaide
+              Find your part of Adelaide
             </h2>
             <p>
               Max Wall is based in Adelaide&apos;s northern suburbs and works
-              right across the metropolitan area, from Gawler in the north to
-              Seaford in the south, west to the beaches and east into the
-              Adelaide Hills. We install James Hardie cladding, Hardie Gravis AAC
-              panels, eaves and linings, CSR Bradford insulation and Dulux
-              AcraStone microcement, and we paint inside and out.
+              across the metropolitan area: north to Gawler, west to the
+              beaches, south to Seaford and east into the Adelaide Hills. We
+              group that into four regions, and each has its own page.
             </p>
             <p>
-              Wherever you are, the process is the same. Send us a few photos
-              and your suburb, we come out to measure and check the walls, roof
+              A region page covers what is particular to working there: the
+              homes we see, the conditions that change how a wall is built or
+              insulated, such as salt air, bushfire ratings, heritage streets
+              and estate guidelines, and the questions locals ask us most. For
+              products, inclusions and what each job involves, go to the{" "}
+              <Link
+                href="/services"
+                className="font-semibold text-bluestone underline underline-offset-4"
+              >
+                cladding, insulation and microcement service pages
+              </Link>
+              .
+            </p>
+            <p>
+              Wherever you are, the steps are the same. Send a few photos and
+              your suburb, we come out to measure and check the walls, roof
               space or tiles, and you get a fixed written quote before any work
-              starts. Homeowners use us for re-clads, insulation upgrades and
-              bathroom renovations, and builders use us for the building
-              envelope on new homes, extensions and townhouses.
-            </p>
-            <p>
-              Adelaide&apos;s housing changes a lot from one side of the city to
-              the other, so each region below has its own page covering the
-              homes we see there, the work they usually need and the local
-              conditions we plan for.
+              starts. More on{" "}
+              <Link
+                href="/how-we-work"
+                className="font-semibold text-bluestone underline underline-offset-4"
+              >
+                how we measure, quote and install
+              </Link>
+              .
             </p>
           </div>
         </section>
@@ -124,9 +153,9 @@ export default function AreasPage() {
               What changes from one part of Adelaide to another
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              The products are the same everywhere, but the house, the site and
-              the rules aren&apos;t. These are the local differences we plan
-              for at the measure.
+              The products are the same everywhere. The house, the site and
+              the rules are not. These are the four local differences we plan
+              for at the measure, with the region pages that cover each one.
             </p>
             <div className="mt-10 grid gap-8 md:grid-cols-2">
               {localFactors.map((factor) => (
@@ -137,6 +166,18 @@ export default function AreasPage() {
                   <p className="mt-3 leading-relaxed text-ink-soft">
                     {factor.body}
                   </p>
+                  <ul className="mt-2 flex flex-wrap gap-x-6">
+                    {factor.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
@@ -146,8 +187,13 @@ export default function AreasPage() {
         <section className="border-t border-line bg-white py-16 sm:py-20">
           <div className={container}>
             <h2 className="section-title text-bluestone">
-              Services available in every area
+              The same services in every region
             </h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+              What we install doesn&apos;t change with the postcode. Each
+              service has one Adelaide-wide page with the products, what is
+              included and common questions.
+            </p>
             <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((s) => (
                 <li key={s.slug}>
@@ -172,10 +218,10 @@ export default function AreasPage() {
                 Don&apos;t see your suburb?
               </h2>
               <p className="mt-3 max-w-lg leading-relaxed text-ink-soft">
-                These are just some of the areas we cover. Anywhere in greater
-                Adelaide, get in touch with your suburb and a short description
-                of the job, and we&apos;ll let you know when we can come out to
-                measure.
+                The suburb lists above are examples, not a boundary. If you
+                are anywhere in greater Adelaide or the Hills, send your suburb
+                and a short description of the job, and we&apos;ll let you know
+                when we can come out to measure.
               </p>
             </div>
             <div className="md:justify-self-end">

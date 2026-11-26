@@ -132,6 +132,21 @@ export default async function ServicePage(
               <p className="mt-5 text-lg leading-relaxed text-ink-soft">
                 {service.intro}
               </p>
+              <p className="mt-5 leading-relaxed text-ink-soft">
+                {service.links.map((part) =>
+                  typeof part === "string" ? (
+                    part
+                  ) : (
+                    <Link
+                      key={part.href}
+                      href={part.href}
+                      className="font-semibold text-bluestone underline underline-offset-4"
+                    >
+                      {part.label}
+                    </Link>
+                  ),
+                )}
+              </p>
 
               <h3 className="mt-12 text-xl font-bold">What&apos;s included</h3>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">

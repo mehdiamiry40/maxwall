@@ -105,6 +105,27 @@ export default async function RegionPage(props: PageProps<"/areas/[region]">) {
                   ))}
                 </section>
               ))}
+              <section>
+                <h2 className="text-2xl font-semibold text-bluestone">
+                  {page.serviceLinks.title}
+                </h2>
+                <p className="mt-4 leading-relaxed">{page.serviceLinks.intro}</p>
+                <ul className="mt-4 divide-y divide-line">
+                  {page.serviceLinks.links.map((item) => (
+                    <li key={item.slug} className="py-3">
+                      <Link
+                        href={`/services/${item.slug}`}
+                        className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                      >
+                        {item.label}
+                      </Link>
+                      <p className="leading-relaxed text-ink-soft">
+                        {item.body}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             </div>
             <aside className="surface-card self-start p-7 sm:p-8 lg:sticky lg:top-28">
               <h2 className="text-lg font-bold">Suburbs we cover</h2>

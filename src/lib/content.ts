@@ -3,69 +3,107 @@ import { images } from "@/lib/images";
 export const projects = [
   {
     slug: "renovations",
-    title: "Cladding, insulation & microcement for Adelaide renovations",
-    seoTitle: "Home Renovation Cladding & Insulation Adelaide",
+    title: "Cladding and insulation for Adelaide home renovations",
+    seoTitle: "Renovation Cladding & Insulation Adelaide",
     shortTitle: "Renovations & facade upgrades",
     image: images.areasBanner,
     description:
-      "Re-clad a tired facade, insulate a hot or cold home or renovate a bathroom with microcement. Max Wall renovation services across Adelaide.",
+      "Renovating in Adelaide? Max Wall replaces tired cladding, upgrades ceiling, wall and underfloor insulation and resurfaces bathrooms in microcement.",
     intro:
-      "Give the home you already love a fresh look and a more comfortable feel. We update facades, insulate and transform wet areas, without moving you out.",
+      "A new facade, a more comfortable house and a bathroom without grout lines, for the home you already live in. We replace cladding, upgrade insulation and apply microcement, usually without you moving out.",
     quote: "/contact?service=re-cladding",
     features: [
-      "Facade makeovers",
-      "Insulation upgrades",
-      "Microcement bathrooms",
-      "Painting & finishing",
+      "New cladding on tired walls",
+      "Ceiling, wall & underfloor insulation",
+      "Microcement over sound tiles",
+      "Eaves, linings & paint",
     ],
     sections: [
       {
-        title: "Start with what's there",
-        body: "A good renovation starts with an honest look at the existing home. We check the cladding, frame, roof space or tiles, explain what can stay and what needs fixing, and price the preparation properly. Your quote reflects the actual house, not just its appearance.",
+        title: "Start with what's already there",
+        body: "A renovation quote is only as good as the look we take at the existing house. At the measure we check the cladding and frame, the roof space or subfloor, or the tiles and the surface beneath them, and tell you what can stay and what needs fixing. That preparation is priced into the quote, so it reflects the actual house and not just how it looks from the street.",
       },
       {
-        title: "Improve comfort, not just looks",
-        body: "Re-cladding opens up the walls, which is the ideal time to add Bradford wall insulation and a new wall wrap. Ceiling and underfloor insulation can be added to almost any home. Together they make rooms cooler in summer, warmer in winter and quieter all year.",
+        title: "A new face for an older home",
+        body: "Rotting or cracked timber weatherboards can be replaced with James Hardie Linea weatherboards that keep the classic look. A dated front can take Axon, Stria or Oblique boards on a gable, an entry or the whole facade. We go through the profiles at the measure and confirm how the new cladding will meet the windows, the roofline and any brickwork that stays.",
       },
       {
-        title: "Renovate with less mess",
-        body: "Dulux AcraStone microcement can go over suitably prepared, well-adhered tiles, so a bathroom or laundry can be transformed without ripping everything out. Less demolition means less noise, dust and waste, and a faster turnaround.",
+        title: "Insulate while the walls are open",
+        body: "With the old cladding off, the wall frame is exposed. That is the easiest time to fit CSR Bradford wall batts and a new wall wrap, a job that is much harder once the cladding is back on. Ceiling insulation can be topped up or replaced from the roof space, and homes on raised timber floors can have underfloor insulation fitted from below.",
+      },
+      {
+        title: "Extensions and additions",
+        body: "Lightweight fibre cement cladding suits rear extensions, upper-storey additions and granny flats, where keeping weight off the existing structure matters. We install the wall wrap, insulation, cladding, eaves and alfresco ceiling linings on the new section, and can paint it to tie in with the original house.",
+      },
+      {
+        title: "A bathroom without the demolition",
+        body: "Dulux AcraStone microcement can be applied over suitably prepared, well-adhered tiles, so many bathrooms and laundries can be resurfaced without stripping them back. Loose or drummy tiles and any failed waterproofing have to be fixed first, and we check for both before quoting. Expect the room to be out of use for several days while each coat dries.",
+      },
+      {
+        title: "Older homes, approvals and living through it",
+        body: "Homes built or renovated before 1990 may have cladding or eaves that contain asbestos. If we suspect it, we won't start until it has been tested and, if present, removed by a licensed asbestos removalist. Heritage and character areas, bushfire-prone sites and strata properties can also need approval for changes to external walls, so check early. Most people stay at home while we work, and we plan access and the noisier days with you.",
       },
     ],
-    services: ["re-cladding", "insulation", "microcement"],
+    services: [
+      "re-cladding",
+      "insulation",
+      "microcement",
+      "james-hardie-cladding",
+      "eaves-linings",
+      "painting",
+    ],
   },
   {
     slug: "new-builds",
-    title: "Cladding, AAC & insulation for new builds in Adelaide",
-    seoTitle: "New Build Cladding, AAC & Insulation Adelaide",
+    title: "Cladding and insulation for new builds in Adelaide",
+    seoTitle: "New Build Cladding & Insulation Adelaide",
     shortTitle: "New homes & builder projects",
     image: images.scaffold,
     description:
-      "James Hardie cladding, Gravis AAC panels, eaves and CSR Bradford insulation for Adelaide new homes and builder projects. One team, one scope.",
+      "James Hardie cladding, Hardie Gravis AAC panels, eaves and CSR Bradford insulation for new homes in Adelaide, priced from your plans by one team.",
     intro:
-      "One team for the building envelope, from wall wrap and insulation through to cladding, eaves and the final coat. Built around your plans and schedule.",
+      "Wall wrap, insulation, cladding, AAC panels and eaves for new homes, extensions and multi-unit sites. One team prices the building envelope from your plans and works to your construction schedule.",
     quote: "/contact?service=aac-panels",
     features: [
-      "Wall wraps & insulation",
+      "Wall wrap & insulation to plan",
       "James Hardie cladding",
-      "Gravis AAC panels",
-      "Eaves & linings",
+      "Hardie Gravis AAC panels",
+      "Eaves, linings & paint",
     ],
     sections: [
       {
-        title: "Work to the specification",
-        body: "Share your drawings, energy report and wall specifications. We price the cladding, AAC, insulation R-values and wraps your plans call for, and install them to each manufacturer's published guide so the build meets its design intent.",
+        title: "Priced from your plans",
+        body: "Send the drawings, energy report and wall specifications. We price the cladding, AAC panels, wall wraps and insulation R-values your documents call for, then confirm the details on site. You get a fixed written quote with the scope, products and price set out, so it's clear what is and isn't included.",
+      },
+      {
+        title: "Insulation that matches the energy report",
+        body: "New homes must meet the National Construction Code energy requirements in their approved plans. We install CSR Bradford ceiling, wall and acoustic batts to the R-values specified, keep the required clearances around downlights, flues and vents, and leave a record of what was installed.",
+      },
+      {
+        title: "Cladding and AAC on one facade",
+        body: "Many new homes combine materials: James Hardie weatherboards or grooved boards on an upper storey, textured panels at the entry, and Hardie Gravis AAC panels with a texture coat where a solid, rendered look is wanted. Because we install all of them, the junctions, trims and flashings between materials are set out by one team.",
+      },
+      {
+        title: "Boundary walls and bushfire sites",
+        body: "On tight lots, the wall system has to suit the setback and its fire requirements. James Hardie describes its Gravis AAC panel as non-combustible and suitable for all Bushfire Attack Levels when installed as specified, and lists most of its fibre cement cladding to BAL-40. We confirm the system for your site's rating before quoting.",
       },
       {
         title: "Fewer trades to coordinate",
-        body: "Insulation, cladding, eaves and painting are often separate trades. Handled by one team, the sequence is simpler, responsibilities are clear and there's less waiting between stages.",
+        body: "Wall wrap, insulation, cladding, eaves and painting are often split between several trades. Handled by one team, the sequence is simpler, responsibility for the wall is clear and there's less waiting between stages. Inside, we can also finish bathrooms and floors in Dulux AcraStone microcement.",
       },
       {
-        title: "Keep the build moving",
-        body: "Tell us your milestones and site access. We plan wrap, insulation and cladding around frame inspections and other trades, and keep you updated if the weather affects exterior finishes.",
+        title: "Scheduled around your build",
+        body: "Tell us your milestones and site access. We plan the wrap, insulation and cladding around frame inspections and other trades, allow for scaffolding on upper storeys, and keep you updated if the weather affects exterior finishes.",
       },
     ],
-    services: ["james-hardie-cladding", "aac-panels", "insulation"],
+    services: [
+      "james-hardie-cladding",
+      "aac-panels",
+      "insulation",
+      "eaves-linings",
+      "painting",
+      "microcement",
+    ],
   },
 ];
 

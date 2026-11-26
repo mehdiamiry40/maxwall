@@ -1,4 +1,5 @@
 import { pageMetadata } from "@/lib/seo";
+import Link from "next/link";
 import { QuoteForm } from "@/components/QuoteForm";
 import {
   Check,
@@ -8,11 +9,11 @@ import {
   Header,
   PhoneIcon,
 } from "@/components/ui";
-import { phoneHref, site } from "@/lib/site";
+import { phoneHref, site, steps } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Cladding, Insulation & Microcement Quote Adelaide",
-  `Request a free on-site measure and fixed written quote for cladding, insulation, microcement or painting in Adelaide. Call Max Wall on ${site.phone}.`,
+  "Contact Us: Free Measure & Quote in Adelaide",
+  `Contact Max Wall for a free on-site measure and fixed written quote in Adelaide. Call ${site.phone}, email us or send the quote form.`,
   "/contact",
 );
 
@@ -21,6 +22,8 @@ const reassurances = [
   "Fixed written price, no hidden extras",
   "No obligation",
 ];
+
+const inlineLink = "font-semibold underline underline-offset-4";
 
 export default function Contact() {
   return (
@@ -31,14 +34,14 @@ export default function Contact() {
           className={`${container} grid gap-8 py-6 md:grid-cols-[1fr_1.5fr] md:gap-x-16 md:gap-y-10 md:py-20`}
         >
           <div className="md:col-start-1 md:row-start-1">
-            <Eyebrow>Free quote</Eyebrow>
+            <Eyebrow>Free measure &amp; quote</Eyebrow>
             <h1 className="font-display mt-3 text-4xl font-bold leading-[1.05] sm:text-5xl text-bluestone">
-              Let&apos;s talk about your home
+              Contact Max Wall for a free quote
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-ink-soft">
-              Tell us a little about the job. We&apos;ll book a free on-site
-              measure, then send a fixed written quote. We usually reply within
-              the hour.
+              Tell us your suburb and a little about the job. We&apos;ll book a
+              free on-site measure, then send a fixed written quote. We usually
+              reply within the hour.
             </p>
           </div>
           <div className="self-start surface-card p-6 sm:p-10 md:col-start-2 md:row-span-2 md:row-start-1">
@@ -49,9 +52,10 @@ export default function Contact() {
               Tell us about your project
             </h2>
             <p className="mb-8 mt-3 text-sm leading-relaxed text-ink-soft">
-              Just a few details to get started. Don&apos;t know the area or
-              which product to choose? That&apos;s fine — we&apos;ll help you
-              work it out.
+              Your name, mobile and suburb are enough to start. Not sure of the
+              area or which product suits? That&apos;s fine. Choose &ldquo;Not
+              sure yet&rdquo; and we&apos;ll work it out with you at the
+              measure.
             </p>
             <QuoteForm />
           </div>
@@ -81,6 +85,42 @@ export default function Contact() {
                 {site.hours}
               </p>
             </div>
+            <div className="mt-10 border-t border-line pt-8">
+              <h2 className="text-xl font-semibold">What happens next</h2>
+              <ol className="mt-5 space-y-5">
+                {steps.map((s, i) => (
+                  <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-2">
+                    <span className="text-lg font-bold text-sky-ink">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <h3 className="text-lg font-bold">{s.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                        {s.body}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-6 text-sm leading-relaxed text-ink-soft">
+                Read more about{" "}
+                <Link href="/how-we-work" className={inlineLink}>
+                  how we measure, quote and install
+                </Link>
+                , or check{" "}
+                <Link href="/areas" className={inlineLink}>
+                  the Adelaide suburbs we cover
+                </Link>
+                .
+              </p>
+            </div>
+            <p className="mt-10 border-t border-line pt-8 text-sm leading-relaxed text-ink-soft">
+              {site.legalName}
+              <br />
+              ABN {site.abn}
+              <br />
+              {site.city}, {site.region}
+            </p>
           </div>
         </div>
       </main>

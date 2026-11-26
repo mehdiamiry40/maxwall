@@ -1,4 +1,5 @@
 import { faqSchema, pageMetadata } from "@/lib/seo";
+import Link from "next/link";
 import { StructuredData } from "@/components/StructuredData";
 import {
   container,
@@ -7,24 +8,43 @@ import {
   Footer,
   Header,
   PageHero,
+  TextLink,
 } from "@/components/ui";
+import { guides } from "@/lib/content";
 import { images } from "@/lib/images";
 import { faqs, services } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "Cladding, Insulation & Microcement FAQs Adelaide",
-  "Answers about James Hardie cladding, CSR Bradford insulation, Dulux AcraStone microcement and painting: costs, products, timing and quotes in Adelaide.",
+  "FAQs: Quotes, Products, Timing & Insurance",
+  "Straight answers from Max Wall about quotes, products, timing, insurance and staying at home during the work, plus questions on each service we install.",
   "/faq",
 );
 
-const allFaqs = [...faqs, ...services.flatMap((s) => s.faqs)];
-
-const jsonLd = faqSchema(allFaqs);
+// A question shown in the general group is not repeated under a service,
+// so every question appears once on the page and once in the FAQ markup.
+const seen = new Set(faqs.map((f) => f.q));
+const serviceGroups = services.map((s) => ({
+  id: s.slug,
+  title: s.title,
+  href: `/services/${s.slug}`,
+  items: s.faqs.filter((f) => {
+    if (seen.has(f.q)) return false;
+    seen.add(f.q);
+    return true;
+  }),
+}));
 
 const groups = [
-  { id: "general", title: "General", items: faqs },
-  ...services.map((s) => ({ id: s.slug, title: s.title, items: s.faqs })),
+  {
+    id: "general",
+    title: "Quotes, timing and working with us",
+    href: "",
+    items: faqs,
+  },
+  ...serviceGroups.filter((g) => g.items.length > 0),
 ];
+
+const jsonLd = faqSchema(groups.flatMap((g) => g.items));
 
 export default function FaqPage() {
   return (
@@ -34,8 +54,8 @@ export default function FaqPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "FAQ" }]}
-          title="Questions, answered"
-          intro="Can't find what you're after? Give us a call and we'll talk it through."
+          title="Frequently asked questions"
+          intro="Straight answers about quotes, timing, insurance and having us work at your place, followed by the questions we're asked about each service."
           image={images.faqBanner}
         />
 
@@ -63,14 +83,54 @@ export default function FaqPage() {
                 <div key={g.id} id={g.id} className="scroll-mt-24">
                   <h2 className="mb-4 text-2xl font-bold">{g.title}</h2>
                   <FaqList items={g.items} />
+                  {g.href && (
+                    <div className="mt-5">
+                      <TextLink href={g.href}>
+                        {g.title}: products and what&apos;s included
+                      </TextLink>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
+        <section className="border-t border-line bg-white py-16 sm:py-20">
+          <div className={`${container} grid gap-10 md:grid-cols-2 md:gap-16`}>
+            <div>
+              <h2 className="font-display text-2xl font-bold sm:text-3xl text-bluestone">
+                Want the longer answer?
+              </h2>
+              <p className="mt-3 max-w-lg leading-relaxed text-ink-soft">
+                Our guides go further than a short answer can, and{" "}
+                <Link
+                  href="/how-we-work"
+                  className="font-semibold underline underline-offset-4"
+                >
+                  how we measure, quote and install
+                </Link>{" "}
+                walks through a job from first call to handover.
+              </p>
+            </div>
+            <ul className="divide-y divide-line border-y border-line">
+              {guides.map((guide) => (
+                <li key={guide.slug}>
+                  <Link
+                    href={`/guides/${guide.slug}`}
+                    className="flex min-h-12 items-center justify-between gap-4 py-3 font-semibold text-bluestone hover:underline"
+                  >
+                    <span>{guide.title}</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         <CtaSection
-          title="Still have questions?"
+          title="Still have a question?"
           body="Call us or send a message. We're happy to talk through your project, with no obligation."
         />
       </main>

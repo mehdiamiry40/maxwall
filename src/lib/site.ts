@@ -47,16 +47,16 @@ export const brands = [
 
 export const pillars = [
   {
-    title: "Fixed, written quotes",
-    body: "We measure on site and put the scope and price in writing. No surprises on the invoice, no extras halfway through.",
+    title: "Fixed written quotes",
+    body: "We measure on site, then put the scope, products and price in writing before any work starts. What we quote is what you pay.",
   },
   {
-    title: "Proven Australian systems",
-    body: "James Hardie cladding, CSR Bradford insulation and Dulux AcraStone, installed to the manufacturer's specifications.",
+    title: "Installed to the manufacturer's guide",
+    body: "James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement, each installed to the manufacturer's published specifications.",
   },
   {
     title: "One team for the whole wall",
-    body: "Wall wrap, insulation, cladding, linings and the final finish, coordinated by one Adelaide team.",
+    body: "Wall wrap, insulation, cladding, linings and the final coat, planned together and coordinated by one Adelaide team.",
   },
 ];
 
@@ -488,21 +488,21 @@ export const serviceBySlug = (slug: string) =>
 export const steps = [
   {
     title: "Tell us about the job",
-    body: "Call, text a photo, or fill in the form. Your suburb and a rough idea of the job is all we need.",
+    body: "Call, text a photo or fill in the form. Your suburb and a rough idea of the job are all we need to start.",
     detail:
-      "Send us a few photos, plans if you have them and your suburb. We'll ask about the walls, the look you're after and your timing, then book a time to come out.",
+      "Call, email or fill in the quote form with your suburb and a short description of the job. A few photos help, and so do plans or an energy report if you have them. We'll ask about the walls, the look you're after and your timing, then book a time to come out.",
   },
   {
-    title: "Get a fixed quote",
-    body: "We measure on site and recommend the right system. What we quote is what you pay.",
+    title: "Free measure, fixed quote",
+    body: "We measure on site, recommend the right system and put the price in writing. What we quote is what you pay.",
     detail:
-      "We measure on site, check the frame, walls or roof space, and talk through products, profiles and finishes. You'll get a clear written quote with scope, price and timeline. No hidden extras.",
+      "The on-site measure is free. We check the frame, walls, roof space or tiles, and talk through products, profiles and finishes with the house in front of us. You then get a fixed written quote that sets out the scope, the products, the price and the timeline, with no hidden extras.",
   },
   {
-    title: "We get it done",
+    title: "We install and hand over",
     body: "We protect your home, install to the manufacturer's specifications and leave the site clean.",
     detail:
-      "We protect windows, paths and gardens, then install and finish the work to the manufacturer's guide. When we're done we clean up, walk the job with you and explain how to look after it.",
+      "We cover windows, paths and gardens, then install and finish the work to the manufacturer's published guide. When it's done we clean up, walk the job with you and explain how to look after it.",
   },
 ];
 
@@ -580,39 +580,55 @@ export const areaBySlug = (slug: string) =>
 export const faqs = [
   {
     q: "What does Max Wall do?",
-    a: "We install James Hardie cladding, AAC panel walls, eaves and linings, CSR Bradford insulation and Dulux AcraStone microcement, and we paint inside and out. Homeowners and builders across Adelaide use us for one or all of these.",
+    a: "We supply and install James Hardie cladding, Hardie Gravis AAC panel walls, eaves and linings, CSR Bradford insulation and Dulux AcraStone microcement, and we paint inside and out. Homeowners and builders across Adelaide and the Adelaide Hills use us for one of these or for the whole wall.",
   },
   {
-    q: "How much does cladding cost in Adelaide?",
-    a: "It depends on the profile, wall area, height, access and the detailing around windows and corners. Most cladding is priced per square metre. Send us photos or plans and we'll give you a ballpark, then a fixed written quote after a site measure.",
+    q: "How much will my cladding or insulation job cost?",
+    a: "It depends on the product, the area, the height and access, what has to come off first and the detailing around windows and corners, so we don't publish a price list. Send us photos or plans for a rough idea, then we measure on site and give you a fixed written quote.",
   },
   {
-    q: "Which is better: weatherboards, panels or AAC?",
-    a: "Weatherboards like Linea suit classic and Hamptons homes, grooved boards like Axon and Stria give a modern linear look, and AAC panels with a texture coat give a solid, rendered finish. Many homes mix two. We'll recommend what suits your design and budget.",
+    q: "Can you do cladding and insulation as one job?",
+    a: "Yes, and it's usually the best time to do both. With the wall open, we fit the wall wrap and CSR Bradford wall batts, then install the cladding over the top. Ceiling and underfloor insulation can be part of the same job or done on their own.",
   },
   {
     q: "Do you supply the products?",
-    a: "Yes. We supply and install, or work with materials your builder has already ordered, provided they suit the job.",
+    a: "Yes. We supply and install, or we can work with materials your builder has already ordered, provided they suit the job.",
   },
   {
     q: "How long does a typical job take?",
-    a: "Ceiling insulation is often done in a day. A microcement bathroom typically takes several days because each coat needs to dry. Cladding a house front or extension usually takes one to two weeks depending on size and weather. You'll get a timeline with your quote.",
+    a: "Ceiling insulation is often done in a day. A microcement bathroom typically takes several days, because each coat needs to dry. Cladding a house front or an extension usually takes one to two weeks, depending on size and weather. You'll get a timeline with your quote.",
+  },
+  {
+    q: "Is the on-site measure really free?",
+    a: "Yes. The on-site measure and the written quote are both free, and there's no obligation to go ahead.",
+  },
+  {
+    q: "What is in a fixed written quote?",
+    a: "The scope of the work, the products we'll use, the price and the timeline, all in writing before anything starts. Optional items, such as wall insulation during a re-clad or painting, are priced separately so you can decide. What we quote is what you pay.",
+  },
+  {
+    q: "What should I have ready for a quote?",
+    a: "Your suburb, a few clear photos and a short description of the job are enough to start. Plans, an energy report, rough measurements and your preferred timing all help, but none of them is essential. We measure accurately on site before preparing the written quote.",
+  },
+  {
+    q: "Which parts of Adelaide do you cover?",
+    a: "Metropolitan Adelaide and the Adelaide Hills: the northern, western, eastern and southern suburbs, from Gawler to Seaford and up to Mount Barker. If you're not sure about your suburb, call or send a message and we'll tell you.",
   },
   {
     q: "Do you work for builders?",
-    a: "Yes. We work with builders on new homes, extensions and multi-unit sites, and fit in with your construction schedule.",
+    a: "Yes. We work with builders on new homes, extensions and multi-unit sites. Send the drawings, energy report and wall specifications, and we'll price to them and fit in with your construction schedule.",
   },
   {
     q: "Are you insured?",
     a: "Yes. We carry public liability insurance and are happy to provide certificates for builders and strata managers.",
   },
   {
-    q: "What should I have ready for a quote?",
-    a: "Your suburb, a few clear photos and a short description of the project are enough to start. Plans, rough measurements and your preferred timing help, but aren't essential. We measure accurately on site before preparing a written quote.",
+    q: "Can I stay at home while the work is done?",
+    a: "For most jobs, yes. Cladding and exterior painting happen outside, ceiling insulation means some time in the roof space, and a microcement bathroom is out of use for several days. Before we start we'll talk through access, scaffolding and any areas that need to be kept clear, so the job can be planned around you, your kids and pets.",
   },
   {
-    q: "Can I stay at home while the work is done?",
-    a: "For most jobs, yes. We'll discuss access, scaffolding and any rooms or areas that need to be kept clear before starting, so we can plan around you, your kids and pets.",
+    q: "What happens when the job is finished?",
+    a: "We clean up, walk through the work with you and explain how to look after it. Keep your quote, invoice and any product information together, because manufacturers' warranties may ask for them.",
   },
   {
     q: "Are you affiliated with James Hardie, CSR or Dulux?",

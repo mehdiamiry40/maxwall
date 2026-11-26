@@ -1,4 +1,5 @@
 import { pageMetadata } from "@/lib/seo";
+import Link from "next/link";
 import {
   BrandStrip,
   container,
@@ -9,48 +10,62 @@ import {
   PageHero,
   SectionHead,
   SplitSection,
+  TextLink,
 } from "@/components/ui";
 import { images } from "@/lib/images";
-import { pillars, site } from "@/lib/site";
+import { areas, phoneHref, pillars, site } from "@/lib/site";
 
 export const metadata = pageMetadata(
-  "About Our Adelaide Cladding & Insulation Team",
-  "Meet Max Wall Building Solutions, the Adelaide team installing James Hardie cladding, CSR Bradford insulation and Dulux AcraStone microcement.",
+  "About Max Wall Building Solutions, Adelaide",
+  "Max Wall Building Solutions is an Adelaide contractor that supplies and installs James Hardie cladding, CSR Bradford insulation and AcraStone microcement.",
   "/about",
 );
 
 const values = [
   {
     title: "Straight talking",
-    body: "We tell you what your home needs, not what's most expensive. If a simpler option will do, we'll say so.",
+    body: "We tell you what the house needs, not what costs the most. If a simpler option will do the job, we'll say so.",
   },
   {
     title: "Respect for your home",
-    body: "Paths, windows and gardens get covered before we start, and the site is left clean every day.",
+    body: "Windows, paths and gardens are covered before we start, and work areas are left tidy at the end of every day.",
   },
   {
     title: "Detail in the finish",
-    body: "Straight lines, neat trims and flashings, and clearances done right. The small things are what make a job last.",
+    body: "Straight lines, neat trims and flashings, and clearances kept where they're required. The small things are what make a wall last.",
   },
   {
     title: "Easy to deal with",
-    body: "We turn up when we say, keep you in the loop and answer the phone.",
+    body: "We turn up when we say we will, keep you in the loop and answer the phone.",
   },
 ];
 
 const clients = [
   {
     title: "Homeowners",
-    body: "Facade makeovers, insulation upgrades, extensions and microcement bathrooms on the family home.",
+    body: "Re-cladding, insulation upgrades, extensions and microcement bathrooms on the home you live in.",
+    href: "/projects/renovations",
+    link: "How we handle renovations",
   },
   {
     title: "Builders",
-    body: "Reliable cladding, AAC and insulation crews who fit your schedule on new homes and units.",
+    body: "Wall wrap, insulation, cladding, AAC panels and eaves on new homes and multi-unit sites, priced from your plans and scheduled around your build.",
+    href: "/projects/new-builds",
+    link: "How we work on new builds",
   },
   {
     title: "Investors & strata",
-    body: "Pre-sale facade updates, bathroom refreshes and insulation that lift value, comfort and street appeal.",
+    body: "Pre-sale facade updates, bathroom refreshes and insulation for rental and strata properties, with insurance certificates available for strata managers.",
+    href: "/faq",
+    link: "Quotes, timing and insurance questions",
   },
+];
+
+const details = [
+  { label: "Company", value: site.legalName },
+  { label: "ABN", value: site.abn },
+  { label: "Location", value: `${site.city}, ${site.region}` },
+  { label: "Hours", value: site.hours },
 ];
 
 export default function AboutPage() {
@@ -60,31 +75,34 @@ export default function AboutPage() {
       <main id="main" className="flex-1">
         <PageHero
           crumb={[{ label: "About" }]}
-          title="Local tradespeople who care how your walls turn out"
-          intro={`${site.legalName} clads, insulates and finishes homes right across Adelaide.`}
+          title="About Max Wall Building Solutions"
+          intro="An independent Adelaide contractor that clads, insulates and finishes homes, working for homeowners and builders from Gawler to Seaford and up into the Hills."
           image={images.about}
         />
 
         <SplitSection image={images.services.install} side="right">
-          <Eyebrow>Our story</Eyebrow>
+          <Eyebrow>Who we are</Eyebrow>
           <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] sm:text-[2.6rem] text-bluestone">
-            The whole building envelope, done properly
+            One Adelaide team for the whole wall
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">
             <p>
-              Max Wall started with a simple idea: homes finished properly, by
-              people who actually pick up the phone.
+              Max Wall is {site.legalName} (ABN {site.abn}), based in
+              Adelaide&apos;s northern suburbs. We started with a simple idea:
+              homes finished properly, by people who actually pick up the
+              phone.
             </p>
             <p>
-              Based in Adelaide&apos;s northern suburbs, we work with
-              homeowners, builders and investors from Gawler to Seaford and up
-              into the Hills.
+              We supply and install the layers that make up a wall: wall wrap
+              and CSR Bradford insulation, James Hardie cladding or Hardie
+              Gravis AAC panels, eaves and linings, and paint. Inside, we finish
+              bathrooms, walls and floors in Dulux AcraStone microcement.
             </p>
             <p>
-              We handle the whole wall: wrap and insulation, James Hardie
-              cladding or AAC panels, eaves and linings, and paint. Inside, we
-              transform bathrooms and floors with Dulux AcraStone microcement.
-              One team means you&apos;re not juggling trades.
+              Because one team handles those layers, they&apos;re planned
+              together and you&apos;re not juggling trades. Every product is
+              installed to its manufacturer&apos;s published specifications,
+              and every job is quoted in writing before it starts.
             </p>
           </div>
         </SplitSection>
@@ -108,7 +126,14 @@ export default function AboutPage() {
 
         <section className="py-16 sm:py-20 lg:py-24">
           <div className={container}>
-            <SectionHead eyebrow="Values" title="How we work with you" />
+            <SectionHead
+              eyebrow="Values"
+              title="What it's like to work with us"
+              action={{
+                href: "/how-we-work",
+                label: "How a job runs, step by step",
+              }}
+            />
             <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
               {values.map((v) => (
                 <div key={v.title} className="border-t border-line pt-6">
@@ -124,15 +149,85 @@ export default function AboutPage() {
           <div className={container}>
             <SectionHead
               eyebrow="Who we work for"
-              title="Homes, builders and investors"
+              title="Homeowners, builders and investors"
             />
             <div className="grid gap-10 md:grid-cols-3">
               {clients.map((c) => (
                 <div key={c.title}>
                   <h3 className="text-xl font-bold">{c.title}</h3>
-                  <p className="mt-2 leading-relaxed text-ink-soft">{c.body}</p>
+                  <p className="mb-4 mt-2 leading-relaxed text-ink-soft">
+                    {c.body}
+                  </p>
+                  <TextLink href={c.href}>{c.link}</TextLink>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-line bg-white py-16 sm:py-20 lg:py-24">
+          <div className={`${container} grid gap-10 md:grid-cols-2 md:gap-16`}>
+            <div>
+              <Eyebrow>Where we work</Eyebrow>
+              <h2 className="font-display mt-3 text-3xl font-bold leading-[1.1] text-bluestone">
+                Based in the north, working across Adelaide
+              </h2>
+              <p className="mt-5 leading-relaxed text-ink-soft">
+                We work across metropolitan Adelaide and the Adelaide Hills.
+                Each region has its own page covering the homes we see there
+                and the local conditions we plan for.
+              </p>
+              <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-1">
+                {areas.map((area) => (
+                  <li key={area.id}>
+                    <Link
+                      href={`/areas/${area.slug}`}
+                      className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                    >
+                      {area.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4">
+                <TextLink href="/areas">All service areas</TextLink>
+              </div>
+            </div>
+            <div>
+              <Eyebrow>Business details</Eyebrow>
+              <dl className="mt-3 divide-y divide-line border-y border-line">
+                {details.map((d) => (
+                  <div
+                    key={d.label}
+                    className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr]"
+                  >
+                    <dt className="font-bold">{d.label}</dt>
+                    <dd className="text-ink-soft">{d.value}</dd>
+                  </div>
+                ))}
+                <div className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr]">
+                  <dt className="font-bold">Phone</dt>
+                  <dd>
+                    <a
+                      href={phoneHref}
+                      className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                    >
+                      {site.phone}
+                    </a>
+                  </dd>
+                </div>
+                <div className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr]">
+                  <dt className="font-bold">Email</dt>
+                  <dd>
+                    <a
+                      href={`mailto:${site.email}`}
+                      className="inline-flex min-h-11 items-center font-semibold text-bluestone underline underline-offset-4"
+                    >
+                      {site.email}
+                    </a>
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
         </section>

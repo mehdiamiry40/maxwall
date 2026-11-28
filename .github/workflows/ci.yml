@@ -1,0 +1,35 @@
+# Runs on every pull request and on main, so a change that breaks the lint rules, the types,
+# the production build or the tests is caught before it is merged. Vercel still builds each preview.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, typecheck, build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      # next-env.d.ts and the route types are generated, not committed, so the script runs
+      # `next typegen` before `tsc --noEmit`.
+      - run: npm run typecheck
+      # Needs no secrets or env vars. Also fills in and checks the Content-Security-Policy hashes.
+      - run: npm run build
+      - run: npm test

@@ -57,13 +57,17 @@ RESEND_API_KEY= npm run dev
 
 ```bash
 npm run lint
+npm run typecheck
 npm test
 npm run build
 npm run verify
 ```
 
+- `npm run typecheck` runs `next typegen` and then `tsc --noEmit`. The route types and `next-env.d.ts` are generated, not committed, so `tsc` alone fails on a fresh clone.
 - `npm test` covers the rate limiter, the spam checks and the Content-Security-Policy build step.
 - `npm run verify` checks the built static pages for unique titles, canonical and sharing URLs, one h1, contact links, valid JSON-LD and sitemap coverage.
+
+GitHub Actions (`.github/workflows/ci.yml`) runs lint, typecheck, build and test on every pull request and on pushes to `main`.
 
 ## Security headers
 
